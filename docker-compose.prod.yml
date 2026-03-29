@@ -1,0 +1,22 @@
+services:
+  app:
+    labels:
+      - "traefik.enable=true"
+      # HTTPS
+      - "traefik.http.routers.budget-https.rule=Host(`budget.bercy.matge.com`)"
+      - "traefik.http.routers.budget-https.entrypoints=websecure"
+      - "traefik.http.routers.budget-https.tls=true"
+      - "traefik.http.routers.budget-https.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.budget-https.middlewares=noindex-headers@file"
+      # HTTP → HTTPS redirect
+      - "traefik.http.routers.budget-http.rule=Host(`budget.bercy.matge.com`)"
+      - "traefik.http.routers.budget-http.entrypoints=web"
+      - "traefik.http.routers.budget-http.middlewares=redirect-to-https@docker"
+      # Service
+      - "traefik.http.services.budget.loadbalancer.server.port=8000"
+    networks:
+      - ecosystem-network
+
+networks:
+  ecosystem-network:
+    external: true

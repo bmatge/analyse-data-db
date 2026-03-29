@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    container_name: budget-explorer
+    restart: unless-stopped
+    volumes:
+      - db-data:/app/db
+      - ./entrants:/app/entrants:ro
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+volumes:
+  db-data:

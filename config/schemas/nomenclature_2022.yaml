@@ -1,0 +1,25 @@
+# PLF 2022 - Nomenclature complète (format identique au XLS)
+# 8 colonnes, 2562 lignes — contient toute la hiérarchie TTR/CAT/MIN/MSN/PGM/ACT/SSA
+# Encodage latin-1
+
+source:
+  type: nomenclature_xls_format
+  encoding: latin-1
+  separator: ";"
+
+file_pattern: "PLF_2022_Nomenclature.csv"
+
+# Mapping des colonnes source
+columns:
+  type_ligne:      { source: "Type ligne ", type: string }   # Note: espace en fin de nom
+  type_budget:     { source: "Type Budget", type: string }
+  code:            { source: "code", type: string }
+  mission:         { source: "Mission", type: string }
+  ministere:       { source: "Ministere", type: string }
+  libelle:         { source: "Libelle", type: string }
+  libelle_abrege:  { source: "Libelle abrege", type: string }
+  commentaire:     { source: "commentFP", type: string }
+
+derived:
+  annee: 2022
+  exercice: PLF

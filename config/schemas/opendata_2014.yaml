@@ -1,0 +1,42 @@
+# PLF 2014 - Nomenclature par destination uniquement (pas de montants)
+# 7 colonnes, 722 lignes, granularité Action
+
+source:
+  type: csv
+  encoding: utf-8-sig
+  separator: ";"
+
+file_pattern: "plf-2014-nomenclature-par-destination.csv"
+
+columns:
+  type_budget:
+    source: "Type de Mission"
+    type: string
+    mapping:
+      "Budget général": BG
+      "Budgets annexes": BA
+      "Comptes d'affectation spéciale": CAS
+      "Comptes de concours financiers": CCF
+  mission_libelle:     { source: "Mission", type: string }
+  mission_code:        null  # Pas disponible en 2014, résolu via nomenclature
+  programme_code:      { source: "Code Programme", type: integer }
+  programme_libelle:   { source: "Programme", type: string }
+  action_code:         { source: "Code Action", type: string }
+  action_libelle:      { source: "Action", type: string }
+  sous_action_code:    null
+  sous_action_libelle: null
+  categorie_code:      null
+  titre_code:          null
+  ae:                  null
+  cp:                  null
+  ae_fdc_adp:          null
+  cp_fdc_adp:          null
+  ministere_nom:       null
+
+derived:
+  exercice: PLF
+  annee: 2014
+
+validation:
+  required_columns: ["Type de Mission", "Code Programme", "Programme", "Code Action"]
+  type_budget_values: [BG, BA, CAS, CCF]

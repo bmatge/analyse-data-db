@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nomenclature – Budget Explorer</title>
+<link rel="stylesheet" href="/static/style.css">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+<style>
+  /* ── Tabs ── */
+  .tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 1rem; }
+  .tab {
+    padding: 0.6rem 1.25rem; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+    color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -2px;
+    transition: all 0.15s; background: none; border-top: none; border-left: none; border-right: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── Explorer styles ── */
+  .filters {
+    display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;
+  }
+  .filters select, .filters input {
+    padding: 0.4rem 0.6rem; border: 1px solid var(--border); border-radius: 6px;
+    font-size: 0.85rem; background: var(--card);
+  }
+  .filters input { min-width: 220px; }
+  .filters label { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
+
+  .mission-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 0.6rem; overflow: hidden; }
+  .mission-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1rem; cursor: pointer; user-select: none; transition: background 0.12s; }
+  .mission-header:hover { background: #f8fafc; }
+  .mission-header .arrow { font-size: 0.7rem; color: var(--muted); transition: transform 0.15s; width: 1rem; text-align: center; }
+  .mission-header.open .arrow { transform: rotate(90deg); }
+  .mission-header .msn-code { font-family: monospace; font-weight: 700; color: var(--accent); min-width: 2rem; }
+  .mission-header .msn-name { flex: 1; font-weight: 500; font-size: 0.9rem; }
+  .mission-header .msn-meta { display: flex; gap: 0.8rem; font-size: 0.8rem; color: var(--muted); margin-left: auto; white-space: nowrap; }
+  .mission-header .msn-cp { color: var(--fin); font-weight: 600; }
+  .mission-body { display: none; padding: 0 1rem 0.8rem 2.5rem; }
+  .mission-body.open { display: block; }
+
+  .pgm-section { margin-bottom: 0.3rem; }
+  .pgm-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0; cursor: pointer; user-select: none; font-size: 0.88rem; }
+  .pgm-header:hover { background: #f8fafc; border-radius: 4px; }
+  .pgm-header.open .arrow { transform: rotate(90deg); }
+  .pgm-code { font-family: monospace; font-weight: 700; min-width: 2.5rem; }
+  .pgm-name { flex: 1; }
+
+  .act-list { display: none; padding-left: 1.5rem; border-left: 2px solid var(--border); margin-left: 0.5rem; }
+  .act-list.open { display: block; }
+  .act-item { padding: 0.15rem 0; }
+  .act-header { display: flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0; cursor: pointer; font-size: 0.84rem; }
+  .act-header.no-children { cursor: default; }
+  .act-header:hover { background: #f8fafc; border-radius: 4px; }
+  .act-header.open .arrow { transform: rotate(90deg); }
+  .act-code { font-family: monospace; font-weight: 600; color: var(--muted); min-width: 2rem; }
+  .act-name { color: var(--text); }
+
+  .ssa-list { display: none; padding-left: 1.5rem; border-left: 2px solid #e2e8f0; margin-left: 0.5rem; }
+  .ssa-list.open { display: block; }
+  .ssa-item { font-size: 0.82rem; padding: 0.1rem 0; color: var(--muted); }
+  .ssa-code { font-family: monospace; font-weight: 600; margin-right: 0.3rem; }
+
+  .empty-msg { text-align: center; padding: 2rem; color: var(--muted); }
+
+  /* ── Sankey styles ── */
+  #sankey-controls { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin: 4px 0 6px; }
+  .ctrl { display: flex; align-items: center; gap: 4px; }
+  .ctrl label { font-size: 11px; font-weight: 600; color: var(--muted); }
+  .ctrl button { padding: 3px 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--card); cursor: pointer; font-size: 11px; transition: all .15s; }
+  .ctrl button:hover { background: var(--bg); }
+  .ctrl button.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .ctrl select { font-size: 11px; padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px; max-width: 280px; }
+  .sankey-legend { display: flex; justify-content: center; gap: 14px; margin: 4px 0 2px; flex-wrap: wrap; }
+  .sankey-legend span { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); }
+  .sankey-legend .sw { width: 12px; height: 12px; border-radius: 2px; }
+  .sankey-legend .ln { width: 18px; height: 0; border-top: 2px dashed #ef4444; }
+  .sankey-stats { text-align: center; font-size: 11px; color: var(--muted); margin: 4px 0; }
+  #sankey-chart { width: 100%; overflow-x: auto; }
+  #sankey-chart svg { display: block; margin: 0 auto; }
+  .link { fill: none; stroke-opacity: 0.2; transition: stroke-opacity .2s; }
+  .link:hover { stroke-opacity: 0.5; }
+  .link.moved { stroke-dasharray: 4 2; stroke-opacity: 0.5; }
+  .sankey-tip { position: absolute; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; font-size: 11px; pointer-events: none; box-shadow: 0 3px 12px rgba(0,0,0,0.12); max-width: 400px; line-height: 1.6; z-index: 10; }
+  .sankey-tip .tt { font-weight: 700; font-size: 12px; margin-bottom: 3px; }
+  .sankey-tip .td { color: var(--muted); }
+  .sankey-tip .badge-s { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; color: white; margin-right: 4px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Budget Explorer</a>
+  <div class="links">
+    <a href="/">Accueil</a>
+    <a href="/glossaire">Glossaire</a>
+    <a href="/api-specs">Interfaces</a>
+    <a href="/nomenclature" class="active">Nomenclature</a>
+    <a href="/corpus">Corpus documentaire</a>
+    <a href="/plf-lfi">Flux PLF / LFI</a>
+  </div>
+</nav>
+
+<main style="max-width: none; padding: 1rem 1.5rem;">
+  <h1 style="font-size:1.3rem; margin-bottom:0.3rem;">Nomenclature budgetaire</h1>
+  <p class="subtitle" style="margin-bottom:0.8rem;">Explorer l'arborescence et les flux inter-annuels des missions, programmes et actions</p>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="arbo">Arborescence</button>
+    <button class="tab" data-tab="flux">Flux inter-annuels</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════ TAB ARBO ═══ -->
+  <div class="tab-panel active" id="panel-arbo">
+    <div class="filters">
+      <label>Annee :</label>
+      <select id="year"></select>
+      <label>Type :</label>
+      <select id="filter-type">
+        <option value="">Tous</option>
+        <option value="BG">BG - Budget general</option>
+        <option value="BA">BA - Budgets annexes</option>
+        <option value="CAS">CAS - Comptes d'affectation speciale</option>
+        <option value="CCF">CCF - Comptes de concours financiers</option>
+      </select>
+      <label>Recherche :</label>
+      <input type="text" id="filter-search" placeholder="Filtrer par nom ou code...">
+    </div>
+    <div id="missions-list"><div class="loading">Chargement</div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ TAB FLUX ═══ -->
+  <div class="tab-panel" id="panel-flux">
+    <div id="sankey-controls">
+      <div class="ctrl">
+        <label>Niveau :</label>
+        <button class="active" data-level="mission">Missions</button>
+        <button data-level="programme">Programmes</button>
+        <button data-level="action">Actions</button>
+      </div>
+      <div class="ctrl">
+        <label>Budget :</label>
+        <button class="active" data-filter="all">Tous</button>
+        <button data-filter="BG">BG</button>
+        <button data-filter="BA">BA</button>
+        <button data-filter="CAS">CAS</button>
+        <button data-filter="CCF">CCF</button>
+      </div>
+      <div class="ctrl">
+        <label>Taille :</label>
+        <button class="active" data-sizing="count">Nb entites</button>
+        <button data-sizing="ae">Montant AE</button>
+      </div>
+      <div class="ctrl">
+        <label>Mission :</label>
+        <select id="sankey-mission-filter"><option value="all">Toutes</option></select>
+      </div>
+    </div>
+    <div class="sankey-legend">
+      <span><span class="sw" style="background:#2563eb"></span>Budget general</span>
+      <span><span class="sw" style="background:#7c3aed"></span>Budgets annexes</span>
+      <span><span class="sw" style="background:#059669"></span>Comptes speciaux</span>
+      <span><span class="sw" style="background:#d97706"></span>Concours financiers</span>
+      <span><span class="ln"></span>Deplacement</span>
+    </div>
+    <div class="sankey-stats" id="sankey-stats"></div>
+    <div id="sankey-chart"></div>
+  </div>
+</main>
+
+<div class="sankey-tip" style="display:none"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('panel-' + t.dataset.tab).classList.add('active');
+    if (t.dataset.tab === 'flux' && !sankeyLoaded) loadSankey();
+  });
+});
+
+// Check URL hash
+if (location.hash === '#flux') {
+  document.querySelector('[data-tab="flux"]').click();
+}
+
+// ═══════════════════════════════════════════════
+// TAB 1: ARBORESCENCE
+// ═══════════════════════════════════════════════
+const $ = s => document.querySelector(s);
+
+function fmt(n) {
+  if (n == null) return '';
+  if (Math.abs(n) >= 1e9) return (n / 1e9).toFixed(1) + ' Md\u20ac';
+  if (Math.abs(n) >= 1e6) return (n / 1e6).toFixed(0) + ' M\u20ac';
+  return n.toLocaleString('fr-FR') + ' \u20ac';
+}
+
+function badgeType(tb) {
+  const cls = { BG: 'badge-bg', BA: 'badge-ba', CAS: 'badge-cas', CCF: 'badge-ccf' };
+  return `<span class="badge ${cls[tb] || ''}">${tb}</span>`;
+}
+
+let currentYear = null, missionsData = [], budgetData = {}, treesCache = {};
+
+async function initYears() {
+  const years = await (await fetch('/api/annees')).json();
+  const sel = $('#year');
+  years.reverse().forEach(y => {
+    const opt = document.createElement('option');
+    opt.value = y; opt.textContent = y;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => { currentYear = +sel.value; treesCache = {}; loadMissions(); });
+  if (years.length) { currentYear = years[0]; loadMissions(); }
+}
+
+async function loadMissions() {
+  const container = $('#missions-list');
+  container.innerHTML = '<div class="loading">Chargement</div>';
+  const [missions, budget] = await Promise.all([
+    fetch(`/api/missions/${currentYear}`).then(r => r.json()),
+    fetch(`/api/budget/par-mission/${currentYear}`).then(r => r.json())
+  ]);
+  missionsData = missions;
+  budgetData = {};
+  budget.forEach(b => { budgetData[b.mission_code] = b; });
+  renderMissions();
+}
+
+function renderMissions() {
+  const container = $('#missions-list');
+  const typeFilter = $('#filter-type').value;
+  const search = $('#filter-search').value.toLowerCase().trim();
+  let filtered = missionsData;
+  if (typeFilter) filtered = filtered.filter(m => m.type_budget === typeFilter);
+  if (search) filtered = filtered.filter(m =>
+    m.code.toLowerCase().includes(search) || (m.libelle || '').toLowerCase().includes(search)
+  );
+  if (!filtered.length) { container.innerHTML = '<div class="empty-msg">Aucune mission trouvee</div>'; return; }
+  container.innerHTML = filtered.map(m => {
+    const b = budgetData[m.code] || {};
+    const cp = b.total_cp != null ? fmt(b.total_cp) : '';
+    const nbPgm = b.nb_programmes || '';
+    return `<div class="mission-card" data-code="${m.code}">
+      <div class="mission-header" onclick="toggleMission(this, '${m.code}')">
+        <span class="arrow">\u25B6</span>${badgeType(m.type_budget)}
+        <span class="msn-code">${m.code}</span><span class="msn-name">${m.libelle || ''}</span>
+        <span class="msn-meta">${nbPgm ? `<span>${nbPgm} pgm</span>` : ''}${cp ? `<span class="msn-cp">${cp}</span>` : ''}</span>
+      </div><div class="mission-body" id="body-${m.code}"></div></div>`;
+  }).join('');
+}
+
+async function toggleMission(headerEl, msnCode) {
+  const body = $(`#body-${msnCode}`);
+  const isOpen = headerEl.classList.toggle('open');
+  body.classList.toggle('open', isOpen);
+  if (isOpen && !treesCache[msnCode]) {
+    body.innerHTML = '<div class="loading">Chargement</div>';
+    const tree = await (await fetch(`/api/arbre/${currentYear}/${msnCode}`)).json();
+    treesCache[msnCode] = tree;
+    renderTree(body, tree);
+  }
+}
+
+function renderTree(container, tree) {
+  if (!tree.programmes || !tree.programmes.length) { container.innerHTML = '<div class="empty-msg">Aucun programme</div>'; return; }
+  container.innerHTML = tree.programmes.map(pgm => {
+    const actionsHtml = pgm.actions.map(act => {
+      const ssaHtml = act.sous_actions.map(ssa => `<div class="ssa-item"><span class="ssa-code">${ssa.code}</span> ${ssa.libelle}</div>`).join('');
+      const hasSSA = act.sous_actions.length > 0;
+      return `<div class="act-item"><div class="act-header${hasSSA ? '' : ' no-children'}" onclick="${hasSSA ? `toggleEl(this, 'ssa-${pgm.code}-${act.code}')` : ''}">
+        ${hasSSA ? '<span class="arrow">\u25B6</span>' : '<span style="width:0.7rem;display:inline-block"></span>'}
+        <span class="act-code">${act.code}</span><span class="act-name">${act.libelle}</span></div>
+        ${hasSSA ? `<div class="ssa-list" id="ssa-${pgm.code}-${act.code}">${ssaHtml}</div>` : ''}</div>`;
+    }).join('');
+    const hasAct = pgm.actions.length > 0;
+    return `<div class="pgm-section"><div class="pgm-header" onclick="${hasAct ? `toggleEl(this, 'acts-${pgm.code}')` : ''}">
+      ${hasAct ? '<span class="arrow">\u25B6</span>' : '<span style="width:0.8rem;display:inline-block"></span>'}
+      <span class="badge badge-dest">PGM</span><span class="pgm-code">${pgm.code}</span><span class="pgm-name">${pgm.libelle}</span></div>
+      ${hasAct ? `<div class="act-list" id="acts-${pgm.code}">${actionsHtml}</div>` : ''}</div>`;
+  }).join('');
+}
+
+function toggleEl(headerEl, targetId) {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+  const isOpen = headerEl.classList.toggle('open');
+  target.classList.toggle('open', isOpen);
+}
+
+$('#filter-type').addEventListener('change', renderMissions);
+$('#filter-search').addEventListener('input', renderMissions);
+initYears();
+
+// ═══════════════════════════════════════════════
+// TAB 2: SANKEY (lazy loaded)
+// ═══════════════════════════════════════════════
+const TC = { BG: "#2563eb", BA: "#7c3aed", CAS: "#059669", CCF: "#d97706" };
+const TL = { BG: "Budget general", BA: "Budgets annexes", CAS: "Comptes speciaux", CCF: "Concours financiers" };
+let SDATA, sankeyLoaded = false;
+let sLevel = "mission", sFilter = "all", sMission = "all", sSizing = "count";
+
+async function loadSankey() {
+  SDATA = await (await fetch('/static/sankey_data.json')).json();
+  sankeyLoaded = true;
+  populateSankeyFilter();
+  renderSankey();
+
+  document.querySelectorAll('[data-level]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-level]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); sLevel = b.dataset.level; populateSankeyFilter(); renderSankey();
+  }));
+  document.querySelectorAll('[data-filter]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); sFilter = b.dataset.filter; populateSankeyFilter(); renderSankey();
+  }));
+  document.querySelectorAll('[data-sizing]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-sizing]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); sSizing = b.dataset.sizing; renderSankey();
+  }));
+  document.getElementById('sankey-mission-filter').addEventListener('change', e => { sMission = e.target.value; renderSankey(); });
+}
+
+function populateSankeyFilter() {
+  const sel = document.getElementById('sankey-mission-filter');
+  sel.innerHTML = '<option value="all">Toutes</option>';
+  const missions = new Map();
+  SDATA.years.forEach(y => {
+    (SDATA.missions[y] || []).forEach(m => {
+      if (sFilter !== 'all' && m.type_budget !== sFilter) return;
+      if (!missions.has(m.code)) missions.set(m.code, m.libelle || m.code);
+    });
+  });
+  [...missions.entries()].sort((a,b) => a[1].localeCompare(b[1])).forEach(([code, lib]) => {
+    const opt = document.createElement('option');
+    opt.value = code; opt.textContent = `${code} \u2014 ${lib.slice(0, 45)}`;
+    sel.appendChild(opt);
+  });
+}
+
+function renderSankey() {
+  d3.select('#sankey-chart').selectAll('*').remove();
+  const years = SDATA.years, nodes = [], links = [], nodeIdx = {};
+
+  function makeId(y, c) { return `${y}::${c}`; }
+  function addNode(year, code, libelle, type_budget, parent, value, ae) {
+    const id = makeId(year, code);
+    if (nodeIdx[id] !== undefined) return; nodeIdx[id] = nodes.length;
+    nodes.push({ id, year, code, libelle, type_budget, parent, value: value || 1, ae, yi: years.indexOf(year) });
+  }
+  function getAE(level, year, code) {
+    if (sSizing !== 'ae') return null;
+    if (level === 'mission') return (SDATA.ae_by_mission[year] || {})[code];
+    if (level === 'programme') return (SDATA.ae_by_programme[year] || {})[String(code)];
+    return null;
+  }
+
+  if (sLevel === 'mission') {
+    years.forEach(y => { (SDATA.missions[y] || []).forEach(m => {
+      if (sFilter !== 'all' && m.type_budget !== sFilter) return;
+      if (sMission !== 'all' && m.code !== sMission) return;
+      const ae = getAE('mission', y, m.code);
+      addNode(y, m.code, m.libelle, m.type_budget, null, ae != null ? Math.max(1, ae/1e6) : (m.nb_pgm || 1), ae);
+    }); });
+    (SDATA.flows.mission || []).forEach(f => {
+      const si = nodeIdx[makeId(f.from_year, f.code)], ti = nodeIdx[makeId(f.to_year, f.code)];
+      if (si !== undefined && ti !== undefined) {
+        const ae = getAE('mission', f.from_year, f.code);
+        links.push({ source: si, target: ti, value: ae != null ? Math.max(1, ae/1e6) : (f.value || 1) });
+      }
+    });
+  } else if (sLevel === 'programme') {
+    years.forEach(y => { (SDATA.programmes_data[y] || []).forEach(p => {
+      if (sFilter !== 'all' && p.type_budget !== sFilter) return;
+      if (sMission !== 'all' && p.mission_code !== sMission) return;
+      const ae = getAE('programme', y, p.code);
+      addNode(y, String(p.code), p.libelle, p.type_budget, p.mission_code, ae != null ? Math.max(1, ae/1e6) : (p.nb_act || 1), ae);
+    }); });
+    (SDATA.flows.programme || []).forEach(f => {
+      const si = nodeIdx[makeId(f.from_year, String(f.code))], ti = nodeIdx[makeId(f.to_year, String(f.code))];
+      if (si !== undefined && ti !== undefined) {
+        const ae = getAE('programme', f.from_year, f.code);
+        links.push({ source: si, target: ti, value: ae != null ? Math.max(1, ae/1e6) : (f.value || 1), moved: f.moved, fromParent: f.from_parent, toParent: f.to_parent });
+      }
+    });
+  } else {
+    years.forEach(y => { (SDATA.actions_data[y] || []).forEach(a => {
+      if (sFilter !== 'all' && a.type_budget !== sFilter) return;
+      if (sMission !== 'all' && a.mission_code !== sMission) return;
+      addNode(y, `${a.programme_code}-${a.code}`, a.libelle, a.type_budget, String(a.programme_code), 1);
+    }); });
+    (SDATA.flows.action || []).forEach(f => {
+      const c = `${f.programme_code}-${f.code}`;
+      const si = nodeIdx[makeId(f.from_year, c)], ti = nodeIdx[makeId(f.to_year, c)];
+      if (si !== undefined && ti !== undefined) links.push({ source: si, target: ti, value: 1 });
+    });
+  }
+
+  // Stats
+  const nps = {}; nodes.forEach(n => { nps[n.year] = (nps[n.year] || 0) + 1; });
+  document.getElementById('sankey-stats').textContent = years.map(y => `${y}: ${nps[y] || 0}`).join(' \u2192 ') + ` | ${links.length} liens`;
+
+  if (!nodes.length) { d3.select('#sankey-chart').append('p').attr('class','empty-msg').text('Aucun element.'); return; }
+
+  const margin = { top: 44, right: 200, bottom: 20, left: 200 };
+  const colW = 300, maxN = Math.max(...Object.values(nps));
+  const rH = sLevel === 'action' ? 8 : sLevel === 'programme' ? 10 : 14;
+  const width = margin.left + colW * (years.length - 1) + margin.right;
+  const height = Math.max(500, maxN * (rH + 4) + margin.top + margin.bottom);
+
+  const svg = d3.select('#sankey-chart').append('svg').attr('width', width).attr('height', height);
+  const sankey = d3.sankey().nodeId(d => d.index).nodeWidth(14).nodePadding(sLevel === 'action' ? 2 : 4)
+    .nodeAlign(d3.sankeyLeft).extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+  const graph = sankey({ nodes: nodes.map((d,i) => ({...d, index:i})), links: links.map(d => ({...d})) });
+  const yearX = {}; years.forEach((y,i) => { yearX[y] = margin.left + i * colW; });
+  graph.nodes.forEach(n => { const dx = yearX[n.year] - n.x0; n.x0 += dx; n.x1 += dx; });
+
+  years.forEach(y => {
+    svg.append('text').attr('class','step-label').attr('x', yearX[y]+7).attr('y', margin.top-12)
+      .attr('text-anchor','middle').attr('font-size','15px').attr('font-weight','700').attr('fill','#1a1a2e').text(`PLF ${y}`);
+  });
+
+  svg.append('g').selectAll('path').data(graph.links).join('path')
+    .attr('class', d => 'link' + (d.moved ? ' moved' : ''))
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('stroke', d => d.moved ? '#ef4444' : TC[graph.nodes[typeof d.source === 'object' ? d.source.index : d.source].type_budget] || '#999')
+    .attr('stroke-width', d => Math.max(1, d.width))
+    .on('mouseover', (ev,d) => showTip(ev, `<div class="tt">${graph.nodes[d.source.index].code} \u2192 ${graph.nodes[d.target.index].code}</div>`))
+    .on('mousemove', moveTip).on('mouseout', hideTip);
+
+  const ng = svg.append('g').selectAll('g').data(graph.nodes).join('g');
+  ng.append('rect').attr('x',d=>d.x0).attr('y',d=>d.y0).attr('width',d=>d.x1-d.x0).attr('height',d=>Math.max(1,d.y1-d.y0))
+    .attr('fill',d=>TC[d.type_budget]||'#999').attr('rx',2)
+    .on('mouseover',(ev,d)=>{
+      const aeStr = d.ae != null ? `<br>AE: ${(d.ae/1e9).toFixed(2)} Md\u20ac` : '';
+      showTip(ev, `<div class="tt"><span class="badge-s" style="background:${TC[d.type_budget]}">${d.type_budget}</span>${d.code}</div><div class="td">${d.libelle||'\u2014'}${aeStr}<br>PLF ${d.year}</div>`);
+    }).on('mousemove', moveTip).on('mouseout', hideTip);
+
+  const fs = sLevel === 'action' ? '8px' : sLevel === 'programme' ? '9px' : '10px';
+  const ml = sLevel === 'action' ? 35 : 30;
+  ng.filter(d => d.yi === years.length-1).append('text')
+    .attr('x',d=>d.x1+5).attr('y',d=>(d.y0+d.y1)/2).attr('dy','0.35em').attr('font-size',fs).attr('fill','#333')
+    .text(d => { const l = d.libelle || d.code; return l.length > ml ? l.slice(0,ml-1)+'\u2026' : l; })
+    .style('display', d => (d.y1-d.y0) < 4 ? 'none' : null);
+  ng.filter(d => d.yi === 0).append('text')
+    .attr('x',d=>d.x0-5).attr('y',d=>(d.y0+d.y1)/2).attr('dy','0.35em').attr('text-anchor','end').attr('font-size',fs).attr('fill','#333')
+    .text(d => { const l = d.libelle || d.code; return l.length > ml ? l.slice(0,ml-1)+'\u2026' : l; })
+    .style('display', d => (d.y1-d.y0) < 4 ? 'none' : null);
+}
+
+const tip = d3.select('.sankey-tip');
+function showTip(ev,html) { tip.style('display','block').html(html); moveTip(ev); }
+function moveTip(ev) { tip.style('left',(ev.pageX+14)+'px').style('top',(ev.pageY-12)+'px'); }
+function hideTip() { tip.style('display','none'); }
+</script>
+</body>
+</html>

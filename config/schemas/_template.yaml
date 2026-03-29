@@ -1,0 +1,42 @@
+# Template de mapping pour un fichier de données budgétaires open data
+# Copier ce fichier et adapter pour chaque nouvelle année/source
+
+source:
+  type: csv
+  encoding: utf-8-sig
+  separator: ";"
+
+# Pattern glob pour trouver le fichier dans entrants/plf open data/
+file_pattern: "plf*-{annee}*.csv"
+
+# Mapping colonnes source → modèle interne
+# Chaque entrée : { source: "Nom colonne CSV", type: string|integer|float|float_to_int }
+# Si null : la colonne n'existe pas dans la source
+# Si mapping : dict de correspondance valeur source → valeur interne
+columns:
+  type_budget:         { source: "TODO", type: string }
+  mission_libelle:     { source: "TODO", type: string }
+  mission_code:        { source: "TODO", type: string }
+  programme_code:      { source: "TODO", type: integer }
+  programme_libelle:   { source: "TODO", type: string }
+  action_code:         { source: "TODO", type: string }
+  action_libelle:      { source: "TODO", type: string }
+  sous_action_code:    null
+  sous_action_libelle: null
+  categorie_code:      null
+  titre_code:          null
+  ae:                  null
+  cp:                  null
+  ae_fdc_adp:          null
+  cp_fdc_adp:          null
+  ministere_nom:       null
+
+# Champs dérivés (calculés, pas dans la source)
+derived:
+  exercice: PLF
+  annee: 0
+
+# Règles de validation
+validation:
+  required_columns: []
+  type_budget_values: [BG, BA, CAS, CCF]

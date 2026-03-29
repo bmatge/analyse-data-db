@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nomenclature budgétaire — Correspondances 2019→2025</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: #fafafa; color: #1a1a2e; }
+  h1 { text-align: center; padding: 20px 0 4px; font-size: 20px; }
+  .subtitle { text-align: center; color: #666; font-size: 12px; margin-bottom: 10px; }
+  #controls { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 6px 16px 10px; }
+  .control-group { display: flex; align-items: center; gap: 4px; }
+  .control-group label { font-size: 12px; font-weight: 600; color: #555; margin-right: 4px; }
+  .legend-bar { display: flex; justify-content: center; gap: 14px; margin: 4px 0 8px; }
+  .legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #555; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+  .legend-line { width: 18px; height: 0; border-top: 2px dashed #ef4444; display: inline-block; }
+  .control-group button {
+    padding: 4px 12px; border: 1px solid #ccc; border-radius: 4px;
+    background: white; cursor: pointer; font-size: 11px; transition: all .15s;
+  }
+  .control-group button:hover { background: #f0f0f0; }
+  .control-group button.active { background: #1a1a2e; color: white; border-color: #1a1a2e; }
+  #chart { width: 100%; overflow: auto; }
+  svg { display: block; margin: 0 auto; }
+  .link { fill: none; stroke-opacity: 0.2; transition: stroke-opacity .2s; }
+  .link:hover { stroke-opacity: 0.5; }
+  .link.moved { stroke-dasharray: 4 2; stroke-opacity: 0.5; }
+  .year-label { font-size: 15px; font-weight: 700; fill: #1a1a2e; }
+  .legend-text { font-size: 11px; fill: #555; }
+  .stats { text-align: center; font-size: 11px; color: #888; margin: 6px 0; }
+  .tooltip {
+    position: absolute; background: white; border: 1px solid #ddd;
+    border-radius: 6px; padding: 10px 14px; font-size: 11px;
+    pointer-events: none; box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+    max-width: 400px; line-height: 1.6; z-index: 10;
+  }
+  .tooltip .tt-title { font-weight: 700; font-size: 12px; margin-bottom: 3px; }
+  .tooltip .tt-detail { color: #555; }
+  .tooltip .tt-moved { color: #ef4444; font-weight: 600; }
+  .tooltip .tt-badge {
+    display: inline-block; padding: 1px 6px; border-radius: 3px;
+    font-size: 10px; font-weight: 600; color: white; margin-right: 4px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Correspondances de la nomenclature budgétaire</h1>
+<p class="subtitle">Flux des missions, programmes et actions — PLF 2019 → 2022 → 2024 → 2025</p>
+
+<div id="controls">
+  <div class="control-group">
+    <label>Niveau :</label>
+    <button class="active" data-level="mission">Missions</button>
+    <button data-level="programme">Programmes</button>
+    <button data-level="action">Actions</button>
+  </div>
+  <div class="control-group">
+    <label>Budget :</label>
+    <button class="active" data-filter="all">Tous</button>
+    <button data-filter="BG">BG</button>
+    <button data-filter="BA">BA</button>
+    <button data-filter="CAS">CAS</button>
+    <button data-filter="CCF">CCF</button>
+  </div>
+  <div class="control-group">
+    <label>Taille :</label>
+    <button class="active" data-sizing="count">Nb entités</button>
+    <button data-sizing="ae">Montant AE</button>
+  </div>
+  <div class="control-group">
+    <label>Mission :</label>
+    <select id="mission-filter"><option value="all">Toutes</option></select>
+  </div>
+</div>
+
+<div class="legend-bar">
+  <span class="legend-item"><span class="legend-swatch" style="background:#2563eb"></span>Budget général</span>
+  <span class="legend-item"><span class="legend-swatch" style="background:#7c3aed"></span>Budgets annexes</span>
+  <span class="legend-item"><span class="legend-swatch" style="background:#059669"></span>Comptes spéciaux</span>
+  <span class="legend-item"><span class="legend-swatch" style="background:#d97706"></span>Concours financiers</span>
+  <span class="legend-item"><span class="legend-line"></span>Déplacement</span>
+</div>
+<div class="stats" id="stats"></div>
+<div id="chart"></div>
+<div class="tooltip" style="display:none"></div>
+
+<script>
+const TC = { BG: "#2563eb", BA: "#7c3aed", CAS: "#059669", CCF: "#d97706" };
+const TL = { BG: "Budget général", BA: "Budgets annexes", CAS: "Comptes spéciaux", CCF: "Concours financiers" };
+
+let DATA, currentLevel = "mission", currentFilter = "all", currentMission = "all", currentSizing = "count";
+
+fetch("sankey_data.json").then(r => r.json()).then(data => {
+  DATA = data;
+  populateMissionFilter();
+  render();
+  document.querySelectorAll("[data-level]").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll("[data-level]").forEach(x => x.classList.remove("active"));
+    b.classList.add("active"); currentLevel = b.dataset.level; render();
+  }));
+  document.querySelectorAll("[data-filter]").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll("[data-filter]").forEach(x => x.classList.remove("active"));
+    b.classList.add("active"); currentFilter = b.dataset.filter;
+    populateMissionFilter(); render();
+  }));
+  document.querySelectorAll("[data-sizing]").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll("[data-sizing]").forEach(x => x.classList.remove("active"));
+    b.classList.add("active"); currentSizing = b.dataset.sizing; render();
+  }));
+  document.getElementById("mission-filter").addEventListener("change", e => {
+    currentMission = e.target.value; render();
+  });
+});
+
+function populateMissionFilter() {
+  const sel = document.getElementById("mission-filter");
+  const val = sel.value;
+  sel.innerHTML = '<option value="all">Toutes</option>';
+  // Collect all missions from all years
+  const missions = new Map();
+  DATA.years.forEach(y => {
+    (DATA.missions[y] || []).forEach(m => {
+      if (currentFilter !== "all" && m.type_budget !== currentFilter) return;
+      if (!missions.has(m.code)) missions.set(m.code, m.libelle || m.code);
+    });
+  });
+  [...missions.entries()].sort((a,b) => a[1].localeCompare(b[1])).forEach(([code, lib]) => {
+    const opt = document.createElement("option");
+    opt.value = code; opt.textContent = `${code} — ${lib.slice(0, 50)}`;
+    sel.appendChild(opt);
+  });
+  sel.value = missions.has(val) ? val : "all";
+  currentMission = sel.value;
+}
+
+function render() {
+  d3.select("#chart").selectAll("*").remove();
+  const years = DATA.years;
+  const nodes = [], links = [], nodeIdx = {};
+
+  function makeId(year, code) { return `${year}::${code}`; }
+  function addNode(year, code, libelle, type_budget, parent, value, ae) {
+    const id = makeId(year, code);
+    if (nodeIdx[id] !== undefined) return nodeIdx[id];
+    nodeIdx[id] = nodes.length;
+    nodes.push({ id, year, code, libelle, type_budget, parent, value: value || 1, ae, yi: years.indexOf(year) });
+    return nodeIdx[id];
+  }
+
+  // Helper: get AE value for sizing
+  function getAE(level, year, code) {
+    if (currentSizing !== "ae") return null;
+    if (level === "mission") return (DATA.ae_by_mission[year] || {})[code];
+    if (level === "programme") return (DATA.ae_by_programme[year] || {})[String(code)];
+    return null;
+  }
+
+  if (currentLevel === "mission") {
+    years.forEach(y => {
+      (DATA.missions[y] || []).forEach(m => {
+        if (currentFilter !== "all" && m.type_budget !== currentFilter) return;
+        if (currentMission !== "all" && m.code !== currentMission) return;
+        const ae = getAE("mission", y, m.code);
+        const val = ae != null ? ae / 1e6 : (m.nb_pgm || 1);
+        addNode(y, m.code, m.libelle, m.type_budget, null, Math.max(1, val), ae);
+      });
+    });
+    (DATA.flows.mission || []).forEach(f => {
+      const si = nodeIdx[makeId(f.from_year, f.code)];
+      const ti = nodeIdx[makeId(f.to_year, f.code)];
+      if (si !== undefined && ti !== undefined) {
+        const ae = getAE("mission", f.from_year, f.code);
+        const val = ae != null ? ae / 1e6 : (f.value || 1);
+        links.push({ source: si, target: ti, value: Math.max(1, val) });
+      }
+    });
+  }
+  else if (currentLevel === "programme") {
+    years.forEach(y => {
+      (DATA.programmes_data[y] || []).forEach(p => {
+        if (currentFilter !== "all" && p.type_budget !== currentFilter) return;
+        if (currentMission !== "all" && p.mission_code !== currentMission) return;
+        const ae = getAE("programme", y, p.code);
+        const val = ae != null ? ae / 1e6 : (p.nb_act || 1);
+        addNode(y, String(p.code), p.libelle, p.type_budget, p.mission_code, Math.max(1, val), ae);
+      });
+    });
+    (DATA.flows.programme || []).forEach(f => {
+      const si = nodeIdx[makeId(f.from_year, String(f.code))];
+      const ti = nodeIdx[makeId(f.to_year, String(f.code))];
+      if (si !== undefined && ti !== undefined) {
+        const ae = getAE("programme", f.from_year, f.code);
+        const val = ae != null ? ae / 1e6 : (f.value || 1);
+        links.push({ source: si, target: ti, value: Math.max(1, val), moved: f.moved,
+                      fromParent: f.from_parent, toParent: f.to_parent });
+      }
+    });
+  }
+  else { // action
+    years.forEach(y => {
+      (DATA.actions_data[y] || []).forEach(a => {
+        if (currentFilter !== "all" && a.type_budget !== currentFilter) return;
+        if (currentMission !== "all" && a.mission_code !== currentMission) return;
+        const code = `${a.programme_code}-${a.code}`;
+        addNode(y, code, a.libelle, a.type_budget, String(a.programme_code), 1);
+      });
+    });
+    (DATA.flows.action || []).forEach(f => {
+      const code = `${f.programme_code}-${f.code}`;
+      const si = nodeIdx[makeId(f.from_year, code)];
+      const ti = nodeIdx[makeId(f.to_year, code)];
+      if (si !== undefined && ti !== undefined)
+        links.push({ source: si, target: ti, value: 1 });
+    });
+  }
+
+  // Stats
+  const nodesByYear = {};
+  nodes.forEach(n => { nodesByYear[n.year] = (nodesByYear[n.year] || 0) + 1; });
+  const stableLinks = links.length;
+  const movedLinks = links.filter(l => l.moved).length;
+  const newNodes = nodes.filter(n => {
+    return !links.some(l => (typeof l.target === "number" ? l.target : l.target.index) === nodes.indexOf(n));
+  }).filter(n => n.yi > 0).length;
+  const removedNodes = nodes.filter(n => {
+    return !links.some(l => (typeof l.source === "number" ? l.source : l.source.index) === nodes.indexOf(n));
+  }).filter(n => n.yi < years.length - 1).length;
+
+  const countStr = years.map(y => `${y}: ${nodesByYear[y] || 0}`).join(" → ");
+  document.getElementById("stats").textContent =
+    `${countStr} | ${stableLinks} liens stables` +
+    (movedLinks ? ` | ${movedLinks} déplacements` : "") +
+    (newNodes ? ` | ${newNodes} apparus` : "") +
+    (removedNodes ? ` | ${removedNodes} disparus` : "");
+
+  if (nodes.length === 0) {
+    d3.select("#chart").append("p").style("text-align","center").style("padding","40px").style("color","#999")
+      .text("Aucun élément pour cette sélection.");
+    return;
+  }
+
+  // Layout
+  const margin = { top: 44, right: 200, bottom: 20, left: 200 };
+  const colWidth = 300;
+  const width = margin.left + colWidth * (years.length - 1) + margin.right;
+  const nodeH = currentLevel === "action" ? 8 : currentLevel === "programme" ? 10 : 14;
+  const height = Math.max(500, Math.max(...Object.values(nodesByYear)) * (nodeH + 4) + margin.top + margin.bottom);
+
+  const svg = d3.select("#chart").append("svg").attr("width", width).attr("height", height);
+
+  const sankey = d3.sankey()
+    .nodeId(d => d.index).nodeWidth(14).nodePadding(currentLevel === "action" ? 2 : 4)
+    .nodeAlign(d3.sankeyLeft)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankey({
+    nodes: nodes.map((d, i) => ({ ...d, index: i })),
+    links: links.map(d => ({ ...d })),
+  });
+
+  // Fix x positions
+  const yearX = {};
+  years.forEach((y, i) => { yearX[y] = margin.left + i * colWidth; });
+  graph.nodes.forEach(n => { const dx = yearX[n.year] - n.x0; n.x0 += dx; n.x1 += dx; });
+
+  // Year labels
+  years.forEach(y => {
+    svg.append("text").attr("class", "year-label").attr("x", yearX[y] + 7).attr("y", margin.top - 12)
+      .attr("text-anchor", "middle").text(`PLF ${y}`);
+  });
+
+  // Links
+  svg.append("g").selectAll("path").data(graph.links).join("path")
+    .attr("class", d => "link" + (d.moved ? " moved" : ""))
+    .attr("d", d3.sankeyLinkHorizontal())
+    .attr("stroke", d => {
+      if (d.moved) return "#ef4444";
+      const src = typeof d.source === "object" ? d.source : graph.nodes[d.source];
+      return TC[src.type_budget] || "#999";
+    })
+    .attr("stroke-width", d => Math.max(1, d.width))
+    .on("mouseover", (ev, d) => showTooltip(ev, linkTip(d, graph)))
+    .on("mousemove", moveTip)
+    .on("mouseout", hideTip);
+
+  // Nodes
+  const ng = svg.append("g").selectAll("g").data(graph.nodes).join("g");
+  ng.append("rect")
+    .attr("x", d => d.x0).attr("y", d => d.y0)
+    .attr("width", d => d.x1 - d.x0).attr("height", d => Math.max(1, d.y1 - d.y0))
+    .attr("fill", d => TC[d.type_budget] || "#999").attr("rx", 2)
+    .on("mouseover", (ev, d) => showTooltip(ev, nodeTip(d)))
+    .on("mousemove", moveTip)
+    .on("mouseout", hideTip);
+
+  // Labels (right side for last column, left for others)
+  const fontSize = currentLevel === "action" ? "8px" : currentLevel === "programme" ? "9px" : "10px";
+  const maxLen = currentLevel === "action" ? 35 : currentLevel === "programme" ? 32 : 30;
+
+  ng.append("text")
+    .attr("x", d => years.indexOf(d.year) === years.length - 1 ? d.x1 + 5 : d.x0 - 5)
+    .attr("y", d => (d.y0 + d.y1) / 2).attr("dy", "0.35em")
+    .attr("text-anchor", d => years.indexOf(d.year) === years.length - 1 ? "start" : "end")
+    .attr("font-size", fontSize).attr("fill", "#333")
+    .text(d => {
+      const l = d.libelle || d.code;
+      return l.length > maxLen ? l.slice(0, maxLen - 1) + "…" : l;
+    })
+    .style("display", d => (d.y1 - d.y0) < 4 ? "none" : null);
+
+  // Code label on opposite side
+  ng.filter(d => years.indexOf(d.year) < years.length - 1 && (d.y1 - d.y0) >= 6)
+    .append("text")
+    .attr("x", d => d.x1 + 3).attr("y", d => (d.y0 + d.y1) / 2).attr("dy", "0.35em")
+    .attr("font-size", "7px").attr("fill", "#aaa").text(d => d.code);
+
+}
+
+// Tooltip
+const tooltip = d3.select(".tooltip");
+function showTooltip(ev, html) { tooltip.style("display", "block").html(html); moveTip(ev); }
+function moveTip(ev) { tooltip.style("left", (ev.pageX + 14) + "px").style("top", (ev.pageY - 12) + "px"); }
+function hideTip() { tooltip.style("display", "none"); }
+
+function nodeTip(d) {
+  const badge = `<span class="tt-badge" style="background:${TC[d.type_budget]}">${d.type_budget}</span>`;
+  const parent = d.parent ? `<br>Rattachement : ${d.parent}` : "";
+  const aeStr = d.ae != null ? `<br>AE : ${(d.ae / 1e9).toFixed(2)} Md€` : "";
+  return `<div class="tt-title">${badge}${d.code}</div>` +
+    `<div class="tt-detail">${d.libelle || "—"}${parent}${aeStr}<br>PLF ${d.year}</div>`;
+}
+
+function linkTip(d, graph) {
+  const src = typeof d.source === "object" ? d.source : graph.nodes[d.source];
+  const tgt = typeof d.target === "object" ? d.target : graph.nodes[d.target];
+  const moved = d.moved ? `<div class="tt-moved">⚠ Déplacé : ${d.fromParent} → ${d.toParent}</div>` : "";
+  return `<div class="tt-title">${src.year} → ${tgt.year}</div>` +
+    `<div class="tt-detail">${src.code} → ${tgt.code}<br>` +
+    `${src.libelle || "?"}<br>→ ${tgt.libelle || "?"}</div>${moved}`;
+}
+</script>
+</body>
+</html>

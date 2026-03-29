@@ -1,0 +1,37 @@
+# PLF 2020 - Crédits par destination et nature (format data.gouv.fr)
+# 12 colonnes utiles, 2215 lignes
+# Montants en entiers avec espaces comme séparateur de milliers
+
+source:
+  type: csv
+  encoding: utf-8
+  separator: ";"
+
+file_pattern: "PLF_2020_Credits.csv"
+
+columns:
+  type_budget:         { source: "typeBudget", type: string }
+  mission_libelle:     null
+  mission_code:        { source: "mission", type: string }
+  programme_code:      { source: "programme", type: integer }
+  programme_libelle:   null
+  action_code:         { source: "action", type: string }  # format "178-04"
+  action_libelle:      null
+  sous_action_code:    { source: "sous_action", type: string, nullable: true }
+  sous_action_libelle: null
+  categorie_code:      { source: "categorie", type: integer, nullable: true }
+  titre_code:          { source: "titre", type: integer }
+  ae:                  { source: "aePlfNp1", type: space_int, nullable: true }
+  cp:                  { source: "cpPlfNp1", type: space_int, nullable: true }
+  ae_fdc_adp:          null
+  cp_fdc_adp:          null
+  ministere_nom:       null
+  ministere_code:      { source: "ministere", type: integer }
+
+derived:
+  exercice: PLF
+  annee: 2020
+
+validation:
+  required_columns: ["typeBudget", "programme", "aePlfNp1", "cpPlfNp1"]
+  type_budget_values: [BG, BA, CAS, CCF]

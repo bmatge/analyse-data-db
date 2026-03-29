@@ -1,0 +1,2490 @@
+Exercice;Loi;Type ligne;Type Budget;code;Libelle
+2020;LFI;Mission;CCF;ZC;Avances aux collectivités territoriales
+2020;LFI;PGM;CCF;832;Avances aux collectivités et établissements publics, et à la Nouvelle-Calédonie
+2020;LFI;ACT;CCF;832-01;Avances de l'article L. 2337-1 du code général des collectivités territoriales
+2020;LFI;ACT;CCF;832-02;Avances de l'article 14 de la loi n° 46-2921 du 23 décembre 1946 et de l'article L. 2237-2 du code général des collectivités territoriales
+2020;LFI;ACT;CCF;832-03;Avances de l'article 34 de la loi n° 53-1336 du 31 décembre 1953 (avances spéciales sur recettes budgétaires)
+2020;LFI;ACT;CCF;832-04;Avances à la Nouvelle-Calédonie, au titre de la fiscalité du nickel
+2020;LFI;PGM;CCF;833;Avances sur le montant des impositions revenant aux régions, départements, communes, établissements et divers organismes
+2020;LFI;ACT;CCF;833-01;Avances sur le montant des impositions revenant aux régions, départements, communes, établissements et divers organismes
+2020;LFI;ACT;CCF;833-02;Avances aux départements sur le produit de la taxe intérieure de consommation sur les produits pétroliers
+2020;LFI;ACT;CCF;833-03;Avances aux départements sur les frais de gestion de la taxe foncière sur les propriétés bâties
+2020;LFI;ACT;CCF;833-04;Avances aux régions sur les frais de gestion de la contribution foncière des entreprises (CFE), de la contribution sur la valeur ajoutée des entreprises (CVAE) et de la taxe d'habitation (TH) et sur le produit de la taxe intérieure de consommation sur les produits énergétiques (TICPE)
+2020;LFI;Mission;CAS;YK;Financement des aides aux collectivités pour l'électrification rurale
+2020;LFI;PGM;CAS;793;Électrification rurale
+2020;LFI;ACT;CAS;793-09;Déclaration d'utilité publique (Très haute tension)
+2020;LFI;ACT;CAS;793-03;Renforcement des réseaux
+2020;LFI;ACT;CAS;793-04;Extension des réseaux
+2020;LFI;ACT;CAS;793-05;Enfouissement et pose en façade
+2020;LFI;ACT;CAS;793-06;Sécurisation des fils nus (hors faible section)
+2020;LFI;ACT;CAS;793-07;Sécurisation des fils nus de faible section
+2020;LFI;ACT;CAS;793-08;Fonctionnement
+2020;LFI;ACT;CAS;793-10;Intempéries
+2020;LFI;PGM;CAS;794;Opérations de maîtrise de la demande d’électricité, de production d’électricité par des énergies renouvelables ou de production de proximité dans les zones non interconnectées
+2020;LFI;ACT;CAS;794-02;Sites isolés
+2020;LFI;ACT;CAS;794-03;Installations de proximité en zone non interconnectée
+2020;LFI;ACT;CAS;794-04;Maîtrise de la demande d'énergie
+2020;LFI;ACT;CAS;794-05;Déclaration d'utilité publique (Très haute tension) - (Engagements antérieurs au 1er janvier 2013)
+2020;LFI;ACT;CAS;794-06;Intempéries - (Engagements antérieurs au 1er janvier 2013)
+2020;LFI;Mission;BG;VA;Cohésion des territoires
+2020;LFI;PGM;BG;112;Impulsion et coordination de la politique d'aménagement du territoire
+2020;LFI;ACT;BG;112-11;FNADT section locale
+2020;LFI;SSA;BG;112-11-01;CPER 2007-2014
+2020;LFI;SSA;BG;112-11-02;CPER 2015-2020
+2020;LFI;SSA;BG;112-11-03;Contrats de convergence et de transformation
+2020;LFI;SSA;BG;112-11-04;Pactes de développement territorial
+2020;LFI;ACT;BG;112-12;FNADT section générale
+2020;LFI;SSA;BG;112-12-01;Soutien au développement des territoires
+2020;LFI;SSA;BG;112-12-02;Accès aux services
+2020;LFI;SSA;BG;112-12-03;Fonctionnement
+2020;LFI;ACT;BG;112-13;Soutien aux Opérateurs
+2020;LFI;SSA;BG;112-13-01;SCSP de l'Agence nationale de la cohésion des territoires
+2020;LFI;SSA;BG;112-13-02;Prospective, évaluation et autres études
+2020;LFI;SSA;BG;112-13-03;Subventions aux organismes et partenaires du réseau ANCT
+2020;LFI;SSA;BG;112-13-04;Certification, assistance technique et participation aux programmes de coopération
+2020;LFI;SSA;BG;112-13-05;Soutien à Business France
+2020;LFI;ACT;BG;112-14;Prime d’aménagement du territoire, contrats de ruralité et pacte Etat-métropoles
+2020;LFI;SSA;BG;112-14-01;Prime d'aménagement du territoire
+2020;LFI;SSA;BG;112-14-02;Pacte État-métropoles
+2020;LFI;SSA;BG;112-14-03;Contrats de ruralité
+2020;LFI;PGM;BG;162;Interventions territoriales de l'État
+2020;LFI;ACT;BG;162-10;Fonds interministériel pour la transformation de la Guyane
+2020;LFI;SSA;BG;162-10-01;La cohésion des territoires
+2020;LFI;SSA;BG;162-10-02;La mobilité multimodale
+2020;LFI;SSA;BG;162-10-03;Les territoires résilients
+2020;LFI;SSA;BG;162-10-04;Les territoires d'innovation et de rayonnement
+2020;LFI;SSA;BG;162-10-05;La cohésion sociale et l'employabilité
+2020;LFI;ACT;BG;162-02;Eau - Agriculture en Bretagne
+2020;LFI;SSA;BG;162-02-21;Inciter les agriculteurs et les autres acteurs à supprimer les atteintes à l'environnement
+2020;LFI;SSA;BG;162-02-22;Mesurer l'évolution de la situation environnementale des milieux et faire appliquer des solutions correctives par l'action réglementaire
+2020;LFI;SSA;BG;162-02-23;Améliorer l'évaluation des résultats, développer le retour d'expérience et amplifier la gestion prospective et le pilotage à long terme
+2020;LFI;SSA;BG;162-02-24;Mettre en oeuvre le plan d'urgence nitrates
+2020;LFI;SSA;BG;162-02-25;Mettre en oeuvre le plan de lutte contre les algues vertes
+2020;LFI;ACT;BG;162-04;Programme exceptionnel d'investissements en faveur de la Corse
+2020;LFI;SSA;BG;162-04-41;Mettre à niveau les réseaux et équipements collectifs
+2020;LFI;SSA;BG;162-04-42;Renforcer les infrastructures de mise en valeur du territoire insulaire
+2020;LFI;SSA;BG;162-04-43;Résorber le déficit en services collectifs
+2020;LFI;SSA;BG;162-04-44;Assistance à maîtrise d'ouvrage
+2020;LFI;ACT;BG;162-06;Plan gouvernemental sur le Marais Poitevin - Poitou Charentes
+2020;LFI;SSA;BG;162-06-61;Améliorer et coordonner la gestion de la ressource en eau
+2020;LFI;SSA;BG;162-06-62;Favoriser une agriculture conforme aux enjeux environnementaux du marais
+2020;LFI;SSA;BG;162-06-63;Préserver les milieux naturels
+2020;LFI;SSA;BG;162-06-64;Gérer et valoriser de façon durable le territoire et le patrimoine du Marais poitevin
+2020;LFI;ACT;BG;162-08;Volet territorialisé du plan national d'action chlordécone
+2020;LFI;SSA;BG;162-08-81;Elaborer localement une stratégie d'amélioration de la qualité de vie des populations dans un contexte de pollution
+2020;LFI;SSA;BG;162-08-82;Favoriser une approche de prévention du risque sanitaire et de protection des populations dans une stratégie durable
+2020;LFI;SSA;BG;162-08-83;Poursuivre les actions de recherche
+2020;LFI;SSA;BG;162-08-84;Evaluer les enjeux socio-économiques de la pollution au chlordécone
+2020;LFI;ACT;BG;162-09;Plan littoral 21
+2020;LFI;SSA;BG;162-09-91;Vitrine française de la résilience écologique
+2020;LFI;SSA;BG;162-09-92;Economie globale portée par l'innovation qui irrigue tout le territoire
+2020;LFI;SSA;BG;162-09-93;Littoral symbole d'attractivité, d'accueil et de cohésion républicaine
+2020;LFI;ACT;BG;162-11;Reconquête de la qualité des cours d’eau en Pays de la Loire
+2020;LFI;SSA;BG;162-11-11;Mieux accompagner les maîtres d'ouvrage porteurs des actions de restauration des milieux aquatiques
+2020;LFI;SSA;BG;162-11-12;Accompagner la transition agro-écologique des exploitations agricoles
+2020;LFI;SSA;BG;162-11-13;Renforcer les connaissances et le suivi
+2020;LFI;PGM;BG;177;Hébergement, parcours vers le logement et insertion des personnes vulnérables
+2020;LFI;ACT;BG;177-11;Prévention de l'exclusion
+2020;LFI;SSA;BG;177-11-01;Alloctaions et aides sociales
+2020;LFI;SSA;BG;177-11-05;Autres actions de prévention de l'exclusion
+2020;LFI;SSA;BG;177-11-02;Gens du voyage - action sociale
+2020;LFI;SSA;BG;177-11-03;Gens du voyage - aide aux collectivités et organismes gérant des aires d'accueil des gens du voyage (ALT2)
+2020;LFI;ACT;BG;177-12;Hébergement et logement adapté
+2020;LFI;SSA;BG;177-12-01;Plate-forme de veille sociale : 115
+2020;LFI;SSA;BG;177-12-02;Plate-forme de veille sociale : SAO
+2020;LFI;SSA;BG;177-12-03;Plate-forme de veille sociale : accueil de jour
+2020;LFI;SSA;BG;177-12-04;Plate-forme de veille sociale : SAMU social, équipes mobiles
+2020;LFI;SSA;BG;177-12-06;Hébergement d'urgence - hors centres d'hébergement et de réinsertion sociale (CHRS)
+2020;LFI;SSA;BG;177-12-10;Centres d’hébergement et de réinsertion sociale (CHRS) - structures en dotation globale
+2020;LFI;SSA;BG;177-12-07;Nuits d'hôtel
+2020;LFI;SSA;BG;177-12-08;Accompagnement social lié à l'hébergement
+2020;LFI;SSA;BG;177-12-15;Allocation de logement temporaire (ALT1)
+2020;LFI;SSA;BG;177-12-12;Résidences sociales (aide à la gestion locative sociale)
+2020;LFI;SSA;BG;177-12-13;Maisons-relais
+2020;LFI;SSA;BG;177-12-11;Adaptation à la vie active dans les CHRS
+2020;LFI;SSA;BG;177-12-17;Autres actions en faveur de l'hébergement et du logement adapté
+2020;LFI;SSA;BG;177-12-09;Hébergement de stabilisation - hors centres d'hébergement et de réinsertion sociale (CHRS)
+2020;LFI;SSA;BG;177-12-05;Service intégré de l'accueil et de l'orientation (SIAO)
+2020;LFI;SSA;BG;177-12-14;Intermédiation locative
+2020;LFI;SSA;BG;177-12-16;Accompagnement vers et dans le logement
+2020;LFI;ACT;BG;177-14;Conduite et animation des politiques de l'hébergement et de l'inclusion sociale
+2020;LFI;SSA;BG;177-14-01;Ingénierie et outils de la gouvernance
+2020;LFI;SSA;BG;177-14-02;Soutien financier aux organismes nationaux intervenant dans le champ social : FONJEP
+2020;LFI;SSA;BG;177-14-03;Soutien financier aux organismes nationaux intervenant dans le champ social : autres organismes nationaux
+2020;LFI;SSA;BG;177-14-04;Institut de formation aux carrières administratives, sanitaires et sociales de Dieppe
+2020;LFI;SSA;BG;177-14-06;Autres actions de conduite et d’animation de la politique de de l'hébergement et de l'inclusion social
+2020;LFI;PGM;BG;109;Aide à l'accès au logement
+2020;LFI;ACT;BG;109-01;Aides personnelles
+2020;LFI;ACT;BG;109-02;Information relative au logement et accompagnement des publics en difficulté
+2020;LFI;SSA;BG;109-02-01;Information sur le logement (ANIL et ADIL)
+2020;LFI;SSA;BG;109-02-02;Autres interventions de l'Etat en faveur du logement des publics en difficulté
+2020;LFI;ACT;BG;109-03;Sécurisation des risques locatifs
+2020;LFI;SSA;BG;109-03-01;Garantie des risques locatifs
+2020;LFI;PGM;BG;147;Politique de la ville
+2020;LFI;ACT;BG;147-02;Revitalisation économique et emploi
+2020;LFI;SSA;BG;147-02-20;Allègement de charges sociales dans les zones franches urbaines et les zones de redynamisation urbaine
+2020;LFI;SSA;BG;147-02-21;Fonctionnement de l'établissement public d’insertion de la défense
+2020;LFI;ACT;BG;147-03;Stratégie, ressources et évaluation
+2020;LFI;SSA;BG;147-03-34;Partenariat National
+2020;LFI;SSA;BG;147-03-32;Evaluation - accompagnement des acteurs
+2020;LFI;SSA;BG;147-03-30;Centre de ressources - Formation des acteurs régionaux
+2020;LFI;SSA;BG;147-03-31;Fonctionnement des services et formation des acteurs de la politique de la ville
+2020;LFI;SSA;BG;147-03-35;Etudes et communications
+2020;LFI;SSA;BG;147-03-36;Mesures expérimentales
+2020;LFI;SSA;BG;147-03-38;Délégués du Prefet
+2020;LFI;ACT;BG;147-01;Actions territorialisées et Dispositifs spécifiques de la politique de la ville
+2020;LFI;SSA;BG;147-01-11;Réussite éducative
+2020;LFI;SSA;BG;147-01-10;Programme d'action des contrats de ville
+2020;LFI;SSA;BG;147-01-12;Adultes relais
+2020;LFI;SSA;BG;147-01-17;Investissement  régionaux (CPER) (Ex FIV)
+2020;LFI;SSA;BG;147-01-18;Investissement  régionaux (hors CPER) (Ex FIV)
+2020;LFI;SSA;BG;147-01-20;Délégation interministérielle à la lutte contre le racisme et l'antisémitisme (DILCRA)
+2020;LFI;ACT;BG;147-04;Rénovation urbaine et amélioration du cadre de vie
+2020;LFI;SSA;BG;147-04-40;Programme national de rénovation urbaine
+2020;LFI;SSA;BG;147-04-41;Grands Projets de ville et opérations de renouvellement urbain (CPER)
+2020;LFI;SSA;BG;147-04-42;Grands Projets de ville et opérations de renouvellement urbain (hors CPER)
+2020;LFI;SSA;BG;147-04-44;Amélioration du cadre de vie - Collèges dégradés (ANRU)
+2020;LFI;SSA;BG;147-04-45;Fonctionnement de l’agence nationale de rénovation urbaine (ANRU)
+2020;LFI;PGM;BG;135;Urbanisme, territoires et amélioration de l'habitat
+2020;LFI;ACT;BG;135-03;Lutte contre l'habitat indigne
+2020;LFI;SSA;BG;135-03-01;Lutte contre l'insalubrité
+2020;LFI;SSA;BG;135-03-02;Lutte contre le risque plomb
+2020;LFI;SSA;BG;135-03-07;LHI - travaux d'office
+2020;LFI;SSA;BG;135-03-08;LHI - autres dépenses : diagnostics
+2020;LFI;ACT;BG;135-01;Construction locative et amélioration du parc
+2020;LFI;SSA;BG;135-01-15;Bassin Minier
+2020;LFI;SSA;BG;135-01-03;Gens du voyage - aires d'accueil
+2020;LFI;SSA;BG;135-01-14;FNAP - versement
+2020;LFI;SSA;BG;135-01-16;Gens du voyage - évacuation des campements
+2020;LFI;SSA;BG;135-01-13;SNE
+2020;LFI;SSA;BG;135-01-11;Parc locatif social - Hors conventions de délégation de compétence - Maîtrise d'oeuvre urbaine et sociale et autres prestations d'ingénierie
+2020;LFI;SSA;BG;135-01-04;Parc locatif social - Conventions de délégation de compétence (article 61 de la loi du 13 août 2004)
+2020;LFI;SSA;BG;135-01-08;Parc locatif social - Hors conventions de délégation de compétence - Démolition et changement d'usage
+2020;LFI;SSA;BG;135-01-07;Parc locatif social - Hors conventions de délégation de compétence - Réhabilitation et amélioration de la qualité de service
+2020;LFI;SSA;BG;135-01-06;Parc locatif social - Hors conventions de délégation de compétence - Offre nouvelle en construction neuve et acquisition amélioration y compris surchage foncière
+2020;LFI;SSA;BG;135-01-17;PLS Conv délég Offre nouvelle
+2020;LFI;SSA;BG;135-01-18;PLS Conv Délég Réhabilitation
+2020;LFI;SSA;BG;135-01-19;PLS Conv Délég Démolition
+2020;LFI;SSA;BG;135-01-20;PLS Conv Délég MOUS
+2020;LFI;ACT;BG;135-05;Soutien
+2020;LFI;SSA;BG;135-05-13;Informatique Urbanisme
+2020;LFI;SSA;BG;135-05-01;Observation, études et évaluation : études centrales
+2020;LFI;SSA;BG;135-05-02;Communication
+2020;LFI;SSA;BG;135-05-03;Formation : actions nationales et interrégionales
+2020;LFI;SSA;BG;135-05-04;Informatique Logement
+2020;LFI;SSA;BG;135-05-05;Déplacements des agents de l'administration centrale et remboursement de personnel mis a disposition
+2020;LFI;SSA;BG;135-05-06;Observation, études et évaluation : études locales
+2020;LFI;SSA;BG;135-05-10;Commissions de médiation pour le droit au logement opposable
+2020;LFI;ACT;BG;135-02;Soutien à l'accession à la propriété
+2020;LFI;SSA;BG;135-02-03;Participation aux frais de gestion de la société de gestion du fonds de garantie de l'accession sociale
+2020;LFI;ACT;BG;135-04;Réglementation, politique technique et qualité de la construction
+2020;LFI;SSA;BG;135-04-06;Observatoires du logement
+2020;LFI;SSA;BG;135-04-01;Contentieux DALO
+2020;LFI;SSA;BG;135-04-03;Qualité de la construction : études
+2020;LFI;SSA;BG;135-04-05;Contentieux de l'urbanisme
+2020;LFI;SSA;BG;135-04-08;Rénovation Anah
+2020;LFI;SSA;BG;135-04-09;Contentieux habitat hors DALO
+2020;LFI;ACT;BG;135-07;Urbanisme et aménagement
+2020;LFI;SSA;BG;135-07-05;Architectes et paysagistes conseils
+2020;LFI;SSA;BG;135-07-06;Agences d'urbanisme
+2020;LFI;SSA;BG;135-07-03;Politiques d'aménagement de l'Etat (hors CPER)
+2020;LFI;SSA;BG;135-07-02;Politiques d'aménagement de l'Etat (CPER)
+2020;LFI;SSA;BG;135-07-04;Aide aux maires bâtisseurs
+2020;LFI;SSA;BG;135-07-01;Villes et territoires durables
+2020;LFI;Mission;BG;AA;Action extérieure de l'État
+2020;LFI;PGM;BG;105;Action de la France en Europe et dans le monde
+2020;LFI;ACT;BG;105-02;Action européenne
+2020;LFI;SSA;BG;105-02-01;Moyens de fonctionnement : services d'administration centrale
+2020;LFI;SSA;BG;105-02-11;"Personnel concourant à l'action ""action européenne"""
+2020;LFI;SSA;BG;105-02-07;Dépenses d'intervention et de communication du ministre chargé des affaires européennes
+2020;LFI;SSA;BG;105-02-08;Contributions aux organisations européennes
+2020;LFI;ACT;BG;105-05;Coopération de sécurité et de défense
+2020;LFI;SSA;BG;105-05-01;Formation des élites et cadres de sécurité et de défense
+2020;LFI;SSA;BG;105-05-02;Ingénierie de sécurité et de défense
+2020;LFI;SSA;BG;105-05-03;Fonctions de direction et soutien en France et étranger
+2020;LFI;SSA;BG;105-05-04;"Personnel concourant à l'action ""coopération de sécurité et de défense"""
+2020;LFI;ACT;BG;105-01;Coordination de l'action diplomatique
+2020;LFI;SSA;BG;105-01-01;Etat major : cabinets
+2020;LFI;SSA;BG;105-01-08;Etat major : logistique de niveau chef d'Etat ou de gouvernement
+2020;LFI;SSA;BG;105-01-09;Etat-major : affaires politiques
+2020;LFI;SSA;BG;105-01-15;"Personnel concourant à l'action ""coordination de l'action diplomatique"""
+2020;LFI;SSA;BG;105-01-16;Sécurité des communautés françaises
+2020;LFI;ACT;BG;105-04;Contributions internationales
+2020;LFI;SSA;BG;105-04-01;Opérations de maintien de la paix : participations obligatoires aux opérations de maintien de la paix des Nations Unies (en devises)
+2020;LFI;SSA;BG;105-04-02;Contributions en euros aux organisations internationales
+2020;LFI;SSA;BG;105-04-05;Contributions en devises aux organisations internationales
+2020;LFI;ACT;BG;105-06;Soutien
+2020;LFI;SSA;BG;105-06-06;Ressources humaines
+2020;LFI;SSA;BG;105-06-08;Systèmes d'information et de télécommunication
+2020;LFI;SSA;BG;105-06-10;Logistique diplomatique
+2020;LFI;SSA;BG;105-06-11;Politique immobilière
+2020;LFI;SSA;BG;105-06-12;Sécurité diplomatique
+2020;LFI;SSA;BG;105-06-14;"Personnel concourant à l'action ""soutien"""
+2020;LFI;ACT;BG;105-99;Dépenses de personnel à reventiler entre les actions du programme
+2020;LFI;ACT;BG;105-07;Réseau diplomatique
+2020;LFI;SSA;BG;105-07-01;Réseau diplomatique : postes à l'étranger - dépenses de structures du ministère des Affaires étrangères
+2020;LFI;SSA;BG;105-07-02;"Personnel du Ministère des Affaires étrangères et européennes concourant à l'action ""réseau diplomatique"""
+2020;LFI;SSA;BG;105-07-03;Réseau diplomatique : postes à l'étranger - dépenses de structures hors ministère des Affaires étrangères
+2020;LFI;SSA;BG;105-07-04;"Personnel hors Ministère des Affaires étrangères et européennes, concourant à l'action ""réseau diplomatique"""
+2020;LFI;PGM;BG;185;Diplomatie culturelle et d'influence
+2020;LFI;ACT;BG;185-01;Appui au réseau
+2020;LFI;ACT;BG;185-04;Enseignement supérieur et recherche
+2020;LFI;ACT;BG;185-02;Coopération culturelle et promotion du français
+2020;LFI;SSA;BG;185-02-01;Langue française et diversité linguistique
+2020;LFI;SSA;BG;185-02-05;Coopération et diffusion culturelles
+2020;LFI;ACT;BG;185-05;Agence pour l'enseignement français à l'étranger
+2020;LFI;ACT;BG;185-03;Objectifs de développement durable
+2020;LFI;ACT;BG;185-06;"Dépenses de personnel concourant au programme ""Diplomatie culturelle et d'influence"""
+2020;LFI;ACT;BG;185-07;Diplomatie économique et développement du tourisme
+2020;LFI;PGM;BG;151;Français à l'étranger et affaires consulaires
+2020;LFI;ACT;BG;151-01;Offre d'un service public de qualité aux Français à l'étranger
+2020;LFI;SSA;BG;151-01-02;Services publics administratifs offerts aux français
+2020;LFI;SSA;BG;151-01-13;"Personnel concourant à l'action ""offre d'un service public de qualité aux français à l'étranger"""
+2020;LFI;SSA;BG;151-01-12;Animation et gestion du réseau : animation des postes consulaires
+2020;LFI;ACT;BG;151-03;Instruction des demandes de visa
+2020;LFI;SSA;BG;151-03-01;Fourniture des services administratifs
+2020;LFI;SSA;BG;151-03-02;"Personnel concourant à l'action ""instruction des demandes de visa"""
+2020;LFI;SSA;BG;151-03-03;Introduction de la biométrie, aménagement des services et lutte contre la fraude
+2020;LFI;ACT;BG;151-99;Dépenses de personnel à reventiler entre les actions du programme
+2020;LFI;ACT;BG;151-02;Accès des élèves français au réseau AEFE
+2020;LFI;SSA;BG;151-02-01;Aide à la scolarité
+2020;LFI;SSA;BG;151-02-02;Prise en charge des frais de scolarité
+2020;LFI;Mission;CCF;ZA;Accords monétaires internationaux
+2020;LFI;PGM;CCF;811;Relations avec l'Union monétaire ouest-africaine
+2020;LFI;ACT;CCF;811-01;Relations avec l'Union monétaire ouest-africaine
+2020;LFI;PGM;CCF;813;Relations avec l'Union des Comores
+2020;LFI;ACT;CCF;813-01;Relations avec l'Union des Comores
+2020;LFI;PGM;CCF;812;Relations avec l'Union monétaire d'Afrique centrale
+2020;LFI;ACT;CCF;812-01;Relations avec l'Union monétaire d'Afrique centrale
+2020;LFI;Mission;BA;XC;Contrôle et exploitation aériens
+2020;LFI;PGM;BA;613;Soutien aux prestations de l'aviation civile
+2020;LFI;ACT;BA;613-01;Ressources humaines et management
+2020;LFI;SSA;BA;613-01-01;Ressources humaines et management
+2020;LFI;SSA;BA;613-01-02;Météo-France
+2020;LFI;ACT;BA;613-02;Logistique
+2020;LFI;ACT;BA;613-03;Affaires financières
+2020;LFI;ACT;BA;613-04;Formation aéronautique
+2020;LFI;PGM;BA;612;Navigation aérienne
+2020;LFI;ACT;BA;612-01;Soutien et prestations externes de la Navigation aérienne
+2020;LFI;ACT;BA;612-02;Exploitation et innovation de la Navigation aérienne
+2020;LFI;PGM;BA;614;Transports aériens, surveillance et certification
+2020;LFI;ACT;BA;614-01;Développement durable et régulation
+2020;LFI;ACT;BA;614-02;Surveillance et certification
+2020;LFI;ACT;BA;614-04;Enquêtes de sécurité aérienne
+2020;LFI;Mission;CAS;YF;Développement agricole et rural
+2020;LFI;PGM;CAS;775;Développement et transfert en agriculture
+2020;LFI;ACT;CAS;775-01;Développement et transfert
+2020;LFI;ACT;CAS;775-02;Fonction support
+2020;LFI;PGM;CAS;776;Recherche appliquée et innovation en agriculture
+2020;LFI;ACT;CAS;776-01;Recherche appliquée et innovation
+2020;LFI;SSA;CAS;776-01-01;Programmes de développement agricole et rural
+2020;LFI;SSA;CAS;776-01-02;Appels à projet
+2020;LFI;ACT;CAS;776-02;Fonction support
+2020;LFI;Mission;BA;XJ;Publications officielles et information administrative
+2020;LFI;PGM;BA;623;Édition et diffusion
+2020;LFI;ACT;BA;623-01;Diffusion légale
+2020;LFI;ACT;BA;623-02;Information administrative, édition publique et promotion
+2020;LFI;PGM;BA;624;Pilotage et ressources humaines
+2020;LFI;ACT;BA;624-01;Pilotage, modernisation et activités numériques
+2020;LFI;ACT;BA;624-02;Promotion et distribution des publications
+2020;LFI;ACT;BA;624-03;Dépenses de personnel
+2020;LFI;ACT;BA;624-04;Convention Etat - Société anonyme de composition et d'impression des journaux officiels
+2020;LFI;Mission;BG;IA;Immigration, asile et intégration
+2020;LFI;PGM;BG;104;Intégration et accès à la nationalité française
+2020;LFI;ACT;BG;104-11;Accueil des étrangers primo arrivants
+2020;LFI;SSA;BG;104-11-02;Accueil des étrangers primo-arrivants - Dépenses sur crédits nationaux
+2020;LFI;SSA;BG;104-11-04;Accueil des étrangers primo-arrivants - Dépenses à la charge du fonds européen pour l'intégration (FEI)
+2020;LFI;SSA;BG;104-11-05;Accueil des étrangers primo-arrivants - Dépenses à la charge du Fonds européen asile, migration et intégration
+2020;LFI;ACT;BG;104-12;Actions d'accompagnement des étrangers en situation régulière
+2020;LFI;SSA;BG;104-12-02;Actions d'accompagnement des primo-arrivants - Dépenses sur crédits nationaux
+2020;LFI;SSA;BG;104-12-08;Actions d'accompagnement des primo-arrivants. Dépenses à la charge du Fonds européen pour l'intégration (FEI)
+2020;LFI;SSA;BG;104-12-14;Actions d'accompagnement des étrangers. Dépenses à la charge du Fonds européen asile, migration et intégration (FAMI)
+2020;LFI;ACT;BG;104-14;Accès à la nationalité française
+2020;LFI;ACT;BG;104-15;Accompagnement des réfugiés
+2020;LFI;SSA;BG;104-15-01;Centres provisoires d'hébergement des réfugiés
+2020;LFI;SSA;BG;104-15-12;Aide et accompagnement des réfugiés - Dépenses sur crédits nationaux
+2020;LFI;SSA;BG;104-15-04;Aide et accompagnement des réfugiés. Dépenses à la charge du Fonds Européen pour les réfugiés (FER)
+2020;LFI;SSA;BG;104-15-13;Aide et accompagnement des réfugiés - dépenses à la charge du Fonds européen asile, migration et intégration (FAMI)
+2020;LFI;ACT;BG;104-16;Accompagnement du plan de traitement des foyers de  travailleurs migrants
+2020;LFI;SSA;BG;104-16-01;Foyers de travailleurs migrants - Dépenses sur crédits nationaux
+2020;LFI;PGM;BG;303;Immigration et asile
+2020;LFI;ACT;BG;303-01;Circulation des étrangers et politique des visas
+2020;LFI;ACT;BG;303-02;Garantie de l'exercice du droit d'asile
+2020;LFI;SSA;BG;303-02-01;Office français de protection des réfugiés et apatrides (OFPRA)
+2020;LFI;SSA;BG;303-02-03;Hébergement d'urgence et accompagnement des demandeurs d'asile
+2020;LFI;SSA;BG;303-02-05;Prise en charge financière des demandeurs d'asile
+2020;LFI;SSA;BG;303-02-15;Centres d’accueil des demandeurs d’asile
+2020;LFI;SSA;BG;303-02-16;Fonds européen pour les réfugiés - Dépenses à la charge du fonds
+2020;LFI;SSA;BG;303-02-17;Fonds européen asile, migration et intégration - Dépenses à la charge du fonds
+2020;LFI;SSA;BG;303-02-18;Actions spécifiques en faveur des demandeurs d'asile
+2020;LFI;ACT;BG;303-03;Lutte contre l'immigration irrégulière
+2020;LFI;SSA;BG;303-03-02;Assistance sanitaire et sociale aux personnes maintenues en rétention administrative ou en zone d'attente : prise en charge sanitaire dans les centres de rétention administrative et zones d'attente aéroportuaires
+2020;LFI;SSA;BG;303-03-03;Assistance sanitaire et sociale aux personnes maintenues en rétention administrative ou en zone d’attente : accompagnement social aux personnes retenues en centre de rétention administrative
+2020;LFI;SSA;BG;303-03-04;Reconduite à la frontière - Dépenses d'éloignement sur crédits nationaux
+2020;LFI;SSA;BG;303-03-06;Reconduite à la frontière - Dépenses de fonctionnement des centres de rétention administrative sur crédits nationaux
+2020;LFI;SSA;BG;303-03-09;Investissement immobilier des centres de rétention administrative - Dépenses sur crédits nationaux
+2020;LFI;SSA;BG;303-03-11;Mise en oeuvre des accords de coopération policière
+2020;LFI;SSA;BG;303-03-13;Fonds européen asile, migration et intégration   - Dépenses à la charge du fonds
+2020;LFI;ACT;BG;303-04;Soutien
+2020;LFI;SSA;BG;303-04-04;Système d'information concourant aux politiques d'immigration, d'asile et d'intégration
+2020;LFI;SSA;BG;303-04-01;Fonctionnement courant de la Direction générale des étrangers en France
+2020;LFI;SSA;BG;303-04-03;Soutien informatique de la Direction générale des étrangers en France
+2020;LFI;Mission;BG;TB;Travail et emploi
+2020;LFI;PGM;BG;102;Accès et retour à l'emploi
+2020;LFI;ACT;BG;102-02;Amélioration des dispositifs en faveur de l’emploi des personnes les plus éloignées du marché du travail
+2020;LFI;SSA;BG;102-02-02;Accompagnement des publics les plus en difficultés
+2020;LFI;SSA;BG;102-02-01;Insertion dans l'emploi au moyen de contrats aidés
+2020;LFI;ACT;BG;102-01;Amélioration de l’efficacité du service public de l’emploi
+2020;LFI;SSA;BG;102-01-02;Coordination du service public de l'emploi
+2020;LFI;SSA;BG;102-01-01;Indemnisation des demandeurs d'emploi
+2020;LFI;ACT;BG;102-03;Plan d'investissement des compétences
+2020;LFI;PGM;BG;103;Accompagnement des mutations économiques et développement de l'emploi
+2020;LFI;ACT;BG;103-01;Anticipation et accompagnement des conséquences des mutations économiques sur l'emploi
+2020;LFI;SSA;BG;103-01-01;Développement de l’emploi en TPE-PME
+2020;LFI;SSA;BG;103-01-02;Implication des branches et des entreprises dans la prévention du licenciement et le reclassement des salariés
+2020;LFI;ACT;BG;103-02;Amélioration de l'insertion dans l'emploi par l'adaptation des qualifications et la reconnaissance des compétences
+2020;LFI;SSA;BG;103-02-03;Reconnaissance des compétences acquises par les personnes
+2020;LFI;SSA;BG;103-02-04;Amélioration de l'accès à la qualification par le développement de l'alternance et de la certification
+2020;LFI;ACT;BG;103-03;Développement de l'emploi
+2020;LFI;SSA;BG;103-03-01;Baisse du coût du travail pour faciliter le développement de territoires et de secteurs à forts potentiels d'emploi
+2020;LFI;SSA;BG;103-03-02;Promotion de l'activité
+2020;LFI;ACT;BG;103-04;Plan d'investissement des compétences
+2020;LFI;PGM;BG;111;Amélioration de la qualité de l'emploi et des relations du travail
+2020;LFI;ACT;BG;111-02;Qualité et effectivité du droit
+2020;LFI;SSA;BG;111-02-01;Veille sur l'effectivité du droit : formation continue des conseillers prud'homaux
+2020;LFI;SSA;BG;111-02-03;Conseiller du salarié, subventions aux groupements et associations, et autres dépenses liées à la qualité et à l’effectivité du droit
+2020;LFI;SSA;BG;111-02-02;Renouvellement des conseillers prud'hommes
+2020;LFI;SSA;BG;111-02-04;Défenseur syndical
+2020;LFI;ACT;BG;111-03;Dialogue social et démocratie sociale
+2020;LFI;SSA;BG;111-03-01;Paritarisme et formation syndicale
+2020;LFI;SSA;BG;111-03-02;Action des services déconcentrés dans le développement de la négociation collective : soutien aux acteurs du dialogue social
+2020;LFI;SSA;BG;111-03-03;Représentativités syndicale et patronale
+2020;LFI;ACT;BG;111-04;Lutte contre le travail illégal
+2020;LFI;ACT;BG;111-01;Santé et sécurité au travail
+2020;LFI;SSA;BG;111-01-10;Recherche et exploitation des études
+2020;LFI;SSA;BG;111-01-11;Agence nationale de sécurité sanitaire de l’alimentation, de l’environnement et du travail (ANSES)
+2020;LFI;SSA;BG;111-01-12;Agence nationale pour l'amélioration des conditions de travail (ANACT)
+2020;LFI;SSA;BG;111-01-13;Fonds d'amélioration des conditions de travail (FACT)
+2020;LFI;PGM;BG;155;Conception, gestion et évaluation des politiques de l'emploi et du travail
+2020;LFI;ACT;BG;155-98;Dépenses des personnels des services centraux concourant aux politiques de l'emploi et du travail
+2020;LFI;ACT;BG;155-07;Fonds social européen - Assistance technique
+2020;LFI;SSA;BG;155-07-05;Concours du fonds social européen. Assistance technique. Objectif convergence (2007-2013)
+2020;LFI;SSA;BG;155-07-06;Concours du fonds social européen. Assistance technique. Objectif compétitivité régionale et emploi (2007-2013)
+2020;LFI;SSA;BG;155-07-07;Concours du fonds social européen. Assistance technique. Programme emploi et inclusion (2014-2020)
+2020;LFI;SSA;BG;155-07-08;Concours du fonds social européen. Assitance technique. Programme initiative pour l'emploi des jeunes (IEJ) (2014-2020)
+2020;LFI;SSA;BG;155-07-09;Concours du fonds social européen. Assistance technique. Programmes FSE Etat - Régions d'outre-mer (2014-2020)
+2020;LFI;ACT;BG;155-08;Fonctionnement des services
+2020;LFI;ACT;BG;155-09;Systèmes d'information
+2020;LFI;ACT;BG;155-10;Affaires immobilières
+2020;LFI;ACT;BG;155-11;Communication
+2020;LFI;ACT;BG;155-12;Etudes, statistiques évaluation et recherche
+2020;LFI;SSA;BG;155-12-01;Etudes et statistiques (hors opérateurs)
+2020;LFI;SSA;BG;155-12-02;CEE
+2020;LFI;SSA;BG;155-12-03;CEREQ
+2020;LFI;ACT;BG;155-13;Politique des ressources humaines
+2020;LFI;ACT;BG;155-14;Personnels mettant en oeuvre les politiques d'accès et retour à l'emploi
+2020;LFI;ACT;BG;155-15;Personnels mettant en oeuvre les politiques d'accompagnement des mutations économiques et développement de l'emploi
+2020;LFI;ACT;BG;155-16;Personnels mettant en oeuvre les politiques d'amélioration de la qualité de l'emploi et des relations du travail
+2020;LFI;ACT;BG;155-17;Personnels de statistiques, études et recherche
+2020;LFI;ACT;BG;155-18;Personnels transversaux et de soutien
+2020;LFI;ACT;BG;155-99;Dépenses des personnels des services  déconcentrés concourant aux politiques de l'emploi et du travail
+2020;LFI;Mission;BG;RD;Remboursements et dégrèvements
+2020;LFI;PGM;BG;200;Remboursements et dégrèvements d'impôts d'État (crédits évaluatifs)
+2020;LFI;ACT;BG;200-11;Remboursements et restitutions liés à la mécanique de l'impôt
+2020;LFI;SSA;BG;200-11-05;Impôt sur le revenu
+2020;LFI;SSA;BG;200-11-01;Impôts sur les sociétés
+2020;LFI;SSA;BG;200-11-02;Taxe sur la valeur ajoutée
+2020;LFI;SSA;BG;200-11-03;Plafonnement des impositions directes
+2020;LFI;SSA;BG;200-11-04;Autres remboursements et dégrèvements liés à la mécanique de l'impôt
+2020;LFI;ACT;BG;200-12;Remboursements et dégrèvements liées à des politiques publiques
+2020;LFI;SSA;BG;200-12-09;Taxe intérieure sur la consommation finale d'électricité
+2020;LFI;SSA;BG;200-12-03;Impôt sur les sociétés
+2020;LFI;SSA;BG;200-12-08;Acomptes de crédits et de réductions d'impôts sur le revenu
+2020;LFI;SSA;BG;200-12-01;Prime pour l'emploi
+2020;LFI;SSA;BG;200-12-02;Impôt sur le revenu
+2020;LFI;SSA;BG;200-12-04;Taxe intérieure de consommation sur les produits énergétiques (ex TIPP)
+2020;LFI;SSA;BG;200-12-05;Taxe intérieure de consommation sur le gaz naturel
+2020;LFI;SSA;BG;200-12-06;Contribution pour l'audiovisuel public
+2020;LFI;SSA;BG;200-12-07;Prélèvement sur le produit des jeux
+2020;LFI;ACT;BG;200-13;Remboursements et dégrèvements liés à la gestion des produits de l'Etat
+2020;LFI;SSA;BG;200-13-08;Autres remboursements et dégrèvements liés à la gestion des produits de l'Etat - Dations en paiement, intérêts moratoires, remises de débets
+2020;LFI;SSA;BG;200-13-02;Impôts sur les sociétés - Dégrèvements et restitution de sommes indûment perçues
+2020;LFI;SSA;BG;200-13-09;Prélèvement à la source (PAS) : dégrèvements et restitutions
+2020;LFI;SSA;BG;200-13-07;Autres remboursements et dégrèvements liés à la gestion des produits de l'Etat - Admissions en non valeur - Créances liées aux impôts
+2020;LFI;SSA;BG;200-13-01;Impôts sur le revenu - Dégrèvements et restitution de sommes indûment perçues
+2020;LFI;SSA;BG;200-13-03;Autres impôts directs et taxes assimilées - Dégrèvements et restitution de sommes indûment perçues
+2020;LFI;SSA;BG;200-13-04;Taxe sur la valeur ajoutée - Dégrèvements et restitution de sommes indûment perçues
+2020;LFI;SSA;BG;200-13-05;Enregistrement, timbre, autres contributions et taxes indirectes - Dégrèvements et restitution de sommes indûment perçues
+2020;LFI;SSA;BG;200-13-06;Autres remboursements et dégrèvements liés à la gestion des produits de l'Etat
+2020;LFI;PGM;BG;201;Remboursements et dégrèvements d'impôts locaux (crédits évaluatifs)
+2020;LFI;ACT;BG;201-01;Taxe professionnelle et contribution économique territoriale  et autres impôts économiques créés ou modifiés dans le cadre de la réforme de la taxe professionnelle
+2020;LFI;SSA;BG;201-01-01;Taxe professionnelle et contribution économique territoriale  et autres impôts économiques créés ou modifiés dans le cadre de la réforme de la taxe professionnelle
+2020;LFI;ACT;BG;201-02;Taxes foncières
+2020;LFI;SSA;BG;201-02-01;Taxes foncières
+2020;LFI;ACT;BG;201-03;Taxe d'habitation
+2020;LFI;SSA;BG;201-03-01;Taxe d'habitation
+2020;LFI;ACT;BG;201-04;Admission en non valeur d'impôts locaux
+2020;LFI;SSA;BG;201-04-01;Admission en non valeur d'impôts locaux
+2020;LFI;Mission;CAS;YN;Transition énergétique
+2020;LFI;PGM;CAS;764;Soutien à la transition énergétique
+2020;LFI;ACT;CAS;764-01;Soutien aux énergies renouvelables électriques
+2020;LFI;SSA;CAS;764-01-01;Soutien aux producteurs d'énergies renouvelables électriques
+2020;LFI;SSA;CAS;764-01-02;Etudes techniques, financières et juridiques préalables aux lancements d'appels d'offres pour le développement d'énergies renouvelables relatives aux ENR
+2020;LFI;ACT;CAS;764-02;Soutien à l'effacement de consommation électrique
+2020;LFI;ACT;CAS;764-03;Soutien à l'injection de bio-méthane
+2020;LFI;ACT;CAS;764-04;Fonds d'interconnexion
+2020;LFI;PGM;CAS;765;Engagements financiers liés à la transition énergétique
+2020;LFI;ACT;CAS;765-01;Désendettement vis-à-vis des opérateurs supportant des charges de service public de l'électricité
+2020;LFI;ACT;CAS;765-03;Remboursement d'anciens plafonnements de CSPE
+2020;LFI;Mission;BG;AV;Investissements d'avenir
+2020;LFI;PGM;BG;421;Soutien des progrès de l'enseignement et de la recherche
+2020;LFI;ACT;BG;421-01;Nouveaux cursus à l'université
+2020;LFI;ACT;BG;421-02;Programmes prioritaires de recherche
+2020;LFI;ACT;BG;421-03;Équipements structurants de recherche
+2020;LFI;ACT;BG;421-04;Soutien des grandes universités de recherche
+2020;LFI;ACT;BG;421-05;Constitution d'écoles universitaires de recherche
+2020;LFI;ACT;BG;421-06;Créations expérimentales de sociétés universitaires et scientifiques
+2020;LFI;ACT;BG;421-07;Territoires d'innovation pédagogique
+2020;LFI;PGM;BG;422;Valorisation de la recherche
+2020;LFI;ACT;BG;422-01;Intégration des SATT, incubateurs et accélérateurs
+2020;LFI;ACT;BG;422-02;"Fonds national post-maturation ""Frontier venture"""
+2020;LFI;ACT;BG;422-03;Démonstrateurs et territoires d'innovation de grande ambition
+2020;LFI;ACT;BG;422-04;Nouveaux écosystèmes d'innovation
+2020;LFI;ACT;BG;422-05;Accélération du développement des écosystèmes d'innovation performants
+2020;LFI;PGM;BG;423;Accélération de la modernisation des entreprises
+2020;LFI;ACT;BG;423-06;Fonds national d'amorçage n° 2
+2020;LFI;ACT;BG;423-05;Concours d'innovation
+2020;LFI;ACT;BG;423-01;Soutien à l'innovation collaborative
+2020;LFI;ACT;BG;423-02;Accompagnement et transformation des filières
+2020;LFI;ACT;BG;423-03;Industrie du futur
+2020;LFI;ACT;BG;423-04;Adaptation et qualification de la main d'oeuvre
+2020;LFI;ACT;BG;423-07;Fonds à l'internationalisation des PME
+2020;LFI;ACT;BG;423-08;"Fonds de fonds ""Multicap Croissance"" n° 2"
+2020;LFI;ACT;BG;423-09;Grands défis
+2020;LFI;Mission;BG;TR;Action et transformation publiques
+2020;LFI;PGM;BG;348;Rénovation des cités administratives et autres sites domaniaux multi-occupants
+2020;LFI;ACT;BG;348-11;Etudes
+2020;LFI;ACT;BG;348-12;Travaux et gros entretien à la charge du propriétaire
+2020;LFI;ACT;BG;348-13;Acquisitions, construction
+2020;LFI;PGM;BG;349;Fonds pour la transformation de l'action publique
+2020;LFI;ACT;BG;349-01;Fonds pour la transformation de l’action publique
+2020;LFI;PGM;BG;351;Fonds d'accompagnement interministériel Ressources humaines
+2020;LFI;ACT;BG;351-01;Accompagnement interministériel Ressources humaines
+2020;LFI;PGM;BG;352;Fonds pour l'accélération du financement des start-up d'État
+2020;LFI;ACT;BG;352-01;Fonds pour l'accélération du financement des start-up d'État
+2020;LFI;Mission;BG;SE;Solidarité, insertion et égalité des chances
+2020;LFI;PGM;BG;124;Conduite et soutien des politiques sanitaires, sociales, du sport, de la jeunesse et de la vie associative
+2020;LFI;ACT;BG;124-22;Personnels transversaux et de soutien
+2020;LFI;ACT;BG;124-99;Personnel des services déconcentrés concourant aux programmes de politique
+2020;LFI;ACT;BG;124-10;Fonctionnement des services
+2020;LFI;ACT;BG;124-11;Systèmes d'information
+2020;LFI;ACT;BG;124-12;Affaires immobilières
+2020;LFI;ACT;BG;124-14;Communication
+2020;LFI;ACT;BG;124-15;Affaires européennes et internationales
+2020;LFI;ACT;BG;124-16;Statistiques, études et recherche
+2020;LFI;ACT;BG;124-17;Financement des agences régionales de santé
+2020;LFI;ACT;BG;124-18;Personnels mettant en oeuvre les politiques sociales et de la santé
+2020;LFI;ACT;BG;124-19;Personnels mettant en oeuvre les politiques du sport, de la jeunesse, de l'éducation populaire et de la vie associative
+2020;LFI;ACT;BG;124-20;Personnels mettant en oeuvre les politiques pour les droits des femmes
+2020;LFI;ACT;BG;124-21;Personnels mettant en œuvre les politiques de la ville, du logement et de l'hébergement
+2020;LFI;ACT;BG;124-23;Politique des ressources humaines
+2020;LFI;ACT;BG;124-98;Personnel des services centraux concourant aux programmes de politique
+2020;LFI;PGM;BG;157;Handicap et dépendance
+2020;LFI;ACT;BG;157-12;Allocations et aides en faveur des personnes handicapées
+2020;LFI;SSA;BG;157-12-01;Allocation pour adultes handicapés
+2020;LFI;SSA;BG;157-12-02;Allocation supplémentaire d'invalidité
+2020;LFI;SSA;BG;157-12-03;Financement de la rémunération garantie pour les travailleurs handicapés
+2020;LFI;ACT;BG;157-13;Pilotage du programme et animation des politiques inclusives
+2020;LFI;SSA;BG;157-13-01;Accompagnement de la situation de handicap
+2020;LFI;SSA;BG;157-13-02;Subventions nationales, opérateurs et lutte contre la maltraitance
+2020;LFI;SSA;BG;157-13-03;Contentieux et études
+2020;LFI;PGM;BG;137;Égalité entre les femmes et les hommes
+2020;LFI;ACT;BG;137-21;Politiques publiques - Accès au droit
+2020;LFI;ACT;BG;137-22;Partenariats et innovations
+2020;LFI;ACT;BG;137-23;Soutien du programme égalité entre les femmes et les hommes
+2020;LFI;PGM;BG;304;Inclusion sociale et protection des personnes
+2020;LFI;ACT;BG;304-15;Qualification en travail social
+2020;LFI;SSA;BG;304-15-01;Qualification en travail social - crédits nationaux
+2020;LFI;SSA;BG;304-15-02;Qualification en travail social - crédits déconcentrés
+2020;LFI;SSA;BG;304-15-03;Certification professionnelle
+2020;LFI;ACT;BG;304-19;Stratégie interministérielle de Prévention et de Lutte contre la Pauvreté des Enfants et des Jeunes
+2020;LFI;SSA;BG;304-19-01;Contractualisation avec les départements
+2020;LFI;SSA;BG;304-19-02;Mesures d'investissement social (hors contractualisation)
+2020;LFI;SSA;BG;304-19-03;Contractualisation avec les régions
+2020;LFI;SSA;BG;304-19-04;Contractualisation avec les métropoles
+2020;LFI;SSA;BG;304-19-05;Marge de manœuvre territoriale
+2020;LFI;ACT;BG;304-11;Prime d'activité et autres dispositifs
+2020;LFI;SSA;BG;304-11-01;Prime d'activité
+2020;LFI;SSA;BG;304-11-02;Autres dispositifs
+2020;LFI;ACT;BG;304-13;Ingénierie, outils de la gouvernance et expérimentations
+2020;LFI;SSA;BG;304-13-01;Innovation et expérimentation sociale
+2020;LFI;SSA;BG;304-13-02;Expérimentations (RSA - CUI 7heures et autres expérimentations)
+2020;LFI;SSA;BG;304-13-03;Ingénierie, outils de la gouvernance - Evaluation et communication
+2020;LFI;ACT;BG;304-14;Aide alimentaire
+2020;LFI;SSA;BG;304-14-01;Aide alimentaire - crédits nationaux
+2020;LFI;SSA;BG;304-14-02;Aide alimentaire - crédits déconcentrés
+2020;LFI;ACT;BG;304-16;Protection juridique des majeurs
+2020;LFI;SSA;BG;304-16-01;Services tutélaires
+2020;LFI;SSA;BG;304-16-02;Mandataires individuels
+2020;LFI;ACT;BG;304-17;Protection et accompagnement des enfants, des jeunes et des familles vulnérables
+2020;LFI;SSA;BG;304-17-07;Mineurs Non Accompagnés
+2020;LFI;SSA;BG;304-17-08;Autres actions  locales
+2020;LFI;SSA;BG;304-17-01;Agence française de l'adoption
+2020;LFI;SSA;BG;304-17-05;Autres actions nationales
+2020;LFI;SSA;BG;304-17-03;Soutien financier aux organismes nationaux
+2020;LFI;SSA;BG;304-17-02;GIP Enfance en danger
+2020;LFI;SSA;BG;304-17-04;Frais de justice
+2020;LFI;SSA;BG;304-17-06;Point accueil écoute jeune
+2020;LFI;SSA;BG;304-17-09;Stratégie de prévention et protection de l'enfance
+2020;LFI;ACT;BG;304-18;Aide à la réinsertion familiale et sociale des anciens migrants dans leur pays d’origine (ARFS)
+2020;LFI;Mission;BG;SF;Sport, jeunesse et vie associative
+2020;LFI;PGM;BG;219;Sport
+2020;LFI;ACT;BG;219-02;Développement du sport de haut niveau
+2020;LFI;ACT;BG;219-03;Prévention par le sport et protection des sportifs
+2020;LFI;ACT;BG;219-01;Promotion du sport pour le plus grand nombre
+2020;LFI;ACT;BG;219-04;Promotion des métiers du sport
+2020;LFI;ACT;BG;219-98;Personnels des services centraux concourant au programme sport
+2020;LFI;ACT;BG;219-99;Personnels des services déconcentrés concourant aux programme Sport
+2020;LFI;PGM;BG;163;Jeunesse et vie associative
+2020;LFI;ACT;BG;163-01;Développement de la vie associative
+2020;LFI;ACT;BG;163-02;Actions en faveur de la jeunesse et de l'éducation populaire
+2020;LFI;ACT;BG;163-04;Développement du service civique
+2020;LFI;ACT;BG;163-06;Service National Universel
+2020;LFI;PGM;BG;350;Jeux olympiques et paralympiques 2024
+2020;LFI;ACT;BG;350-01;Société de livraison des ouvrages olympiques et paralympiques
+2020;LFI;ACT;BG;350-02;Comité d'organisation des jeux olympiques et paralympiques
+2020;LFI;ACT;BG;350-03;Haute performance des jeux olympiques et paralympiques
+2020;LFI;ACT;BG;350-04;Héritage des jeux olympiques et paralympiques
+2020;LFI;Mission;BG;TA;Écologie, développement et mobilité durables
+2020;LFI;PGM;BG;174;Énergie, climat et après-mines
+2020;LFI;ACT;BG;174-06;Soutien
+2020;LFI;ACT;BG;174-01;Politique de l'énergie
+2020;LFI;SSA;BG;174-01-02;Agence nationale pour la gestion des déchets radioactifs (ANDRA)
+2020;LFI;SSA;BG;174-01-03;Politique de l'énergie hors ADEME et ANDRA
+2020;LFI;SSA;BG;174-01-04;Revitalisation des territoires
+2020;LFI;ACT;BG;174-04;Gestion économique et sociale de l'après-mines
+2020;LFI;SSA;BG;174-04-01;Agence nationale de garantie des droits des mineurs (ANGDM)
+2020;LFI;SSA;BG;174-04-02;Intervention après-mines (hors ANGDM)
+2020;LFI;SSA;BG;174-04-06;Charbonnages
+2020;LFI;ACT;BG;174-05;Lutte contre le changement climatique et pour la qualité de l'air
+2020;LFI;SSA;BG;174-05-06;Contrôles des carburants
+2020;LFI;SSA;BG;174-05-02;Surveillance de la qualité de l'air
+2020;LFI;SSA;BG;174-05-01;Lutte contre l'effet de serre
+2020;LFI;SSA;BG;174-05-03;Centre interprofessionnel technique d'études de la pollution atmosphérique (CITEPA)
+2020;LFI;SSA;BG;174-05-04;Etudes et essais dans le domaine des émissions des véhicules
+2020;LFI;SSA;BG;174-05-05;Surveillance du marché
+2020;LFI;ACT;BG;174-02;Accompagnement transition énergétique
+2020;LFI;SSA;BG;174-02-02;Chèque énergie
+2020;LFI;SSA;BG;174-02-01;Prime transition énergétique
+2020;LFI;ACT;BG;174-03;Aides à l'acquisition de véhicules propres
+2020;LFI;SSA;BG;174-03-01;Aides à l'acquisition de véhicules propres
+2020;LFI;SSA;BG;174-03-02;Aides au retrait de véhicules polluants
+2020;LFI;PGM;BG;181;Prévention des risques
+2020;LFI;ACT;BG;181-01;Prévention des risques technologiques et des pollutions
+2020;LFI;SSA;BG;181-01-05;Prévention des risques technologiques
+2020;LFI;SSA;BG;181-01-02;Santé Environnement et Économie circulaire
+2020;LFI;ACT;BG;181-09;Contrôle de la sûreté nucléaire et de la radioprotection
+2020;LFI;ACT;BG;181-10;Prévention des risques naturels et hydrauliques
+2020;LFI;SSA;BG;181-10-04;Connaissance et culture du risque dans le domaine des inondations
+2020;LFI;SSA;BG;181-10-05;Surveillance et prévision des inondations (hydrologie, prévision des inondations et radars météorologiques) - mission RDI
+2020;LFI;SSA;BG;181-10-06;Sécurité des ouvrages hydrauliques
+2020;LFI;SSA;BG;181-10-11;"Support et contentieux concourant à l'action ""Prévention des risques naturels et hydrauliques"""
+2020;LFI;SSA;BG;181-10-12;Connaissance, culture du risque et surveillance dans le domaine des risques naturels (multirisques ou terrestres)
+2020;LFI;SSA;BG;181-10-16;Travaux de prévention des risques naturels (multirisques ou terrestres)
+2020;LFI;SSA;BG;181-10-18;Travaux de prévention des risques hydrauliques
+2020;LFI;SSA;BG;181-10-20;Soutien aux Programmes d'actions de prévention des inondations (animation)
+2020;LFI;ACT;BG;181-11;Gestion de l'après-mine et travaux de mise en sécurité, indemnisations et expropriations sur les sites
+2020;LFI;SSA;BG;181-11-01;GEODERIS
+2020;LFI;SSA;BG;181-11-02;BRGM
+2020;LFI;SSA;BG;181-11-03;Plans de prévention des risques miniers et Autres études
+2020;LFI;SSA;BG;181-11-04;Travaux de sécurité dans les mines, indemnisation et expropriations sur les sites miniers
+2020;LFI;ACT;BG;181-12;Agence de l'environnement et de la maîtrise de l'énergie (ADEME)
+2020;LFI;PGM;BG;159;Expertise, économie sociale et solidaire, information géographique et météorologie
+2020;LFI;ACT;BG;159-12;Information géographique et cartographique
+2020;LFI;SSA;BG;159-12-01;Production de l'information géographique
+2020;LFI;SSA;BG;159-12-02;Recherche dans le domaine de l'information géographique
+2020;LFI;SSA;BG;159-12-03;Pilotage de la politique d'information géographique
+2020;LFI;ACT;BG;159-11;Etudes et expertise en matière de développement durable
+2020;LFI;ACT;BG;159-13;Météorologie
+2020;LFI;SSA;BG;159-13-01;Observation et prévision dans le domaine météorologique
+2020;LFI;SSA;BG;159-13-02;Recherche dans le domaine météorologique
+2020;LFI;ACT;BG;159-10;Gouvernance, évaluation, études et prospective en matière de développement durable
+2020;LFI;SSA;BG;159-10-07;Activités transversales
+2020;LFI;SSA;BG;159-10-01;Statistiques
+2020;LFI;SSA;BG;159-10-02;Pilotage du réseau scientifique et technique (RST)
+2020;LFI;SSA;BG;159-10-03;Etudes, évaluation, stratégie du développement durable (CPER)
+2020;LFI;SSA;BG;159-10-04;Etudes, évaluation, stratégie du développement durable (hors CPER)
+2020;LFI;SSA;BG;159-10-05;Gouvernance et définition des politiques stratégiques
+2020;LFI;SSA;BG;159-10-06;Affaires stratégiques
+2020;LFI;ACT;BG;159-14;Economie sociale et solidaire
+2020;LFI;SSA;BG;159-14-01;Développement de l'économie sociale et solidaire
+2020;LFI;SSA;BG;159-14-02;Dispositifs locaux d'accompagnement
+2020;LFI;PGM;BG;113;Paysages, eau et biodiversité
+2020;LFI;ACT;BG;113-02;logistique, formation et contentieux
+2020;LFI;SSA;BG;113-02-01;Fonctionnement courant et logistique
+2020;LFI;SSA;BG;113-02-02;Contentieux de l'ingénierie, de l'eau et de la biodiversité
+2020;LFI;ACT;BG;113-01;Sites, paysages, publicité
+2020;LFI;SSA;BG;113-01-11;Préservation des sites, des paysages et publicité (CPER)
+2020;LFI;SSA;BG;113-01-10;Préservation des sites, des paysages et publicité (hors CPER)
+2020;LFI;ACT;BG;113-07;Gestion des milieux et biodiversité
+2020;LFI;SSA;BG;113-07-40;Mesures territoriales dans le domaine de l'eau (CPER)
+2020;LFI;SSA;BG;113-07-46;Opérateurs de l'eau et de la biodiversité
+2020;LFI;SSA;BG;113-07-16;Sécurité d'approvisionnement des matières premières et coopération minière
+2020;LFI;SSA;BG;113-07-19;Milieux et espaces marins (hors CPER)
+2020;LFI;SSA;BG;113-07-20;Milieux et espaces marins (CPER)
+2020;LFI;SSA;BG;113-07-31;Conservation des espèces et des habitats d'intérêt européen dans le réseau Natura 2000 (hors CPER)
+2020;LFI;SSA;BG;113-07-32;Conservation des espèces et des habitats d'intérêt européen dans le réseau Natura 2000 (CPER)
+2020;LFI;SSA;BG;113-07-41;Mesures territoriales dans le domaine de l'eau (hors CPER)
+2020;LFI;SSA;BG;113-07-42;Espaces protégés (CPER)
+2020;LFI;SSA;BG;113-07-43;Espaces protégés  (hors CPER)
+2020;LFI;SSA;BG;113-07-44;Biodiversité, connaissance, contrôle, expertise, conservation des espèces (CPER)
+2020;LFI;SSA;BG;113-07-45;Biodiversité, connaissance, contrôle, expertise, conservation des espèces (hors CPER)
+2020;LFI;PGM;BG;203;Infrastructures et services de transports
+2020;LFI;ACT;BG;203-44;Transports collectifs
+2020;LFI;SSA;BG;203-44-01;Infrastructures transport collectif
+2020;LFI;SSA;BG;203-44-02;Politique de déplacements
+2020;LFI;SSA;BG;203-44-03;Transports collectifs : tarifs sociaux
+2020;LFI;SSA;BG;203-44-04;Compensation ex-loi SRU LGV
+2020;LFI;SSA;BG;203-44-05;Infrastructures Vélo (Fonds de mobilités actives)
+2020;LFI;ACT;BG;203-01;Routes - Développement
+2020;LFI;ACT;BG;203-04;Routes - Entretien
+2020;LFI;SSA;BG;203-04-01;Régénération du réseau routier national
+2020;LFI;SSA;BG;203-04-02;Entretien réseau routier national
+2020;LFI;ACT;BG;203-41;Ferroviaire
+2020;LFI;SSA;BG;203-41-03;Subvention SNCF réseau (TET)
+2020;LFI;SSA;BG;203-41-01;Infrastructures ferroviaires
+2020;LFI;SSA;BG;203-41-02;Subvention SNCF réseau (TER)
+2020;LFI;SSA;BG;203-41-04;Subvention SNCF réseau (fret)
+2020;LFI;SSA;BG;203-41-05;Compensation fret
+2020;LFI;SSA;BG;203-41-06;Régénération ferroviaire
+2020;LFI;SSA;BG;203-41-07;Services ferroviaires
+2020;LFI;ACT;BG;203-42;Voies navigables
+2020;LFI;SSA;BG;203-42-01;Infrastructures fluviales
+2020;LFI;SSA;BG;203-42-02;Subvention Voies navigables de France (VNF)
+2020;LFI;ACT;BG;203-43;Ports
+2020;LFI;SSA;BG;203-43-01;Infrastructures portuaires
+2020;LFI;SSA;BG;203-43-02;Entretien des ports
+2020;LFI;SSA;BG;203-43-03;Soutien et contrôle du transport fluvial et maritime
+2020;LFI;SSA;BG;203-43-04;Dispositifs de prise en compte de la pénibilité des métiers portuaires
+2020;LFI;ACT;BG;203-45;Transports combinés
+2020;LFI;SSA;BG;203-45-01;Infrastructure transport combiné
+2020;LFI;SSA;BG;203-45-02;Aides aux transports combinés
+2020;LFI;SSA;BG;203-45-03;Autoroutes ferroviaires
+2020;LFI;SSA;BG;203-45-04;Autoroute de la mer
+2020;LFI;ACT;BG;203-47;Fonctions support
+2020;LFI;SSA;BG;203-47-01;Etudes générales
+2020;LFI;SSA;BG;203-47-02;Fonctionnement des services
+2020;LFI;SSA;BG;203-47-03;Systèmes d'information
+2020;LFI;SSA;BG;203-47-04;Subvention ART (ex ARAFER)
+2020;LFI;ACT;BG;203-50;Transport routier
+2020;LFI;SSA;BG;203-50-01;Aires de contrôle routier
+2020;LFI;SSA;BG;203-50-02;Soutien au transport routier
+2020;LFI;SSA;BG;203-50-03;Contrôle du transport routier
+2020;LFI;ACT;BG;203-51;Sécurité ferroviaire
+2020;LFI;SSA;BG;203-51-01;Infrastructures sécurité ferroviaire
+2020;LFI;SSA;BG;203-51-02;Moyens d'exploitation Sécurité ferroviaire
+2020;LFI;ACT;BG;203-52;Transport aérien
+2020;LFI;SSA;BG;203-52-01;Infrastructures aéroportuaires
+2020;LFI;SSA;BG;203-52-02;Transport aérien : lignes d'aménagement du territoire
+2020;LFI;SSA;BG;203-52-03;Fonds de compensation Nantes Atlantique
+2020;LFI;PGM;BG;205;Affaires maritimes
+2020;LFI;ACT;BG;205-01;Sécurité et sûreté maritimes
+2020;LFI;SSA;BG;205-01-01;Surveillance du trafic maritime
+2020;LFI;SSA;BG;205-01-02;Contrôle  des navires
+2020;LFI;SSA;BG;205-01-03;Signalisation maritime
+2020;LFI;SSA;BG;205-01-04;Subvention à la société nationale de sauvetage en mer
+2020;LFI;SSA;BG;205-01-05;Bureau enquête accidents mer
+2020;LFI;ACT;BG;205-04;Action interministérielle de la mer
+2020;LFI;SSA;BG;205-04-05;Elaboration et mise en oeuvre de la stratégie nationale mer et littoral
+2020;LFI;SSA;BG;205-04-01;Dispositif de contrôle et de surveillance
+2020;LFI;SSA;BG;205-04-02;Plaisance
+2020;LFI;SSA;BG;205-04-03;Polmar terre
+2020;LFI;SSA;BG;205-04-04;Environnement et cultures marines
+2020;LFI;ACT;BG;205-03;Flotte de commerce
+2020;LFI;SSA;BG;205-03-01;Groupe maritime d'économie mixte (subvention à un régime particulier de retraite)
+2020;LFI;SSA;BG;205-03-03;Entreprises d'armement : contributions aux charges sociales
+2020;LFI;ACT;BG;205-02;Gens de mer et enseignement maritime
+2020;LFI;SSA;BG;205-02-01;Financement contractualisé des structures de l'enseignement maritime secondaire (CPER)
+2020;LFI;SSA;BG;205-02-02;Financement non contractualisé des structures de l'enseignement maritime secondaire (hors CPER)
+2020;LFI;SSA;BG;205-02-03;Aides aux élèves de l'enseignement maritime secondaire
+2020;LFI;SSA;BG;205-02-04;Financement contractualisé des structures de l'enseignement maritime supérieur (CPER)
+2020;LFI;SSA;BG;205-02-05;Financement non contactualisé des structures de l'enseignement maritime supérieur (hors CPER)
+2020;LFI;SSA;BG;205-02-07;Formation continue et promotion sociale des marins
+2020;LFI;SSA;BG;205-02-08;Protection sanitaire et sociale du marin
+2020;LFI;SSA;BG;205-02-09;Aides aux marins
+2020;LFI;SSA;BG;205-02-10;Domaine maritime (subventions)
+2020;LFI;ACT;BG;205-05;Soutien au programme
+2020;LFI;SSA;BG;205-05-02;Systèmes d'information
+2020;LFI;SSA;BG;205-05-03;"Dépenses communes au programme ""sécurité et affaires maritimes"""
+2020;LFI;PGM;BG;217;Conduite et pilotage des politiques de l'écologie, du développement et de la mobilité durables
+2020;LFI;ACT;BG;217-18;Personnels relevant de programmes d'autres ministères
+2020;LFI;SSA;BG;217-18-01;"Personnels relevant du programme ""Patrimoines"""
+2020;LFI;SSA;BG;217-18-02;"Personnels relevant du programme ""Transmission des savoirs et démocratisation de la culture"""
+2020;LFI;SSA;BG;217-18-03;"Personnels relevant du programme ""Conduite et soutien des politiques sanitaires et sociales"""
+2020;LFI;SSA;BG;217-18-04;"Personnels relevant du programme ""Développement des entreprises et de l'emploi"""
+2020;LFI;SSA;BG;217-18-05;"Personnels relevant du programme ""Conduite et pilotage des politiques de l'agriculture"""
+2020;LFI;SSA;BG;217-18-06;Personnels relevant de programmes de divers autres ministères
+2020;LFI;SSA;BG;217-18-07;Personnel relevant du ministère de la défense - Bases aériennes
+2020;LFI;ACT;BG;217-27;Commission de régulation de l'énergie (CRE)
+2020;LFI;ACT;BG;217-26;Autorité de contrôle des nuisances aéroportuaires (ACNUSA)
+2020;LFI;ACT;BG;217-06;Actions nationales, européennes et internationales en faveur du développement durable
+2020;LFI;SSA;BG;217-06-01;Animation de la politique stratégique et gouvernance en matière de changement climatique et développement durable
+2020;LFI;SSA;BG;217-06-02;Participation à l'élaboration des normes et de la législation dans le cadre communautaire
+2020;LFI;SSA;BG;217-06-03;Appui et soutien des intérêts français dans le dispositif international
+2020;LFI;SSA;BG;217-06-04;Partenariat associatif
+2020;LFI;ACT;BG;217-04;Politique et gestion des systèmes d'information et des réseaux informatiques
+2020;LFI;SSA;BG;217-04-03;Accompagnement des opérations d'informatisation
+2020;LFI;SSA;BG;217-04-09;Systèmes d'information métiers du secrétariat général
+2020;LFI;SSA;BG;217-04-05;Fonctionnement et adaptation des infrastructures informatiques ministérielles
+2020;LFI;ACT;BG;217-05;Politique des ressources humaines et formation
+2020;LFI;SSA;BG;217-05-01;Etudes et évaluations des politiques des ressources humaines
+2020;LFI;SSA;BG;217-05-03;Moyens concourant à la mise en oeuvre de la formation professionnelle et du recrutement - maîtrise d'ouvrage nationale (hors écoles)
+2020;LFI;SSA;BG;217-05-04;Action sociale : politique en faveur des enfants
+2020;LFI;SSA;BG;217-05-05;Action sociale : politique en matière de restauration collective
+2020;LFI;SSA;BG;217-05-06;Action sociale : crédits d'initiative locale
+2020;LFI;SSA;BG;217-05-08;Action sociale : autre politique d'action sociale individuelle et collective
+2020;LFI;SSA;BG;217-05-12;Politique de prévention
+2020;LFI;SSA;BG;217-05-16;Recrutement, insertion, reclassement et maintien dans l'emploi des travailleurs handicapés
+2020;LFI;SSA;BG;217-05-11;Action sociale : politique de soutien aux familles
+2020;LFI;SSA;BG;217-05-09;Protection sociale complémentaire
+2020;LFI;SSA;BG;217-05-10;Relations sociales
+2020;LFI;SSA;BG;217-05-02;Moyens concourant à la mise en oeuvre des formations dispensées par les écoles (ENPC, ENTPE, ENTE)
+2020;LFI;SSA;BG;217-05-19;Remboursements des rémunérations des agents mis à disposition.
+2020;LFI;ACT;BG;217-03;Politique et programmation de l'immobilier et des moyens de fonctionnement
+2020;LFI;SSA;BG;217-03-10;Fonctionnement courant de l'administration centrale
+2020;LFI;SSA;BG;217-03-12;Fonctionnement courant des services déconcentrés
+2020;LFI;SSA;BG;217-03-11;Immobilier de l'administration centrale
+2020;LFI;SSA;BG;217-03-13;Immobilier des services déconcentrés
+2020;LFI;SSA;BG;217-03-14;Inspection et contrôle de l'activité des services
+2020;LFI;ACT;BG;217-02;Fonction juridique
+2020;LFI;SSA;BG;217-02-01;Conseil et assistance aux directions d'administration centrale et aux services déconcentrés
+2020;LFI;SSA;BG;217-02-02;Protection statutaire des fonctionnaires (Loi du 13 juillet 1983 - article 11)
+2020;LFI;SSA;BG;217-02-03;Accidents de la circulation : indemnisation (Loi du 5 juillet 1985)
+2020;LFI;SSA;BG;217-02-06;Autres contentieux
+2020;LFI;ACT;BG;217-07;"Personnels oeuvrant pour les politiques du programme ""Conduite et pilotage des politiques de l'écologie, du développement et de la mobilité durables"""
+2020;LFI;ACT;BG;217-08;"Personnels oeuvrant pour les politiques du programme ""Infrastructures et services de transports"""
+2020;LFI;SSA;BG;217-08-02;Personnels à la charge du compte de commerce
+2020;LFI;SSA;BG;217-08-01;Personnels hors compte de commerce
+2020;LFI;ACT;BG;217-09;"Personnels oeuvrant pour les politiques du programme ""Sécurité et éducation routières"""
+2020;LFI;ACT;BG;217-11;"Personnels oeuvrant pour les politiques du programme ""Affaires maritimes"""
+2020;LFI;ACT;BG;217-13;"Personnels oeuvrant pour les politiques du programme ""Paysages, eau et biodiversité"""
+2020;LFI;ACT;BG;217-16;"Personnels oeuvrant pour les politiques du programme ""Prévention des risques"""
+2020;LFI;ACT;BG;217-15;"Personnels relevant du ministère de la "" Cohésion des territoires """
+2020;LFI;ACT;BG;217-22;Personnels transférés aux collectivités territoriales
+2020;LFI;SSA;BG;217-22-01;Personnels transférés aux collectivités locales hors ouvriers des parcs et ateliers
+2020;LFI;SSA;BG;217-22-02;Ouvriers des parcs et ateliers transférés mis à disposition des collectivités territoriales
+2020;LFI;ACT;BG;217-23;"Personnels oeuvrant pour les politiques des programmes ""énergie, climat et après-mines"""
+2020;LFI;ACT;BG;217-25;Commission nationale du débat public
+2020;LFI;ACT;BG;217-24;Personnels oeuvrant dans le domaine des transports aériens
+2020;LFI;ACT;BG;217-28;"Personnels oeuvrant pour le développement durable et pour les politiques du programme ""expertise, information géographique et météorologique"""
+2020;LFI;ACT;BG;217-98;Dépenses de personnel de l'administration centrale à reventiler entre les actions miroirs des programmes de politiques sectorielles
+2020;LFI;ACT;BG;217-99;Dépenses de personnel en services déconcentrés à reventiler entre les actions miroirs des programmes de politiques sectorielles
+2020;LFI;PGM;BG;345;Service public de l'énergie
+2020;LFI;ACT;BG;345-02;Protection des consommateurs en situation de précarité énergétique
+2020;LFI;SSA;BG;345-02-01;Tarif de première nécessité pour l'électricité
+2020;LFI;SSA;BG;345-02-02;Compensation des versements aux fonds de solidarité logement
+2020;LFI;SSA;BG;345-02-03;Tarif spécial de solidarité pour le gaz
+2020;LFI;SSA;BG;345-02-04;Dispositif d'affichage déporté de la consommation d'énergie
+2020;LFI;SSA;BG;345-02-06;Chèque énergie (charges des fournisseurs liées aux services)
+2020;LFI;ACT;BG;345-01;Solidarité avec les zones non interconnectées au réseau métropolitain
+2020;LFI;ACT;BG;345-03;Soutien à la cogénération
+2020;LFI;SSA;BG;345-03-01;Soutien à la cogénération de moins de 12 MW
+2020;LFI;SSA;BG;345-03-02;Soutien aux cogénérations industrielles de plus de 12 MW
+2020;LFI;ACT;BG;345-05;Frais de support
+2020;LFI;ACT;BG;345-06;Médiateur de l'énergie
+2020;LFI;ACT;BG;345-07;Fermeture de la centrale de Fessenheim
+2020;LFI;ACT;BG;345-08;Contentieux
+2020;LFI;PGM;BG;355;Charge de la dette de SNCF Réseau reprise par l'État (crédits évaluatifs)
+2020;LFI;ACT;BG;355-01;Charge de la dette de SNCF Réseau reprise par l’État
+2020;LFI;Mission;CAS;YM;Participation de la France au désendettement de la Grèce
+2020;LFI;PGM;CAS;795;Versement de la France à la Grèce au titre de la restitution à cet État des revenus perçus sur les titres grecs
+2020;LFI;ACT;CAS;795-01;Versement de la France à la Grèce au titre de la restitution à cet État des revenus perçus par la Banque de France sur les titres grecs détenus en compte propre
+2020;LFI;ACT;CAS;795-02;Versement de la France à la Grèce au titre de la restitution à cet État des revenus perçus par la Banque de France sur les titres grecs détenus au titre du portefeuille dit SMP
+2020;LFI;PGM;CAS;796;Rétrocessions de trop-perçus à la Banque de France
+2020;LFI;ACT;CAS;796-01;Rétrocessions de trop-perçus à la Banque de France
+2020;LFI;Mission;BG;RC;Relations avec les collectivités territoriales
+2020;LFI;PGM;BG;119;Concours financiers aux collectivités territoriales et à leurs groupements
+2020;LFI;ACT;BG;119-04;Dotation générale de décentralisation des départements
+2020;LFI;SSA;BG;119-04-01;Dotation générale de décentralisation des départements de droit commun
+2020;LFI;ACT;BG;119-02;Dotation générale de décentralisation des communes
+2020;LFI;SSA;BG;119-02-01;Concours pour le financement des services communaux d'hygiène et de santé
+2020;LFI;SSA;BG;119-02-03;Concours pour l'entretien de la voirie nationale de la ville de Paris
+2020;LFI;SSA;BG;119-02-04;Concours pour le financement du transfert des monuments historiques
+2020;LFI;SSA;BG;119-02-08;Concours pour le financement de l'élaboration des documents d'urbanisme
+2020;LFI;SSA;BG;119-02-09;Concours pour le financement du transfert de compétences prévu à l'article L.631-7-1 du CCH
+2020;LFI;ACT;BG;119-01;Soutien aux projets des communes et groupements de communes
+2020;LFI;SSA;BG;119-01-04;Dotation forfaitaire - Titres sécurisés
+2020;LFI;SSA;BG;119-01-10;Soutien à l'investissement des communes et groupement de communes - Part métropoles
+2020;LFI;SSA;BG;119-01-11;Soutien à l'investissement des communes et groupement de communes - Contrats de ruralité
+2020;LFI;SSA;BG;119-01-12;Dotation Biodiversité
+2020;LFI;SSA;BG;119-01-07;Soutien à l'investissement des communes et groupement de communes-Grands priorités
+2020;LFI;SSA;BG;119-01-01;Dotation globale d'équipement des communes (soldes de paiements)
+2020;LFI;SSA;BG;119-01-02;Dotation de développement rural (soldes de paiements)
+2020;LFI;SSA;BG;119-01-03;Remboursement par l'Etat des indemnités dues aux régisseurs de police municipale
+2020;LFI;SSA;BG;119-01-05;Dotation politique de la ville
+2020;LFI;SSA;BG;119-01-06;Dotation d’équipement des territoires ruraux
+2020;LFI;SSA;BG;119-01-08;Soutien à l'investissement des communes et groupement de communes - Bourgs - centres
+2020;LFI;SSA;BG;119-01-09;Dotation communale d'insularité
+2020;LFI;SSA;BG;119-01-13;Protection fonctionnelle - Elu local
+2020;LFI;ACT;BG;119-03;Soutien aux projets des départements et des régions
+2020;LFI;SSA;BG;119-03-03;Dotation de soutien à l'investissement des départements (fraction potentiel fiscal)
+2020;LFI;SSA;BG;119-03-04;Fonds de stabilisation des départements
+2020;LFI;SSA;BG;119-03-01;Dotation de soutien à l'investissement des départements (Fraction projets)
+2020;LFI;SSA;BG;119-03-02;Fonds exceptionnel de développement économique des régions
+2020;LFI;ACT;BG;119-05;Dotation générale de décentralisation des régions
+2020;LFI;SSA;BG;119-05-01;Dotation générale de décentralisation des régions de droit commun
+2020;LFI;SSA;BG;119-05-02;Dotation générale de décentralisation et dotation de continuité territoriale de Corse
+2020;LFI;SSA;BG;119-05-03;Dotation générale de décentralisation versée au syndicat des transports d'Ile de France au titre de la décentralisation des transports scolaires
+2020;LFI;ACT;BG;119-06;Dotation générale de décentralisation concours particuliers
+2020;LFI;SSA;BG;119-06-01;Concours pour l'organisation et le financement des transports urbains
+2020;LFI;SSA;BG;119-06-02;Concours aux ports maritimes
+2020;LFI;SSA;BG;119-06-03;Concours aux bibliothèques
+2020;LFI;SSA;BG;119-06-04;Concours aux aérodromes
+2020;LFI;SSA;BG;119-06-05;Concours pour le financement du transfert du domaine public fluvial
+2020;LFI;PGM;BG;122;Concours spécifiques et administration
+2020;LFI;ACT;BG;122-01;Aides exceptionnelles aux collectivités territoriales
+2020;LFI;SSA;BG;122-01-07;Autres subventions aux collectivités territoriales et organismes publics locaux
+2020;LFI;SSA;BG;122-01-12;Dotation de soutien dépenses de sécurité liée à l'organisation de grands évènements
+2020;LFI;SSA;BG;122-01-03;Aides aux communes en difficultés financières
+2020;LFI;SSA;BG;122-01-06;Regroupement communal
+2020;LFI;SSA;BG;122-01-08;Programme de sécurité des établissements scolaires
+2020;LFI;SSA;BG;122-01-09;Réparations des dégâts causés par les calamités publiques
+2020;LFI;SSA;BG;122-01-20;Subventions pour travaux divers d'intérêt local
+2020;LFI;SSA;BG;122-01-21;Aides aux communes concernées par les restructurations Défense
+2020;LFI;SSA;BG;122-01-10;Fonds d'urgence aux collectivités territoriales
+2020;LFI;SSA;BG;122-01-22;Remboursement frais de garde - élu local
+2020;LFI;ACT;BG;122-02;Administration des relations avec les collectivités territoriales
+2020;LFI;SSA;BG;122-02-02;Direction générale des collectivités locales : soutien
+2020;LFI;SSA;BG;122-02-03;Organismes nationaux relatifs aux collectivités territoriales
+2020;LFI;SSA;BG;122-02-04;Comité des finances locales
+2020;LFI;SSA;BG;122-02-01;Systèmes d'information et de communication
+2020;LFI;ACT;BG;122-04;Dotations Outre-Mer
+2020;LFI;SSA;BG;122-04-01;Dotation globale de fonctionnement des provinces de Nouvelle-Calédonie
+2020;LFI;SSA;BG;122-04-02;Dotation globale de compensation versée à la Nouvelle-Calédonie
+2020;LFI;SSA;BG;122-04-04;Dotation globale de compensation versée à la Polynésie française
+2020;LFI;SSA;BG;122-04-06;Dotation globale de compensation de la collectivité d'outre-mer de Saint-Martin
+2020;LFI;SSA;BG;122-04-07;Dotation globale de compensation de la collectivité d'outre-mer de Saint-Barthélémy
+2020;LFI;Mission;BG;SA;Santé
+2020;LFI;PGM;BG;204;Prévention, sécurité sanitaire et offre de soins
+2020;LFI;ACT;BG;204-17;Politique des produits de santé et de la qualité des pratiques et des soins
+2020;LFI;SSA;BG;204-17-01;Produits de santé, thérapeutiques et cosmétiques : Agence nationale de sécurité du médicament et des produits de santé (ANSM)
+2020;LFI;SSA;BG;204-17-02;Bioéthique et biomédecine : Agence de biomédecine (ABM)
+2020;LFI;SSA;BG;204-17-03;Autres actions relatives à la politique des pratiques et des produits de santé
+2020;LFI;SSA;BG;204-17-04;Résistance aux antibiotiques et infections liées aux soins
+2020;LFI;ACT;BG;204-11;Pilotage de la politique de santé publique
+2020;LFI;SSA;BG;204-11-01;Actions de pilotage, de soutien et de partenariats pour relayer la politique de santé publique
+2020;LFI;SSA;BG;204-11-02;Veille, surveillance, évaluation et expertise (dont  le Haut conseil de santé publique)
+2020;LFI;SSA;BG;204-11-04;Actions juridiques et contentieuses
+2020;LFI;SSA;BG;204-11-05;Ecole des hautes études de santé publique (EHESP)
+2020;LFI;SSA;BG;204-11-07;Agence nationale de santé publique (ANSP)
+2020;LFI;SSA;BG;204-11-08;Développement et exploitation des systèmes d'information de santé publique
+2020;LFI;ACT;BG;204-12;Santé des populations
+2020;LFI;SSA;BG;204-12-02;Santé des populations en difficulté
+2020;LFI;SSA;BG;204-12-03;Santé de la mère et de l'enfant
+2020;LFI;SSA;BG;204-12-04;Traumatismes et violences
+2020;LFI;SSA;BG;204-12-05;Politique vaccinale
+2020;LFI;ACT;BG;204-14;Prévention des maladies chroniques et qualité de vie des malades
+2020;LFI;SSA;BG;204-14-01;Maladies neuro dégénératives et maladies liées au vieillissement
+2020;LFI;SSA;BG;204-14-02;Cancer dont dépistages et maintien à domicile (MAD) (y compris Institut national du cancer (INCa))
+2020;LFI;SSA;BG;204-14-03;Prévention des addictions
+2020;LFI;SSA;BG;204-14-04;Santé mentale
+2020;LFI;SSA;BG;204-14-05;Autres maladies chroniques
+2020;LFI;SSA;BG;204-14-06;Infections par le VIH, les IST, les hépatites et la tuberculose
+2020;LFI;ACT;BG;204-15;Prévention des risques liés à l'environnement et à l'alimentation
+2020;LFI;SSA;BG;204-15-01;Nutrition et santé
+2020;LFI;SSA;BG;204-15-02;Environnement et santé
+2020;LFI;SSA;BG;204-15-03;Expertise, évaluation des risques : Agence nationale de sécurité sanitaire, de l'alimentation, de l’environnement et du travail (ANSES)
+2020;LFI;ACT;BG;204-16;Veille et sécurité sanitaire
+2020;LFI;SSA;BG;204-16-01;Organisation de la veille et des vigilances sanitaires
+2020;LFI;SSA;BG;204-16-03;Prévention des risques infectieux émergents et préparation des crises sanitaires
+2020;LFI;SSA;BG;204-16-04;Gestion des alertes et des crises sanitaires
+2020;LFI;ACT;BG;204-18;Projets régionaux de santé
+2020;LFI;ACT;BG;204-19;Modernisation de l'offre de soins
+2020;LFI;SSA;BG;204-19-02;Frais de gestion liés à la certification dans le domaine sanitaire
+2020;LFI;SSA;BG;204-19-03;Conception des politiques d'offre de soins et actions de modernisation
+2020;LFI;SSA;BG;204-19-07;Agence pour le développement des systémes d'information de santé partagés (GIP-ASIP)
+2020;LFI;SSA;BG;204-19-08;Agence de santé de Wallis-et-Futuna
+2020;LFI;PGM;BG;183;Protection maladie
+2020;LFI;ACT;BG;183-02;Aide médicale de l'Etat
+2020;LFI;ACT;BG;183-03;Fonds d'indemnisation des victimes de l'amiante
+2020;LFI;Mission;BG;SB;Sécurités
+2020;LFI;PGM;BG;161;Sécurité civile
+2020;LFI;ACT;BG;161-11;Prévention et gestion de crises
+2020;LFI;SSA;BG;161-11-05;Activité opérationnelle
+2020;LFI;SSA;BG;161-11-01;Veille, alerte et gestion interministérielle des crises
+2020;LFI;SSA;BG;161-11-02;Développement et fonctionnement du réseau d'alerte - SAIP
+2020;LFI;SSA;BG;161-11-03;Solidarité nationale
+2020;LFI;SSA;BG;161-11-04;Prévention opérationnelle et protection de la population
+2020;LFI;SSA;BG;161-11-06;Personnel concourant à la prévention et à la gestion de crises
+2020;LFI;ACT;BG;161-12;Préparation et interventions spécialisées des moyens nationaux
+2020;LFI;SSA;BG;161-12-02;Préparation et intervention des moyens nationaux terrestres
+2020;LFI;SSA;BG;161-12-01;Préparation et intervention des moyens nationaux aériens - Avions
+2020;LFI;SSA;BG;161-12-03;Préparation et intervention des moyens nationaux aériens - Hélicoptères
+2020;LFI;SSA;BG;161-12-04;Préparation et intervention des moyens nationaux de déminage
+2020;LFI;SSA;BG;161-12-05;Préparation et intervention des moyens nationaux de soutien
+2020;LFI;SSA;BG;161-12-06;Pilotage des moyens nationaux
+2020;LFI;ACT;BG;161-13;Soutien aux acteurs de la sécurité civile
+2020;LFI;SSA;BG;161-13-01;Aides de l'Etat aux acteurs de la sécurité civile
+2020;LFI;SSA;BG;161-13-02;Développement et fonctionnement du réseau des transmissions - INPT/ANTARES
+2020;LFI;SSA;BG;161-13-03;Participation de l'Etat aux pensions, prestations rattachées et indemnités aux sapeurs-pompiers volontaires
+2020;LFI;SSA;BG;161-13-04;Personnel concourant au soutien des acteurs de la sécurité civile
+2020;LFI;ACT;BG;161-14;Fonctionnement, soutien et logistique
+2020;LFI;SSA;BG;161-14-01;Fonctionnement courant des services centraux
+2020;LFI;SSA;BG;161-14-02;Soutien courant des services
+2020;LFI;SSA;BG;161-14-03;Personnel concourant au fonctionnement, au soutien et à la logistique
+2020;LFI;ACT;BG;161-99;Dépenses de personnel du programme à reventiler
+2020;LFI;PGM;BG;176;Police nationale
+2020;LFI;ACT;BG;176-04;Police des étrangers et sûreté des transports internationaux
+2020;LFI;SSA;BG;176-04-03;Autres actions relatives à la police des étrangers et à la sureté des transports internationaux - Administration centrale et cabinets
+2020;LFI;SSA;BG;176-04-04;Autres actions relatives à la police des étrangers et à la sureté des transports internationaux - Hors administration centrale et cabinets
+2020;LFI;ACT;BG;176-03;Sécurité routière
+2020;LFI;SSA;BG;176-03-01;Sécurité routière  - Administration centrale et cabinet
+2020;LFI;SSA;BG;176-03-02;Sécurité routière - Hors administration centrale et cabinets
+2020;LFI;ACT;BG;176-02;Sécurité et paix publiques
+2020;LFI;SSA;BG;176-02-01;Sécurité et paix publiques - Administration centrale et cabinets
+2020;LFI;SSA;BG;176-02-02;Sécurité et paix publiques - Hors administration centrale et cabinet
+2020;LFI;ACT;BG;176-05;Missions de police judiciaire et concours à la justice
+2020;LFI;SSA;BG;176-05-01;Missions de police judiciaire et concours à la justice - Administration centrale et cabinets
+2020;LFI;SSA;BG;176-05-02;Missions de police judiciaire et concours à la justice - Hors administration centrale et cabinets
+2020;LFI;ACT;BG;176-01;Ordre public et protection de la souveraineté
+2020;LFI;SSA;BG;176-01-01;Ordre public et protection de la souveraineté - Administration centrale et cabinets
+2020;LFI;SSA;BG;176-01-02;Ordre public et protection de la souveraineté - Hors administration centrale et cabinets
+2020;LFI;ACT;BG;176-06;Commandement, ressources humaines et logistique
+2020;LFI;SSA;BG;176-06-08;Soutien (autres dépenses) - Administration centrale et cabinets
+2020;LFI;SSA;BG;176-06-01;Formation
+2020;LFI;SSA;BG;176-06-02;Action sociale
+2020;LFI;SSA;BG;176-06-03;Immobilier
+2020;LFI;SSA;BG;176-06-04;Système d'information et de communication : ACROPOL
+2020;LFI;SSA;BG;176-06-05;Système d'information et de communication : hors ACROPOL
+2020;LFI;SSA;BG;176-06-07;Soutien (autres dépenses)
+2020;LFI;ACT;BG;176-99;Dépenses de personnel du programme à reventiler
+2020;LFI;PGM;BG;152;Gendarmerie nationale
+2020;LFI;ACT;BG;152-05;Exercice des missions militaires
+2020;LFI;SSA;BG;152-05-01;Exercice des missions militaires - hors administration centrale et cabinet
+2020;LFI;SSA;BG;152-05-02;Exercice des missions militaires - administration centrale et cabinet
+2020;LFI;ACT;BG;152-04;Commandement, ressources humaines et logistique
+2020;LFI;SSA;BG;152-04-01;Commandement, ressources humaines et logistique
+2020;LFI;SSA;BG;152-04-02;Commandement, ressources humaines et logistique - administration centrale et cabinet
+2020;LFI;ACT;BG;152-03;Missions de police judiciaire et concours à la justice
+2020;LFI;SSA;BG;152-03-01;Missions de police judiciaire et concours à la justice - hors administration centrale et cabinet
+2020;LFI;SSA;BG;152-03-02;Missions de police judiciaire et concours à la justice - administration centrale et cabinet
+2020;LFI;ACT;BG;152-01;Ordre et sécurité publics
+2020;LFI;SSA;BG;152-01-01;Ordre et sécurité publics - hors administration centrale et cabinet
+2020;LFI;SSA;BG;152-01-02;Ordre et sécurité publics -  administration centrale et cabinet
+2020;LFI;ACT;BG;152-02;Sécurité routière
+2020;LFI;SSA;BG;152-02-01;Sécurité routière - hors administration centrale et cabinet
+2020;LFI;SSA;BG;152-02-02;Sécurité routière - administration centrale et cabinet
+2020;LFI;ACT;BG;152-99;"Personnel concourant au programme ""Gendarmerie nationale"""
+2020;LFI;PGM;BG;207;Sécurité et éducation routières
+2020;LFI;ACT;BG;207-02;Démarches interministérielles et communication
+2020;LFI;SSA;BG;207-02-01;Communication nationale
+2020;LFI;SSA;BG;207-02-02;Actions locales et partenariat
+2020;LFI;ACT;BG;207-01;Observation, prospective, réglementation et soutien au programme
+2020;LFI;SSA;BG;207-01-01;Prospective
+2020;LFI;SSA;BG;207-01-02;Soutien au programme
+2020;LFI;ACT;BG;207-03;Éducation routière
+2020;LFI;SSA;BG;207-03-01;Organisation des examens du permis de conduire
+2020;LFI;SSA;BG;207-03-02;Formations
+2020;LFI;SSA;BG;207-03-03;Aide au financement du permis de conduire à 1 euro par jour
+2020;LFI;Mission;BG;PC;Crédits non répartis
+2020;LFI;PGM;BG;552;Dépenses accidentelles et imprévisibles
+2020;LFI;ACT;BG;552-01;Dépenses accidentelles et imprévisibles
+2020;LFI;PGM;BG;551;Provision relative aux rémunérations publiques
+2020;LFI;ACT;BG;551-01;Provision relative aux rémunérations publiques
+2020;LFI;Mission;BG;RA;Recherche et enseignement supérieur
+2020;LFI;PGM;BG;150;Formations supérieures et recherche universitaire
+2020;LFI;ACT;BG;150-05;Bibliothèques et documentation
+2020;LFI;ACT;BG;150-04;Établissements d'enseignement privés
+2020;LFI;ACT;BG;150-03;Formation initiale et continue de niveau doctorat
+2020;LFI;ACT;BG;150-01;Formation initiale et continue du baccalauréat à la licence
+2020;LFI;ACT;BG;150-15;Pilotage et support du programme
+2020;LFI;SSA;BG;150-15-01;"Personnel concourant à l'action ""Pilotage et support du programme"""
+2020;LFI;SSA;BG;150-15-02;Pilotage du système universitaire
+2020;LFI;SSA;BG;150-15-03;Pilotage opérationnel des établissements
+2020;LFI;SSA;BG;150-15-04;International
+2020;LFI;SSA;BG;150-15-05;Formation du vivier
+2020;LFI;ACT;BG;150-02;Formation initiale et continue de niveau master
+2020;LFI;ACT;BG;150-13;Diffusion des savoirs et musées
+2020;LFI;ACT;BG;150-17;Recherche
+2020;LFI;ACT;BG;150-14;Immobilier
+2020;LFI;SSA;BG;150-14-01;"Personnel concourant à l'action ""immobilier"""
+2020;LFI;SSA;BG;150-14-02;Construction et 1er équipement (CPER)
+2020;LFI;SSA;BG;150-14-03;Construction et 1er équipement (hors CPER)
+2020;LFI;SSA;BG;150-14-04;Maintenance et logistique
+2020;LFI;SSA;BG;150-14-05;Sécurité
+2020;LFI;SSA;BG;150-14-07;Plan de relance - Sécurité
+2020;LFI;SSA;BG;150-14-06;Plan de relance - Construction et 1er équipement (CPER)
+2020;LFI;ACT;BG;150-99;Dépenses de personnel du programme à reventiler
+2020;LFI;PGM;BG;142;Enseignement supérieur et recherche agricoles
+2020;LFI;ACT;BG;142-01;Enseignement supérieur
+2020;LFI;SSA;BG;142-01-05;Financement des établissements sous contrat
+2020;LFI;SSA;BG;142-01-06;Action sociale étudiante
+2020;LFI;SSA;BG;142-01-07;Aides à la mobilité internationale
+2020;LFI;SSA;BG;142-01-09;Contribution au Centre international des hautes études agronomiques méditerranéennes (CIHEAM)
+2020;LFI;SSA;BG;142-01-04;Enseignement supérieur public - Financement des établissements d'enseignement supérieur publics (CPER)
+2020;LFI;SSA;BG;142-01-03;Enseignement supérieur public - Financement des établissements d'enseignement supérieur publics (hors CPER)
+2020;LFI;SSA;BG;142-01-02;Enseignement supérieur public - Personnel de l'enseignement supérieur (personnels mis à disposition)
+2020;LFI;SSA;BG;142-01-01;Enseignement supérieur public - Personnel de l'enseignement supérieur (hors personnel mis à disposition)
+2020;LFI;SSA;BG;142-01-08;Versement au CAS pension pour les emplois gagés - hors personnel
+2020;LFI;ACT;BG;142-02;Recherche, développement et transfert de technologie
+2020;LFI;SSA;BG;142-02-06;Appui à la recherche des établissements d'enseignement supérieur agricole(CPER)
+2020;LFI;SSA;BG;142-02-05;Appui à la recherche des établissements d'enseignement supérieur agricole (hors CPER)
+2020;LFI;SSA;BG;142-02-03;Appui à la recherche de l'institut national de recherche pour l’agriculture, l’alimentation et l’environnement (INRAE)
+2020;LFI;SSA;BG;142-02-01;Appui à la recherche - Personnel de la recherche du ministère chargé de l'agriculture
+2020;LFI;SSA;BG;142-02-07;Transfert de technologie, développement agricole, appui à la recherche - Organismes de développement
+2020;LFI;ACT;BG;142-99;"Dépenses de personnel du programme ""enseignement supérieur et recherche agricoles"" à reventiler"
+2020;LFI;PGM;BG;186;Recherche culturelle et culture scientifique
+2020;LFI;ACT;BG;186-03;Culture scientifique et technique
+2020;LFI;SSA;BG;186-03-01;Culture scientifique et technique
+2020;LFI;ACT;BG;186-01;Recherche culturelle
+2020;LFI;SSA;BG;186-01-10;Recherche en faveur des patrimoines
+2020;LFI;SSA;BG;186-01-11;Recherche en faveur de la création
+2020;LFI;SSA;BG;186-01-12;Recherche pluridisciplinaire
+2020;LFI;PGM;BG;191;Recherche duale (civile et militaire)
+2020;LFI;ACT;BG;191-01;Recherche duale en sciences du vivant
+2020;LFI;SSA;BG;191-01-01;Commissariat à l'énergie atomique
+2020;LFI;SSA;BG;191-01-02;Autres bénéficiaires
+2020;LFI;ACT;BG;191-03;Recherche duale dans le domaine aérospatial
+2020;LFI;SSA;BG;191-03-01;Centre national d'études spatiales
+2020;LFI;SSA;BG;191-03-02;Commissariat à l'énergie atomique
+2020;LFI;SSA;BG;191-03-03;Autres bénéficiaires
+2020;LFI;ACT;BG;191-04;Autres recherches et développements technologiques duaux
+2020;LFI;SSA;BG;191-04-01;Commissariat à l'énergie atomique
+2020;LFI;SSA;BG;191-04-02;Autres bénéficiaires
+2020;LFI;ACT;BG;191-02;Recherche duale en sciences et techniques de l'information et de la communication
+2020;LFI;SSA;BG;191-02-01;Centre national d'études spatiales
+2020;LFI;SSA;BG;191-02-02;Commissariat à l'énergie atomique
+2020;LFI;SSA;BG;191-02-03;Autres bénéficiaires
+2020;LFI;PGM;BG;190;Recherche dans les domaines de l'énergie, du développement et de la mobilité durables
+2020;LFI;ACT;BG;190-12;Recherche dans le domaine des transports, de la construction et de l'aménagement
+2020;LFI;SSA;BG;190-12-01;Université Gustave Eiffel
+2020;LFI;SSA;BG;190-12-03;Centre scientifique et technique du bâtiment (CSTB)
+2020;LFI;ACT;BG;190-13;Recherche partenariale dans le développement et l'aménagement durable
+2020;LFI;SSA;BG;190-13-02;Agence de l'environnement et de la maîtrise de l'énergie (ADEME)
+2020;LFI;SSA;BG;190-13-01;Agence nationale chargée de la sécurité sanitaire de l'alimentation, de l'environnement et du travail (ANSES)
+2020;LFI;SSA;BG;190-13-07;Changement global (GMES, adaptation au changement climatique)
+2020;LFI;SSA;BG;190-13-08;Risque, santé, environnement
+2020;LFI;SSA;BG;190-13-09;Biodiversité
+2020;LFI;SSA;BG;190-13-05;Construction (PREBAT, C2D2, RGCU)
+2020;LFI;SSA;BG;190-13-04;Recherche en matière de transport (PREDIT)
+2020;LFI;SSA;BG;190-13-10;Innovation et prospective dans le domaine du développement et de l'aménagement durable
+2020;LFI;SSA;BG;190-13-06;Urbanisme et territoire (PUCA, MUTS)
+2020;LFI;ACT;BG;190-11;Recherche dans le domaine des risques
+2020;LFI;SSA;BG;190-11-01;Institut national de l'environnement industriel et des risques (INERIS)
+2020;LFI;SSA;BG;190-11-02;Institut de radioprotection et de sûreté nucléaire (IRSN)
+2020;LFI;ACT;BG;190-14;Recherche et développement dans le domaine de l'aéronautique civile
+2020;LFI;SSA;BG;190-14-01;Recherches en amont
+2020;LFI;SSA;BG;190-14-02;Subventions à des organismes de recherche
+2020;LFI;SSA;BG;190-14-03;Equipementier
+2020;LFI;SSA;BG;190-14-04;Avions
+2020;LFI;SSA;BG;190-14-05;Moteurs
+2020;LFI;SSA;BG;190-14-06;Hélicoptères
+2020;LFI;ACT;BG;190-15;Charges nucléaires de long terme des installations du CEA
+2020;LFI;ACT;BG;190-16;Recherche dans le domaine de l'énergie nucléaire
+2020;LFI;SSA;BG;190-16-01;Soutien aux activités nucléaires du CEA
+2020;LFI;ACT;BG;190-17;Recherche dans le domaine des nouvelles technologies de l'énergie
+2020;LFI;SSA;BG;190-17-01;Soutien aux nouvelles technologies de l'énergie (CEA)
+2020;LFI;SSA;BG;190-17-02;Soutien aux nouvelles technologies de l'énergie (IFPEN)
+2020;LFI;PGM;BG;172;Recherches scientifiques et technologiques pluridisciplinaires
+2020;LFI;ACT;BG;172-02;Agence nationale de la recherche
+2020;LFI;SSA;BG;172-02-16;Agence nationale de la recherche - fontionnement
+2020;LFI;SSA;BG;172-02-25;Agence nationale de la recherche - programmation
+2020;LFI;ACT;BG;172-01;Pilotage et animation
+2020;LFI;SSA;BG;172-01-33;Soutien à la recherche
+2020;LFI;SSA;BG;172-01-31;Prospective, études
+2020;LFI;SSA;BG;172-01-32;Action européenne et internationale
+2020;LFI;SSA;BG;172-01-34;Support du programme
+2020;LFI;SSA;BG;172-01-35;Animation scientifique
+2020;LFI;SSA;BG;172-01-36;Soutien à l'innovation
+2020;LFI;SSA;BG;172-01-37;Dispositifs d'aide aux jeunes chercheurs
+2020;LFI;SSA;BG;172-01-38;Renforcement des liens entre sciences et société
+2020;LFI;ACT;BG;172-16;Recherches scientifiques et technologiques en sciences et techniques de l'information
+2020;LFI;ACT;BG;172-17;Recherches scientifiques et technologiques dans le domaine de l'énergie
+2020;LFI;ACT;BG;172-11;Recherches interdisciplinaires et transversales
+2020;LFI;ACT;BG;172-12;Diffusion, valorisation et transfert des connaissances et des technologies
+2020;LFI;ACT;BG;172-13;Grandes infrastructures de recherche
+2020;LFI;ACT;BG;172-14;Moyens généraux et d'appui à la recherche
+2020;LFI;ACT;BG;172-15;Recherches scientifiques et technologiques en sciences de la vie et de la santé
+2020;LFI;ACT;BG;172-18;Recherches scientifiques et technologiques dans le domaine de l'environnement
+2020;LFI;ACT;BG;172-19;Recherches scientifiques et technologiques en sciences humaines et sciences sociales
+2020;LFI;PGM;BG;193;Recherche spatiale
+2020;LFI;ACT;BG;193-03;Développement de la technologie spatiale au service de la recherche en sciences de l'information et de la communication
+2020;LFI;SSA;BG;193-03-01;Programmes nationaux du centre national d'études spatiales (CNES)
+2020;LFI;SSA;BG;193-03-02;Contribution française à l'Agence spatiale européenne
+2020;LFI;ACT;BG;193-01;Développement de la technologie spatiale au service de la science
+2020;LFI;SSA;BG;193-01-01;Programmes nationaux du centre national d'études spatiales (CNES)
+2020;LFI;SSA;BG;193-01-02;Contribution française à l'Agence spatiale européenne
+2020;LFI;ACT;BG;193-06;Moyens généraux et d'appui à la recherche
+2020;LFI;SSA;BG;193-06-01;Programmes nationaux du centre national d'études spatiales (CNES)
+2020;LFI;SSA;BG;193-06-02;Contribution française à l'Agence spatiale européenne
+2020;LFI;ACT;BG;193-05;Maîtrise des technologies orbitales et de l'innovation technologique
+2020;LFI;SSA;BG;193-05-01;Programmes nationaux du centre national d'études spatiales (CNES)
+2020;LFI;SSA;BG;193-05-02;Contribution française à l'Agence spatiale européenne
+2020;LFI;ACT;BG;193-04;Maîtrise de l'accès à l'espace
+2020;LFI;SSA;BG;193-04-01;Programmes nationaux du centre national d'études spatiales (CNES)
+2020;LFI;SSA;BG;193-04-02;Contribution française à l'Agence spatiale européenne
+2020;LFI;ACT;BG;193-02;Développement de la technologie spatiale au service de l'observation de la terre
+2020;LFI;SSA;BG;193-02-01;Programmes nationaux du centre national d'études spatiales (CNES)
+2020;LFI;SSA;BG;193-02-02;Contribution française à l'Agence spatiale européenne
+2020;LFI;ACT;BG;193-07;Développement des satellites de météorologie
+2020;LFI;SSA;BG;193-07-01;Contribution française à EUMETSAT
+2020;LFI;PGM;BG;231;Vie étudiante
+2020;LFI;ACT;BG;231-01;Aides directes
+2020;LFI;SSA;BG;231-01-01;Bourses sur critères sociaux
+2020;LFI;SSA;BG;231-01-02;Aides au mérite
+2020;LFI;SSA;BG;231-01-03;Aides à la mobilité
+2020;LFI;SSA;BG;231-01-04;Bourses de mérite
+2020;LFI;SSA;BG;231-01-05;Fonds national d'aide d'urgence et autres aides
+2020;LFI;SSA;BG;231-01-06;Prêts et fonds de garantie
+2020;LFI;ACT;BG;231-02;Aides indirectes
+2020;LFI;SSA;BG;231-02-01;Aides indirectes
+2020;LFI;SSA;BG;231-02-02;Plan de relance - Aides indirectes
+2020;LFI;ACT;BG;231-03;Santé des étudiants et activités associatives, culturelles et sportives
+2020;LFI;SSA;BG;231-03-01;Santé des étudiants et activités associatives, culturelles et sportives
+2020;LFI;SSA;BG;231-03-02;Plan de relance - Santé des étudiants et activités associatives, culturelles et sportives
+2020;LFI;ACT;BG;231-04;Pilotage et animation du programme
+2020;LFI;PGM;BG;192;Recherche et enseignement supérieur en matière économique et industrielle
+2020;LFI;ACT;BG;192-01;Organismes de formation supérieure et de recherche
+2020;LFI;SSA;BG;192-01-01;Ecoles des mines
+2020;LFI;SSA;BG;192-01-02;Groupe des écoles de télécommunications
+2020;LFI;SSA;BG;192-01-04;Autres écoles
+2020;LFI;SSA;BG;192-01-03;GENES
+2020;LFI;SSA;BG;192-01-05;Personnels oeuvrant pour les organismes de formation supérieure et de recherche
+2020;LFI;ACT;BG;192-03;Soutien de la recherche industrielle stratégique
+2020;LFI;SSA;BG;192-03-01;Fonds de compétitivité des entreprises
+2020;LFI;SSA;BG;192-03-02;Plan de relance - Economie numérique
+2020;LFI;ACT;BG;192-02;Soutien et diffusion de l'innovation technologique
+2020;LFI;SSA;BG;192-02-01;OSEO Innovation
+2020;LFI;SSA;BG;192-02-03;Accompagnement de la politique d'innovation
+2020;LFI;SSA;BG;192-02-04;Compensation de l'allègement des cotisations sociales patronales des jeunes entreprises innovantes
+2020;LFI;SSA;BG;192-02-05;Normes, qualité, métrologie (part recherche)
+2020;LFI;SSA;BG;192-02-06;Redéploiement des programmes d'investissements d'avenir (PIA)
+2020;LFI;Mission;BG;RB;Régimes sociaux et de retraite
+2020;LFI;PGM;BG;198;Régimes sociaux et de retraite des transports terrestres
+2020;LFI;ACT;BG;198-03;Régime de retraite du personnel de la SNCF
+2020;LFI;SSA;BG;198-03-01;Charge de retraite de la SNCF
+2020;LFI;ACT;BG;198-04;Régime de retraite du personnel de la RATP
+2020;LFI;SSA;BG;198-04-01;Charges de retraite de la RATP
+2020;LFI;ACT;BG;198-05;Autres régimes
+2020;LFI;SSA;BG;198-05-01;Congé de fin d'activité (FONGECFA-Transports, AGECFA-Voyageurs)
+2020;LFI;SSA;BG;198-05-02;Pensions de retraite remboursées à la Caisse autonome de retraites complémentaires et de prévoyance des transports (CARCEPT)
+2020;LFI;SSA;BG;198-05-03;Aide au rachat des cotisations de retraite pour les conjoints de bateliers
+2020;LFI;SSA;BG;198-05-04;Garanties de retraite des anciens agents des services publics d'Afrique du Nord et d'outre-mer
+2020;LFI;SSA;BG;198-05-05;Autres régimes spécifiques
+2020;LFI;PGM;BG;195;Régimes de retraite des mines, de la SEITA et divers
+2020;LFI;ACT;BG;195-01;Versements au fonds spécial de retraite de la caisse autonome nationale de sécurité sociale dans les mines
+2020;LFI;ACT;BG;195-02;Régime de retraite de la SEITA
+2020;LFI;ACT;BG;195-04;Caisse des retraites des régies ferroviaires d'outre-mer
+2020;LFI;ACT;BG;195-07;Versements liés à la liquidation de l'ORTF
+2020;LFI;ACT;BG;195-11;Régime de retraite complémentaire des exploitants agricoles (RCO)
+2020;LFI;PGM;BG;197;Régimes de retraite et de sécurité sociale des marins
+2020;LFI;ACT;BG;197-01;Régimes de retraite et de sécurité sociale des marins
+2020;LFI;Mission;CCF;ZD;Avances à l'audiovisuel public
+2020;LFI;PGM;CCF;841;France Télévisions
+2020;LFI;ACT;CCF;841-01;France Télévisions
+2020;LFI;PGM;CCF;842;ARTE France
+2020;LFI;ACT;CCF;842-01;ARTE France
+2020;LFI;PGM;CCF;843;Radio France
+2020;LFI;ACT;CCF;843-01;Radio France
+2020;LFI;PGM;CCF;844;France Médias Monde
+2020;LFI;ACT;CCF;844-01;France Médias Monde
+2020;LFI;PGM;CCF;847;TV5 Monde
+2020;LFI;ACT;CCF;847-01;TV5 Monde
+2020;LFI;PGM;CCF;845;Institut national de l'audiovisuel
+2020;LFI;ACT;CCF;845-01;Institut national de l'audiovisuel
+2020;LFI;Mission;CCF;ZE;Prêts à des États étrangers
+2020;LFI;PGM;CCF;851;Prêts du Trésor à des États étrangers en vue de faciliter la vente de biens et de services concourant au développement du commerce extérieur de la France
+2020;LFI;ACT;CCF;851-01;Prêts à des États étrangers en vue de faciliter la vente de biens et de services concourant au développement du commerce extérieur de la France
+2020;LFI;PGM;CCF;852;Prêts à des États étrangers pour consolidation de dettes envers la France
+2020;LFI;ACT;CCF;852-01;Prêts résultant de l'exécution d'accords conclus avec les gouvernements étrangers et portant consolidation des dettes de leur pays envers la France
+2020;LFI;PGM;CCF;853;Prêts à l'Agence française de développement en vue de favoriser le développement économique et social dans des États étrangers
+2020;LFI;ACT;CCF;853-01;Prêts à l'Agence française de développement en vue de favoriser le développement économique et social dans des États étrangers
+2020;LFI;PGM;CCF;854;Prêts aux États membres de l'Union européenne dont la monnaie est l'euro
+2020;LFI;ACT;CCF;854-01;Soutien financier aux États membres de l’Union européenne dont la monnaie est l’euro
+2020;LFI;Mission;CAS;YE;Contrôle de la circulation et du stationnement routiers
+2020;LFI;PGM;CAS;751;Structures et dispositifs de sécurité routière
+2020;LFI;ACT;CAS;751-01;Dispositifs de contrôle
+2020;LFI;ACT;CAS;751-02;Centre national de traitement
+2020;LFI;ACT;CAS;751-03;Soutien au programme
+2020;LFI;ACT;CAS;751-04;Fichier national du permis de conduire
+2020;LFI;PGM;CAS;754;Contribution à l'équipement des collectivités territoriales pour l'amélioration des transports en commun, de la sécurité et de la circulation routières
+2020;LFI;ACT;CAS;754-01;Contribution à l'équipement des collectivités territoriales pour l'amélioration des transports en commun, de la sécurité et de la circulation routières
+2020;LFI;PGM;CAS;755;Désendettement de l'État
+2020;LFI;ACT;CAS;755-01;Désendettement de l'État
+2020;LFI;PGM;CAS;753;Contrôle et modernisation de la politique de la circulation et du stationnement routiers
+2020;LFI;ACT;CAS;753-01;Déploiement du procès-verbal électronique
+2020;LFI;Mission;CAS;YI;Services nationaux de transport conventionnés de voyageurs
+2020;LFI;PGM;CAS;785;Exploitation des services nationaux de transport conventionnés
+2020;LFI;ACT;CAS;785-01;Contribution à l’exploitation des services nationaux de transport conventionnés
+2020;LFI;ACT;CAS;785-02;Frais d'enquêtes, d'études et de conseil relatifs à l'exploitation des services nationaux de transport conventionnés
+2020;LFI;ACT;CAS;785-03;Contributions versées aux régions au titre de l’exploitation des services nationaux de transports antérieurement conventionnés
+2020;LFI;PGM;CAS;786;Matériel roulant des services nationaux de transport conventionnés
+2020;LFI;ACT;CAS;786-01;Contribution au matériel roulant des services nationaux de transport conventionnés
+2020;LFI;ACT;CAS;786-02;Frais d'enquêtes, d'études et de conseil relatifs au matériel roulant des services nationaux de transport conventionnés
+2020;LFI;Mission;BG;MB;Anciens combattants, mémoire et liens avec la nation
+2020;LFI;PGM;BG;169;Reconnaissance et réparation en faveur du monde combattant
+2020;LFI;ACT;BG;169-01;Administration de  la dette viagère
+2020;LFI;SSA;BG;169-01-10;Pensions militaires d'invalidité de victimes de guerre et allocations rattachées
+2020;LFI;SSA;BG;169-01-11;Retraite du combattant
+2020;LFI;ACT;BG;169-02;Gestion  des droits liés aux pensions militaires d'invalidité
+2020;LFI;SSA;BG;169-02-21;Soins médicaux gratuits et appareillage des mutilés
+2020;LFI;SSA;BG;169-02-22;Remboursement des réductions de transport accordées aux invalides
+2020;LFI;SSA;BG;169-02-23;Remboursement des prestations de sécurité sociale aux invalides
+2020;LFI;ACT;BG;169-03;Solidarité
+2020;LFI;SSA;BG;169-03-30;Fonds de solidarité pour les anciens combattants d'Afrique du Nord et d'Indochine
+2020;LFI;SSA;BG;169-03-31;Majoration des rentes mutualistes des anciens combattants et victimes de guerre
+2020;LFI;SSA;BG;169-03-32;Subventions aux associations et oeuvres diverses
+2020;LFI;SSA;BG;169-03-33;Indemnités, pécules et frais de voyages sur les tombes
+2020;LFI;SSA;BG;169-03-34;Action sociale en faveur du monde combattant : Office national des anciens combattants (ONAC)
+2020;LFI;SSA;BG;169-03-35;Office national des anciens combattants (ONAC) : subventions
+2020;LFI;SSA;BG;169-03-36;Institution nationale des invalides : subventions
+2020;LFI;SSA;BG;169-03-37;Conseil national des communes compagnons de la libération - Subventions
+2020;LFI;ACT;BG;169-07;Actions en faveur des rapatriés
+2020;LFI;PGM;BG;167;Liens entre la Nation et son armée
+2020;LFI;ACT;BG;167-02;Politique de mémoire
+2020;LFI;ACT;BG;167-01;Liens armées-jeunesse
+2020;LFI;PGM;BG;158;Indemnisation des victimes des persécutions antisémites et des actes de barbarie pendant la seconde guerre mondiale
+2020;LFI;ACT;BG;158-01;Indemnisation des orphelins de la déportation et des victimes de spoliations du fait des législations antisémites en vigueur pendant l'Occupation
+2020;LFI;ACT;BG;158-02;Indemnisation des victimes d'actes de barbarie durant la seconde guerre mondiale
+2020;LFI;Mission;BG;OA;Outre-mer
+2020;LFI;PGM;BG;138;Emploi outre-mer
+2020;LFI;ACT;BG;138-02;Aide à l'insertion et à la qualification professionnelle
+2020;LFI;SSA;BG;138-02-30;Passeport mobilité formation professionnelle
+2020;LFI;SSA;BG;138-02-20;Aides à la qualification professionnelle et à l'adaptation à l'emploi - RSMA Guadeloupe
+2020;LFI;SSA;BG;138-02-27;Aides à la qualification professionnelle et à l'adaptation à l'emploi - RSMA Réunion
+2020;LFI;SSA;BG;138-02-11;Aides à l'insertion et à l'emploi dans les collectivités d'outre-mer
+2020;LFI;SSA;BG;138-02-17;Accompagnement, évaluations et dialogue social
+2020;LFI;SSA;BG;138-02-18;Aides à la qualification professionnelle et à l'adaptation à l'emploi - Commandement du SMA
+2020;LFI;SSA;BG;138-02-19;Aides à la qualification professionnelle et à l'adaptation à l'emploi - Détachement du SMA Périgueux
+2020;LFI;SSA;BG;138-02-21;Aides à la qualification professionnelle et à l'adaptation à l'emploi - RSMA Guyane
+2020;LFI;SSA;BG;138-02-23;Aides à la qualification professionnelle et à l'adaptation à l'emploi - RSMA Martinique
+2020;LFI;SSA;BG;138-02-24;Aides à la qualification professionnelle et à l'adaptation à l'emploi - BSMA Mayotte
+2020;LFI;SSA;BG;138-02-25;Aides à la qualification professionnelle et à l'adaptation à l'emploi -RSMA Nouvelle-Calédonie
+2020;LFI;SSA;BG;138-02-26;Aides à la qualification professionnelle et à l'adaptation à l'emploi - RSMA Polynésie Française
+2020;LFI;SSA;BG;138-02-31;Formation en mobilité: subventions
+2020;LFI;ACT;BG;138-01;Soutien aux entreprises
+2020;LFI;SSA;BG;138-01-01;Abaissement du coût du travail - Exonération de cotisations sociales
+2020;LFI;SSA;BG;138-01-02;Abaissement du coût du fret
+2020;LFI;SSA;BG;138-01-03;Autres aides aux entreprises
+2020;LFI;ACT;BG;138-03;Pilotage des politiques des outre-mer
+2020;LFI;ACT;BG;138-04;Financement de l’économie
+2020;LFI;PGM;BG;123;Conditions de vie outre-mer
+2020;LFI;ACT;BG;123-07;Insertion économique et coopération régionales
+2020;LFI;SSA;BG;123-07-01;Intégration des collectivités d’outre-mer dans leur environnement régional
+2020;LFI;SSA;BG;123-07-02;Défense des intérêts des collectivités d’outre-mer dans le cadre international
+2020;LFI;ACT;BG;123-06;Collectivités territoriales
+2020;LFI;SSA;BG;123-06-14;Subventions d’équilibre
+2020;LFI;SSA;BG;123-06-05;Programmes prioritaires ciblés - Réforme de l’état-civil à Mayotte
+2020;LFI;SSA;BG;123-06-06;Programmes prioritaires ciblés -  Dotation de 1er numérotage
+2020;LFI;SSA;BG;123-06-11;Dotations de rattrapage et d'aide au développement
+2020;LFI;SSA;BG;123-06-12;Dotations de rattrapage et d’aide au développement aide à la reconversion de l’économie polynésienne
+2020;LFI;SSA;BG;123-06-16;Actions d'urgence et de solidarité nationale suite aux calamités et actions de défense civile
+2020;LFI;SSA;BG;123-06-19;Moyens de sécurité civile
+2020;LFI;SSA;BG;123-06-20;Lutte contre l'orpaillage clandestin en Guyane
+2020;LFI;SSA;BG;123-06-13;Travaux divers d’intérêt local
+2020;LFI;ACT;BG;123-03;Continuité territoriale
+2020;LFI;SSA;BG;123-03-02;Fonds de continuité territoriale
+2020;LFI;SSA;BG;123-03-04;Désenclavement  - Desserte aérienne et maritime (hors CPER)
+2020;LFI;SSA;BG;123-03-03;Fonds d'échanges éducatifs, culturels et sportifs
+2020;LFI;ACT;BG;123-01;Logement
+2020;LFI;SSA;BG;123-01-05;Logement social - Aide exceptionnelle de l'Etat prévue par l'article 3 de la Loi du 30/12/1996
+2020;LFI;SSA;BG;123-01-04;Logement social - Amélioration du parc privé
+2020;LFI;SSA;BG;123-01-02;Logement social - Accession à la propriété
+2020;LFI;SSA;BG;123-01-01;Logement social - Construction de logements locatifs sociaux
+2020;LFI;SSA;BG;123-01-03;Logement social - Amélioration du parc locatif social
+2020;LFI;SSA;BG;123-01-07;Accompagnement des politiques urbaines d'aménagement (hors CPER)
+2020;LFI;SSA;BG;123-01-08;Accompagnement des politiques urbaines d'aménagement (CPER)
+2020;LFI;SSA;BG;123-01-12;Résorption de l'habitat insalubre (hors CPER)
+2020;LFI;SSA;BG;123-01-06;Logement social - Etudes et manifestations
+2020;LFI;SSA;BG;123-01-16;Plan de relance - Logement
+2020;LFI;ACT;BG;123-02;Aménagement  du territoire
+2020;LFI;SSA;BG;123-02-04;Autres interventions non contractualisé
+2020;LFI;SSA;BG;123-02-02;Contrats en cours
+2020;LFI;SSA;BG;123-02-03;Anciennes générations de contrats
+2020;LFI;ACT;BG;123-04;Sanitaire, social, culture, jeunesse et sports
+2020;LFI;SSA;BG;123-04-01;Aides sociales
+2020;LFI;SSA;BG;123-04-02;Actions sanitaires et sociales
+2020;LFI;SSA;BG;123-04-05;Protection sociale
+2020;LFI;SSA;BG;123-04-06;Culture, jeunesse et sports
+2020;LFI;SSA;BG;123-04-04;Agence de santé de Wallis-et-Futuna
+2020;LFI;ACT;BG;123-08;Fonds exceptionnel d'investissement
+2020;LFI;SSA;BG;123-08-01;Fonds exceptionnel d'investissement
+2020;LFI;SSA;BG;123-08-02;Plan de relance - Fonds exceptionnel d'investissement
+2020;LFI;ACT;BG;123-09;Appui à l'accès aux financements bancaires
+2020;LFI;SSA;BG;123-09-01;Agence française de développement (AFD) - Bonification d'intérêts
+2020;LFI;SSA;BG;123-09-02;Fonds de garantie agriculture et pêche
+2020;LFI;Mission;CCF;ZF;Prêts et avances à des particuliers ou à des organismes privés
+2020;LFI;PGM;CCF;861;Prêts et avances pour le logement des agents de l'État
+2020;LFI;ACT;CCF;861-04;Avances aux agents de l'État à l'étranger pour la prise en location d'un logement
+2020;LFI;PGM;CCF;862;Prêts pour le développement économique et social
+2020;LFI;ACT;CCF;862-01;Prêts pour le développement économique et social
+2020;LFI;PGM;CCF;868;Prêts et avances pour le développement du commerce avec l'Iran
+2020;LFI;ACT;CCF;868-01;Prêts et avances pour le développement du commerce avec l'Iran
+2020;LFI;PGM;CCF;869;Prêts à la société concessionnaire de la liaison express entre Paris et l'aéroport Paris-Charles de Gaulle
+2020;LFI;ACT;CCF;869-01;Prêts à la société concessionnaire de la liaison express entre Paris et l'aéroport Paris-Charles de Gaulle
+2020;LFI;PGM;CCF;876;Prêts octroyés dans le cadre des programmes des investissements d'avenir
+2020;LFI;ACT;CCF;876-01;Prêts octroyés dans le cadre des programmes des investissements d'avenir
+2020;LFI;Mission;CCF;ZB;Avances à divers services de l'État ou organismes gérant des services publics
+2020;LFI;PGM;CCF;821;Avances à l'Agence de services et de paiement, au titre du préfinancement des aides communautaires de la politique agricole commune
+2020;LFI;ACT;CCF;821-01;Avances au titre du préfinancement des aides communautaires de la politique agricole commune
+2020;LFI;PGM;CCF;823;Avances à des organismes distincts de l'État et gérant des services publics
+2020;LFI;ACT;CCF;823-01;Avances à des organismes distincts de l'État et gérant des services publics
+2020;LFI;PGM;CCF;824;Avances à des services de l'État
+2020;LFI;ACT;CCF;824-01;Avances au budget annexe « Contrôle et exploitation aériens »
+2020;LFI;PGM;CCF;825;Avances à l'Office national d'indemnisation des accidents médicaux, des affections iatrogènes et des infections nosocomiales (ONIAM) au titre de l'indemnisation des victimes du Benfluorex
+2020;LFI;ACT;CCF;825-01;Avances à l'ONIAM au titre de l'indemnisation des victimes du Benfluorex
+2020;LFI;Mission;BG;PB;Pouvoirs publics
+2020;LFI;PGM;BG;511;Assemblée nationale
+2020;LFI;ACT;BG;511-01;Assemblée nationale
+2020;LFI;PGM;BG;501;Présidence de la République
+2020;LFI;ACT;BG;501-01;Présidence de la République
+2020;LFI;PGM;BG;541;La Chaîne parlementaire
+2020;LFI;ACT;BG;541-01;La Chaîne parlementaire - Assemblée nationale
+2020;LFI;ACT;BG;541-02;Public Sénat
+2020;LFI;PGM;BG;521;Sénat
+2020;LFI;ACT;BG;521-01;Sénat
+2020;LFI;ACT;BG;521-02;Jardin du Luxembourg
+2020;LFI;ACT;BG;521-03;Musée du Luxembourg
+2020;LFI;PGM;BG;531;Conseil constitutionnel
+2020;LFI;ACT;BG;531-01;Conseil constitutionnel
+2020;LFI;PGM;BG;542;Indemnités des représentants français au Parlement européen
+2020;LFI;ACT;BG;542-01;Indemnités des représentants français au Parlement européen
+2020;LFI;PGM;BG;532;Haute Cour
+2020;LFI;ACT;BG;532-01;Haute Cour
+2020;LFI;PGM;BG;533;Cour de justice de la République
+2020;LFI;ACT;BG;533-01;Cour de justice de la République
+2020;LFI;SSA;BG;533-01-01;Cour de justice de la République
+2020;LFI;SSA;BG;533-01-02;Cour de justice de la République : fonction judiciaire
+2020;LFI;Mission;CAS;YB;Gestion du patrimoine immobilier de l'État
+2020;LFI;PGM;CAS;721;Contribution des cessions immobilières au désendettement de l'État
+2020;LFI;ACT;CAS;721-01;Contribution au désendettement de l'État
+2020;LFI;PGM;CAS;723;Opérations immobilières et entretien des bâtiments de l'État
+2020;LFI;ACT;CAS;723-11;Opérations structurantes et cessions
+2020;LFI;ACT;CAS;723-12;Contrôles règlementaires, audits, expertises et diagnostics
+2020;LFI;ACT;CAS;723-13;Maintenance à la charge du propriétaire
+2020;LFI;ACT;CAS;723-14;Gros entretien, réhabilitation, mise en conformité et remise en état
+2020;LFI;Mission;BG;EC;Enseignement scolaire
+2020;LFI;PGM;BG;230;Vie de l'élève
+2020;LFI;ACT;BG;230-04;Action sociale
+2020;LFI;SSA;BG;230-04-01;"Dépenses de personnel concourant à l'action ""action sociale"""
+2020;LFI;SSA;BG;230-04-02;Bourses et fonds sociaux
+2020;LFI;SSA;BG;230-04-06;Services d'action sociale
+2020;LFI;ACT;BG;230-03;Inclusion scolaire des élèves en situation de handicap
+2020;LFI;ACT;BG;230-05;Politique de l'internat et établissements à la charge de l'Etat
+2020;LFI;ACT;BG;230-01;Vie scolaire et éducation à la responsabilité
+2020;LFI;ACT;BG;230-02;Santé scolaire
+2020;LFI;ACT;BG;230-06;Actions éducatives complémentaires aux enseignements
+2020;LFI;ACT;BG;230-99;Dépenses de personnel concourant au programme
+2020;LFI;PGM;BG;143;Enseignement technique agricole
+2020;LFI;ACT;BG;143-05;Moyens communs à l'enseignement technique agricole, public et privé
+2020;LFI;SSA;BG;143-05-01;Inspection de l'enseignement agricole
+2020;LFI;SSA;BG;143-05-02;Suivi de l’insertion professionnelle et OETA (observatoire de l’enseignement technique agricole)
+2020;LFI;SSA;BG;143-05-03;Création, rénovation et délivrance des diplômes et titres de l'enseignement agricole - Hors personnel - Actions locales
+2020;LFI;SSA;BG;143-05-05;Création, rénovation et délivrance des diplômes et titres de l'enseignement agricole - Hors personnel - Actions nationales
+2020;LFI;ACT;BG;143-02;Mise en oeuvre des enseignements dans les établissements privés
+2020;LFI;SSA;BG;143-02-01;Enseignement agricole privé à temps plein - Personnel - Actions locales
+2020;LFI;SSA;BG;143-02-03;Etablissements privés du rythme approprié
+2020;LFI;SSA;BG;143-02-06;Etablissements privés du temps plein
+2020;LFI;SSA;BG;143-02-04;Aides à l'enseignement privé - financement des organisations fédératives, des organismes de formation des personnels et des actions pédagogiques
+2020;LFI;SSA;BG;143-02-05;Enseignement agricole privé à temps plein - Personnel - Actions nationales
+2020;LFI;SSA;BG;143-02-07;Enseignement agricole privé à temps plein - hors personnel - subvention forfaitaire
+2020;LFI;ACT;BG;143-01;Mise en oeuvre de l'enseignement dans les établissements publics
+2020;LFI;SSA;BG;143-01-04;Personnel permanent - Personnels titulaires et stagiaires de l'enseignement agricole public
+2020;LFI;SSA;BG;143-01-03;Personnel permanent - Charges de pensions des personnels gagés des établissements publics (CFA, CFPPA)
+2020;LFI;SSA;BG;143-01-13;Réparation des accidents du travail des élèves et étudiants
+2020;LFI;SSA;BG;143-01-10;Moyens d'appui et de modernisation du système d'enseignement public - Lycées agricoles des collectivités d'outre-mer (hors CPER)
+2020;LFI;SSA;BG;143-01-12;Moyens d'ajustement (structurels et conjoncturels) - Personnel non enseignant
+2020;LFI;SSA;BG;143-01-09;Moyens d'appui et de modernisation du système d'enseignement public - Lycées agricoles des collectivités d'outre-mer (CPER)
+2020;LFI;SSA;BG;143-01-08;Moyens d'appui et de modernisation du système d'enseignement public - Actions pédagogiques et modernisation de l'appareil de formation (soutien aux opérateurs nationaux)
+2020;LFI;SSA;BG;143-01-11;Moyens d'ajustement (structurels et conjoncturels) - Personnel enseignant
+2020;LFI;SSA;BG;143-01-01;Personnel permanent - Personnel mis à disposition par le ministère chargé de l'agriculture
+2020;LFI;SSA;BG;143-01-02;Personnel permanent - Personnel du ministère chargé de l'équipement au titre de des lycées maritimes
+2020;LFI;SSA;BG;143-01-05;Personnel permanent - Personnel de surveillance des établissements - Assistants d'éducation
+2020;LFI;SSA;BG;143-01-15;Personnel TOS inclus dans le périmètre de décentralisation
+2020;LFI;SSA;BG;143-01-16;Visite médicale des élèves en stage
+2020;LFI;SSA;BG;143-01-17;Mise en oeuvre du service partagé des personnels
+2020;LFI;SSA;BG;143-01-18;Personnel - Autres moyens d'ajustement
+2020;LFI;ACT;BG;143-04;Évolution des compétences et dynamique territoriale
+2020;LFI;SSA;BG;143-04-01;Apprentissage et formation professionnelle continue- Action nationales
+2020;LFI;SSA;BG;143-04-02;Apprentissage et formation professionnelle continue - Actions locales (CPER)
+2020;LFI;SSA;BG;143-04-03;Apprentissage et formation professionnelle continue - Actions locales (hors CPER)
+2020;LFI;SSA;BG;143-04-05;Insertion, adaptation pédagogiques, animation et développement rural - Actions nationales - autres actions
+2020;LFI;SSA;BG;143-04-07;Insertion, adaptation pédagogiques, animation et développement rural - Actions locales (hors CPER)
+2020;LFI;SSA;BG;143-04-08;Aides à la mobilité internationale (CPER)
+2020;LFI;SSA;BG;143-04-10;Coopération et échanges internationaux - Fonctionnement des réseaux de la coopération et des échanges internationaux
+2020;LFI;SSA;BG;143-04-09;Aides à la mobilité internationale (hors CPER
+2020;LFI;ACT;BG;143-03;Aide sociale aux élèves (enseignement public et privé)
+2020;LFI;SSA;BG;143-03-01;Bourses et fonds sociaux
+2020;LFI;SSA;BG;143-03-02;Inclusion scolaire des élèves en situation de handicap
+2020;LFI;ACT;BG;143-99;"Dépenses de personnel du programme ""enseignement technique agricole"" à reventiler"
+2020;LFI;PGM;BG;140;Enseignement scolaire public du premier degré
+2020;LFI;ACT;BG;140-02;Enseignement élémentaire
+2020;LFI;SSA;BG;140-02-01;Enseignement élémentaire : personnel
+2020;LFI;SSA;BG;140-02-02;Enseignement élémentaire : hors personnel (hors CPER)
+2020;LFI;SSA;BG;140-02-04;Droit d'accueil pour les élèves dans les écoles primaires. Remboursement aux communes
+2020;LFI;ACT;BG;140-07;Personnels en situations diverses
+2020;LFI;SSA;BG;140-07-02;Personnels en réadaptation ou en réemploi
+2020;LFI;SSA;BG;140-07-03;Personnels en décharge syndicale
+2020;LFI;SSA;BG;140-07-04;Partenariats divers
+2020;LFI;SSA;BG;140-07-01;Personnels en situations diverses : personnel
+2020;LFI;ACT;BG;140-01;Enseignement pré-élémentaire
+2020;LFI;ACT;BG;140-06;Pilotage et encadrement pédagogique
+2020;LFI;SSA;BG;140-06-02;Pilotage et encadrement pédagogiques : personnels de direction
+2020;LFI;SSA;BG;140-06-03;Pilotage et encadrement pédagogiques : personnels d'inspection
+2020;LFI;SSA;BG;140-06-04;Pilotage et encadrement pédagogiques : personnels enseignants affectés à l'encadrement pédagogique
+2020;LFI;SSA;BG;140-06-01;Pilotage et encadrement pédagogique : personnel
+2020;LFI;ACT;BG;140-05;Remplacement
+2020;LFI;ACT;BG;140-03;Besoins éducatifs particuliers
+2020;LFI;SSA;BG;140-03-01;Besoins éducatifs particuliers : personnel
+2020;LFI;SSA;BG;140-03-02;Prévention et traitement des difficultés scolaires (hors CPER)
+2020;LFI;SSA;BG;140-03-03;Intégration des primo arrivants (hors CPER)
+2020;LFI;SSA;BG;140-03-05;Enseignement à l'extérieur de l'école (hors CPER)
+2020;LFI;SSA;BG;140-03-04;Scolarisation des élèves malades ou handicapés (hors CPER)
+2020;LFI;ACT;BG;140-04;Formation des personnels enseignants
+2020;LFI;ACT;BG;140-99;Dépenses de personnel du programme à reventiler
+2020;LFI;PGM;BG;141;Enseignement scolaire public du second degré
+2020;LFI;ACT;BG;141-13;Personnels en situations diverses
+2020;LFI;SSA;BG;141-13-01;"Personnels concourant à l'action ""personnels en situations diverses"""
+2020;LFI;SSA;BG;141-13-02;Personnels en réadaptation ou en réemploi
+2020;LFI;SSA;BG;141-13-03;Personnels en décharges syndicales
+2020;LFI;SSA;BG;141-13-04;Partenariats divers
+2020;LFI;ACT;BG;141-12;Pilotage, administration et encadrement pédagogique
+2020;LFI;SSA;BG;141-12-01;"Dépenses de personnel concourant à l'action ""pilotage, administration et encadrement pédagogique"""
+2020;LFI;SSA;BG;141-12-02;Pilotage, administration et encadrement pédagogique : personnel de direction
+2020;LFI;SSA;BG;141-12-03;Pilotage, administration et encadrement pédagogique : personnel d'inspection
+2020;LFI;SSA;BG;141-12-04;Pilotage, administration et encadrement pédagogique : personnels enseignants affectés à l'encadrement pédagogique
+2020;LFI;SSA;BG;141-12-05;Pilotage, administration et encadrement pédagogique : personnels administratifs des EPLE
+2020;LFI;ACT;BG;141-10;Formation des personnels enseignants et d'orientation
+2020;LFI;ACT;BG;141-06;Besoins éducatifs particuliers
+2020;LFI;SSA;BG;141-06-01;"Dépenses de personnel concourant à l'action ""besoins éducatifs particuliers"""
+2020;LFI;SSA;BG;141-06-02;Prévention et traitement des difficultés scolaires
+2020;LFI;SSA;BG;141-06-03;Intégration des primo arrivants
+2020;LFI;SSA;BG;141-06-04;Scolarisation des élèves malades ou handicapés
+2020;LFI;SSA;BG;141-06-05;Enseignement à l'extérieur de l'EPLE
+2020;LFI;ACT;BG;141-04;Apprentissage
+2020;LFI;ACT;BG;141-03;Enseignement professionnel sous statut scolaire
+2020;LFI;ACT;BG;141-02;Enseignement général et technologique en lycée
+2020;LFI;ACT;BG;141-01;Enseignement en collège
+2020;LFI;ACT;BG;141-11;Remplacement
+2020;LFI;ACT;BG;141-09;Formation continue des adultes et validation des acquis de l'expérience
+2020;LFI;SSA;BG;141-09-01;"Dépenses de personnel concourant à l'action ""formation continue des adultes en VAE"""
+2020;LFI;SSA;BG;141-09-02;Formation continue
+2020;LFI;SSA;BG;141-09-03;Validation des acquis de l'expérience (VAE)
+2020;LFI;ACT;BG;141-08;Information et orientation
+2020;LFI;ACT;BG;141-07;Aide à l'insertion professionnelle
+2020;LFI;ACT;BG;141-05;Enseignement post-baccalauréat en lycée
+2020;LFI;ACT;BG;141-99;Dépenses de personnel du programme à reventiler
+2020;LFI;PGM;BG;214;Soutien de la politique de l'éducation nationale
+2020;LFI;ACT;BG;214-05;Action internationale
+2020;LFI;SSA;BG;214-05-01;"Personnel concourant à l'action ""action internationale"""
+2020;LFI;SSA;BG;214-05-02;Actions financées par l'Etat
+2020;LFI;SSA;BG;214-05-03;Centre international d'études pédagogiques (CIEP)
+2020;LFI;ACT;BG;214-10;Transports scolaires
+2020;LFI;ACT;BG;214-08;Logistique, système d'information, immobilier
+2020;LFI;SSA;BG;214-08-01;"Personnel concourant à l'action ""logistique, système d'information et immobilier"""
+2020;LFI;SSA;BG;214-08-02;Logistique et système d'information (hors personnel)
+2020;LFI;SSA;BG;214-08-03;Immobilier (services administratifs)
+2020;LFI;SSA;BG;214-08-04;Immobilier (établissements scolaires)
+2020;LFI;ACT;BG;214-03;Communication
+2020;LFI;ACT;BG;214-01;Pilotage et mise en oeuvre des politiques éducatives
+2020;LFI;SSA;BG;214-01-01;"Dépenses de personnel concourant à l'action ""pilotage et mise en oeuvre des politiques éducatives"""
+2020;LFI;SSA;BG;214-01-02;Pilotage et mise en oeuvre des politiques éducatives de l'enseignement scolaire
+2020;LFI;SSA;BG;214-01-03;Pilotage et mise en oeuvre des politiques éducatives de l'enseignement supérieur
+2020;LFI;ACT;BG;214-09;Certification
+2020;LFI;SSA;BG;214-09-01;Personnel
+2020;LFI;SSA;BG;214-09-02;Diplôme national du brevet
+2020;LFI;SSA;BG;214-09-03;Diplômes d'enseignement général et technologique
+2020;LFI;SSA;BG;214-09-04;Diplômes professionnels
+2020;LFI;SSA;BG;214-09-05;Examens postbaccalauréat
+2020;LFI;SSA;BG;214-09-06;Dépenses transversales des examens des élèves
+2020;LFI;ACT;BG;214-06;Politique des ressources humaines
+2020;LFI;SSA;BG;214-06-01;"Personnel concourant à l'action ""politiques des ressources humaines"""
+2020;LFI;SSA;BG;214-06-02;Pilotage et gestion des personnels
+2020;LFI;SSA;BG;214-06-03;Recrutement des personnels enseignants
+2020;LFI;SSA;BG;214-06-04;Recrutement des personnels non enseignants
+2020;LFI;SSA;BG;214-06-05;Action sociale
+2020;LFI;SSA;BG;214-06-06;Formation des personnels non enseignants
+2020;LFI;ACT;BG;214-04;Expertise juridique
+2020;LFI;ACT;BG;214-07;Établissements d'appui de la politique éducative
+2020;LFI;ACT;BG;214-02;Évaluation et contrôle
+2020;LFI;ACT;BG;214-99;Dépenses de personnel du programme à reventiler
+2020;LFI;PGM;BG;139;Enseignement privé du premier et du second degrés
+2020;LFI;ACT;BG;139-07;Dispositifs spécifiques de scolarisation
+2020;LFI;ACT;BG;139-01;Enseignement pré-élémentaire
+2020;LFI;ACT;BG;139-02;Enseignement élémentaire
+2020;LFI;ACT;BG;139-04;Enseignement général et technologique en lycée
+2020;LFI;ACT;BG;139-06;Enseignement post-baccalauréat en lycée
+2020;LFI;ACT;BG;139-08;Actions sociales en faveur des élèves
+2020;LFI;SSA;BG;139-08-01;Bourses et primes de collèges
+2020;LFI;SSA;BG;139-08-02;Bourses et primes de lycées
+2020;LFI;SSA;BG;139-08-03;Fonds sociaux de collèges
+2020;LFI;SSA;BG;139-08-04;Fonds sociaux de lycées
+2020;LFI;ACT;BG;139-09;Fonctionnement des établissements
+2020;LFI;SSA;BG;139-09-01;Forfait d'externat
+2020;LFI;SSA;BG;139-09-02;Crédits pédagogiques
+2020;LFI;SSA;BG;139-09-04;Interventions
+2020;LFI;SSA;BG;139-09-06;Droit d'accueil pour les élèves dans les écoles primaires
+2020;LFI;ACT;BG;139-10;Formation des personnels enseignants
+2020;LFI;ACT;BG;139-11;Remplacement
+2020;LFI;ACT;BG;139-12;Soutien
+2020;LFI;ACT;BG;139-05;Enseignement professionnel sous statut scolaire
+2020;LFI;ACT;BG;139-99;Dépenses de personnel du programme à reventiler
+2020;LFI;ACT;BG;139-03;Enseignement en collège
+2020;LFI;Mission;BG;GA;Gestion des finances publiques et des ressources humaines
+2020;LFI;PGM;BG;148;Fonction publique
+2020;LFI;ACT;BG;148-01;Formation des fonctionnaires
+2020;LFI;SSA;BG;148-01-01;Ecole nationale d'administration
+2020;LFI;SSA;BG;148-01-02;Instituts régionaux d'administration
+2020;LFI;SSA;BG;148-01-07;Formation interministérielle
+2020;LFI;ACT;BG;148-02;Action sociale interministérielle
+2020;LFI;SSA;BG;148-02-02;Aide aux familles
+2020;LFI;SSA;BG;148-02-03;Retraités
+2020;LFI;SSA;BG;148-02-04;Logement
+2020;LFI;SSA;BG;148-02-05;Restauration
+2020;LFI;SSA;BG;148-02-06;Sections régionales interministérielles d'action sociale
+2020;LFI;ACT;BG;148-03;Appui et innovation des ressources humaines
+2020;LFI;PGM;BG;156;Gestion fiscale et financière de l'État et du secteur public local
+2020;LFI;ACT;BG;156-08;Gestion des fonds déposés
+2020;LFI;ACT;BG;156-09;Soutien
+2020;LFI;ACT;BG;156-06;Gestion des pensions
+2020;LFI;ACT;BG;156-07;Gestion financière du secteur public local hors fiscalité
+2020;LFI;ACT;BG;156-05;Gestion financière de l'État hors fiscalité
+2020;LFI;ACT;BG;156-03;Fiscalité des particuliers et fiscalité directe locale
+2020;LFI;ACT;BG;156-02;Fiscalité des PME
+2020;LFI;SSA;BG;156-02-01;Fiscalité des PME (hors remises sur les ventes de timbres)
+2020;LFI;SSA;BG;156-02-02;Remises sur les ventes de timbres
+2020;LFI;ACT;BG;156-01;Fiscalité des grandes entreprises
+2020;LFI;ACT;BG;156-99;Dépenses de personnel de la direction générale des finances publiques - à reventiler
+2020;LFI;PGM;BG;218;Conduite et pilotage des politiques économiques et financières
+2020;LFI;ACT;BG;218-07;Pilotage des finances publiques et projets interministériels
+2020;LFI;ACT;BG;218-09;Action sociale ministérielle
+2020;LFI;SSA;BG;218-09-01;Action sociale
+2020;LFI;SSA;BG;218-09-02;Hygiène et sécurité
+2020;LFI;ACT;BG;218-08;Accompagnement du changement de l’action publique
+2020;LFI;ACT;BG;218-02;Expertise, audit, évaluation et contrôle
+2020;LFI;ACT;BG;218-05;Prestations d'appui et support
+2020;LFI;ACT;BG;218-99;Personnel du programme à reventiler
+2020;LFI;PGM;BG;302;Facilitation et sécurisation des échanges
+2020;LFI;ACT;BG;302-01;Surveillance douanière des flux de personnes et de marchandises et lutte contre la grande fraude douanière.
+2020;LFI;ACT;BG;302-04;Promotion des échanges internationaux et qualité du dédouanement
+2020;LFI;ACT;BG;302-03;Préservation de la sécurité et de la sûreté de l'espace national et européen
+2020;LFI;ACT;BG;302-05;Fiscalité douanière, énergétique et environnementale
+2020;LFI;ACT;BG;302-06;Soutien des services opérationnels
+2020;LFI;ACT;BG;302-98;Personnel du programme à reventiler
+2020;LFI;ACT;BG;302-08;Soutien au réseau des débitants de tabac
+2020;LFI;Mission;BG;JA;Justice
+2020;LFI;PGM;BG;107;Administration pénitentiaire
+2020;LFI;ACT;BG;107-04;Soutien et formation
+2020;LFI;ACT;BG;107-01;Garde et contrôle des personnes placées sous main de justice
+2020;LFI;ACT;BG;107-02;Accueil et accompagnement des personnes placées sous main de justice
+2020;LFI;ACT;BG;107-99;Dépenses de personnel du programme à reventiler
+2020;LFI;PGM;BG;166;Justice judiciaire
+2020;LFI;ACT;BG;166-01;Traitement et jugement des contentieux civils
+2020;LFI;SSA;BG;166-01-01;Traitement et jugement des contentieux commerciaux
+2020;LFI;SSA;BG;166-01-02;Traitement et jugement des contentieux sociaux
+2020;LFI;SSA;BG;166-01-03;Traitement et jugement des autres contentieux civils
+2020;LFI;SSA;BG;166-01-04;"Personnels concourant aux différentes sous-actions de l'action ""traitement et jugement des contentieux civils"""
+2020;LFI;ACT;BG;166-07;Formation
+2020;LFI;SSA;BG;166-07-01;Ecole nationale de la magistrature
+2020;LFI;SSA;BG;166-07-02;Ecole nationale des greffes
+2020;LFI;SSA;BG;166-07-03;Formation régionalisée
+2020;LFI;ACT;BG;166-06;Soutien
+2020;LFI;SSA;BG;166-06-01;Administration et gestion
+2020;LFI;SSA;BG;166-06-02;Gestion immobilière du propriétaire
+2020;LFI;SSA;BG;166-06-06;Gestion immobilière de l'occupant
+2020;LFI;ACT;BG;166-05;Enregistrement des décisions judiciaires
+2020;LFI;ACT;BG;166-03;Cassation
+2020;LFI;ACT;BG;166-02;Conduite de la politique pénale et jugement des affaires pénales
+2020;LFI;SSA;BG;166-02-05;"Personnels concourant aux différentes sous-actions de l'action ""conduite de la politique pénale et jugement des affaires pénales"""
+2020;LFI;SSA;BG;166-02-06;"Conduite politique pénale, orientation et mise en état des affaires; exécution des peines"
+2020;LFI;SSA;BG;166-02-07;"Instruction;jugement affaires pénales;application des peines"
+2020;LFI;SSA;BG;166-02-08;Frais de justice centraux
+2020;LFI;ACT;BG;166-08;Support à l'accès au droit et à la justice
+2020;LFI;SSA;BG;166-08-01;Aide juridictionnelle - Personnel
+2020;LFI;SSA;BG;166-08-02;Accès au droit, réseau judiciaire de proximité et médiation familiale - Personnel
+2020;LFI;SSA;BG;166-08-03;Aide aux victimes - Personnel
+2020;LFI;ACT;BG;166-99;Dépenses de personnel concourant au programme à reventiler
+2020;LFI;PGM;BG;182;Protection judiciaire de la jeunesse
+2020;LFI;ACT;BG;182-04;Formation
+2020;LFI;SSA;BG;182-04-01;Ecole nationale de Protection judiciaire de la jeunesse - site central
+2020;LFI;SSA;BG;182-04-02;Ecole nationale de Protection judiciaire de la jeunesse - pôles territoriaux de formation
+2020;LFI;SSA;BG;182-04-03;Formation  - hors Ecole nationale de Protection judiciaire de la jeunesse
+2020;LFI;ACT;BG;182-03;Soutien
+2020;LFI;SSA;BG;182-03-01;Administration centrale, directions inter-régionales et territoriales (hors CPER)
+2020;LFI;ACT;BG;182-01;Mise en oeuvre des décisions judiciaires
+2020;LFI;SSA;BG;182-01-01;Centres éducatifs fermés (CEF) - Secteur public
+2020;LFI;SSA;BG;182-01-02;Centres éducatifs renforcés (CER) - Secteur public
+2020;LFI;SSA;BG;182-01-03;Hébergement non spécialisé tarification exclusive - secteur associatif habilité
+2020;LFI;SSA;BG;182-01-04;Hébergement non spécialisé tarification conjointe - secteur associatif habilité
+2020;LFI;SSA;BG;182-01-14;Réparations pénales - Secteur associatif habilité
+2020;LFI;SSA;BG;182-01-16;Milieu Fermé - Etablissements pénitentiaires pour mineurs - Secteur public
+2020;LFI;SSA;BG;182-01-17;Mesures éducatives d'activité de jour - Secteur associatif habilité
+2020;LFI;SSA;BG;182-01-05;Centres éducatifs fermés (CEF) - Secteur associatif habilité
+2020;LFI;SSA;BG;182-01-06;Centres éducatifs renforcés (CER) - Secteur associatif habilité
+2020;LFI;SSA;BG;182-01-07;Hébergement collectif non spécialisé - Secteur public
+2020;LFI;SSA;BG;182-01-18;Milieu ouvert et investigation - Secteur public
+2020;LFI;SSA;BG;182-01-19;Milieu Fermé - Quartiers pour mineurs - Secteur public
+2020;LFI;SSA;BG;182-01-20;Unités d'activité de jour - Secteur public
+2020;LFI;SSA;BG;182-01-21;Hébergement : jeunes majeurs - Secteur associatif habilité
+2020;LFI;SSA;BG;182-01-22;Action éducative en milieu ouvert jeunes majeurs - Secteur associatif habilité
+2020;LFI;SSA;BG;182-01-23;Hébergement individualisé - Secteur public
+2020;LFI;SSA;BG;182-01-24;Placement familial - Secteur public
+2020;LFI;SSA;BG;182-01-25;Actions éducatives nationales et régionales - Secteur public
+2020;LFI;SSA;BG;182-01-26;Mesures d'investigation judiciaire pénales - Secteur associatif
+2020;LFI;SSA;BG;182-01-27;Mesures d'investigation judiciaire civiles - Secteur associatif
+2020;LFI;PGM;BG;101;Accès au droit et à la justice
+2020;LFI;ACT;BG;101-03;Aide aux victimes
+2020;LFI;ACT;BG;101-02;Développement de l'accès au droit et du réseau judiciaire de proximité
+2020;LFI;ACT;BG;101-01;Aide juridictionnelle
+2020;LFI;SSA;BG;101-01-03;Aide à l'intervention en matières juridictionnelle et non juridictionnelle
+2020;LFI;SSA;BG;101-01-10;Protocoles et conventions
+2020;LFI;ACT;BG;101-04;Médiation familiale et espaces de rencontre
+2020;LFI;ACT;BG;101-05;Indemnisation des avoués
+2020;LFI;PGM;BG;310;Conduite et pilotage de la politique de la justice
+2020;LFI;ACT;BG;310-01;État major
+2020;LFI;ACT;BG;310-04;Gestion de l'administration centrale
+2020;LFI;SSA;BG;310-04-01;"Personnel concourant à l'action ""gestion de l'administration centrale"""
+2020;LFI;SSA;BG;310-04-02;Charges immobilières
+2020;LFI;SSA;BG;310-04-04;Formation des personnels de l'administration centrale
+2020;LFI;SSA;BG;310-04-07;Réparations civiles
+2020;LFI;SSA;BG;310-04-09;Fonctionnement de l'administration centrale - autre dépenses
+2020;LFI;SSA;BG;310-04-03;Communication
+2020;LFI;ACT;BG;310-03;Évaluation, contrôle, études et recherche
+2020;LFI;SSA;BG;310-03-01;"Personnel concourant à l'action ""évaluation, contrôle, études et recherche"""
+2020;LFI;SSA;BG;310-03-02;Etudes, statistiques et recherche (hors personnel)
+2020;LFI;ACT;BG;310-02;Activité normative
+2020;LFI;ACT;BG;310-09;Action informatique ministérielle
+2020;LFI;SSA;BG;310-09-01;"Personnel concourant à l'action ""Politique informatique"""
+2020;LFI;SSA;BG;310-09-02;Politique informatique et maintenance du parc
+2020;LFI;SSA;BG;310-09-03;Politique informatique - réalisation de nouveaux projets
+2020;LFI;ACT;BG;310-10;Action sociale ministérielle
+2020;LFI;SSA;BG;310-10-01;"Personnel concourant à l'action ""Action sociale ministérielle """
+2020;LFI;SSA;BG;310-10-02;Action sociale
+2020;LFI;SSA;BG;310-10-03;Action en faveur des personnels handicapés
+2020;LFI;ACT;BG;310-99;Dépenses de personnel du programme à reventiler
+2020;LFI;PGM;BG;335;Conseil supérieur de la magistrature
+2020;LFI;ACT;BG;335-01;Conseil supérieur de la magistrature
+2020;LFI;Mission;BG;MA;Médias, livre et industries culturelles
+2020;LFI;PGM;BG;180;Presse et médias
+2020;LFI;ACT;BG;180-01;Relations financières avec l'AFP
+2020;LFI;SSA;BG;180-01-01;Abonnement de l'Etat à l'AFP
+2020;LFI;SSA;BG;180-01-02;Compensation des missions d'intérêt général de l'AFP
+2020;LFI;ACT;BG;180-02;Aides à la presse
+2020;LFI;SSA;BG;180-02-01;Aides à la diffusion : aide au transport postal de la presse
+2020;LFI;SSA;BG;180-02-04;aide au pluralisme de la presse périodique régionale et locale
+2020;LFI;SSA;BG;180-02-05;Aides à la diffusion : aide au portage de la presse
+2020;LFI;SSA;BG;180-02-07;Aides au pluralisme : aide aux publications d'information politique et générale à faibles ressources publicitaires
+2020;LFI;SSA;BG;180-02-08;Aides au pluralisme : aide aux quotidiens régionaux, départementaux et locaux d'information politique et générale à faibles ressources de petites annonces
+2020;LFI;SSA;BG;180-02-09;Aides à la modernisation : aide à la modernisation sociale de la presse quotidienne d'information politique et générale
+2020;LFI;SSA;BG;180-02-10;Aides à la modernisation : aide à la modernisation de la distribution de la presse quotidienne nationale
+2020;LFI;SSA;BG;180-02-11;Aides à la modernisation : aide à la modernisation des diffuseurs
+2020;LFI;SSA;BG;180-02-15;Aides à la diffusion : exonération des charges patronales pour les vendeurs-colporteurs et porteurs de presse
+2020;LFI;SSA;BG;180-02-16;Fonds stratégique pour le développement de la presse
+2020;LFI;SSA;BG;180-02-17;Fonds de soutien à l'émergence et à l'innovation dans la presse
+2020;LFI;ACT;BG;180-06;Soutien à l'expression radiophonique locale
+2020;LFI;SSA;BG;180-06-01;Soutien à l’expression radiophonique locale
+2020;LFI;SSA;BG;180-06-02;Fonction support
+2020;LFI;ACT;BG;180-07;Compagnie internationale de radio et télévision (CIRT)
+2020;LFI;SSA;BG;180-07-01;Compagnie internationale de radio et télévision (CIRT)
+2020;LFI;ACT;BG;180-05;Soutien aux médias de proximité
+2020;LFI;SSA;BG;180-05-01;Soutien aux médias de proximité
+2020;LFI;PGM;BG;334;Livre et industries culturelles
+2020;LFI;ACT;BG;334-01;Livre et lecture
+2020;LFI;SSA;BG;334-01-01;Bibliothèque nationale de France
+2020;LFI;SSA;BG;334-01-02;Quadrilatère Richelieu
+2020;LFI;SSA;BG;334-01-03;Développement de la lecture et des collections
+2020;LFI;SSA;BG;334-01-04;Edition, librairie et professions du livre
+2020;LFI;ACT;BG;334-02;Industries culturelles
+2020;LFI;SSA;BG;334-02-01;Soutien dans le domaine de la musique enregistrée
+2020;LFI;SSA;BG;334-02-03;Haute autorité pour la diffusion des oeuvres et la protection des droits sur internet (HADOPI)
+2020;LFI;SSA;BG;334-02-02;Soutien dans le domaine du cinéma
+2020;LFI;SSA;BG;334-02-04;Entrepreneuriat culturel
+2020;LFI;SSA;BG;334-02-05;Centre national de la musique
+2020;LFI;Mission;BG;EB;Engagements financiers de l'État
+2020;LFI;PGM;BG;336;Dotation du Mécanisme européen de stabilité
+2020;LFI;ACT;BG;336-01;Dotation du Mécanisme européen de stabilité
+2020;LFI;PGM;BG;338;Augmentation de capital de la Banque européenne d'investissement
+2020;LFI;ACT;BG;338-01;Augmentation de capital de la Banque européenne d'investissement
+2020;LFI;PGM;BG;145;Épargne
+2020;LFI;ACT;BG;145-02;Instruments de financement du logement
+2020;LFI;ACT;BG;145-01;Épargne logement
+2020;LFI;PGM;BG;344;Fonds de soutien relatif aux prêts et contrats financiers structurés à risque
+2020;LFI;ACT;BG;344-01;Fonds de soutien relatif aux prêts et contrats financiers structurés à risque
+2020;LFI;SSA;BG;344-01-01;Aide pour le remboursement anticipé des emprunts liés à des contrats de prêt ou des contrats financiers structurés à risque
+2020;LFI;SSA;BG;344-01-02;Aide à la gestion de l'encours pour les collectivités locales et certains établissements publics ayant souscrit des contrats de prêt ou des contrats financiers à haut risque
+2020;LFI;SSA;BG;344-01-03;Dépenses de fonctionnement du fonds de soutien
+2020;LFI;PGM;BG;117;Charge de la dette et trésorerie de l'État (crédits évaluatifs)
+2020;LFI;ACT;BG;117-01;Dette
+2020;LFI;ACT;BG;117-03;Trésorerie
+2020;LFI;PGM;BG;114;Appels en garantie de l'État (crédits évaluatifs)
+2020;LFI;ACT;BG;114-05;Autres garanties
+2020;LFI;ACT;BG;114-04;Développement international de l'économie française
+2020;LFI;SSA;BG;114-04-01;Assurance-crédit
+2020;LFI;SSA;BG;114-04-02;Assurance-prospection
+2020;LFI;SSA;BG;114-04-03;Garantie de change
+2020;LFI;SSA;BG;114-04-04;Garantie du risque économique
+2020;LFI;SSA;BG;114-04-05;Garanties de taux d'intérêt Natixis
+2020;LFI;SSA;BG;114-04-06;Garantie du risque exportateur
+2020;LFI;ACT;BG;114-03;Financement des entreprises et industrie
+2020;LFI;ACT;BG;114-02;Soutien au domaine social, logement, santé
+2020;LFI;ACT;BG;114-01;Agriculture et environnement
+2020;LFI;Mission;CAS;YC;Participations financières de l'État
+2020;LFI;PGM;CAS;731;Opérations en capital intéressant les participations financières de l'État
+2020;LFI;ACT;CAS;731-01;Augmentations de capital, dotations en fonds propres, avances d'actionnaire et prêts assimilés
+2020;LFI;ACT;CAS;731-03;Achats ou souscriptions de titres, parts ou droits de société
+2020;LFI;ACT;CAS;731-04;Autres investissements financiers de nature patrimoniale
+2020;LFI;ACT;CAS;731-05;Prestations de services : commissions bancaires, frais juridiques et frais liés aux opérations de gestion des participations financières de l'État
+2020;LFI;ACT;CAS;731-06;Versements au profit du Mécanisme européen de stabilité
+2020;LFI;PGM;CAS;732;Désendettement de l'État et d'établissements publics de l'État
+2020;LFI;ACT;CAS;732-01;Désendettement de l'État ou d'établissements publics de l'État
+2020;LFI;Mission;BG;DA;Défense
+2020;LFI;PGM;BG;146;Équipement des forces
+2020;LFI;ACT;BG;146-08;Projection - mobilité - soutien
+2020;LFI;SSA;BG;146-08-56;Maintenir le potentiel ami et autre - Flotte logistique
+2020;LFI;SSA;BG;146-08-42;Projeter les forces - Avion de transport futur (A400M)
+2020;LFI;SSA;BG;146-08-43;Projeter les forces - Autres opérations
+2020;LFI;SSA;BG;146-08-46;Assurer la mobilité - Rénovation Cougar
+2020;LFI;SSA;BG;146-08-47;Assurer la mobilité - Hélicoptère NH 90
+2020;LFI;SSA;BG;146-08-48;Assurer la mobilité - Autres opérations
+2020;LFI;SSA;BG;146-08-51;Maintenir le potentiel ami et autre - Porteur polyvalent terrestre (PPT)
+2020;LFI;SSA;BG;146-08-53;Maintenir le potentiel ami et autre - Autres opérations
+2020;LFI;SSA;BG;146-08-55;Maintenir le potentiel ami et autre - MRTT
+2020;LFI;SSA;BG;146-08-44;Assurer la mobilité - VLTP
+2020;LFI;SSA;BG;146-08-45;Assurer la mobilité - HIL
+2020;LFI;ACT;BG;146-06;Dissuasion
+2020;LFI;SSA;BG;146-06-24;Assurer la crédibilité technique de la dissuasion – SNLE 3G
+2020;LFI;SSA;BG;146-06-14;Assurer la crédibilité technique de la dissuasion M51
+2020;LFI;SSA;BG;146-06-15;Assurer la crédibilité technique de la dissuasion SNLE NG : adaptation M51
+2020;LFI;SSA;BG;146-06-17;Assurer la crédibilité technique de la dissuasion - Air sol moyenne portée amélioré (ASMPA)
+2020;LFI;SSA;BG;146-06-18;Assurer la crédibilité technique de la dissuasion Simulation
+2020;LFI;SSA;BG;146-06-19;Assurer la crédibilité technique de la dissuasion - Autres opérations
+2020;LFI;SSA;BG;146-06-22;Assurer la crédibilité opérationnelle de la dissuasion - soutien et mise en oeuvre des forces - toutes opérations
+2020;LFI;SSA;BG;146-06-23;Assurer la crédibilité technique de la posture - toutes opérations
+2020;LFI;ACT;BG;146-07;Commandement et maîtrise de l'information
+2020;LFI;SSA;BG;146-07-24;Commander et conduire - Système de commandement et de conduite des opérations aériennes (SCCOA)
+2020;LFI;SSA;BG;146-07-25;Commander et conduire - Système d'information TERRE
+2020;LFI;SSA;BG;146-07-27;Commander et conduire - Géographie numérique
+2020;LFI;SSA;BG;146-07-28;Commander et conduire - Autres opérations
+2020;LFI;SSA;BG;146-07-35;Communiquer - Autres opérations
+2020;LFI;SSA;BG;146-07-68;Renseigner, surveiller, acquérir - Autres opérations
+2020;LFI;SSA;BG;146-07-29;Commander et conduire - Système d'information des armées (SIA)
+2020;LFI;SSA;BG;146-07-30;Communiquer - Cyber
+2020;LFI;SSA;BG;146-07-37;Communiquer- DESCARTES
+2020;LFI;SSA;BG;146-07-43;Espace - Communiquer - Moyens de communication satellitaire
+2020;LFI;SSA;BG;146-07-44;Espace - Renseigner, surveiller, acquérir et reconnaître - ROIM
+2020;LFI;SSA;BG;146-07-46;Espace - Commander et conduire - OMEGA
+2020;LFI;SSA;BG;146-07-50;Communiquer - Transmission
+2020;LFI;SSA;BG;146-07-60;Renseigner, surveiller, acquérir et reconnaître - ALSR
+2020;LFI;SSA;BG;146-07-61;Renseigner, surveiller, acquérir et reconnaître - CUGE
+2020;LFI;SSA;BG;146-07-62;Renseigner, surveiller, acquérir et reconnaître - Drones aériens
+2020;LFI;SSA;BG;146-07-63;Renseigner, surveiller, acquérir et reconnaître - Hawkeye
+2020;LFI;SSA;BG;146-07-64;Renseigner, surveiller, acquérir et reconnaître - ROEM
+2020;LFI;SSA;BG;146-07-67;Renseigner, surveiller, acquérir et reconnaître - SDCA
+2020;LFI;SSA;BG;146-07-45;Espace - Maîtrise de l'Espace
+2020;LFI;SSA;BG;146-07-36;Communiquer - CONTACT
+2020;LFI;SSA;BG;146-07-42;Espace - Renseigner, surveiller, acquérir et reconnaître - ROEM
+2020;LFI;ACT;BG;146-09;Engagement et combat
+2020;LFI;SSA;BG;146-09-56;Frapper à distance - Missile de croisière naval (MDCN)
+2020;LFI;SSA;BG;146-09-59;Frapper à distance - RAFALE
+2020;LFI;SSA;BG;146-09-61;Frapper à distance - Autres opérations
+2020;LFI;SSA;BG;146-09-66;Opérer en milieu hostile - Véhicule blindé de combat d'infanterie (VBCI)
+2020;LFI;SSA;BG;146-09-68;Opérer en milieu hostile - Hélicoptère HAP/HAD TIGRE
+2020;LFI;SSA;BG;146-09-69;Opérer en milieu hostile - Future torpille lourde (FTL)
+2020;LFI;SSA;BG;146-09-71;Opérer en milieu hostile - Evolution Exocet
+2020;LFI;SSA;BG;146-09-73;Opérer en milieu hostile - Frégates multi-missions (FREMM)
+2020;LFI;SSA;BG;146-09-74;Opérer en milieu hostile - SNA Barracuda
+2020;LFI;SSA;BG;146-09-75;Opérer en milieu hostile - Autres opérations et conduire des opérations spéciales
+2020;LFI;SSA;BG;146-09-77;Opérer en milieu hostile -  SCORPION
+2020;LFI;SSA;BG;146-09-88;Opérer en milieu hostile - missile moyenne portée MMP
+2020;LFI;SSA;BG;146-09-78;Frapper à distance - Mirage 2000
+2020;LFI;SSA;BG;146-09-89;Opérer en milieu hostile - Frégates de taille intermédiaire
+2020;LFI;SSA;BG;146-09-62;Frapper à distance - SCAF
+2020;LFI;SSA;BG;146-09-63;Frapper à distance - Porte-avions
+2020;LFI;SSA;BG;146-09-79;Opérer en milieu hostile - Plateformes
+2020;LFI;SSA;BG;146-09-84;Opérer en milieu hostile - MAST-F
+2020;LFI;SSA;BG;146-09-85;Opérer en milieu hostile - SLAMF
+2020;LFI;SSA;BG;146-09-86;Opérer en milieu hostile - ATL2
+2020;LFI;ACT;BG;146-10;Protection et sauvegarde
+2020;LFI;SSA;BG;146-10-79;Assurer la sûreté des approches - Autres opérations et assurer la sécurité de l'Etat, de la nation et des citoyens
+2020;LFI;SSA;BG;146-10-82;Assurer la protection des forces et des sites - Famille de systèmes sol-air futurs (FSAF)
+2020;LFI;SSA;BG;146-10-86;Assurer la protection des forces et des sites - Autres opérations et assurer la protection de l'homme
+2020;LFI;SSA;BG;146-10-74;Assurer la sûreté des approches, la sécurité de l’Etat, de la nation et des citoyens - SECOIA
+2020;LFI;SSA;BG;146-10-80;Assurer la sûreté des approches - Alerte avancée
+2020;LFI;SSA;BG;146-10-75;Assurer la sûreté des approches, la sécurité de l’Etat, de la nation et des citoyens - Patrouilleur futur
+2020;LFI;SSA;BG;146-10-76;Assurer la sûreté des approches, la sécurité de l’Etat, de la nation et des citoyens - Missiles
+2020;LFI;SSA;BG;146-10-77;Assurer la sûreté des approches, la sécurité de l’Etat, de la nation et des citoyens - AVSIMAR
+2020;LFI;SSA;BG;146-10-87;Assurer la protection de l'homme - e-SAN
+2020;LFI;ACT;BG;146-11;Préparation et conduite des opérations d'armement
+2020;LFI;SSA;BG;146-11-90;Investissements pour les opérations d'armement
+2020;LFI;SSA;BG;146-11-89;Fonctionnement et soutien DGA
+2020;LFI;ACT;BG;146-12;Parts étrangères et programmes civils
+2020;LFI;SSA;BG;146-12-96;Parts étrangères
+2020;LFI;SSA;BG;146-12-97;Programmes civils
+2020;LFI;PGM;BG;212;Soutien de la politique de la défense
+2020;LFI;ACT;BG;212-04;Politique immobilière
+2020;LFI;ACT;BG;212-05;Systèmes d'information, d'administration et de gestion
+2020;LFI;ACT;BG;212-06;Politiques des ressources humaines
+2020;LFI;SSA;BG;212-06-03;Reconversion
+2020;LFI;SSA;BG;212-06-04;Action sociale et autres politiques de ressources humaines (hors rémunérations des agents)
+2020;LFI;ACT;BG;212-56;"Préparation des forces navales - Personnel travaillant pour le programme ""Préparation et emploi des forces"""
+2020;LFI;SSA;BG;212-56-01;Ressources humaines des forces navales
+2020;LFI;SSA;BG;212-56-02;Rémunérations des ouvriers de l'Etat de la DCNS
+2020;LFI;ACT;BG;212-10;Restructurations
+2020;LFI;ACT;BG;212-08;Politique culturelle et éducative
+2020;LFI;SSA;BG;212-08-01;Actions culturelles et mise en valeur du patrimoine
+2020;LFI;SSA;BG;212-08-02;Gestion et communication des archives historiques de la défense
+2020;LFI;ACT;BG;212-11;Pilotage, soutien et communication
+2020;LFI;ACT;BG;212-50;"Recherche et exploitation du renseignement intéressant la sécurité de la France - Personnel travaillant  pour le programme ""Environnement et prospective de la politique de défense"""
+2020;LFI;SSA;BG;212-50-01;Renseignement extérieur
+2020;LFI;SSA;BG;212-50-02;Renseignement de sécurité et de défense
+2020;LFI;ACT;BG;212-51;"Prospective de défense - Personnel travaillant  pour le programme ""Environnement et prospective de la politique de défense"""
+2020;LFI;SSA;BG;212-51-01;DGRIS / Administration  centrale
+2020;LFI;ACT;BG;212-52;Relations internationales
+2020;LFI;SSA;BG;212-52-01;DGA / Soutien aux exportations
+2020;LFI;SSA;BG;212-52-02;DGRIS / Diplomatie de défense
+2020;LFI;ACT;BG;212-53;"Préparation et conduite des opérations d'armement - Personnel travaillant  pour le programme  ""Équipement des forces """
+2020;LFI;SSA;BG;212-53-01;Soutien aux opérations d'armement
+2020;LFI;ACT;BG;212-54;"Planification des moyens et conduite des opérations - Personnel travaillant  pour le programme ""Préparation et emploi des forces"""
+2020;LFI;SSA;BG;212-54-06;Renseignement d'intérêt militaire
+2020;LFI;SSA;BG;212-54-01;Commandement des armées
+2020;LFI;SSA;BG;212-54-02;Organismes interarmées à vocation opérationnelle
+2020;LFI;SSA;BG;212-54-03;Organismes interarmées à vocation prospective et maîtrise des armements
+2020;LFI;SSA;BG;212-54-04;Enseignement interarmées
+2020;LFI;SSA;BG;212-54-05;EMA / Relations internationales militaires / PPE
+2020;LFI;SSA;BG;212-54-07;Systèmes d'information et de communication
+2020;LFI;ACT;BG;212-55;"Préparation des forces terrestres - Personnel travaillant pour le programme ""Préparation et emploi des forces"""
+2020;LFI;SSA;BG;212-55-01;Ressources humaines des forces terrestres
+2020;LFI;ACT;BG;212-57;"Préparation des forces aériennes- Personnel travaillant pour le programme ""Préparation et emploi des forces"""
+2020;LFI;SSA;BG;212-57-01;Ressources humaines des forces aériennes
+2020;LFI;SSA;BG;212-57-02;Service industriel aéronautique(SIAé)
+2020;LFI;ACT;BG;212-58;"Logistique et soutien interarmées - Personnel travaillant pour le programme ""Préparation et emploi des forces"""
+2020;LFI;SSA;BG;212-58-01;Fonction pétrolière
+2020;LFI;SSA;BG;212-58-02;Logistique et soutien interarmées / CICoS
+2020;LFI;SSA;BG;212-58-03;Soutiens complémentaires
+2020;LFI;SSA;BG;212-58-04;Service interarmées des munitions
+2020;LFI;SSA;BG;212-58-05;Service du commissariat des armées
+2020;LFI;SSA;BG;212-58-06;Fonction santé
+2020;LFI;ACT;BG;212-59;"Surcoûts liés aux opérations - Personnel travaillant pour le programme ""Préparation et emploi des forces"""
+2020;LFI;SSA;BG;212-59-01;Surcoûts liés aux opérations extérieures
+2020;LFI;SSA;BG;212-59-02;Surcoûts liés aux opérations intérieures
+2020;LFI;ACT;BG;212-60;"Politique immobilière - Personnel travaillant pour l'action ""Politique immobilière"""
+2020;LFI;ACT;BG;212-61;Action sociale, chômage et pensions
+2020;LFI;SSA;BG;212-61-01;Actions sociales et autres politiques des ressources humaines
+2020;LFI;SSA;BG;212-61-02;Reconversion des personnels militaires - Chômage
+2020;LFI;SSA;BG;212-61-03;Reconversion des personnels civils - Chômage
+2020;LFI;ACT;BG;212-62;"Politique culturelle et éducative - gestion et communication des archives historiques de la défense - Personnel travaillant pour l'action ""Politique culturelle et éducative"""
+2020;LFI;ACT;BG;212-63;Restructurations - RH
+2020;LFI;SSA;BG;212-63-01;Restructurations Personnels civils
+2020;LFI;SSA;BG;212-63-02;Restructurations Personnels militaires
+2020;LFI;ACT;BG;212-64;"Pilotage, soutien  -  Personnel travaillant pour l'action "" Pilotage, soutien """
+2020;LFI;SSA;BG;212-64-01;Personnel du SGA employeur
+2020;LFI;SSA;BG;212-64-07;Personnel de l'action sociale
+2020;LFI;SSA;BG;212-64-08;Personnel de l'agence de reconversion de la Défense
+2020;LFI;ACT;BG;212-65;"Journée défense et citoyenneté - Personnel travaillant pour le programme ""Liens entre la Nation et son armée"""
+2020;LFI;ACT;BG;212-66;Rayonnement et contribution extérieure
+2020;LFI;SSA;BG;212-66-01;Pilotage, soutien et communication - effectifs sortants remboursés sous PMEA Mindef
+2020;LFI;SSA;BG;212-66-02;Pilotage, soutien et communication - effectifs sortants non remboursés sous PMEA Mindef
+2020;LFI;SSA;BG;212-66-03;Pilotage, soutien et communication - effectifs sortants remboursés hors PMEA Mindef
+2020;LFI;SSA;BG;212-66-04;Pilotage, soutien et communication - Présidence de la République
+2020;LFI;SSA;BG;212-66-05;Pilotage, soutien et communication -  Elèves des classes préparatoires des lycées de la défense
+2020;LFI;ACT;BG;212-67;Pilotage, soutien et communication - dépenses de personnel des cabinets et des organismes rattachés / RH
+2020;LFI;SSA;BG;212-67-06;Contrôle Budgétaire et Comptable Ministériel défense - Agence Comptable des Services Industriels de l'Armement
+2020;LFI;SSA;BG;212-67-01;Sous-Direction des Bureau des Cabinets - Cabinet du Ministre de la Défense - Cabinet du Secrétaire d'Etat aux anciens combattants - Bureau des Officiers Généraux
+2020;LFI;SSA;BG;212-67-02;Contrôle général des armées
+2020;LFI;SSA;BG;212-67-03;Direction Générale du Numérique et des systèmes d'information et de communication
+2020;LFI;SSA;BG;212-67-04;Délégation à l'Information et la Communication de la Défense
+2020;LFI;SSA;BG;212-67-05;Gendarmerie de la Sureté de l'Armement Nucléaire
+2020;LFI;SSA;BG;212-67-07;Direction de la Protection des Installations, moyens et activités de la Défense
+2020;LFI;PGM;BG;178;Préparation et emploi des forces
+2020;LFI;ACT;BG;178-05;Logistique et soutien interarmées
+2020;LFI;SSA;BG;178-05-82;Soutien des forces par les bases de défense
+2020;LFI;SSA;BG;178-05-89;Infrastructure des soutiens
+2020;LFI;SSA;BG;178-05-83;Soutiens complémentaires
+2020;LFI;SSA;BG;178-05-80;Fonction santé
+2020;LFI;SSA;BG;178-05-84;Service interarmées des munitions
+2020;LFI;SSA;BG;178-05-85;Service du commissariat aux armées
+2020;LFI;SSA;BG;178-05-11;Infrastructures de santé
+2020;LFI;ACT;BG;178-03;Préparation des forces navales
+2020;LFI;SSA;BG;178-03-01;Commandement et activités des forces navales
+2020;LFI;SSA;BG;178-03-05;Ressources humaines des forces navales
+2020;LFI;SSA;BG;178-03-07;Maintien en condition opérationnelle du matériel des forces navales
+2020;LFI;SSA;BG;178-03-08;Environnement opérationnel des forces navales
+2020;LFI;SSA;BG;178-03-11;Infrastructures maritimes
+2020;LFI;ACT;BG;178-02;Préparation des forces terrestres
+2020;LFI;SSA;BG;178-02-01;Commandement et activités des forces terrestres
+2020;LFI;SSA;BG;178-02-05;Ressources humaines des forces terrestres
+2020;LFI;SSA;BG;178-02-07;Maintien en condition opérationnelle du matériel des forces terrestres
+2020;LFI;SSA;BG;178-02-08;Environnement opérationnel des forces terrestres
+2020;LFI;SSA;BG;178-02-11;Infrastructures terrestres
+2020;LFI;ACT;BG;178-04;Préparation des forces aériennes
+2020;LFI;SSA;BG;178-04-05;Ressources humaines des forces aériennes
+2020;LFI;SSA;BG;178-04-03;Activités des forces aériennes
+2020;LFI;SSA;BG;178-04-02;Commandement et activités centralisées des forces aériennes
+2020;LFI;SSA;BG;178-04-06;Entretien et équipements des forces aériennes
+2020;LFI;SSA;BG;178-04-09;Service industriel aéronautique (SIAé)
+2020;LFI;SSA;BG;178-04-04;Activités des forces aériennes stratégiques
+2020;LFI;SSA;BG;178-04-11;Infrastructures aériennes
+2020;LFI;SSA;BG;178-04-12;Activités spatiales
+2020;LFI;ACT;BG;178-06;Surcoûts liés aux opérations extérieures
+2020;LFI;ACT;BG;178-07;Surcoûts liés aux opérations intérieures
+2020;LFI;ACT;BG;178-01;Planification  des moyens et conduite des opérations
+2020;LFI;SSA;BG;178-01-10;Emploi des forces
+2020;LFI;SSA;BG;178-01-11;Renseignement d'intérêt militaire
+2020;LFI;SSA;BG;178-01-14;Systèmes d'information et de communication
+2020;LFI;SSA;BG;178-01-21;Infrastructures SIC
+2020;LFI;PGM;BG;144;Environnement et prospective de la politique de défense
+2020;LFI;ACT;BG;144-03;Recherche et exploitation du renseignement intéressant la sécurité de la France
+2020;LFI;SSA;BG;144-03-31;Renseignement extérieur
+2020;LFI;SSA;BG;144-03-32;Renseignement de sécurité de défense
+2020;LFI;ACT;BG;144-07;Prospective de défense
+2020;LFI;SSA;BG;144-07-01;Analyse stratégique
+2020;LFI;SSA;BG;144-07-02;Prospective des systèmes de forces
+2020;LFI;SSA;BG;144-07-03;Etudes amont
+2020;LFI;SSA;BG;144-07-04;Gestion des moyens et subventions
+2020;LFI;ACT;BG;144-08;Relations internationales et diplomatie de défense
+2020;LFI;Mission;BG;CA;Conseil et contrôle de l'État
+2020;LFI;PGM;BG;126;Conseil économique, social et environnemental
+2020;LFI;ACT;BG;126-01;Représentation des activités économiques et sociales
+2020;LFI;SSA;BG;126-01-01;Personnel
+2020;LFI;SSA;BG;126-01-02;Fonctionnement
+2020;LFI;ACT;BG;126-02;Fonctionnement de l'institution
+2020;LFI;SSA;BG;126-02-01;Personnel
+2020;LFI;SSA;BG;126-02-02;Fonctionnement
+2020;LFI;SSA;BG;126-02-03;Investissement
+2020;LFI;ACT;BG;126-03;Communication et international
+2020;LFI;SSA;BG;126-03-01;Personnel
+2020;LFI;SSA;BG;126-03-02;Fonctionnement
+2020;LFI;PGM;BG;164;Cour des comptes et autres juridictions financières
+2020;LFI;ACT;BG;164-25;Information des citoyens
+2020;LFI;ACT;BG;164-23;Contrôle des gestions publiques
+2020;LFI;ACT;BG;164-21;Examen des comptes publics
+2020;LFI;ACT;BG;164-22;Contrôle des finances publiques
+2020;LFI;ACT;BG;164-24;Evaluation des politiques publiques
+2020;LFI;ACT;BG;164-26;Mise en jeu de la responsabilité des comptables publics et des gestionnaires publics
+2020;LFI;ACT;BG;164-27;Pilotage et soutien des juridictions financières
+2020;LFI;ACT;BG;164-99;Personnels à reventiler
+2020;LFI;PGM;BG;165;Conseil d'État et autres juridictions administratives
+2020;LFI;ACT;BG;165-06;Soutien
+2020;LFI;SSA;BG;165-06-01;Frais de justice
+2020;LFI;SSA;BG;165-06-02;Soutien (hors frais de justice)
+2020;LFI;ACT;BG;165-01;Fonction juridictionnelle : Conseil d'État
+2020;LFI;ACT;BG;165-05;Fonction études, expertise et services rendus aux administrations de l'État et des collectivités
+2020;LFI;ACT;BG;165-04;Fonction consultative
+2020;LFI;ACT;BG;165-02;Fonction juridictionnelle : Cours administratives d'appel
+2020;LFI;ACT;BG;165-03;Fonction juridictionnelle : Tribunaux administratifs
+2020;LFI;ACT;BG;165-99;Dépenses de personnels du programme à reventiler
+2020;LFI;ACT;BG;165-07;Cour nationale du droit d'asile
+2020;LFI;PGM;BG;340;Haut Conseil des finances publiques
+2020;LFI;ACT;BG;340-01;Haut Conseil des finances publiques
+2020;LFI;Mission;CAS;YD;Pensions
+2020;LFI;PGM;CAS;741;Pensions civiles et militaires de retraite et allocations temporaires d'invalidité
+2020;LFI;ACT;CAS;741-01;Fonctionnaires civils relevant du code des pensions civiles et militaires de retraite
+2020;LFI;SSA;CAS;741-01-05;Pensions d'anciens fonctionnaires mahorais non intégrés dans la fonction publique d'Etat
+2020;LFI;SSA;CAS;741-01-01;Pensions hors PTT, la Poste et France-Télécom
+2020;LFI;SSA;CAS;741-01-02;Pensions PTT avant le 1er janvier 1992
+2020;LFI;SSA;CAS;741-01-03;Pensions de la Poste
+2020;LFI;SSA;CAS;741-01-04;Pensions France-Télécom
+2020;LFI;SSA;CAS;741-01-06;Pensions uniques d'anciens fonctionnaires mahorais intégrés dans la fonction publique d'Etat
+2020;LFI;ACT;CAS;741-02;Militaires relevant du code des pensions civiles et militaires de retraite
+2020;LFI;ACT;CAS;741-03;Allocations temporaires d'invalidité
+2020;LFI;SSA;CAS;741-03-01;Pensions hors PTT, la Poste et France-Télécom
+2020;LFI;SSA;CAS;741-03-02;Pensions PTT avant le 1er janvier 1992
+2020;LFI;SSA;CAS;741-03-03;Pensions de la Poste
+2020;LFI;SSA;CAS;741-03-04;Pensions France-Télécom
+2020;LFI;PGM;CAS;742;Ouvriers des établissements industriels de l'État
+2020;LFI;ACT;CAS;742-01;Prestations vieillesse et invalidité
+2020;LFI;ACT;CAS;742-03;Autres dépenses spécifiques
+2020;LFI;ACT;CAS;742-04;Gestion du régime
+2020;LFI;ACT;CAS;742-05;Rentes accidents du travail des ouvriers civils des établissements militaires (RATOCEM)
+2020;LFI;PGM;CAS;743;Pensions militaires d'invalidité et des victimes de guerre et autres pensions
+2020;LFI;ACT;CAS;743-01;Reconnaissance de la Nation
+2020;LFI;SSA;CAS;743-01-01;Retraite du combattant
+2020;LFI;SSA;CAS;743-01-02;Légion d'honneur
+2020;LFI;SSA;CAS;743-01-03;Médaille militaire
+2020;LFI;ACT;CAS;743-02;Réparation
+2020;LFI;SSA;CAS;743-02-01;Pensions militaires d'invalidité
+2020;LFI;SSA;CAS;743-02-02;Allocations viagères en faveur de certains nationaux algériens
+2020;LFI;SSA;CAS;743-02-03;Indemnisation de certains français musulmans victimes de sévices corporels en Algérie
+2020;LFI;SSA;CAS;743-02-04;Allocations spéciales aux aveugles enrôlés dans la Résistance
+2020;LFI;ACT;CAS;743-03;Pensions d'Alsace-Moselle
+2020;LFI;ACT;CAS;743-04;Allocations de reconnaissance des anciens supplétifs
+2020;LFI;ACT;CAS;743-05;Pensions des anciens agents du chemin de fer franco-éthiopien
+2020;LFI;ACT;CAS;743-06;Pensions des sapeurs-pompiers et anciens agents de la défense passive victimes d'accident
+2020;LFI;ACT;CAS;743-07;Pensions de l'ORTF
+2020;LFI;SSA;CAS;743-07-01;Rentes accicdents du travail
+2020;LFI;SSA;CAS;743-07-02;Allocations surcomplémentaires de retraite
+2020;LFI;Mission;BG;CB;Culture
+2020;LFI;PGM;BG;175;Patrimoines
+2020;LFI;ACT;BG;175-04;Patrimoine archivistique et célébrations nationales
+2020;LFI;SSA;BG;175-04-03;Recherche, connaissance, conservation, valorisation et promotion du patrimoine archivistique (CPER)
+2020;LFI;SSA;BG;175-04-04;Recherche, connaissance, conservation, valorisation et promotion du patrimoine archivistique (hors CPER)
+2020;LFI;SSA;BG;175-04-10;Archives nationales
+2020;LFI;SSA;BG;175-04-11;Archives territoriales - Construction, aménagement et entretien
+2020;LFI;ACT;BG;175-03;Patrimoine des musées de France
+2020;LFI;SSA;BG;175-03-02;Musées de France - Construction, aménagement et entretien (CPER)
+2020;LFI;SSA;BG;175-03-03;Musées de France - Construction, aménagement et entretien (hors CPER)
+2020;LFI;SSA;BG;175-03-05;Recherche, connaissance, conservation, valorisation et promotion des collections
+2020;LFI;SSA;BG;175-03-20;Musées et établissements nationaux
+2020;LFI;ACT;BG;175-02;Architecture et espaces protégés
+2020;LFI;SSA;BG;175-02-02;Travaux et études en espaces protégés (sites patrimoniaux remarquables, abords, patrimoine mondial)
+2020;LFI;SSA;BG;175-02-04;Promotion, diffusion et sensibilisation à l'architecture
+2020;LFI;ACT;BG;175-01;Monuments Historiques et patrimoine monumental
+2020;LFI;SSA;BG;175-01-01;Fêtes nationales et cérémonies publiques
+2020;LFI;SSA;BG;175-01-03;Monuments historiques appartenant à l'Etat - entretien
+2020;LFI;SSA;BG;175-01-06;Monuments historiques n'appartenant pas à l'Etat - entretien (hors CPER)
+2020;LFI;SSA;BG;175-01-04;Monuments historiques appartenant à l'Etat - restauration (hors CPER)
+2020;LFI;SSA;BG;175-01-07;Monuments historiques n'appartenant pas à l'Etat - restauration (CPER)
+2020;LFI;SSA;BG;175-01-08;Monuments historiques n'appartenant pas à l'Etat - restauration (hors CPER)
+2020;LFI;SSA;BG;175-01-09;Promotion et valorisation des monuments historiques et du patrimoine monumental (CPER)
+2020;LFI;SSA;BG;175-01-10;Promotion et valorisation des monuments historiques et du patrimoine monumental (hors CPER)
+2020;LFI;SSA;BG;175-01-14;Centre des monuments nationaux (CMN)
+2020;LFI;SSA;BG;175-01-20;Monuments historiques appartenant à l'Etat - restauration (CPER)
+2020;LFI;SSA;BG;175-01-22;Etablissements nationaux
+2020;LFI;ACT;BG;175-08;Acquisition et enrichissement des collections publiques
+2020;LFI;SSA;BG;175-08-02;Enrichissement des collections publiques pour les musées
+2020;LFI;SSA;BG;175-08-05;Enrichissement des collections publiques pour les archives
+2020;LFI;SSA;BG;175-08-06;Enrichissement des collections publiques : patrimoine monumental et architectural
+2020;LFI;SSA;BG;175-08-07;Fonds du patrimoine
+2020;LFI;ACT;BG;175-09;Patrimoine archéologique
+2020;LFI;SSA;BG;175-09-04;Promotion et diffusion du patrimoine archéologique (CPER)
+2020;LFI;SSA;BG;175-09-02;Promotion et diffusion du patrimoine archéologique (hors CPER)
+2020;LFI;SSA;BG;175-09-01;Recherche, connaissance et protection du patrimoine archéologique (Hors CPER)
+2020;LFI;SSA;BG;175-09-03;Recherche, connaissance et protection du patrimoine archéologique (CPER)
+2020;LFI;SSA;BG;175-09-05;Financement des opérations d'archéologie préventive
+2020;LFI;PGM;BG;131;Création
+2020;LFI;ACT;BG;131-02;Soutien à la création, à la production et à la diffusion des arts visuels
+2020;LFI;SSA;BG;131-02-08;Soutien aux institutions et lieux de création et de diffusion en matière d'arts visuels
+2020;LFI;SSA;BG;131-02-01;Arts visuels (CPER)
+2020;LFI;SSA;BG;131-02-02;Acquisitions et commandes publiques dans le secteur des arts visuels
+2020;LFI;SSA;BG;131-02-04;Structuration des professions et de l'économie du secteur des arts visuels
+2020;LFI;SSA;BG;131-02-06;Aides à la création et à la diffusion en matière d'arts visuels
+2020;LFI;SSA;BG;131-02-09;Soutien aux manufactures et métiers d'art
+2020;LFI;ACT;BG;131-01;Soutien à la création, à la production et à la diffusion du spectacle vivant
+2020;LFI;SSA;BG;131-01-01;Spectacle vivant (CPER)
+2020;LFI;SSA;BG;131-01-04;Soutien aux artistes et équipes artistiques
+2020;LFI;SSA;BG;131-01-08;Recherche, ressource et valorisation du patrimoine du spectacle vivant
+2020;LFI;SSA;BG;131-01-02;Aide à la création et aux nouvelles écritures
+2020;LFI;SSA;BG;131-01-25;Structuration des professions et de l'économie du secteur du spectacle vivant
+2020;LFI;SSA;BG;131-01-23;Soutien aux institutions et lieux de création et de diffusion en matière de spectacle vivant
+2020;LFI;SSA;BG;131-01-24;Festivals et résidences
+2020;LFI;ACT;BG;131-06;Soutien à l'emploi et structurations des professions
+2020;LFI;SSA;BG;131-06-04;Compensation CSG artistes auteurs
+2020;LFI;SSA;BG;131-06-01;Soutien à l'emploi et accompagnement professionnel des artistes
+2020;LFI;SSA;BG;131-06-02;Structuration des professions et de l'économie du secteur du spectacle vivant
+2020;LFI;SSA;BG;131-06-03;Structuration des professions de l'économie du secteur des arts visuels
+2020;LFI;PGM;BG;224;Transmission des savoirs et démocratisation de la culture
+2020;LFI;ACT;BG;224-02;Soutien à la démocratisation et à l'éducation artistique et culturelle
+2020;LFI;SSA;BG;224-02-27;Sécurisation des sites et évènements culturels
+2020;LFI;SSA;BG;224-02-26;Pass Culture Jeunes
+2020;LFI;SSA;BG;224-02-21;Politique d'éducation artistique et culturelle (dominante jeunes)
+2020;LFI;SSA;BG;224-02-22;Politiques en faveur des publics en situation spécifique  (dominante adultes)
+2020;LFI;SSA;BG;224-02-23;Politiques territoires et cohésion sociale (dominante adultes)
+2020;LFI;SSA;BG;224-02-24;Soutien aux pratiques amateurs
+2020;LFI;SSA;BG;224-02-25;Soutien à la transition et à l'innovation numériques
+2020;LFI;ACT;BG;224-01;Soutien aux établissements d'enseignement supérieur et insertion professionnelle
+2020;LFI;SSA;BG;224-01-23;Enseignement supérieur, insertion et formation professionnelle en matière d'art plastique (hors CPER)
+2020;LFI;SSA;BG;224-01-07;Enseignement supérieur, insertion et formation professionnelle en matière de spectacle vivant (CPER)
+2020;LFI;SSA;BG;224-01-21;Enseignement supérieur, insertion et formation professionnelle en matière de patrimoine
+2020;LFI;SSA;BG;224-01-22;Enseignement supérieur, insertion et formation professionnelle en matière de spectacle vivant (hors CPER)
+2020;LFI;SSA;BG;224-01-24;Soutien aux autres établissements d'enseignement supérieur
+2020;LFI;SSA;BG;224-01-19;Bourses et aides
+2020;LFI;SSA;BG;224-01-14;Enseignement supérieur, insertion et formation professionnelle en matière d'arts plastiques (CPER)
+2020;LFI;ACT;BG;224-07;Fonctions de soutien du ministère
+2020;LFI;SSA;BG;224-07-01;Fonctions immobilières
+2020;LFI;SSA;BG;224-07-06;Fonction formation
+2020;LFI;SSA;BG;224-07-07;Fonction communication
+2020;LFI;SSA;BG;224-07-08;Etudes et prospective
+2020;LFI;SSA;BG;224-07-10;Fonctions logistiques
+2020;LFI;SSA;BG;224-07-11;Action sociale
+2020;LFI;SSA;BG;224-07-12;Dépenses de personnel, gratification des stagiaires et remboursement de mise à disposition de personnel
+2020;LFI;SSA;BG;224-07-13;Fonction informatique
+2020;LFI;ACT;BG;224-06;Action culturelle internationale
+2020;LFI;SSA;BG;224-06-02;Promotion de la création et des industries culturelles françaises à l'étranger
+2020;LFI;SSA;BG;224-06-03;Coopération technique culturelle, communautaire et multilatérale
+2020;LFI;SSA;BG;224-06-04;Diffusion des cultures étrangères et accueil des professionnels et des artistes étrangers
+2020;LFI;ACT;BG;224-09;Langue française et langues de France
+2020;LFI;SSA;BG;224-09-01;Politique linguistique
+2020;LFI;Mission;BG;AD;Aide publique au développement
+2020;LFI;PGM;BG;209;Solidarité à l'égard des pays en développement
+2020;LFI;ACT;BG;209-05;Coopération multilatérale
+2020;LFI;ACT;BG;209-02;Coopération bilatérale
+2020;LFI;ACT;BG;209-08;"Dépenses de personnels concourant au programme ""Solidarité à l'égard des pays en développement"""
+2020;LFI;ACT;BG;209-07;Coopération communautaire
+2020;LFI;ACT;BG;209-09;Actions de co-développement
+2020;LFI;PGM;BG;110;Aide économique et financière au développement
+2020;LFI;ACT;BG;110-02;Aide économique et financière bilatérale
+2020;LFI;SSA;BG;110-02-10;Rémunération de l'Agence française de développement (AFD)
+2020;LFI;SSA;BG;110-02-12;Agence française de développement (AFD) (DOM-TOM)
+2020;LFI;SSA;BG;110-02-11;Agence française de développement (AFD) bonifications d'intérêts
+2020;LFI;SSA;BG;110-02-15;Evaluation expost relevant de l'Agence française de développement (AFD)
+2020;LFI;SSA;BG;110-02-14;Fonds français pour l'environnement mondial
+2020;LFI;SSA;BG;110-02-16;Aide budgétaire à destination des pays étrangers
+2020;LFI;SSA;BG;110-02-19;Dons aux Etats étrangers
+2020;LFI;SSA;BG;110-02-17;Evaluations expost des prêts RPE
+2020;LFI;SSA;BG;110-02-20;EXPERTISE FRANCE
+2020;LFI;SSA;BG;110-02-21;Aide au commerce des pays en développement
+2020;LFI;SSA;BG;110-02-18;Evaluations préalables et appui au montage des projets
+2020;LFI;SSA;BG;110-02-22;Rémunérations liées aux opérations de prêts RPE (Natixis et autres)
+2020;LFI;ACT;BG;110-03;Traitement de la dette des pays pauvres
+2020;LFI;SSA;BG;110-03-10;AFD - Traitement de la dette des pays pauvres - Indemnisation au titre des annulations de dettes (Dakar I et II, Club de Paris)
+2020;LFI;SSA;BG;110-03-11;AFD - indemnisation au titre des réductions de taux d'intérêt des prêts
+2020;LFI;SSA;BG;110-03-12;Fonds multilatéraux de soutien aux pays pauvres très endettés
+2020;LFI;SSA;BG;110-03-13;Compensation des annulations de dettes multilatérales
+2020;LFI;ACT;BG;110-01;Aide économique et financière multilatérale
+2020;LFI;SSA;BG;110-01-10;Association internationale de développement
+2020;LFI;SSA;BG;110-01-25;Banque interaméricaine de développement
+2020;LFI;SSA;BG;110-01-13;Groupe de la banque mondiale
+2020;LFI;SSA;BG;110-01-18;Fonds africain de développement
+2020;LFI;SSA;BG;110-01-24;Fonds asiatique de développement
+2020;LFI;SSA;BG;110-01-33;Fonds de Doha
+2020;LFI;SSA;BG;110-01-34;Agriculture (FIDA)
+2020;LFI;SSA;BG;110-01-16;Coopération technique
+2020;LFI;SSA;BG;110-01-35;Santé (FMS)
+2020;LFI;SSA;BG;110-01-38;Initiatives dans le cadre  de la présidence du G20
+2020;LFI;SSA;BG;110-01-29;Fonds de coopération pour la sûreté nucléaire et la non prolifération
+2020;LFI;SSA;BG;110-01-36;Environnement et changement climatique (FEM et autres fonds)
+2020;LFI;SSA;BG;110-01-39;Bonifications des prêts à des institutions ou fonds internationaux
+2020;LFI;Mission;BG;AB;Administration générale et territoriale de l'État
+2020;LFI;PGM;BG;232;Vie politique, cultuelle et associative
+2020;LFI;ACT;BG;232-05;Vie associative
+2020;LFI;ACT;BG;232-03;Commission nationale des comptes de campagne et des financements politiques
+2020;LFI;ACT;BG;232-99;Dépenses de personnel du programme à reventiler
+2020;LFI;ACT;BG;232-01;Financement des partis
+2020;LFI;ACT;BG;232-02;Organisation des élections
+2020;LFI;SSA;BG;232-02-01;Elections présidentielles
+2020;LFI;SSA;BG;232-02-02;Elections législatives générales
+2020;LFI;SSA;BG;232-02-03;Elections des représentants au Parlement européen
+2020;LFI;SSA;BG;232-02-04;Elections sénatoriales générales
+2020;LFI;SSA;BG;232-02-05;Elections départementales générales
+2020;LFI;SSA;BG;232-02-06;Elections municipales générales
+2020;LFI;SSA;BG;232-02-07;Référendums
+2020;LFI;SSA;BG;232-02-09;Elections régionales générales et assemblée de Corse
+2020;LFI;SSA;BG;232-02-10;Elections partielles (législatives, sénatoriales, départementales, municipales, régionales, territoriales et provinciales)
+2020;LFI;SSA;BG;232-02-11;Elections : dépenses communes
+2020;LFI;SSA;BG;232-02-12;Systèmes d'information et de communication
+2020;LFI;SSA;BG;232-02-13;Elections territoriales en outre-mer
+2020;LFI;ACT;BG;232-04;Cultes
+2020;LFI;SSA;BG;232-04-01;Immobilier
+2020;LFI;SSA;BG;232-04-02;Soutien
+2020;LFI;PGM;BG;216;Conduite et pilotage des politiques de l'intérieur
+2020;LFI;ACT;BG;216-01;État-major et services centraux
+2020;LFI;SSA;BG;216-01-01;Cabinets des ministres et bureaux des cabinets des ministres
+2020;LFI;SSA;BG;216-01-02;Cabinet du secrétariat général et des services rattachés
+2020;LFI;SSA;BG;216-01-03;Délégation à l'information et à la communication
+2020;LFI;SSA;BG;216-01-05;Inspection générale de l'administration
+2020;LFI;SSA;BG;216-01-07;Conseil national des activités privées de sécurité (CNAPS)
+2020;LFI;SSA;BG;216-01-09;Direction des systèmes d'information et de communication : personnel
+2020;LFI;SSA;BG;216-01-10;Services zonaux des systèmes d'information et de communication : soutien
+2020;LFI;SSA;BG;216-01-11;Gestion des ressources humaines
+2020;LFI;SSA;BG;216-01-12;Direction générale des collectivités locales
+2020;LFI;SSA;BG;216-01-14;Comité des finances locales
+2020;LFI;SSA;BG;216-01-16;Cultes
+2020;LFI;SSA;BG;216-01-17;Direction générale des outre-mer
+2020;LFI;SSA;BG;216-01-15;Fonctionnement général des services
+2020;LFI;SSA;BG;216-01-08;Autres études et recherches
+2020;LFI;ACT;BG;216-06;Affaires juridiques et contentieuses
+2020;LFI;SSA;BG;216-06-01;Refus de concours de la force publique : règlements amiables
+2020;LFI;SSA;BG;216-06-02;Refus de concours de la force publique : contentieux
+2020;LFI;SSA;BG;216-06-03;Attroupements : règlements amiables
+2020;LFI;SSA;BG;216-06-04;Attroupements : contentieux
+2020;LFI;SSA;BG;216-06-05;Autres mises en cause de l'Etat : règlements amiables
+2020;LFI;SSA;BG;216-06-06;Autres mises en cause de l'Etat : contentieux
+2020;LFI;SSA;BG;216-06-07;Accidents de la circulation : règlements amiables
+2020;LFI;SSA;BG;216-06-08;Accidents de la circulation : contentieux
+2020;LFI;SSA;BG;216-06-09;Protection juridique
+2020;LFI;SSA;BG;216-06-10;Litiges intervenant dans le cadre du droit des étrangers : règlements amiables
+2020;LFI;SSA;BG;216-06-11;Litiges intervenant dans le cadre du droit des étrangers : règlements contentieux
+2020;LFI;ACT;BG;216-05;Affaires immobilières
+2020;LFI;SSA;BG;216-05-01;Immobilier de l'administration centrale : fonctionnement courant
+2020;LFI;SSA;BG;216-05-06;Opérations d'investissement
+2020;LFI;SSA;BG;216-05-11;Immobilier administration centrale et déconcentrée
+2020;LFI;SSA;BG;216-05-10;Action sociale : immobilier
+2020;LFI;ACT;BG;216-04;Action sociale et formation
+2020;LFI;SSA;BG;216-04-01;Action sociale : offre de services collectifs
+2020;LFI;SSA;BG;216-04-02;Formation et recrutement
+2020;LFI;SSA;BG;216-04-07;Action sociale : partenariat social
+2020;LFI;SSA;BG;216-04-08;Action sociale : insertion des personnes handicapées
+2020;LFI;SSA;BG;216-04-09;Action sociale : professionnels de soutien
+2020;LFI;SSA;BG;216-04-10;Action sociale : missions transversales
+2020;LFI;ACT;BG;216-03;Système d'information et de communication
+2020;LFI;SSA;BG;216-03-05;Maintien en condition opérationnelle des systèmes d'information et de communication (SIC)
+2020;LFI;SSA;BG;216-03-08;Système d'information et de communication : grands projets
+2020;LFI;ACT;BG;216-08;Immigration, asile et intégration
+2020;LFI;SSA;BG;216-08-01;Direction générale des étrangers en France
+2020;LFI;ACT;BG;216-09;Sécurité et éducation routières
+2020;LFI;SSA;BG;216-09-01;Délégation à la sécurité routière
+2020;LFI;ACT;BG;216-10;Fonds interministériel de prévention de la délinquance
+2020;LFI;SSA;BG;216-10-01;Actions en faveur des jeunes
+2020;LFI;SSA;BG;216-10-02;Prévention des violences faites aux femmes, des violences intrafamiliales et l'aide aux victimes
+2020;LFI;SSA;BG;216-10-03;Actions pour améliorer la tranquillité publique
+2020;LFI;SSA;BG;216-10-04;Prévention de la radicalisation
+2020;LFI;SSA;BG;216-10-05;Actions de sécurisation
+2020;LFI;ACT;BG;216-99;Dépenses de personnel du programme à reventiler
+2020;LFI;PGM;BG;354;Administration territoriale de l'État
+2020;LFI;ACT;BG;354-01;Coordination de la sécurité des personnes et des biens
+2020;LFI;ACT;BG;354-06;Dépenses immobilières de l'administration territoriale
+2020;LFI;ACT;BG;354-05;Fonctionnement courant de l'administration territoriale
+2020;LFI;ACT;BG;354-03;Contrôle de légalité et conseil aux collectivités territoriales
+2020;LFI;ACT;BG;354-04;Pilotage territorial des politiques gouvernementales
+2020;LFI;ACT;BG;354-02;Réglementation générale, garantie de l'identité et de la nationalité et délivrance des titres
+2020;LFI;ACT;BG;354-99;Dépenses de personnel du programme à reventiler
+2020;LFI;Mission;BG;DB;Économie
+2020;LFI;PGM;BG;134;Développement des entreprises et régulations
+2020;LFI;ACT;BG;134-23;Industrie et services
+2020;LFI;ACT;BG;134-24;Régulation concurrentielle des marchés, protection économique et sécurité du consommateur
+2020;LFI;ACT;BG;134-08;Expertise, conseil et inspection
+2020;LFI;SSA;BG;134-08-01;Conseil général de l'industrie, de l'énergie et des technologies (CGIET)
+2020;LFI;ACT;BG;134-99;"Dépenses de personnel à reventiler du programme ""Développement des entreprises et de l'emploi"""
+2020;LFI;ACT;BG;134-22;Contrats à impact social
+2020;LFI;ACT;BG;134-04;Développement des postes, des télécommunications et du numérique
+2020;LFI;ACT;BG;134-07;Développement international des entreprises et attractivité du territoire
+2020;LFI;ACT;BG;134-13;Régulation des communications électroniques et des postes (ARCEP)
+2020;LFI;ACT;BG;134-15;Mise en oeuvre du droit de la concurrence (Autorité de la concurrence)
+2020;LFI;PGM;BG;220;Statistiques et études économiques
+2020;LFI;ACT;BG;220-07;Formation initiale
+2020;LFI;ACT;BG;220-99;Dépenses de personnel du programme à reventiler
+2020;LFI;ACT;BG;220-02;Information sur les entreprises et synthèses économiques
+2020;LFI;SSA;BG;220-02-01;Information sur les entreprises et synthèses économiques hors secteur industrie
+2020;LFI;SSA;BG;220-02-02;Information sur les entreprises et synthèses économiques secteur industrie (SESSI)
+2020;LFI;ACT;BG;220-03;Information démographique et sociale
+2020;LFI;ACT;BG;220-01;Infrastructure statistique
+2020;LFI;SSA;BG;220-01-01;Infrastructures statistiques hors recensement de la population
+2020;LFI;SSA;BG;220-01-02;Recensement de la population
+2020;LFI;SSA;BG;220-01-03;"Personnel concourant à l'action ""Infrastructure statistique"""
+2020;LFI;ACT;BG;220-05;Pilotage et soutien
+2020;LFI;ACT;BG;220-06;Action régionale
+2020;LFI;PGM;BG;305;Stratégie économique et fiscale
+2020;LFI;ACT;BG;305-01;Définition et mise en oeuvre de la politique économique et financière de la France dans le cadre national, international et européen
+2020;LFI;ACT;BG;305-03;Elaboration de la législation fiscale
+2020;LFI;ACT;BG;305-02;Développement international de l'économie française
+2020;LFI;PGM;BG;343;Plan France Très haut débit
+2020;LFI;ACT;BG;343-01;Réseaux d'initiative publique
+2020;LFI;Mission;BG;DC;Direction de l'action du Gouvernement
+2020;LFI;PGM;BG;129;Coordination du travail gouvernemental
+2020;LFI;ACT;BG;129-03;Coordination de la politique européenne
+2020;LFI;ACT;BG;129-02;Coordination de la sécurité et de la défense
+2020;LFI;SSA;BG;129-02-01;Secrétariat général de la défense et de la sécurité nationale - Coordination des enseignements de défense et de sécurité
+2020;LFI;SSA;BG;129-02-02;Fonds spéciaux
+2020;LFI;SSA;BG;129-02-03;Groupement interministériel de contrôle
+2020;LFI;ACT;BG;129-01;Coordination du travail gouvernemental
+2020;LFI;SSA;BG;129-01-01;Cabinet du Premier ministre et des ministres rattachés
+2020;LFI;SSA;BG;129-01-02;Secrétariat Général du Gouvernement
+2020;LFI;SSA;BG;129-01-03;Service d'Information du Gouvernement
+2020;LFI;SSA;BG;129-01-06;Commissions rattachées aux services centraux
+2020;LFI;SSA;BG;129-01-07;Commission d'indemnisation des victimes des essais nucléaires
+2020;LFI;ACT;BG;129-10;Soutien
+2020;LFI;SSA;BG;129-10-01;Direction des services administratifs et financiers
+2020;LFI;SSA;BG;129-10-03;Commission de vérification des fonds spéciaux
+2020;LFI;ACT;BG;129-11;Stratégie et prospective
+2020;LFI;SSA;BG;129-11-01;Centre d'analyse stratégique
+2020;LFI;SSA;BG;129-11-02;Conseil d'analyse économique
+2020;LFI;SSA;BG;129-11-03;Conseil d'orientation des retraites
+2020;LFI;SSA;BG;129-11-04;Conseil d'analyse de la société
+2020;LFI;ACT;BG;129-13;Ordre de la Légion d'honneur
+2020;LFI;ACT;BG;129-15;Mission interministérielle de lutte contre les drogues et les conduites addictives
+2020;LFI;ACT;BG;129-16;Coordination de la politique numérique
+2020;LFI;ACT;BG;129-99;"Dépenses de personnel du programme ""coordination du travail gouvernemental"" à reventiler"
+2020;LFI;PGM;BG;308;Protection des droits et libertés
+2020;LFI;ACT;BG;308-10;Haute autorité pour la transparence de la vie publique
+2020;LFI;ACT;BG;308-13;Commission du secret de la Défense nationale
+2020;LFI;ACT;BG;308-06;Autres autorités indépendantes
+2020;LFI;SSA;BG;308-06-03;Commission nationale consultative des droits de l'homme
+2020;LFI;SSA;BG;308-06-01;Commission d'accès aux documents administratifs
+2020;LFI;SSA;BG;308-06-02;Comité consultatif national d'éthique
+2020;LFI;ACT;BG;308-05;Contrôleur général des lieux de privation de liberté
+2020;LFI;ACT;BG;308-03;Conseil supérieur de l'audiovisuel
+2020;LFI;ACT;BG;308-02;Commission nationale de l'informatique et des libertés
+2020;LFI;ACT;BG;308-09;Défenseur des droits
+2020;LFI;ACT;BG;308-11;Régulation de la distribution de la presse
+2020;LFI;ACT;BG;308-12;Commission nationale de contrôle des techniques de renseignement
+2020;LFI;Mission;BG;AC;Agriculture, alimentation, forêt et affaires rurales
+2020;LFI;PGM;BG;149;Compétitivité et durabilité de l'agriculture, de l'agroalimentaire, de la forêt, de la pêche et de l'aquaculture
+2020;LFI;ACT;BG;149-21;Adaptation des filières à l'évolution des marchés
+2020;LFI;SSA;BG;149-21-03;Soutien à la production de sucre dans les départements d'outre-mer
+2020;LFI;SSA;BG;149-21-02;Emploi et innovation dans les industries agroalimentaires
+2020;LFI;SSA;BG;149-21-04;Actions internationales
+2020;LFI;SSA;BG;149-21-06;Fonds avenir bio
+2020;LFI;SSA;BG;149-21-08;Intervention en faveur des filières agroalimentaires
+2020;LFI;SSA;BG;149-21-09;Autres actions d'adaptation des filières à l'évolution des marchés
+2020;LFI;ACT;BG;149-22;Gestion des crises et des aléas de la production agricole
+2020;LFI;SSA;BG;149-22-01;Aides conjoncturelle
+2020;LFI;SSA;BG;149-22-02;Prêts de crise
+2020;LFI;SSA;BG;149-22-04;Aides en faveur du redressement des exploitations en difficulté (AGRIDIFF)
+2020;LFI;SSA;BG;149-22-05;Fonds national de gestion des risques en agriculture
+2020;LFI;ACT;BG;149-23;Appui au renouvellement et à la modernisation des exploitations agricoles
+2020;LFI;SSA;BG;149-23-07;Fonds d'incitation et de communication pour l'installation en agriculture (FICIA)
+2020;LFI;SSA;BG;149-23-01;Prêts à l'installation
+2020;LFI;SSA;BG;149-23-02;Aides à la cessation d'activités
+2020;LFI;SSA;BG;149-23-03;Stages à l'installation
+2020;LFI;SSA;BG;149-23-04;Aides au départs (anciens dispositifs)
+2020;LFI;SSA;BG;149-23-05;Aides aux Coopératives d'Utilisation de Matériel Agricole (CUMA)
+2020;LFI;SSA;BG;149-23-06;Dotation aux jeunes agriculteurs
+2020;LFI;SSA;BG;149-23-08;Compétitivité et adaptation des exploitations agricoles
+2020;LFI;SSA;BG;149-23-09;Plan de relance - Autres aides à la modernisation des exploitations agricole
+2020;LFI;ACT;BG;149-24;Gestion équilibrée et durable des territoires
+2020;LFI;SSA;BG;149-24-13;Actions d'expertise technique (eau et connaissance des sols)
+2020;LFI;SSA;BG;149-24-01;Hydraulique agricole et ouvrages domaniaux
+2020;LFI;SSA;BG;149-24-02;Formation et information des cadres syndicaux et professionnels de l'agriculture
+2020;LFI;SSA;BG;149-24-03;Animation et développement rural
+2020;LFI;SSA;BG;149-24-04;Actions en faveur du cheval menées au niveau national
+2020;LFI;SSA;BG;149-24-05;foncier
+2020;LFI;SSA;BG;149-24-06;Plan de maîtrise des pollutions d'origine agricole
+2020;LFI;SSA;BG;149-24-07;Indemnités compensatoires de handicaps naturels
+2020;LFI;SSA;BG;149-24-08;Mesures agro-environnementales et climatiques et agricultures biologiques
+2020;LFI;SSA;BG;149-24-09;Prime herbagère agro-environnementale
+2020;LFI;SSA;BG;149-24-10;Aides à la diversification des cultures dans l'assolemen
+2020;LFI;SSA;BG;149-24-11;Autres actions environnementales et pastoralisme
+2020;LFI;SSA;BG;149-24-12;Boisement des terres agricoles
+2020;LFI;SSA;BG;149-24-14;Autres actions de soutien aux syndicats
+2020;LFI;ACT;BG;149-25;Protection sociale
+2020;LFI;SSA;BG;149-25-16;Réglementation et sécurité au travail
+2020;LFI;SSA;BG;149-25-17;Incitation à l'emploi en agriculture et en milieu rural
+2020;LFI;ACT;BG;149-26;Gestion durable de la forêt et développement de la filière bois
+2020;LFI;SSA;BG;149-26-09;Centre national de la propriété forestière (CNPF)
+2020;LFI;SSA;BG;149-26-04;Défense des forêts contre les incendies (DFCI)
+2020;LFI;SSA;BG;149-26-01;ONF - Versement compensateur
+2020;LFI;SSA;BG;149-26-02;ONF - Missions d'intérêt général
+2020;LFI;SSA;BG;149-26-03;ONF - Autres subventions
+2020;LFI;SSA;BG;149-26-05;Restauration des terrains en montagne (RTM)
+2020;LFI;SSA;BG;149-26-06;Acquisition de forêt par l'Etat ou les collectivités territoriales
+2020;LFI;SSA;BG;149-26-07;Classement et lutte phytosanitaire
+2020;LFI;SSA;BG;149-26-08;Chablis
+2020;LFI;SSA;BG;149-26-10;Etudes et recherche
+2020;LFI;SSA;BG;149-26-11;Prêts bonifiés
+2020;LFI;SSA;BG;149-26-12;Fonds stratégique de la forêt et du bois (FSFB)
+2020;LFI;ACT;BG;149-27;Moyens de mise en oeuvre des politiques publiques et gestion des interventions
+2020;LFI;SSA;BG;149-27-06;France AgriMer
+2020;LFI;SSA;BG;149-27-03;Office du développement agricole et rural de Corse (ODARC)
+2020;LFI;SSA;BG;149-27-01;Institut français du cheval et de l'équitation (IFCE)
+2020;LFI;SSA;BG;149-27-02;Agence de services et de paiement (ASP)
+2020;LFI;SSA;BG;149-27-04;Agence Bio
+2020;LFI;SSA;BG;149-27-05;Institut national des appellations d'origine (INAO)
+2020;LFI;SSA;BG;149-27-07;Office de développement de l'économie agricole d'outre-mer (ODEADOM)
+2020;LFI;SSA;BG;149-27-08;Provision pour aléas - Refus d'apurement communautaire
+2020;LFI;SSA;BG;149-27-09;Autres moyens dédiés à la mise en oeuvre des politiques publiques et gestion des interventions
+2020;LFI;ACT;BG;149-28;Pêche et aquaculture
+2020;LFI;SSA;BG;149-28-01;Suivi scientifique et des données
+2020;LFI;SSA;BG;149-28-02;Contrôle des pêches
+2020;LFI;SSA;BG;149-28-03;Appui technique
+2020;LFI;SSA;BG;149-28-04;Interventions socio-économiques
+2020;LFI;SSA;BG;149-28-05;Interventions économiques non cofinancées par l'UE
+2020;LFI;SSA;BG;149-28-06;Interventions économiques cofinancées par l'UE
+2020;LFI;PGM;BG;215;Conduite et pilotage des politiques de l'agriculture
+2020;LFI;ACT;BG;215-02;Évaluation de l'impact des politiques publiques et information économique
+2020;LFI;SSA;BG;215-02-07;Personnel de l'INSEE - Administrations centrale
+2020;LFI;SSA;BG;215-02-08;Personnel de l'INSEE -DRAF
+2020;LFI;SSA;BG;215-02-09;Personnel : moyens d'ajustement statistiques pour le recensement agricole
+2020;LFI;SSA;BG;215-02-10;Personnel : moyens d'ajustement statistiques (hors recensement agricole)
+2020;LFI;SSA;BG;215-02-02;Recensement agricole
+2020;LFI;SSA;BG;215-02-01;Enquêtes statistiques et réseau d'information comptable agricole
+2020;LFI;SSA;BG;215-02-03;Etudes pour l'aide à la décision
+2020;LFI;ACT;BG;215-03;Moyens des directions régionales de l'alimentation, de l'agriculture et de la forêt, des directions de l'alimentation, de l'agriculture et de la forêt et directions départementales des territoires (et de la mer)
+2020;LFI;SSA;BG;215-03-04;Actions sanitaires et sociales
+2020;LFI;SSA;BG;215-03-05;Formation continue
+2020;LFI;SSA;BG;215-03-06;Gestion immobilière
+2020;LFI;SSA;BG;215-03-03;Personnel : moyens d'ajustement des DRAAF, DAAF et DDT(M)
+2020;LFI;SSA;BG;215-03-09;Personnels permanents des DRAAF, DAAF et DDT(M)
+2020;LFI;SSA;BG;215-03-10;Personnels en DRAAF - Centres de prestations comptables mutualisés (CPCM) - Travaillant pour le MAAP
+2020;LFI;SSA;BG;215-03-11;Personnels en DRAAF - Centres de prestations comptables mutualisés (CPCM) - Travaillant pour le MEEDM
+2020;LFI;SSA;BG;215-03-07;Autres moyens (hors personnel)
+2020;LFI;ACT;BG;215-01;Moyens de l'administration centrale
+2020;LFI;SSA;BG;215-01-02;Actions sanitaires et sociales
+2020;LFI;SSA;BG;215-01-04;Gestion immobilière de l'administration centrale
+2020;LFI;SSA;BG;215-01-03;Formation continue
+2020;LFI;SSA;BG;215-01-01;Personnel permanent
+2020;LFI;SSA;BG;215-01-05;Autres moyens (hors personnel)
+2020;LFI;SSA;BG;215-01-06;Personnel : moyens d'ajustement
+2020;LFI;ACT;BG;215-04;Moyens communs
+2020;LFI;SSA;BG;215-04-01;Communication et diffusion de l'information - Fonds de communication : AFICAR
+2020;LFI;SSA;BG;215-04-02;Communication et diffusion de l'information - Autres actions
+2020;LFI;SSA;BG;215-04-03;Frais judiciaires et réparations civiles
+2020;LFI;SSA;BG;215-04-04;Mise en oeuvre de la réforme de l'Etat
+2020;LFI;SSA;BG;215-04-11;Politique immobilière (achat, construction et rénovation)
+2020;LFI;SSA;BG;215-04-12;Mise en oeuvre de la formation par l'INFOMA
+2020;LFI;SSA;BG;215-04-20;Suivi statistique et scientifique du milieu et des ressources halieutiques pour le compte de la communauté européenne - personnel - cofinancement partiel du FEP
+2020;LFI;SSA;BG;215-04-21;Personnel des représentations françaises à l'étranger et organismes internationaux
+2020;LFI;SSA;BG;215-04-14;Remboursement de personnel mis à disposition du ministère chargé de l'agriculture
+2020;LFI;SSA;BG;215-04-17;Autres financements de personnel contribuant aux objectifs du ministère chargé de l'agriculture
+2020;LFI;SSA;BG;215-04-16;Elèves et stagiaires en écoles ou en centres de formation
+2020;LFI;SSA;BG;215-04-15;Personnel mis à disposition par le ministère chargé de l'agriculture et autres dépenses
+2020;LFI;SSA;BG;215-04-22;Systèmes d'information
+2020;LFI;ACT;BG;215-99;"Dépenses de personnel du programme ""conduite et pilotage des politiques de l'agriculture"" à reventiler"
+2020;LFI;PGM;BG;206;Sécurité et qualité sanitaires de l'alimentation
+2020;LFI;ACT;BG;206-03;Prévention et gestion des risques sanitaires liés aux denrées alimentaires
+2020;LFI;SSA;BG;206-03-31;Inspection sanitaire dans les établissements du secteur alimentaire
+2020;LFI;SSA;BG;206-03-33;Lutte contre les zoonoses dans la chaîne alimentaire
+2020;LFI;SSA;BG;206-03-35;Surveillance de la contamination des denrées et gestion des alertes
+2020;LFI;SSA;BG;206-03-37;Appui à la gestion des risques sanitaires liés aux aliments
+2020;LFI;ACT;BG;206-05;Elimination des cadavres et des sous-produits animaux
+2020;LFI;SSA;BG;206-05-50;Service public de l'équarrissage
+2020;LFI;ACT;BG;206-04;Actions transversales
+2020;LFI;SSA;BG;206-04-42;Moyens de fonctionnement de l'agence nationale chargée de la sécurité sanitaire de l’alimentation, de l’environnement et du travail (ANSES)
+2020;LFI;SSA;BG;206-04-43;Autres moyens scientifiques et techniques
+2020;LFI;SSA;BG;206-04-45;Qualité nutritionnelle et sanitaire des produits (CPER)
+2020;LFI;SSA;BG;206-04-44;Système d'information de l'alimentation (SIAL)
+2020;LFI;SSA;BG;206-04-46;Brigade nationale d'enquêtes vétérinaires et phytosanitaires
+2020;LFI;SSA;BG;206-04-47;Inspection vétérinaire et phytosanitaire aux frontières
+2020;LFI;ACT;BG;206-02;Lutte contre les maladies animales et protection des animaux
+2020;LFI;SSA;BG;206-02-20;Gestion des maladies animales (hors ESST)
+2020;LFI;SSA;BG;206-02-21;Gestion des encéphalopathies spongiformes subaigües transmissibles (ESST)
+2020;LFI;SSA;BG;206-02-24;Plans d'urgence contre les épizooties et visites sanitaires
+2020;LFI;SSA;BG;206-02-27;Protection des animaux
+2020;LFI;SSA;BG;206-02-29;Contrôle de l'alimentation animale et du médicament vétérinaire
+2020;LFI;SSA;BG;206-02-22;Identification et traçabilité des animaux vivants
+2020;LFI;ACT;BG;206-01;Prévention et gestion des risques inhérents à la production végétale
+2020;LFI;SSA;BG;206-01-10;Gestion des risques pour la santé des végétaux
+2020;LFI;SSA;BG;206-01-13;Contrôle des pratiques agricoles de la production des végétaux
+2020;LFI;SSA;BG;206-01-15;Promotion des modes de production respectueux de la santé et de l'environnement
+2020;LFI;SSA;BG;206-01-18;Surveillance de la santé des forêts
+2020;LFI;ACT;BG;206-06;Mise en oeuvre de la politique de sécurité et de qualité sanitaires de l'alimentation
+2020;LFI;SSA;BG;206-06-01;Personnel des services de l'alimentation au niveau déconcentré : moyens permanents
+2020;LFI;SSA;BG;206-06-02;Personnel des services de l'alimentation au niveau déconcentré: moyens non permanents
+2020;LFI;SSA;BG;206-06-03;Personnel mis à disposition par le ministère de l'agriculture
+2020;LFI;SSA;BG;206-06-63;Actions sanitaires et sociales des services de l'alimentation
+2020;LFI;SSA;BG;206-06-67;Actions d'information et de communication
+2020;LFI;ACT;BG;206-08;Qualité de l'alimentation et offre alimentaire
+2020;LFI;SSA;BG;206-08-80;Qualité de l'alimentation et offre alimentaire
+2020;LFI;Ministere;;7;Action et comptes publics
+2020;LFI;Ministere;;44;Outre-mer
+2020;LFI;Ministere;;9;Intérieur
+2020;LFI;Ministere;;21;Économie et finances
+2020;LFI;Ministere;;38;Enseignement supérieur, recherche et innovation
+2020;LFI;Ministere;;6;Éducation nationale et jeunesse
+2020;LFI;Ministere;;45;Cohésion des territoires et relations avec les collectivités territoriales
+2020;LFI;Ministere;;3;Agriculture et alimentation
+2020;LFI;Ministere;;1;Europe et affaires étrangères
+2020;LFI;Ministere;;2;Culture
+2020;LFI;Ministere;;10;Justice
+2020;LFI;Ministere;;52;Sports
+2020;LFI;Ministere;;56;Solidarités et santé
+2020;LFI;Ministere;;23;Transition écologique et solidaire
+2020;LFI;Ministere;;70;Armées
+2020;LFI;Ministere;;12;Services du Premier ministre
+2020;LFI;Ministere;;36;Travail
+2020;LFI;TitreLolf;;1;Dotations des pouvoirs publics
+2020;LFI;CategorieLolf;;10;"Cat Dotations des pouvoirs publics
+"
+2020;LFI;TitreLolf;;2;Dépenses de personnel
+2020;LFI;CategorieLolf;;21;Rémunérations d’activité
+2020;LFI;CategorieLolf;;22;Cotisations et contributions sociales
+2020;LFI;CategorieLolf;;23;Prestations sociales et allocations diverses
+2020;LFI;TitreLolf;;3;Dépenses de fonctionnement
+2020;LFI;CategorieLolf;;31;Dépenses de fonctionnement autres que celles de personnel
+2020;LFI;CategorieLolf;;32;Subventions pour charges de service public
+2020;LFI;TitreLolf;;4;Charges de la dette de l’État
+2020;LFI;CategorieLolf;;41;Intérêt de la dette financière négociable
+2020;LFI;CategorieLolf;;42;Intérêt de la dette financière non négociable
+2020;LFI;CategorieLolf;;43;Charges financières diverses
+2020;LFI;TitreLolf;;5;Dépenses d’investissement
+2020;LFI;CategorieLolf;;51;Dépenses pour immobilisations corporelles de l’État
+2020;LFI;CategorieLolf;;52;Dépenses pour immobilisations incorporelles de l’État
+2020;LFI;TitreLolf;;6;Dépenses d’intervention
+2020;LFI;CategorieLolf;;61;Transferts aux ménages
+2020;LFI;CategorieLolf;;62;Transferts aux entreprises
+2020;LFI;CategorieLolf;;63;Transferts aux collectivités territoriales
+2020;LFI;CategorieLolf;;64;Transferts aux autres collectivités
+2020;LFI;CategorieLolf;;65;Appels en garantie
+2020;LFI;TitreLolf;;7;Dépenses d’opérations financières
+2020;LFI;CategorieLolf;;71;Prêts et avances
+2020;LFI;CategorieLolf;;72;Dotations en fonds propres
+2020;LFI;CategorieLolf;;73;Dépenses de participations financières

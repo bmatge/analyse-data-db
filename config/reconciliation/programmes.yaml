@@ -1,0 +1,253 @@
+# Réconciliation des programmes budgétaires à travers les années
+# Ce fichier est la seule partie du système nécessitant un jugement humain
+# lors de changements de nomenclature.
+
+# ============================================================
+# PROGRAMMES STABLES (même code dans les 3 jeux de données 2014-2024-2025)
+# Pour ceux-ci, le canonical_id est automatiquement "PGM:{code}"
+# ============================================================
+stable_codes:
+  years: [2014, 2024, 2025]
+  codes:
+    - 101  # Accès au droit et à la justice
+    - 102  # Accès et retour à l'emploi
+    - 103  # Accompagnement des mutations économiques et développement de l'emploi
+    - 104  # Intégration et accès à la nationalité française
+    - 105  # Action de la France en Europe et dans le monde
+    - 107  # Administration pénitentiaire
+    - 109  # Aide à l'accès au logement
+    - 110  # Aide économique et financière au développement
+    - 111  # Amélioration de la qualité de l'emploi et des relations du travail
+    - 112  # Impulsion et coordination de la politique d'aménagement du territoire
+    - 113  # Paysages, eau et biodiversité
+    - 114  # Appels en garantie de l'État
+    - 117  # Charge de la dette et trésorerie de l'État
+    - 119  # Concours financiers aux collectivités territoriales
+    - 122  # Concours spécifiques et administration
+    - 123  # Conditions de vie outre-mer
+    - 126  # Conseil d'État et autres juridictions administratives
+    - 129  # Coordination du travail gouvernemental
+    - 131  # Création
+    - 134  # Développement des entreprises et régulations
+    - 135  # Urbanisme, territoires et amélioration de l'habitat
+    - 137  # Égalité entre les femmes et les hommes
+    - 138  # Emploi outre-mer
+    - 139  # Enseignement privé du premier et du second degrés
+    - 140  # Enseignement scolaire public du premier degré
+    - 141  # Enseignement scolaire public du second degré
+    - 142  # Enseignement supérieur et recherche agricoles
+    - 143  # Enseignement technique agricole
+    - 144  # Environnement et prospective de la politique de défense
+    - 145  # Épargne
+    - 146  # Équipement des forces
+    - 147  # Politique de la ville
+    - 148  # Fonction publique
+    - 149  # Compétitivité et durabilité de l'agriculture
+    - 150  # Formations supérieures et recherche universitaire
+    - 151  # Français à l'étranger et affaires consulaires
+    - 152  # Gendarmerie nationale
+    - 155  # Soutien des ministères sociaux
+    - 156  # Gestion fiscale et financière de l'État et du secteur public local
+    - 157  # Handicap et dépendance
+    - 158  # Indemnisation des victimes des persécutions antisémites
+    - 159  # Expertise, information géographique et météorologie
+    - 161  # Sécurité civile
+    - 162  # Interventions territoriales de l'État
+    - 163  # Jeunesse et vie associative
+    - 164  # Cour des comptes et autres juridictions financières
+    - 165  # Conseil économique, social et environnemental
+    - 166  # Justice judiciaire
+    - 169  # Reconnaissance et réparation en faveur du monde combattant
+    - 172  # Recherches scientifiques et technologiques pluridisciplinaires
+    - 174  # Énergie, climat et après-mines
+    - 175  # Patrimoines
+    - 176  # Police nationale
+    - 177  # Hébergement, parcours vers le logement et insertion
+    - 178  # Préparation et emploi des forces
+    - 180  # Presse et médias
+    - 181  # Prévention des risques
+    - 182  # Protection judiciaire de la jeunesse
+    - 183  # Protection maladie
+    - 185  # Diplomatie culturelle et d'influence
+    - 190  # Recherche dans les domaines de l'énergie
+    - 191  # Recherche duale (civile et militaire)
+    - 192  # Recherche et enseignement supérieur en matière économique et industrielle
+    - 193  # Recherche spatiale
+    - 195  # Régimes de retraite des mines, de la SEITA et divers
+    - 197  # Régimes de retraite et de sécurité sociale des marins
+    - 198  # Régimes sociaux et de retraite des transports terrestres
+    - 200  # Remboursements et dégrèvements d'impôts d'État
+    - 201  # Remboursements et dégrèvements d'impôts locaux
+    - 203  # Infrastructures et services de transports
+    - 204  # Prévention, sécurité sanitaire et offre de soins
+    - 205  # Affaires maritimes, pêche et aquaculture
+    - 206  # Sécurité et qualité sanitaires de l'alimentation
+    - 207  # Sécurité et éducation routières
+    - 209  # Solidarité à l'égard des pays en développement
+    - 212  # Soutien de la politique de la défense
+    - 214  # Soutien de la politique de l'éducation nationale
+    - 215  # Conduite et pilotage des politiques de l'agriculture
+    - 216  # Conduite et pilotage des politiques de l'intérieur
+    - 217  # Conduite et pilotage des politiques de l'écologie
+    - 218  # Conduite et pilotage des politiques économiques et financières
+    - 219  # Sport
+    - 220  # Statistiques et études économiques
+    - 224  # Soutien aux politiques du ministère de la culture
+    - 230  # Vie de l'élève
+    - 231  # Vie étudiante
+    - 232  # Vie politique
+    - 302  # Facilitation et sécurisation des échanges
+    - 303  # Immigration et asile
+    - 304  # Inclusion sociale et protection des personnes
+    - 305  # Stratégie économique et fiscale
+    - 308  # Protection des droits et libertés
+    - 310  # Conduite et pilotage de la politique de la justice
+    - 334  # Livre et industries culturelles
+    - 335  # Conseil supérieur de la magistrature
+    - 501  # Présidence de la République
+    - 511  # Assemblée nationale
+    - 521  # Sénat
+    - 531  # Conseil constitutionnel
+    - 533  # Cour de justice de la République
+    - 541  # Indemnités des représentants français au Parlement européen
+    - 551  # Provision relative aux rémunérations publiques
+    - 552  # Dépenses accidentelles et imprévisibles
+    - 612  # Navigation aérienne
+    - 613  # Soutien aux prestations de l'aviation civile
+    - 614  # Transports aériens, surveillance et certification
+    - 623  # Édition et diffusion
+    - 624  # Pilotage et activités de développement des publications
+    - 723  # Contribution aux dépenses immobilières
+    - 731  # Opérations en capital intéressant les participations de l'État
+    - 732  # Désendettement de l'État et d'établissements publics
+    - 741  # Pensions civiles et militaires de retraite
+    - 742  # Ouvriers des établissements industriels de l'État
+    - 743  # Pensions militaires d'invalidité
+    - 751  # Structures et dispositifs de sécurité routière
+    - 753  # Contrôle et modernisation de la politique de la circulation
+    - 754  # Contribution à l'équipement des collectivités territoriales
+    - 755  # Désendettement de l'État
+    - 775  # Développement et transfert en agriculture
+    - 776  # Recherche appliquée et innovation en agriculture
+    - 793  # Électrification rurale
+    - 794  # Opérations de maîtrise de la demande d'électricité
+    - 821  # Avances à des organismes distincts de l'État
+    - 823  # Avances à des services de l'État
+    - 824  # Avances à des particuliers et associations
+    - 825  # Avances à des collectivités et établissements publics
+    - 832  # Avances sur le montant des impositions revenant aux régions
+    - 833  # Avances sur le montant des impositions revenant aux départements
+    - 851  # Prêts du Trésor à des États étrangers
+    - 852  # Prêts pour le développement économique et social
+    - 853  # Prêts à l'Agence française de développement
+    - 861  # Prêts et avances à des particuliers ou organismes privés
+    - 862  # Avances remboursables et prêts bonifiés aux entreprises
+
+# ============================================================
+# PROGRAMMES CRÉÉS ENTRE 2014 ET 2024 (présents en 2024+2025)
+# ============================================================
+created_2014_2024:
+  codes:
+    - 343  # Plan France très haut débit
+    - 344  # Fonds de soutien relatif aux prêts et contrats financiers structurés
+    - 345  # Service public de l'énergie
+    - 348  # Performance et résilience des bâtiments de l'État et de ses opérateurs
+    - 349  # Transformation publique
+    - 350  # Jeux olympiques et paralympiques 2024
+    - 354  # Administration territoriale de l'État
+    - 355  # Charge de la dette de SNCF Réseau
+    - 361  # Transmission des savoirs et démocratisation de la culture
+    - 362  # Écologie
+    - 363  # Compétitivité
+    - 365  # Renforcement des fonds propres de l'AFD
+    - 368  # Conduite et pilotage de la transformation et de la fonction publiques
+    - 369  # Amortissement de la dette de l'État liée à la covid-19
+    - 370  # Restitution des biens mal acquis
+    - 379  # Compensation à la sécurité sociale du coût des dons de vaccins
+    - 380  # Fonds d'accélération de la transition écologique dans les territoires
+    - 381  # Allègements du coût du travail en agriculture (TODE-AG)
+    - 421  # Soutien des progrès de l'enseignement et de la recherche
+    - 422  # Valorisation de la recherche
+    - 423  # Accélération de la modernisation des entreprises
+    - 424  # Financement des investissements stratégiques
+    - 425  # Financement structurel des écosystèmes d'innovation
+    - 830  # Avances aux collectivités et établissements publics et à la Nouvelle-Calédonie
+    - 869  # Prêts à la société concessionnaire de la liaison express
+
+# ============================================================
+# PROGRAMMES UNIQUEMENT EN 2025 (nouveaux)
+# ============================================================
+created_2025:
+  notes: "Audiovisuel public passé de CAS (ZD) à BG (AQ)"
+  codes:
+    - 235  # Moyens de l'administration territoriale de l'État
+    - 372  # France Télévisions
+    - 373  # ARTE France
+    - 374  # Radio France
+    - 375  # France Médias Monde
+    - 376  # Institut national de l'audiovisuel
+    - 377  # TV5 Monde
+    - 383  # Soutien à l'expression radiophonique locale
+    - 384  # Solidarité à l'égard des pays en développement (nouveau)
+
+# ============================================================
+# ÉVÉNEMENTS DE RÉCONCILIATION
+# ============================================================
+events:
+  # Audiovisuel public : basculement CAS → BG en 2025
+  - type: move
+    year: 2025
+    description: "L'audiovisuel public passe de CAS (mission ZD) à BG (mission AQ)"
+    sources:
+      - { code: 841, label: "France Télévisions (CAS)" }
+      - { code: 842, label: "ARTE France (CAS)" }
+      - { code: 843, label: "Radio France (CAS)" }
+      - { code: 844, label: "France Médias Monde (CAS)" }
+      - { code: 845, label: "INA (CAS)" }
+    targets:
+      - { code: 372, canonical_id: "PGM:audiovisuel-france-televisions" }
+      - { code: 373, canonical_id: "PGM:audiovisuel-arte" }
+      - { code: 374, canonical_id: "PGM:audiovisuel-radio-france" }
+      - { code: 375, canonical_id: "PGM:audiovisuel-france-medias-monde" }
+      - { code: 376, canonical_id: "PGM:audiovisuel-ina" }
+
+  # Gestion des FP scindée en 2015-2018
+  - type: split
+    year: 2018
+    description: "Mission Gestion des finances publiques et des ressources humaines scindée"
+    source:
+      mission_code_old: GA  # Ancien périmètre élargi
+    targets:
+      - { mission_code: GA, label: "Gestion des finances publiques" }
+      - { mission_code: TR, label: "Transformation et fonction publiques" }
+
+  # Programmes renommés (même code, libellé différent)
+  - type: rename
+    code: 149
+    year: 2015
+    old_label: "Forêt"
+    new_label: "Compétitivité et durabilité de l'agriculture, de l'agroalimentaire et de la forêt"
+
+  - type: rename
+    code: 177
+    year: 2016
+    old_label: "Prévention de l'exclusion et insertion des personnes vulnérables"
+    new_label: "Hébergement, parcours vers le logement et insertion des personnes vulnérables"
+
+  - type: rename
+    code: 224
+    year: 2020
+    old_label: "Transmission des savoirs et démocratisation de la culture"
+    new_label: "Soutien aux politiques du ministère de la culture"
+
+  - type: rename
+    code: 304
+    year: 2017
+    old_label: "Lutte contre la pauvreté : revenu de solidarité active et expérimentations sociales"
+    new_label: "Inclusion sociale et protection des personnes"
+
+  - type: rename
+    code: 751
+    year: 2020
+    old_label: "Radars"
+    new_label: "Structures et dispositifs de sécurité routière"

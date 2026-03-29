@@ -1,0 +1,41 @@
+# Configuration de scan des documents PDF du PLF 2025
+# Utilisé par src/ingest/documents.py pour scanner et indexer les PDFs
+
+annee: 2025
+exercice: PLF
+type_document: PAP
+root_path: "PLF_2025"
+
+patterns:
+  # Documents au niveau mission
+  mission:
+    path_pattern: "{type_budget}/MSN/{mission_code}/"
+    filename_patterns:
+      - "PAP{annee}_{budget_prefix}_{mission_name}_{mission_code}.pdf"
+    # Le préfixe dans le nom de fichier diff��re du code type_budget pour CAS/CCF
+    budget_prefix_mapping:
+      BG: "BG"
+      BA: "BA"
+      CAS: "CS_CAS"
+      CCF: "CS_CCF"
+      CCO: "CS_CCO"
+      COM: "CS_COM"
+
+  # Documents au niveau programme
+  programme:
+    path_pattern: "{type_budget}/PGM/{programme_code}/"
+    filename_patterns:
+      - "FR_{annee}_PLF_{mission_code}_PGM_{programme_code}.pdf"
+
+  # Documents spéciaux (pas de découpage MSN/PGM)
+  special:
+    - type_budget: CCO
+      path: "CCO/CCO/"
+      filename: "PAP2025_CS_CCO_Comptes_commerce.pdf"
+      mission_code: null
+      programme_code: null
+    - type_budget: COM
+      path: "COM/COM/"
+      filename: "PAP2025_CS_COM_Comptes_operations_monetaires.pdf"
+      mission_code: null
+      programme_code: null

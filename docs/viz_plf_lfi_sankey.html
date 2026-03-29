@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>PLF → LFI — Flux budgétaires 2019-2023</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: #fafafa; color: #1a1a2e; }
+  h1 { text-align: center; padding: 18px 0 2px; font-size: 19px; }
+  .subtitle { text-align: center; color: #666; font-size: 12px; margin-bottom: 8px; }
+  #controls { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin: 4px 16px 6px; }
+  .control-group { display: flex; align-items: center; gap: 4px; }
+  .control-group label { font-size: 11px; font-weight: 600; color: #555; margin-right: 4px; }
+  .control-group button {
+    padding: 3px 10px; border: 1px solid #ccc; border-radius: 4px;
+    background: white; cursor: pointer; font-size: 11px; transition: all .15s;
+  }
+  .control-group button:hover { background: #f0f0f0; }
+  .control-group button.active { background: #1a1a2e; color: white; border-color: #1a1a2e; }
+  .control-group select { font-size: 11px; padding: 3px 6px; border: 1px solid #ccc; border-radius: 4px; max-width: 250px; }
+  .legend-bar { display: flex; justify-content: center; gap: 16px; margin: 4px 0 2px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #555; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
+  .stats { text-align: center; font-size: 11px; color: #888; margin: 4px 0; }
+  #chart { width: 100%; overflow-x: auto; overflow-y: hidden; }
+  svg { display: block; margin: 0 auto; }
+  .link { fill: none; stroke-opacity: 0.18; transition: stroke-opacity .15s; }
+  .link:hover { stroke-opacity: 0.45; }
+  .link.plf-lfi { stroke-opacity: 0.22; }
+  .link.plf-lfi:hover { stroke-opacity: 0.5; }
+  .step-label { font-size: 13px; font-weight: 700; fill: #1a1a2e; }
+  .step-label-sub { font-size: 10px; fill: #888; }
+  .tooltip {
+    position: absolute; background: white; border: 1px solid #ddd;
+    border-radius: 6px; padding: 10px 14px; font-size: 11px;
+    pointer-events: none; box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+    max-width: 420px; line-height: 1.6; z-index: 10;
+  }
+  .tooltip .tt-title { font-weight: 700; font-size: 12px; margin-bottom: 3px; }
+  .tooltip .tt-detail { color: #555; }
+  .tooltip .tt-delta-pos { color: #059669; font-weight: 600; }
+  .tooltip .tt-delta-neg { color: #dc2626; font-weight: 600; }
+  .tooltip .tt-badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; color: white; margin-right: 4px; }
+</style>
+</head>
+<body>
+
+<h1>Flux budgétaires PLF → LFI (2019-2023)</h1>
+<p class="subtitle">Évolution des autorisations d'engagement du projet de loi au vote — par mission ou programme</p>
+
+<div id="controls">
+  <div class="control-group">
+    <label>Niveau :</label>
+    <button class="active" data-level="mission">Missions</button>
+    <button data-level="programme">Programmes</button>
+  </div>
+  <div class="control-group">
+    <label>Filtre :</label>
+    <select id="mission-filter"><option value="all">Toutes les missions</option></select>
+  </div>
+</div>
+
+<div class="legend-bar">
+  <span class="legend-item"><span class="legend-swatch" style="background:#3b82f6"></span>PLF (projet)</span>
+  <span class="legend-item"><span class="legend-swatch" style="background:#f59e0b"></span>LFI (voté)</span>
+  <span class="legend-item"><span class="legend-swatch" style="background:#94a3b8;opacity:.4"></span>PLF→LFI (même année)</span>
+  <span class="legend-item"><span class="legend-swatch" style="background:#3b82f6;opacity:.4"></span>LFI→PLF (année suivante)</span>
+</div>
+
+<div class="stats" id="stats"></div>
+<div id="chart"></div>
+<div class="tooltip" style="display:none"></div>
+
+<script>
+const PLF_COLOR = "#3b82f6";
+const LFI_COLOR = "#f59e0b";
+const LINK_PLF_LFI = "#94a3b8";  // within same year
+const LINK_YEAR = "#3b82f6";     // across years
+
+let DATA, currentLevel = "mission", currentMission = "all";
+
+fetch("sankey_plf_lfi_data.json").then(r => r.json()).then(data => {
+  DATA = data;
+  populateFilter();
+  render();
+
+  document.querySelectorAll("[data-level]").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll("[data-level]").forEach(x => x.classList.remove("active"));
+    b.classList.add("active"); currentLevel = b.dataset.level;
+    populateFilter(); render();
+  }));
+  document.getElementById("mission-filter").addEventListener("change", e => {
+    currentMission = e.target.value; render();
+  });
+});
+
+function populateFilter() {
+  const sel = document.getElementById("mission-filter");
+  sel.innerHTML = '<option value="all">Toutes les missions</option>';
+  const missions = new Map();
+  for (const [key, mdata] of Object.entries(DATA.missions_by_step)) {
+    for (const code of Object.keys(mdata)) {
+      if (!missions.has(code)) {
+        missions.set(code, DATA.mission_labels[code] || code);
+      }
+    }
+  }
+  [...missions.entries()].sort((a,b) => a[1].localeCompare(b[1])).forEach(([code, lib]) => {
+    const opt = document.createElement("option");
+    opt.value = code;
+    opt.textContent = `${code} — ${lib.slice(0, 45)}`;
+    sel.appendChild(opt);
+  });
+}
+
+function fmtMd(v) { return (v / 1e9).toFixed(1) + " Md€"; }
+function fmtM(v) { return (v / 1e6).toFixed(0) + " M€"; }
+
+function render() {
+  d3.select("#chart").selectAll("*").remove();
+  const steps = DATA.steps; // [{exercice, year}, ...]
+  const nodes = [], links = [], nodeIdx = {};
+
+  function nid(step, code) { return `${step.exercice}${step.year}::${code}`; }
+  function addNode(step, si, code, label, ae) {
+    const id = nid(step, code);
+    if (nodeIdx[id] !== undefined) return nodeIdx[id];
+    nodeIdx[id] = nodes.length;
+    nodes.push({ id, step, si, code, label, ae, exercice: step.exercice, year: step.year });
+    return nodeIdx[id];
+  }
+
+  // Build nodes per step
+  steps.forEach((step, si) => {
+    const key = `${step.exercice} ${step.year}`;
+    if (currentLevel === "mission") {
+      const mdata = DATA.missions_by_step[key] || {};
+      for (const [code, info] of Object.entries(mdata)) {
+        if (currentMission !== "all" && code !== currentMission) continue;
+        const label = DATA.mission_labels[code] || code;
+        addNode(step, si, code, label, info.ae);
+      }
+    } else {
+      const pdata = DATA.programmes_by_step[key] || {};
+      for (const [code, info] of Object.entries(pdata)) {
+        if (currentMission !== "all" && info.mission !== currentMission) continue;
+        addNode(step, si, code, code, info.ae);
+      }
+    }
+  });
+
+  // Build links between consecutive steps
+  for (let i = 0; i < steps.length - 1; i++) {
+    const s1 = steps[i], s2 = steps[i + 1];
+    const k1 = `${s1.exercice} ${s1.year}`, k2 = `${s2.exercice} ${s2.year}`;
+    const isPlfToLfi = s1.exercice === "PLF" && s2.exercice === "LFI" && s1.year === s2.year;
+
+    const getData = (key) => currentLevel === "mission" ? DATA.missions_by_step[key] : DATA.programmes_by_step[key];
+    const d1 = getData(k1) || {};
+    const d2 = getData(k2) || {};
+
+    for (const code of Object.keys(d1)) {
+      if (!(code in d2)) continue;
+      const si1 = nodeIdx[nid(s1, code)];
+      const si2 = nodeIdx[nid(s2, code)];
+      if (si1 === undefined || si2 === undefined) continue;
+
+      // Use min of the two AE values for link width (to show flow continuity)
+      const ae1 = d1[code].ae || 0;
+      const ae2 = d2[code].ae || 0;
+      const val = Math.max(1, Math.min(ae1, ae2) / 1e6);
+
+      links.push({
+        source: si1, target: si2, value: val,
+        isPlfToLfi, ae1, ae2, code,
+      });
+    }
+  }
+
+  if (nodes.length === 0) {
+    d3.select("#chart").append("p").style("text-align","center").style("padding","40px").style("color","#999")
+      .text("Aucun élément pour cette sélection.");
+    document.getElementById("stats").textContent = "";
+    return;
+  }
+
+  // Stats
+  const stepTotals = {};
+  steps.forEach(s => {
+    const key = `${s.exercice} ${s.year}`;
+    const d = currentLevel === "mission" ? DATA.missions_by_step[key] : DATA.programmes_by_step[key];
+    if (!d) return;
+    let total = 0;
+    for (const [code, info] of Object.entries(d)) {
+      if (currentMission !== "all") {
+        if (currentLevel === "mission" && code !== currentMission) continue;
+        if (currentLevel === "programme" && info.mission !== currentMission) continue;
+      }
+      total += info.ae || 0;
+    }
+    stepTotals[key] = total;
+  });
+  const statsStr = steps.map(s => {
+    const k = `${s.exercice} ${s.year}`;
+    const v = stepTotals[k];
+    return v ? `${s.exercice} ${s.year}: ${fmtMd(v)}` : null;
+  }).filter(Boolean).join(" → ");
+  document.getElementById("stats").textContent = statsStr;
+
+  // Layout
+  const margin = { top: 52, right: 180, bottom: 20, left: 180 };
+  const colWidth = 180;
+  const width = margin.left + colWidth * (steps.length - 1) + margin.right;
+  const nodesPerStep = {};
+  nodes.forEach(n => { nodesPerStep[n.si] = (nodesPerStep[n.si] || 0) + 1; });
+  const maxNodes = Math.max(...Object.values(nodesPerStep));
+  const rowH = currentLevel === "programme" ? 8 : 12;
+  const height = Math.max(500, maxNodes * (rowH + 3) + margin.top + margin.bottom);
+
+  const svg = d3.select("#chart").append("svg").attr("width", width).attr("height", height);
+
+  const sankey = d3.sankey()
+    .nodeId(d => d.index).nodeWidth(12).nodePadding(currentLevel === "programme" ? 2 : 4)
+    .nodeAlign(d3.sankeyLeft)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankey({
+    nodes: nodes.map((d, i) => ({ ...d, index: i })),
+    links: links.map(d => ({ ...d })),
+  });
+
+  // Fix x positions to step columns
+  const stepX = {};
+  steps.forEach((s, i) => { stepX[i] = margin.left + i * colWidth; });
+  graph.nodes.forEach(n => { const dx = stepX[n.si] - n.x0; n.x0 += dx; n.x1 += dx; });
+
+  // Step labels
+  steps.forEach((s, i) => {
+    const x = stepX[i] + 6;
+    const color = s.exercice === "PLF" ? PLF_COLOR : LFI_COLOR;
+    svg.append("text").attr("class", "step-label").attr("x", x).attr("y", margin.top - 20)
+      .attr("text-anchor", "middle").attr("fill", color).text(s.exercice);
+    svg.append("text").attr("class", "step-label-sub").attr("x", x).attr("y", margin.top - 7)
+      .attr("text-anchor", "middle").text(s.year);
+  });
+
+  // Links
+  svg.append("g").selectAll("path").data(graph.links).join("path")
+    .attr("class", d => "link" + (d.isPlfToLfi ? " plf-lfi" : ""))
+    .attr("d", d3.sankeyLinkHorizontal())
+    .attr("stroke", d => d.isPlfToLfi ? LINK_PLF_LFI : LINK_YEAR)
+    .attr("stroke-width", d => Math.max(1, d.width))
+    .on("mouseover", (ev, d) => showTooltip(ev, linkTip(d)))
+    .on("mousemove", moveTip)
+    .on("mouseout", hideTip);
+
+  // Nodes
+  const ng = svg.append("g").selectAll("g").data(graph.nodes).join("g");
+  ng.append("rect")
+    .attr("x", d => d.x0).attr("y", d => d.y0)
+    .attr("width", d => d.x1 - d.x0).attr("height", d => Math.max(1, d.y1 - d.y0))
+    .attr("fill", d => d.exercice === "PLF" ? PLF_COLOR : LFI_COLOR).attr("rx", 2)
+    .on("mouseover", (ev, d) => showTooltip(ev, nodeTip(d)))
+    .on("mousemove", moveTip)
+    .on("mouseout", hideTip);
+
+  // Labels on last column
+  const fontSize = currentLevel === "programme" ? "8px" : "10px";
+  const maxLen = currentLevel === "programme" ? 25 : 28;
+  ng.filter(d => d.si === steps.length - 1)
+    .append("text")
+    .attr("x", d => d.x1 + 5).attr("y", d => (d.y0 + d.y1) / 2).attr("dy", "0.35em")
+    .attr("font-size", fontSize).attr("fill", "#333")
+    .text(d => {
+      const l = currentLevel === "mission" ? (d.label || d.code) : d.code;
+      return l.length > maxLen ? l.slice(0, maxLen - 1) + "…" : l;
+    });
+
+  // Labels on first column (right-aligned)
+  ng.filter(d => d.si === 0)
+    .append("text")
+    .attr("x", d => d.x0 - 5).attr("y", d => (d.y0 + d.y1) / 2).attr("dy", "0.35em")
+    .attr("text-anchor", "end").attr("font-size", fontSize).attr("fill", "#333")
+    .text(d => {
+      const l = currentLevel === "mission" ? (d.label || d.code) : d.code;
+      return l.length > maxLen ? l.slice(0, maxLen - 1) + "…" : l;
+    });
+}
+
+// Tooltip
+const tooltip = d3.select(".tooltip");
+function showTooltip(ev, html) { tooltip.style("display", "block").html(html); moveTip(ev); }
+function moveTip(ev) { tooltip.style("left", (ev.pageX + 14) + "px").style("top", (ev.pageY - 12) + "px"); }
+function hideTip() { tooltip.style("display", "none"); }
+
+function nodeTip(d) {
+  const badge = `<span class="tt-badge" style="background:${d.exercice === "PLF" ? PLF_COLOR : LFI_COLOR}">${d.exercice} ${d.year}</span>`;
+  const label = currentLevel === "mission" ? `${d.code} — ${d.label}` : `Programme ${d.code}`;
+  const aeStr = d.ae ? `AE : ${fmtMd(d.ae)}` : "Pas de montant";
+  return `<div class="tt-title">${badge}${label}</div><div class="tt-detail">${aeStr}</div>`;
+}
+
+function fmtMd(v) { return (v / 1e9).toFixed(2) + " Md€"; }
+
+function linkTip(d) {
+  const src = typeof d.source === "object" ? d.source : null;
+  const tgt = typeof d.target === "object" ? d.target : null;
+  if (!src || !tgt) return "";
+
+  const delta = d.ae2 - d.ae1;
+  const pct = d.ae1 ? ((delta / d.ae1) * 100).toFixed(1) : "—";
+  const deltaClass = delta >= 0 ? "tt-delta-pos" : "tt-delta-neg";
+  const deltaSign = delta >= 0 ? "+" : "";
+  const label = d.isPlfToLfi ? "Passage PLF → LFI (vote)" : "Évolution inter-annuelle";
+
+  return `<div class="tt-title">${label}</div>` +
+    `<div class="tt-detail">` +
+    `${src.exercice} ${src.year} : ${fmtMd(d.ae1)}<br>` +
+    `${tgt.exercice} ${tgt.year} : ${fmtMd(d.ae2)}<br>` +
+    `<span class="${deltaClass}">Δ ${deltaSign}${fmtMd(delta)} (${deltaSign}${pct}%)</span>` +
+    `</div>`;
+}
+</script>
+</body>
+</html>

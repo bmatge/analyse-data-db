@@ -1,0 +1,43 @@
+# PLF 2019 - Nomenclature par destination
+# 10 colonnes, 720 lignes — enrichi par rapport à 2014 : inclut Code Mission et Code Ministère
+# Encodage latin-1 (pas UTF-8)
+
+source:
+  type: csv
+  encoding: latin-1
+  separator: ";"
+
+file_pattern: "PLF_2019_Nomenclature_destination.csv"
+
+columns:
+  type_budget:
+    source: "Type de mission"
+    type: string
+    mapping:
+      "Budget général": BG
+      "Budgets annexes": BA
+      "Comptes d'affectation spéciale": CAS
+      "Comptes de concours financiers": CCF
+  mission_libelle:     { source: "Mission", type: string }
+  mission_code:        { source: "Code Mission", type: string }
+  programme_code:      { source: "Code Programme", type: integer }
+  programme_libelle:   { source: "Programme", type: string }
+  action_code:         { source: "Code Action", type: string }
+  action_libelle:      { source: "Action", type: string }
+  sous_action_code:    null
+  sous_action_libelle: null
+  categorie_code:      null
+  titre_code:          null
+  ae:                  null
+  cp:                  null
+  ae_fdc_adp:          null
+  cp_fdc_adp:          null
+  ministere_nom:       { source: "Ministère", type: string }
+
+derived:
+  exercice: PLF
+  annee: 2019
+
+validation:
+  required_columns: ["Type de mission", "Code Programme", "Programme", "Code Action"]
+  type_budget_values: [BG, BA, CAS, CCF]

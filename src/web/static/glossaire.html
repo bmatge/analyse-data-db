@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossaire – Budget Explorer</title>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+  /* Page-specific styles */
+  .axes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1rem 0;
+  }
+  @media (max-width: 700px) { .axes-grid { grid-template-columns: 1fr; } }
+
+  .axis-col {
+    padding: 1.2rem;
+    border-radius: var(--radius);
+    border: 2px solid;
+    background: var(--card);
+  }
+  .axis-col.dest { border-color: var(--accent); background: #eff6ff; }
+  .axis-col.nat  { border-color: var(--nature); background: #fffbeb; }
+  .axis-col h3 { margin: 0 0 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+  .axis-col.dest h3 { color: var(--accent); }
+  .axis-col.nat h3  { color: var(--nature); }
+
+  .hier-list { list-style: none; padding: 0; }
+  .hier-item { padding: 0.4rem 0 0.4rem 1.6rem; position: relative; }
+  .hier-item::before {
+    content: ''; position: absolute; left: 0.5rem; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+  }
+  .hier-item::after {
+    content: ''; position: absolute; left: 0.5rem; top: 1rem;
+    width: 0.8rem; height: 2px; background: var(--border);
+  }
+  .hier-item:last-child::before { bottom: calc(100% - 1rem); }
+  .hier-list > .hier-item:first-child::before,
+  .hier-list > .hier-item:first-child::after { display: none; }
+  .hier-list > .hier-item:first-child { padding-left: 0; }
+
+  .hier-label { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .hier-name { font-weight: 600; font-size: 0.92rem; }
+  .hier-detail { display: block; font-size: 0.82rem; color: var(--muted); margin-top: 0.1rem; padding-left: 0.2rem; }
+
+  .legend {
+    display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+  }
+  .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.83rem; font-weight: 500; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+
+  .convention-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1rem 0;
+  }
+  .convention-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem;
+  }
+  .convention-card h4 { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.4rem; }
+  .convention-card .codes { font-family: 'SF Mono','Fira Code',monospace; font-size: 0.9rem; font-weight: 600; }
+  .convention-card .codes span { display: inline-block; margin: 0.1rem 0.2rem 0.1rem 0; padding: 0.15rem 0.45rem; border-radius: 4px; }
+
+  .crosslink { text-align: center; }
+  .crosslink svg { max-width: 100%; height: auto; }
+
+  .keypoints { list-style: none; padding: 0; }
+  .keypoints li { margin-bottom: 0.6rem; font-size: 0.9rem; }
+  .keypoints strong { color: var(--nature); }
+
+  .example-path {
+    display: flex; align-items: center; gap: 0.3rem; flex-wrap: wrap; margin: 1rem 0; font-size: 0.88rem;
+  }
+  .path-step {
+    display: flex; align-items: center; gap: 0.3rem;
+    background: #f1f5f9; padding: 0.35rem 0.65rem; border-radius: 6px; border: 1px solid var(--border);
+  }
+  .path-arrow { color: var(--muted); font-size: 1.1rem; }
+  @media (max-width: 700px) {
+    .example-path { flex-direction: column; align-items: flex-start; }
+    .path-arrow { transform: rotate(90deg); margin: 0.2rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Budget Explorer</a>
+  <div class="links">
+    <a href="/" data-nav="accueil">Accueil</a>
+    <a href="/glossaire" data-nav="glossaire" class="active">Glossaire</a>
+    <a href="/api-specs" data-nav="interfaces">Interfaces</a>
+    <a href="/nomenclature" data-nav="nomenclature">Nomenclature</a>
+    <a href="/corpus" data-nav="corpus">Corpus documentaire</a>
+    <a href="/plf-lfi" data-nav="plf-lfi">Flux PLF / LFI</a>
+  </div>
+</nav>
+
+<main>
+<h1>Glossaire des nomenclatures budgetaires</h1>
+<p class="subtitle">Structure hierarchique des classifications de la loi de finances</p>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div> Nomenclature par destination</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--nature)"></div> Nomenclature par nature</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--fin)"></div> Donnees financieres</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--doc)"></div> Documents budgetaires</div>
+</div>
+
+<!-- ═══ Vue d'ensemble ═══ -->
+<h2>Les deux axes de la nomenclature</h2>
+<p style="margin-bottom:1rem;font-size:0.9rem;">
+  Le budget est classe selon deux axes : la <strong>destination</strong> (&laquo; a quoi sert la depense ? &raquo;)
+  et la <strong>nature</strong> (&laquo; quel type de depense ? &raquo;).
+</p>
+
+<div class="axes-grid">
+  <div class="axis-col dest">
+    <h3><span class="badge badge-dest">DESTINATION</span> A quoi sert la depense ?</h3>
+    <ul class="hier-list">
+      <li class="hier-item">
+        <div class="hier-label"><span class="badge badge-dest">MIN</span> <span class="hier-name">Ministere</span></div>
+        <span class="hier-detail">17 ministeres &mdash; code numerique (1-70)</span>
+      </li>
+      <li class="hier-item">
+        <div class="hier-label"><span class="badge badge-dest">MSN</span> <span class="hier-name">Mission</span></div>
+        <span class="hier-detail">~46 missions &mdash; code 2 lettres (AA-ZF)</span>
+        <ul class="hier-list">
+          <li class="hier-item">
+            <div class="hier-label"><span class="badge badge-dest">PGM</span> <span class="hier-name">Programme</span></div>
+            <span class="hier-detail">~181 programmes &mdash; code 3 chiffres (101-878)</span>
+            <ul class="hier-list">
+              <li class="hier-item">
+                <div class="hier-label"><span class="badge badge-dest">ACT</span> <span class="hier-name">Action</span></div>
+                <span class="hier-detail">~697 actions &mdash; code PGM-NN</span>
+                <ul class="hier-list">
+                  <li class="hier-item">
+                    <div class="hier-label"><span class="badge badge-dest">SSA</span> <span class="hier-name">Sous-action</span></div>
+                    <span class="hier-detail">~289 sous-actions &mdash; code PGM-NN-NN</span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="axis-col nat">
+    <h3><span class="badge badge-nat">NATURE</span> Quel type de depense ?</h3>
+    <ul class="hier-list">
+      <li class="hier-item" style="padding-left:0;">
+        <div class="hier-label"><span class="badge badge-nat">TTR</span> <span class="hier-name">Titre</span></div>
+        <span class="hier-detail">7 titres &mdash; code numerique (1-7)</span>
+        <ul class="hier-list">
+          <li class="hier-item">
+            <div class="hier-label"><span class="badge badge-nat">CAT</span> <span class="hier-name">Categorie</span></div>
+            <span class="hier-detail">19 categories &mdash; code numerique (10-73)</span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div style="margin-top:1.2rem;padding:0.7rem;background:#fff;border-radius:6px;font-size:0.83rem;color:var(--muted);">
+      <strong style="color:var(--nature)">Le croisement</strong> des deux axes donne le detail complet :
+      par ex. les depenses de <em>personnel</em> (nature) du programme <em>Justice judiciaire</em> (destination).
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Glossaire complet ═══ -->
+<h2>Glossaire complet</h2>
+
+<h3>Nomenclature par destination</h3>
+<table class="data-table">
+  <thead><tr><th>Code</th><th>Nom</th><th>Description</th><th>Format</th><th>Qte</th></tr></thead>
+  <tbody>
+    <tr><td class="code-cell" style="color:var(--accent)">MIN</td><td><strong>Ministere</strong></td><td>Perimetre de responsabilite. Relie au PGM, pas a MSN directement.</td><td>Numerique (1-70)</td><td>~17</td></tr>
+    <tr><td class="code-cell" style="color:var(--accent)">MSN</td><td><strong>Mission</strong></td><td>Unite de vote du Parlement. Peut etre interministerielle.</td><td>2 lettres (AA-ZF)</td><td>~46</td></tr>
+    <tr><td class="code-cell" style="color:var(--accent)">PGM</td><td><strong>Programme</strong></td><td>Unite d'autorisation parlementaire. Pont entre MSN et MIN.</td><td>3 chiffres (101-878)</td><td>~181</td></tr>
+    <tr><td class="code-cell" style="color:var(--accent)">ACT</td><td><strong>Action</strong></td><td>Composante d'un programme, un dispositif precis.</td><td>PGM-NN (ex: 105-01)</td><td>~697</td></tr>
+    <tr><td class="code-cell" style="color:var(--accent)">SSA</td><td><strong>Sous-action</strong></td><td>Detail le plus fin. Pas toujours renseigne (~75% nul).</td><td>PGM-NN-NN</td><td>~289</td></tr>
+  </tbody>
+</table>
+
+<h3>Nomenclature par nature</h3>
+<table class="data-table">
+  <thead><tr><th>Code</th><th>Nom</th><th>Description</th><th>Format</th><th>Qte</th></tr></thead>
+  <tbody>
+    <tr><td class="code-cell" style="color:var(--nature)">TTR</td><td><strong>Titre</strong></td><td>Grande categorie economique (personnel, fonctionnement, investissement...).</td><td>Numerique (1-7)</td><td>7</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">CAT</td><td><strong>Categorie</strong></td><td>Sous-division du titre (remunerations, subventions, transferts...).</td><td>Numerique (10-73)</td><td>19</td></tr>
+  </tbody>
+</table>
+
+<h3>Types de budgets</h3>
+<table class="data-table">
+  <thead><tr><th>Code</th><th>Nom</th><th>Description</th><th>Prefixe MSN</th><th>Plage PGM</th></tr></thead>
+  <tbody>
+    <tr><td class="code-cell"><span class="badge badge-bg">BG</span></td><td><strong>Budget general</strong></td><td>Budget principal, finance par l'impot (~95% des credits).</td><td>A &ndash; V</td><td>101-599</td></tr>
+    <tr><td class="code-cell"><span class="badge badge-ba">BA</span></td><td><strong>Budgets annexes</strong></td><td>Services avec recettes affectees (ex: aviation civile).</td><td>X</td><td>600-699</td></tr>
+    <tr><td class="code-cell"><span class="badge badge-cas">CAS</span></td><td><strong>Comptes d'affectation speciale</strong></td><td>Recettes affectees a des depenses precises (pensions, patrimoine...).</td><td>Y</td><td>700-799</td></tr>
+    <tr><td class="code-cell"><span class="badge badge-ccf">CCF</span></td><td><strong>Comptes de concours financiers</strong></td><td>Prets et avances de l'Etat.</td><td>Z</td><td>800-899</td></tr>
+  </tbody>
+</table>
+
+<h3>Donnees financieres</h3>
+<table class="data-table">
+  <thead><tr><th>Code</th><th>Nom</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td class="code-cell" style="color:var(--fin)">AE</td><td><strong>Autorisations d'engagement</strong></td><td>Montant maximal des engagements juridiques (promesse de depense).</td></tr>
+    <tr><td class="code-cell" style="color:var(--fin)">CP</td><td><strong>Credits de paiement</strong></td><td>Montant effectivement decaisse (depense reelle).</td></tr>
+    <tr><td class="code-cell" style="color:var(--fin)">ETPT</td><td><strong>Equivalents temps plein travaille</strong></td><td>1 agent a temps plein pendant 1 an = 1 ETPT.</td></tr>
+  </tbody>
+</table>
+
+<h3>Documents et exercices budgetaires</h3>
+<table class="data-table">
+  <thead><tr><th>Code</th><th>Nom</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td class="code-cell" style="color:var(--doc)">PLF</td><td><strong>Projet de loi de finances</strong></td><td>Projet de budget depose au Parlement (octobre N-1).</td></tr>
+    <tr><td class="code-cell" style="color:var(--doc)">LFI</td><td><strong>Loi de finances initiale</strong></td><td>Budget vote par le Parlement (decembre N-1).</td></tr>
+    <tr><td class="code-cell" style="color:var(--doc)">LFR</td><td><strong>Loi de finances rectificative</strong></td><td>Budget modifie en cours d'annee ("collectif budgetaire").</td></tr>
+    <tr><td class="code-cell" style="color:var(--doc)">PLR</td><td><strong>Projet de loi de reglement</strong></td><td>Constate l'execution effective du budget.</td></tr>
+    <tr><td class="code-cell" style="color:var(--doc)">PAP</td><td><strong>Projet annuel de performances</strong></td><td>Annexe au PLF : objectifs, indicateurs et credits par programme.</td></tr>
+    <tr><td class="code-cell" style="color:var(--doc)">RAP</td><td><strong>Rapport annuel de performances</strong></td><td>Annexe au PLR : bilan d'execution par programme.</td></tr>
+    <tr><td class="code-cell" style="color:var(--doc)">DPT</td><td><strong>Document de politique transversale</strong></td><td>Vision inter-programmes sur une politique transversale.</td></tr>
+  </tbody>
+</table>
+
+<!-- ═══ Diagramme pivot ═══ -->
+<h2>Le role pivot du Programme</h2>
+
+<div class="card crosslink">
+  <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter','Segoe UI',system-ui,sans-serif;">
+    <rect x="10" y="80" width="140" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="80" y="100" text-anchor="middle" font-size="11" fill="#6b7280">MIN</text>
+    <text x="80" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#1e40af">Ministere</text>
+    <rect x="10" y="10" width="140" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="80" y="30" text-anchor="middle" font-size="11" fill="#6b7280">MSN</text>
+    <text x="80" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="#1e40af">Mission</text>
+    <rect x="220" y="50" width="160" height="60" rx="10" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="300" y="72" text-anchor="middle" font-size="11" fill="#93c5fd">PGM</text>
+    <text x="300" y="94" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">Programme</text>
+    <rect x="450" y="20" width="140" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="520" y="40" text-anchor="middle" font-size="11" fill="#6b7280">ACT</text>
+    <text x="520" y="58" text-anchor="middle" font-size="13" font-weight="700" fill="#1e40af">Action</text>
+    <rect x="450" y="90" width="140" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="520" y="110" text-anchor="middle" font-size="11" fill="#6b7280">SSA</text>
+    <text x="520" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#1e40af">Sous-action</text>
+    <rect x="220" y="155" width="160" height="50" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="300" y="175" text-anchor="middle" font-size="11" fill="#6b7280">Type</text>
+    <text x="300" y="193" text-anchor="middle" font-size="13" font-weight="700" fill="#5b21b6">BG | BA | CAS | CCF</text>
+    <defs><marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#94a3b8"/></marker></defs>
+    <line x1="150" y1="40" x2="218" y2="65" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+    <text x="170" y="42" font-size="9" fill="#94a3b8">1:N</text>
+    <line x1="150" y1="100" x2="218" y2="85" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+    <text x="170" y="103" font-size="9" fill="#94a3b8">1:N</text>
+    <line x1="380" y1="65" x2="448" y2="48" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+    <text x="423" y="48" font-size="9" fill="#94a3b8">1:N</text>
+    <line x1="520" y1="70" x2="520" y2="88" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+    <text x="533" y="82" font-size="9" fill="#94a3b8">1:N</text>
+    <line x1="300" y1="110" x2="300" y2="153" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+    <text x="310" y="138" font-size="9" fill="#94a3b8">via MSN</text>
+  </svg>
+  <p style="font-size:0.83rem;color:var(--muted);margin-top:0.5rem;">
+    Le <strong>Programme</strong> fait le pont entre Mission et Ministere, et se decline en Actions / Sous-actions.
+  </p>
+</div>
+
+<!-- ═══ Exemple concret ═══ -->
+<h2>Exemple : suivre un credit</h2>
+<div class="card">
+  <p style="font-size:0.88rem;margin-bottom:0.6rem;">Credits de personnel diplomatique du ministere des Affaires etrangeres :</p>
+  <div class="example-path">
+    <div class="path-step"><span class="badge badge-bg">BG</span> Budget general</div>
+    <span class="path-arrow">&rarr;</span>
+    <div class="path-step"><span class="badge badge-dest">MIN 1</span> Affaires etrangeres</div>
+    <span class="path-arrow">&rarr;</span>
+    <div class="path-step"><span class="badge badge-dest">MSN AA</span> Action exterieure</div>
+    <span class="path-arrow">&rarr;</span>
+    <div class="path-step"><span class="badge badge-dest">PGM 105</span> Action de la France</div>
+    <span class="path-arrow">&rarr;</span>
+    <div class="path-step"><span class="badge badge-dest">ACT 01</span> Coordination diplomatique</div>
+    <span class="path-arrow">&rarr;</span>
+    <div class="path-step"><span class="badge badge-dest">SSA 01</span> Etat-major : cabinets</div>
+  </div>
+  <p style="font-size:0.83rem;color:var(--muted);">
+    Croise avec <span class="badge badge-nat">TTR 1</span> Depenses de personnel &rarr;
+    <span class="badge badge-nat">CAT 10</span> Remunerations, en distinguant
+    <span class="badge badge-fin">AE</span> (engagements) et <span class="badge badge-fin">CP</span> (paiements).
+  </p>
+</div>
+
+<!-- ═══ Conventions ═══ -->
+<h2>Conventions d'encodage</h2>
+<div class="convention-grid">
+  <div class="convention-card">
+    <h4>Code Mission &rarr; Type de budget</h4>
+    <div class="codes"><span class="badge-bg">A-V</span> BG &nbsp; <span class="badge-ba">X</span> BA &nbsp; <span class="badge-cas">Y</span> CAS &nbsp; <span class="badge-ccf">Z</span> CCF</div>
+  </div>
+  <div class="convention-card">
+    <h4>Code Programme &rarr; Type de budget</h4>
+    <div class="codes"><span class="badge-bg">101-599</span> BG &nbsp; <span class="badge-ba">600-699</span> BA &nbsp; <span class="badge-cas">700-799</span> CAS &nbsp; <span class="badge-ccf">800-899</span> CCF</div>
+  </div>
+  <div class="convention-card">
+    <h4>Code Categorie &rarr; Titre</h4>
+    <div class="codes" style="font-size:0.83rem;">1er chiffre de la categorie = titre (ex: <span class="badge badge-nat">10</span> <span class="badge badge-nat">11</span> <span class="badge badge-nat">12</span> &rarr; Titre 1)</div>
+  </div>
+</div>
+
+<!-- ═══ Titres & Categories ═══ -->
+<h2>Detail : 7 Titres et 19 Categories</h2>
+<table class="data-table">
+  <thead><tr><th>Titre</th><th>Libelle du titre</th><th>Cat.</th><th>Libelle de la categorie</th></tr></thead>
+  <tbody>
+    <tr><td rowspan="3" class="code-cell" style="color:var(--nature)">1</td><td rowspan="3">Depenses de personnel</td><td class="code-cell" style="color:var(--nature)">10</td><td>Remunerations d'activite</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">11</td><td>Cotisations et contributions sociales</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">12</td><td>Prestations sociales et allocations diverses</td></tr>
+    <tr><td rowspan="4" class="code-cell" style="color:var(--nature)">2</td><td rowspan="4">Depenses de fonctionnement</td><td class="code-cell" style="color:var(--nature)">20</td><td>Depenses de fonctionnement autres que celles de personnel</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">21</td><td>Subventions pour charges de service public</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">22</td><td>Depenses de fonctionnement militaire</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">23</td><td>Subventions pour charges de service public (operateurs)</td></tr>
+    <tr><td rowspan="2" class="code-cell" style="color:var(--nature)">3</td><td rowspan="2">Depenses d'investissement</td><td class="code-cell" style="color:var(--nature)">30</td><td>Immobilisations corporelles</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">31</td><td>Immobilisations incorporelles</td></tr>
+    <tr><td rowspan="4" class="code-cell" style="color:var(--nature)">4</td><td rowspan="4">Depenses d'intervention</td><td class="code-cell" style="color:var(--nature)">40</td><td>Transferts aux menages</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">41</td><td>Transferts aux entreprises</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">42</td><td>Transferts aux collectivites territoriales</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">43</td><td>Transferts aux autres collectivites</td></tr>
+    <tr><td rowspan="2" class="code-cell" style="color:var(--nature)">5</td><td rowspan="2">Intervention (transferts financiers)</td><td class="code-cell" style="color:var(--nature)">51</td><td>Dotations en fonds propres</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">52</td><td>Prets et avances</td></tr>
+    <tr><td rowspan="3" class="code-cell" style="color:var(--nature)">6</td><td rowspan="3">Operations financieres</td><td class="code-cell" style="color:var(--nature)">61</td><td>Participations financieres</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">62</td><td>Dotations en fonds propres</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">63</td><td>Prets et avances</td></tr>
+    <tr><td rowspan="3" class="code-cell" style="color:var(--nature)">7</td><td rowspan="3">Operations financieres (fonds propres)</td><td class="code-cell" style="color:var(--nature)">71</td><td>Operations financieres (dotation en fonds propres)</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">72</td><td>Participations financieres</td></tr>
+    <tr><td class="code-cell" style="color:var(--nature)">73</td><td>Prets et avances</td></tr>
+  </tbody>
+</table>
+
+<!-- ═══ Points cles ═══ -->
+<h2>Points cles</h2>
+<div class="card" style="background:#fffbeb;border-color:#fbbf24;">
+  <ul class="keypoints">
+    <li><strong>1.</strong> Les codes sont <strong>contextuels par annee</strong> : le programme 104 en 2019 ≠ le meme en 2024.</li>
+    <li><strong>2.</strong> Le <strong>Programme (PGM)</strong> est le noeud central : il relie mission, ministere, actions et sous-actions.</li>
+    <li><strong>3.</strong> <strong>Mission et Ministere</strong> ne sont pas directement lies : c'est le programme qui fait le pont.</li>
+    <li><strong>4.</strong> Les <strong>Titres/Categories</strong> (nature) sont des invariants stables, contrairement aux nomenclatures de destination.</li>
+    <li><strong>5.</strong> <strong>AE vs CP</strong> : AE = promesses, CP = paiements. Un investissement pluriannuel a des AE concentrees et des CP etalees.</li>
+  </ul>
+</div>
+
+</main>
+</body>
+</html>

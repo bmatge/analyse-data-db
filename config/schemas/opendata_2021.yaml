@@ -1,0 +1,36 @@
+# PLF 2021 - Crédits par destination et nature (format data.gouv.fr)
+# 12 colonnes utiles, 2355 lignes
+
+source:
+  type: csv
+  encoding: utf-8
+  separator: ";"
+
+file_pattern: "PLF_2021_Credits.csv"
+
+columns:
+  type_budget:         { source: "typeBudget", type: string }
+  mission_libelle:     null
+  mission_code:        { source: "mission", type: string }
+  programme_code:      { source: "programme", type: integer }
+  programme_libelle:   null
+  action_code:         { source: "action", type: string }
+  action_libelle:      null
+  sous_action_code:    { source: "sous_action", type: string, nullable: true }
+  sous_action_libelle: null
+  categorie_code:      { source: "categorie", type: integer, nullable: true }
+  titre_code:          { source: "titre", type: integer }
+  ae:                  { source: "AE PLF", type: space_int, nullable: true }
+  cp:                  { source: "CP PLF", type: space_int, nullable: true }
+  ae_fdc_adp:          null
+  cp_fdc_adp:          null
+  ministere_nom:       null
+  ministere_code:      { source: "ministere", type: integer }
+
+derived:
+  exercice: PLF
+  annee: 2021
+
+validation:
+  required_columns: ["typeBudget", "programme", "AE PLF", "CP PLF"]
+  type_budget_values: [BG, BA, CAS, CCF]

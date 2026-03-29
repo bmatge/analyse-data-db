@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget Explorer</title>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+  .hero { text-align: center; padding: 2rem 0 1rem; }
+  .hero h1 { font-size: 1.8rem; margin-bottom: 0.4rem; }
+  .hero .subtitle { font-size: 1rem; max-width: 700px; margin: 0 auto; }
+
+  .problem-section { margin: 2rem 0; }
+  .problem-section h2 { border-bottom: 2px solid var(--accent); padding-bottom: 0.3rem; }
+
+  .schema-box {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 1.5rem; margin: 1rem 0;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 0.82rem; line-height: 1.8; white-space: pre; overflow-x: auto;
+    color: var(--text);
+  }
+  .schema-box .dim { color: var(--muted); }
+  .schema-box .key { color: var(--accent); font-weight: 700; }
+  .schema-box .data { color: var(--nature); }
+  .schema-box .doc { color: var(--doc); }
+  .schema-box .warn { color: #dc2626; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1rem 0; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  .challenge-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 1.25rem;
+  }
+  .challenge-card h3 { font-size: 0.95rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+  .challenge-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+  .challenge-card .icon { font-size: 1.3rem; }
+
+  .flow-diagram {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    flex-wrap: wrap; margin: 1.5rem 0; font-size: 0.88rem;
+  }
+  .flow-step {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 0.6rem 1rem; text-align: center; box-shadow: var(--shadow);
+  }
+  .flow-step .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .flow-step .value { font-weight: 700; font-size: 1rem; }
+  .flow-step.plf { border-color: var(--accent); }
+  .flow-step.plf .value { color: var(--accent); }
+  .flow-step.lfi { border-color: var(--nature); }
+  .flow-step.lfi .value { color: var(--nature); }
+  .flow-step.plr { border-color: var(--doc); }
+  .flow-step.plr .value { color: var(--doc); }
+  .flow-arrow { color: var(--muted); font-size: 1.2rem; }
+
+  .nav-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .nav-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 1.25rem; text-decoration: none; color: var(--text);
+    transition: all 0.15s;
+  }
+  .nav-card:hover { border-color: var(--accent); box-shadow: 0 2px 8px rgba(37,99,235,0.12); transform: translateY(-1px); }
+  .nav-card h3 { font-size: 0.95rem; color: var(--accent); margin-bottom: 0.3rem; }
+  .nav-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+  .highlight { background: var(--accent-light); color: var(--accent); padding: 0.1rem 0.4rem; border-radius: 3px; font-weight: 600; font-size: 0.85em; }
+  .highlight-warn { background: #fef2f2; color: #dc2626; padding: 0.1rem 0.4rem; border-radius: 3px; font-weight: 600; font-size: 0.85em; }
+  .highlight-ok { background: #d1fae5; color: #065f46; padding: 0.1rem 0.4rem; border-radius: 3px; font-weight: 600; font-size: 0.85em; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Budget Explorer</a>
+  <div class="links">
+    <a href="/" data-nav="accueil" class="active">Accueil</a>
+    <a href="/glossaire" data-nav="glossaire">Glossaire</a>
+    <a href="/api-specs" data-nav="interfaces">Interfaces</a>
+    <a href="/nomenclature" data-nav="nomenclature">Nomenclature</a>
+    <a href="/corpus" data-nav="corpus">Corpus documentaire</a>
+    <a href="/plf-lfi" data-nav="plf-lfi">Flux PLF / LFI</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════ -->
+<div class="hero">
+  <h1>Classer et relier les donnees du Budget de l'Etat</h1>
+  <p class="subtitle">Comment organiser la documentation et les donnees budgetaires pour qu'elles soient retrouvables, comparables et navigables dans le temps ?</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<div class="problem-section">
+  <h2>Le probleme</h2>
+  <p>Chaque annee, la Direction du Budget produit des <strong>centaines de documents</strong> (PAP, RAP, DPT, jaunes, circulaires) et des <strong>jeux de donnees chiffrees</strong> (credits AE/CP, emplois ETPT, performance, depenses fiscales, recettes). Ces deux mondes &mdash; documentation et data &mdash; partagent la meme structure hierarchique mais vivent dans des silos separes.</p>
+
+  <div class="schema-box"><span class="dim">Le budget s'organise selon une</span> <span class="key">nomenclature</span> <span class="dim">hierarchique :</span>
+
+<span class="key">Type de budget</span>  <span class="dim">(BG, BA, CAS, CCF)</span>
+  <span class="key">Mission</span>  <span class="dim">(49 missions, code 2 lettres : DA = Defense, EC = Enseignement scolaire...)</span>
+    <span class="key">Programme</span>  <span class="dim">(~170 programmes, code 3 chiffres : 178 = Preparation et emploi des forces)</span>
+      <span class="key">Action</span>  <span class="dim">(~700 actions)</span>
+        <span class="key">Sous-action</span>  <span class="dim">(~1 500 sous-actions)</span>
+
+<span class="dim">Croisee avec une</span> <span class="data">nomenclature par nature</span> <span class="dim">:</span>
+<span class="data">Titre</span>  <span class="dim">(7 titres : personnel, fonctionnement, investissement...)</span>
+  <span class="data">Categorie</span>  <span class="dim">(19 categories)</span>
+
+<span class="dim">Et rattachee a un</span> <span class="warn">Ministere</span> <span class="dim">(dont le nom change a chaque remaniement)</span></div>
+
+  <p>Cette nomenclature est la <strong>cle de liaison</strong> entre les documents et les donnees. Un document comme <code>PAP2025_BG_Defense_DA.pdf</code> et une ligne de credits du programme 178 sont relies par la meme mission DA.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<div class="problem-section">
+  <h2>Le cycle budgetaire</h2>
+  <p>Les donnees arrivent en <strong>trois temps</strong> chaque annee, avec des documents associes a chaque etape :</p>
+
+  <div class="flow-diagram">
+    <div class="flow-step plf">
+      <div class="label">Automne N-1</div>
+      <div class="value">PLF</div>
+      <div class="label">Projet de loi</div>
+      <div class="label">+ PAP</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step lfi">
+      <div class="label">Dec./Janv.</div>
+      <div class="value">LFI</div>
+      <div class="label">Loi votee</div>
+      <div class="label">+ amendements</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step plr">
+      <div class="label">Printemps N+1</div>
+      <div class="value">PLR</div>
+      <div class="label">Execution</div>
+      <div class="label">+ RAP</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step plf">
+      <div class="label">Automne N</div>
+      <div class="value">PLF N+1</div>
+      <div class="label">Nouveau cycle</div>
+    </div>
+  </div>
+
+  <p>L'enjeu est de pouvoir suivre un programme ou une mission <strong>a travers ces etapes</strong> (PLF &rarr; LFI &rarr; PLR) et <strong>d'une annee a l'autre</strong>, meme quand la nomenclature evolue.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<div class="problem-section">
+  <h2>Les defis</h2>
+
+  <div class="two-col">
+    <div class="challenge-card">
+      <h3><span class="icon">&#x1f504;</span> Nomenclature variable</h3>
+      <p>Les codes mission et programme peuvent changer d'une annee a l'autre. Des programmes sont crees, supprimes, fusionnes, deplaces entre missions. <span class="highlight-warn">57 programmes supprimes</span> et <span class="highlight-ok">~30 crees</span> entre 2014 et 2025.</p>
+    </div>
+    <div class="challenge-card">
+      <h3><span class="icon">&#x1f3db;</span> Ministeres instables</h3>
+      <p>Les noms de ministeres changent a chaque remaniement. Entre PLF 2024 et PLF 2025, seuls <span class="highlight-warn">5 noms sur 17</span> sont restes identiques. Le nom de ministere ne peut jamais servir de cle.</p>
+    </div>
+    <div class="challenge-card">
+      <h3><span class="icon">&#x1f4ca;</span> Formats heterogenes</h3>
+      <p>Les fichiers open data changent de schema au fil des ans : 7 colonnes en 2014, 12 en 2020 (codes uniquement), 16 en 2024 (avec libelles). Les noms de colonnes AE/CP varient d'un fichier a l'autre.</p>
+    </div>
+    <div class="challenge-card">
+      <h3><span class="icon">&#x23f1;</span> Publication en 24h</h3>
+      <p>Les donnees doivent etre chargees dans les 24h suivant la publication officielle. Pas le temps de modifier du code : le systeme doit etre <span class="highlight">pilote par configuration</span>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<div class="problem-section">
+  <h2>La solution : nomenclature versionnee + identite canonique</h2>
+
+  <div class="schema-box"><span class="dim">Chaque annee, la nomenclature est stockee comme un</span> <span class="key">snapshot independant</span><span class="dim">.</span>
+<span class="dim">Un programme est identifie par le triplet :</span>  <span class="key">(annee, type_budget, code)</span>
+
+<span class="dim">Pour suivre un programme dans le temps, une couche d'</span><span class="doc">identite canonique</span><span class="dim"> lie
+les instances annuelles a une entite persistante :</span>
+
+  <span class="key">Programme 178</span> <span class="dim">(2019)</span>  ─┐
+  <span class="key">Programme 178</span> <span class="dim">(2020)</span>  ─┤
+  <span class="key">Programme 178</span> <span class="dim">(2021)</span>  ─┼──&rarr;  <span class="doc">PGM:178</span> <span class="dim">"Preparation et emploi des forces"</span>
+  <span class="key">Programme 178</span> <span class="dim">(2022)</span>  ─┤
+  <span class="key">Programme 178</span> <span class="dim">(2023)</span>  ─┘
+
+<span class="dim">Quand un code change (ex: audiovisuel public CAS &rarr; BG en 2025),
+l'</span><span class="warn">evenement</span><span class="dim"> est enregistre et les entites canoniques reliees.</span></div>
+
+  <p>Les <strong>documents</strong> (PDFs) sont automatiquement lies aux donnees via la nomenclature : le fichier <code>FR_2025_PLF_DA_PGM_178.pdf</code> est rattache au programme 178, mission DA, et donc a toutes les lignes de credits correspondantes.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<div class="problem-section">
+  <h2>Explorer</h2>
+
+  <div class="nav-cards">
+    <a href="/glossaire" class="nav-card">
+      <h3>Glossaire</h3>
+      <p>Les concepts cles du budget : mission, programme, action, AE/CP, ETPT, types de budget, exercices budgetaires.</p>
+    </a>
+    <a href="/corpus" class="nav-card">
+      <h3>Corpus documentaire</h3>
+      <p>Les 229 documents PAP du PLF 2025, indexes et relies a la nomenclature. Navigation par mission et programme.</p>
+    </a>
+    <a href="/explorer" class="nav-card">
+      <h3>Explorer les donnees</h3>
+      <p>Navigation dans l'arborescence budgetaire : missions, programmes, actions. Credits AE/CP par annee.</p>
+    </a>
+    <a href="/sankey" class="nav-card">
+      <h3>Nomenclature (Sankey)</h3>
+      <p>Visualisation des correspondances de la nomenclature de 2019 a 2025. Missions, programmes et actions a travers les annees.</p>
+    </a>
+    <a href="/plf-lfi" class="nav-card">
+      <h3>PLF / LFI</h3>
+      <p>Flux budgetaires du projet de loi (PLF) au vote (LFI) de 2019 a 2023. Evolution des autorisations d'engagement.</p>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<div class="problem-section">
+  <h2>Donnees chargees</h2>
+  <div class="card-grid" id="stats-grid">
+    <div class="stat-card"><div class="label">Annees</div><div class="value accent" id="st-annees">--</div></div>
+    <div class="stat-card"><div class="label">Programmes</div><div class="value accent" id="st-programmes">--</div></div>
+    <div class="stat-card"><div class="label">Actions</div><div class="value" id="st-actions">--</div></div>
+    <div class="stat-card"><div class="label">Documents</div><div class="value" id="st-documents">--</div></div>
+    <div class="stat-card"><div class="label">Entites canoniques</div><div class="value doc" id="st-canonical">--</div></div>
+    <div class="stat-card"><div class="label">Lignes de donnees</div><div class="value fin" id="st-rows">--</div></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+
+function fmtCount(n) { return n != null ? n.toLocaleString('fr-FR') : '--'; }
+
+async function loadGlobalStats() {
+  try {
+    const years = await (await fetch('/api/annees')).json();
+    $('#st-annees').textContent = years.length;
+
+    // Aggregate across all years
+    let totalPgm = 0, totalAct = 0, totalDocs = 0, totalRows = 0;
+    for (const y of years) {
+      const s = await (await fetch(`/api/stats/${y}`)).json();
+      totalPgm += s.programmes || 0;
+      totalAct += s.actions || 0;
+      totalDocs += s.documents || 0;
+      totalRows += s.lignes_budget || 0;
+    }
+    $('#st-programmes').textContent = fmtCount(totalPgm);
+    $('#st-actions').textContent = fmtCount(totalAct);
+    $('#st-documents').textContent = fmtCount(totalDocs);
+    $('#st-rows').textContent = fmtCount(totalRows);
+
+    // Canonical entities - direct query would need an API endpoint
+    // For now show a static value or skip
+    $('#st-canonical').textContent = '172';
+  } catch (e) {
+    console.error('Stats loading failed:', e);
+  }
+}
+
+loadGlobalStats();
+</script>
+
+</body>
+</html>

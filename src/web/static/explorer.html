@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorer – Budget Explorer</title>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+  .filters {
+    display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.5rem;
+  }
+  .filters select, .filters input {
+    padding: 0.4rem 0.6rem; border: 1px solid var(--border); border-radius: 6px;
+    font-size: 0.85rem; background: var(--card);
+  }
+  .filters input { min-width: 220px; }
+  .filters label { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
+
+  .mission-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow); margin-bottom: 0.6rem; overflow: hidden;
+  }
+  .mission-header {
+    display: flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1rem;
+    cursor: pointer; user-select: none; transition: background 0.12s;
+  }
+  .mission-header:hover { background: #f8fafc; }
+  .mission-header .arrow { font-size: 0.7rem; color: var(--muted); transition: transform 0.15s; width: 1rem; text-align: center; }
+  .mission-header.open .arrow { transform: rotate(90deg); }
+  .mission-header .msn-code { font-family: monospace; font-weight: 700; color: var(--accent); min-width: 2rem; }
+  .mission-header .msn-name { font-weight: 600; font-size: 0.92rem; flex: 1; }
+  .mission-header .msn-meta { font-size: 0.8rem; color: var(--muted); display: flex; gap: 0.8rem; }
+  .mission-header .msn-cp { font-variant-numeric: tabular-nums; }
+
+  .mission-body { display: none; border-top: 1px solid var(--border); padding: 0.75rem 1rem; background: #fafbfc; }
+  .mission-body.open { display: block; }
+
+  .pgm-section { margin-bottom: 0.8rem; }
+  .pgm-header {
+    display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0;
+    cursor: pointer; user-select: none;
+  }
+  .pgm-header:hover { color: var(--accent); }
+  .pgm-header .arrow { font-size: 0.65rem; color: var(--muted); transition: transform 0.15s; width: 0.8rem; }
+  .pgm-header.open .arrow { transform: rotate(90deg); }
+  .pgm-header .pgm-code { font-family: monospace; font-weight: 700; font-size: 0.85rem; color: var(--accent-dark); }
+  .pgm-header .pgm-name { font-weight: 500; font-size: 0.88rem; }
+  .pgm-header .pgm-cp { font-size: 0.8rem; color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+
+  .act-list { display: none; padding-left: 1.5rem; border-left: 2px solid var(--border); margin-left: 0.8rem; margin-top: 0.3rem; }
+  .act-list.open { display: block; }
+
+  .act-item { padding: 0.25rem 0; }
+  .act-header {
+    display: flex; align-items: center; gap: 0.4rem;
+    cursor: pointer; user-select: none; font-size: 0.85rem;
+  }
+  .act-header:hover { color: var(--accent); }
+  .act-header .arrow { font-size: 0.6rem; color: var(--muted); transition: transform 0.15s; width: 0.7rem; }
+  .act-header.open .arrow { transform: rotate(90deg); }
+  .act-header .act-code { font-family: monospace; font-weight: 600; color: var(--accent); }
+  .act-header .act-name { color: var(--text); }
+
+  .ssa-list { display: none; padding-left: 1.2rem; border-left: 2px solid #e8ecf0; margin-left: 0.6rem; margin-top: 0.2rem; }
+  .ssa-list.open { display: block; }
+  .ssa-item { padding: 0.15rem 0; font-size: 0.82rem; color: var(--muted); }
+  .ssa-item .ssa-code { font-family: monospace; font-weight: 600; color: var(--accent); margin-right: 0.3rem; }
+
+  .empty-msg { color: var(--muted); font-size: 0.85rem; font-style: italic; padding: 1rem; text-align: center; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Budget Explorer</a>
+  <div class="links">
+    <a href="/" data-nav="accueil">Accueil</a>
+    <a href="/glossaire" data-nav="glossaire">Glossaire</a>
+    <a href="/api-specs" data-nav="interfaces">Interfaces</a>
+    <div class="dropdown">
+      <a class="drop-trigger active" data-nav="nomenclature">Nomenclature</a>
+      <div class="drop-menu">
+        <a href="/explorer" data-nav="nomenclature-arbo" class="active">Arborescence</a>
+        <a href="/sankey" data-nav="nomenclature-flux">Flux inter-annuels</a>
+      </div>
+    </div>
+    <a href="/corpus" data-nav="corpus">Corpus documentaire</a>
+    <a href="/plf-lfi" data-nav="plf-lfi">Flux PLF / LFI</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Explorateur de nomenclature</h1>
+  <p class="subtitle">Navigation interactive dans l'arborescence Mission &rarr; Programme &rarr; Action &rarr; Sous-action</p>
+
+  <div class="filters">
+    <label>Type :</label>
+    <select id="filter-type">
+      <option value="">Tous</option>
+      <option value="BG">BG - Budget general</option>
+      <option value="BA">BA - Budgets annexes</option>
+      <option value="CAS">CAS - Comptes d'affectation speciale</option>
+      <option value="CCF">CCF - Comptes de concours financiers</option>
+    </select>
+    <label>Recherche :</label>
+    <input type="text" id="filter-search" placeholder="Filtrer par nom ou code...">
+  </div>
+
+  <div id="missions-list">
+    <div class="loading">Chargement</div>
+  </div>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+
+function fmt(n) {
+  if (n == null) return '';
+  if (Math.abs(n) >= 1e9) return (n / 1e9).toFixed(1) + ' Md\u20ac';
+  if (Math.abs(n) >= 1e6) return (n / 1e6).toFixed(0) + ' M\u20ac';
+  return n.toLocaleString('fr-FR') + ' \u20ac';
+}
+
+function badgeType(tb) {
+  const cls = { BG: 'badge-bg', BA: 'badge-ba', CAS: 'badge-cas', CCF: 'badge-ccf' };
+  return `<span class="badge ${cls[tb] || ''}">${tb}</span>`;
+}
+
+let currentYear = null;
+let missionsData = [];
+let budgetData = {};
+let treesCache = {};
+
+// ── Init years ──
+async function initYears() {
+  const years = await (await fetch('/api/annees')).json();
+  const sel = $('#year');
+  years.reverse().forEach(y => {
+    const opt = document.createElement('option');
+    opt.value = y; opt.textContent = y;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => { currentYear = +sel.value; treesCache = {}; loadMissions(); });
+  if (years.length) { currentYear = years[0]; loadMissions(); }
+}
+
+// ── Load missions ──
+async function loadMissions() {
+  const container = $('#missions-list');
+  container.innerHTML = '<div class="loading">Chargement</div>';
+
+  const [missions, budget] = await Promise.all([
+    fetch(`/api/missions/${currentYear}`).then(r => r.json()),
+    fetch(`/api/budget/par-mission/${currentYear}`).then(r => r.json())
+  ]);
+
+  missionsData = missions;
+  budgetData = {};
+  budget.forEach(b => { budgetData[b.mission_code] = b; });
+
+  renderMissions();
+}
+
+function renderMissions() {
+  const container = $('#missions-list');
+  const typeFilter = $('#filter-type').value;
+  const search = $('#filter-search').value.toLowerCase().trim();
+
+  let filtered = missionsData;
+  if (typeFilter) filtered = filtered.filter(m => m.type_budget === typeFilter);
+  if (search) filtered = filtered.filter(m =>
+    m.code.toLowerCase().includes(search) ||
+    (m.libelle || '').toLowerCase().includes(search) ||
+    (m.libelle_abrege || '').toLowerCase().includes(search)
+  );
+
+  if (!filtered.length) {
+    container.innerHTML = '<div class="empty-msg">Aucune mission trouvee</div>';
+    return;
+  }
+
+  container.innerHTML = filtered.map(m => {
+    const b = budgetData[m.code] || {};
+    const cp = b.total_cp != null ? fmt(b.total_cp) : '';
+    const nbPgm = b.nb_programmes || '';
+    return `
+      <div class="mission-card" data-code="${m.code}">
+        <div class="mission-header" onclick="toggleMission(this, '${m.code}')">
+          <span class="arrow">\u25B6</span>
+          ${badgeType(m.type_budget)}
+          <span class="msn-code">${m.code}</span>
+          <span class="msn-name">${m.libelle || m.libelle_abrege || ''}</span>
+          <span class="msn-meta">
+            ${nbPgm ? `<span>${nbPgm} pgm</span>` : ''}
+            ${cp ? `<span class="msn-cp">${cp}</span>` : ''}
+          </span>
+        </div>
+        <div class="mission-body" id="body-${m.code}"></div>
+      </div>`;
+  }).join('');
+}
+
+// ── Toggle mission: load tree on demand ──
+async function toggleMission(headerEl, msnCode) {
+  const body = $(`#body-${msnCode}`);
+  const isOpen = headerEl.classList.toggle('open');
+  body.classList.toggle('open', isOpen);
+
+  if (isOpen && !treesCache[msnCode]) {
+    body.innerHTML = '<div class="loading">Chargement</div>';
+    const tree = await (await fetch(`/api/arbre/${currentYear}/${msnCode}`)).json();
+    treesCache[msnCode] = tree;
+    renderTree(body, tree);
+  }
+}
+
+function renderTree(container, tree) {
+  if (!tree.programmes || !tree.programmes.length) {
+    container.innerHTML = '<div class="empty-msg">Aucun programme</div>';
+    return;
+  }
+
+  container.innerHTML = tree.programmes.map(pgm => {
+    const actionsHtml = pgm.actions.map(act => {
+      const ssaHtml = act.sous_actions.map(ssa =>
+        `<div class="ssa-item"><span class="ssa-code">${ssa.code}</span> ${ssa.libelle}</div>`
+      ).join('');
+
+      const hasSSA = act.sous_actions.length > 0;
+      return `
+        <div class="act-item">
+          <div class="act-header${hasSSA ? '' : ' no-children'}" onclick="${hasSSA ? `toggleEl(this, 'ssa-${pgm.code}-${act.code}')` : ''}">
+            ${hasSSA ? '<span class="arrow">\u25B6</span>' : '<span style="width:0.7rem;display:inline-block"></span>'}
+            <span class="act-code">${act.code}</span>
+            <span class="act-name">${act.libelle}</span>
+          </div>
+          ${hasSSA ? `<div class="ssa-list" id="ssa-${pgm.code}-${act.code}">${ssaHtml}</div>` : ''}
+        </div>`;
+    }).join('');
+
+    const hasAct = pgm.actions.length > 0;
+    return `
+      <div class="pgm-section">
+        <div class="pgm-header" onclick="${hasAct ? `toggleEl(this, 'acts-${pgm.code}')` : ''}">
+          ${hasAct ? '<span class="arrow">\u25B6</span>' : '<span style="width:0.8rem;display:inline-block"></span>'}
+          <span class="badge badge-dest">PGM</span>
+          <span class="pgm-code">${pgm.code}</span>
+          <span class="pgm-name">${pgm.libelle}</span>
+        </div>
+        ${hasAct ? `<div class="act-list" id="acts-${pgm.code}">${actionsHtml}</div>` : ''}
+      </div>`;
+  }).join('');
+}
+
+function toggleEl(headerEl, targetId) {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+  const isOpen = headerEl.classList.toggle('open');
+  target.classList.toggle('open', isOpen);
+}
+
+// ── Filters ──
+$('#filter-type').addEventListener('change', renderMissions);
+$('#filter-search').addEventListener('input', renderMissions);
+
+initYears();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+.git
+.gitignore
+.DS_Store
+db/*.db
+entrants/
+docs/
+tests/
+*.md
+.venv/
+__pycache__/

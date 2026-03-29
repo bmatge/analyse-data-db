@@ -1,0 +1,35 @@
+# PLF 2025 - Dépenses selon nomenclatures destination et nature
+# 16 colonnes, 2415 lignes, schéma identique à 2024
+
+source:
+  type: csv
+  encoding: utf-8-sig
+  separator: ";"
+
+file_pattern: "plf*-depenses-2025*-nomenclatures-destination-et-nature.csv"
+
+columns:
+  type_budget:         { source: "Type Mission", type: string }
+  mission_libelle:     { source: "Mission", type: string }
+  mission_code:        { source: "Code Mission", type: string }
+  programme_code:      { source: "Programme", type: float_to_int }
+  programme_libelle:   { source: "Libellé Programme", type: string }
+  action_code:         { source: "Action", type: string }
+  action_libelle:      { source: "Libellé Action", type: string }
+  sous_action_code:    { source: "Sous Action", type: string, nullable: true }
+  sous_action_libelle: { source: "Libellé SousAction", type: string, nullable: true }
+  categorie_code:      { source: "Catégorie", type: float_to_int, nullable: true }
+  titre_code:          { source: "Code Titre", type: integer }
+  ae:                  { source: "AE  PLF", type: float, nullable: true }
+  cp:                  { source: "CP PLF", type: float, nullable: true }
+  ae_fdc_adp:          { source: "AE Prev FDC/ADP", type: float, nullable: true }
+  cp_fdc_adp:          { source: "CP Prev FDC/ADP", type: float, nullable: true }
+  ministere_nom:       { source: "Ministère", type: string }
+
+derived:
+  exercice: PLF
+  annee: 2025
+
+validation:
+  required_columns: ["Type Mission", "Programme", "AE  PLF", "CP PLF"]
+  type_budget_values: [BG, BA, CAS, CCF]

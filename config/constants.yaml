@@ -1,0 +1,76 @@
+# Constantes budgétaires invariantes
+# Ces valeurs ne changent pas d'une année à l'autre
+
+type_budget:
+  BG: Budget général
+  BA: Budgets annexes
+  CAS: Comptes d'affectation spéciale
+  CCF: Comptes de concours financiers
+
+titres:
+  1: Dépenses de personnel
+  2: Dépenses de fonctionnement
+  3: Dépenses d'investissement
+  4: Dépenses d'intervention (hors transferts financiers)
+  5: Dépenses d'intervention (transferts financiers)
+  6: Dépenses d'opérations financières
+  7: Dépenses d'opérations financières (dotation en fonds propres)
+
+categories:
+  # Titre 1
+  10: { titre: 1, libelle: "Rémunérations d'activité" }
+  11: { titre: 1, libelle: "Cotisations et contributions sociales" }
+  12: { titre: 1, libelle: "Prestations sociales et allocations diverses" }
+  # Titre 2
+  20: { titre: 2, libelle: "Dépenses de fonctionnement autres que celles de personnel" }
+  21: { titre: 2, libelle: "Subventions pour charges de service public" }
+  22: { titre: 2, libelle: "Dépenses de fonctionnement militaire" }
+  23: { titre: 2, libelle: "Subventions pour charges de service public (opérateurs)" }
+  # Titre 3
+  30: { titre: 3, libelle: "Dépenses pour immobilisations corporelles de l'État" }
+  31: { titre: 3, libelle: "Dépenses pour immobilisations incorporelles de l'État" }
+  # Titre 4 - Hors transferts financiers
+  40: { titre: 4, libelle: "Transferts aux ménages" }
+  41: { titre: 4, libelle: "Transferts aux entreprises" }
+  42: { titre: 4, libelle: "Transferts aux collectivités territoriales" }
+  43: { titre: 4, libelle: "Transferts aux autres collectivités" }
+  # Titre 5 - Transferts financiers
+  51: { titre: 5, libelle: "Dotations en fonds propres" }
+  52: { titre: 5, libelle: "Prêts et avances" }
+  # Titre 6
+  61: { titre: 6, libelle: "Dépenses de participations financières" }
+  62: { titre: 6, libelle: "Dotations en fonds propres" }
+  63: { titre: 6, libelle: "Prêts et avances" }
+  # Titre 7
+  71: { titre: 7, libelle: "Dépenses d'opérations financières (dotation en fonds propres)" }
+  72: { titre: 7, libelle: "Dépenses de participations financières" }
+  73: { titre: 7, libelle: "Prêts et avances" }
+
+# Convention d'encodage du type de budget dans le code mission (1ère lettre)
+mission_code_prefix:
+  BG: "A-V"   # Lettres A à V
+  BA: "X"
+  CAS: "Y"
+  CCF: "Z"
+
+# Plages de numéros de programme par type de budget
+programme_code_ranges:
+  BG: [100, 599]
+  BA: [600, 699]
+  CAS: [700, 799]
+  CCF: [800, 899]
+
+exercices:
+  - PLF   # Projet de Loi de Finances
+  - LFI   # Loi de Finances Initiale
+  - PLR   # Projet de Loi de Règlement
+  - LFR   # Loi de Finances Rectificative
+  - PLFR  # Projet de Loi de Finances Rectificative
+
+types_documents:
+  - PAP   # Projet Annuel de Performances
+  - RAP   # Rapport Annuel de Performances
+  - DPT   # Document de Politique Transversale
+  - Jaune # Annexe "jaune" budgétaire
+  - Circulaire
+  - Décret
