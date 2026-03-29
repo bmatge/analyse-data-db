@@ -56,6 +56,9 @@
             <div class="fr-header__logo">
               <p class="fr-logo">Republique<br>Francaise</p>
             </div>
+            <div class="fr-header__navbar">
+              <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="header-navigation" aria-haspopup="menu" id="burger-btn" title="Menu">Menu</button>
+            </div>
           </div>
           <div class="fr-header__service">
             <a href="/" title="Accueil - Budget Explorer">
@@ -67,8 +70,10 @@
       </div>
     </div>
   </div>
-  <div class="fr-header__menu" id="header-menu">
+  <div class="fr-header__menu fr-modal" id="header-navigation" aria-labelledby="burger-btn">
     <div class="fr-container">
+      <button class="fr-btn--close fr-btn" aria-controls="header-navigation" title="Fermer">Fermer</button>
+      <div class="fr-header__menu-links"></div>
       <nav class="fr-nav" role="navigation" aria-label="Menu principal">
         <ul class="fr-nav__list">
           <li class="fr-nav__item"><a class="fr-nav__link" href="/">Accueil</a></li>
@@ -318,5 +323,7 @@ function linkTip(d) {
   return `<div class="tt-title">${label}</div><div class="tt-detail">${src.exercice} ${src.year} : ${fmtMd(d.ae1)}<br>${tgt.exercice} ${tgt.year} : ${fmtMd(d.ae2)}<br><span class="${cls}">\u0394 ${sign}${fmtMd(delta)} (${sign}${pct}%)</span></div>`;
 }
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/dsfr.module.min.js" type="module"></script>
 </body>
 </html>
