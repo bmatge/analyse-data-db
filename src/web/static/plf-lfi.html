@@ -84,37 +84,41 @@
 </header>
 
 <main class="budget-main full-width">
-  <h1 style="font-size:1.2rem; text-align:center; margin:10px 0 2px;">Flux budgetaires PLF &rarr; LFI (2019-2023)</h1>
-  <p class="subtitle" style="text-align:center; margin-bottom:6px;">Evolution des autorisations d'engagement du projet de loi au vote</p>
+  <div class="fr-container" style="text-align:center;">
+    <h1 class="fr-h3 fr-mb-1w">Flux budgetaires <abbr title="Projet de Loi de Finances">PLF</abbr> &rarr; <abbr title="Loi de Finances Initiale">LFI</abbr> (2019-2023)</h1>
+    <p class="fr-text--sm fr-mb-2w" style="color:var(--text-mention-grey)">Evolution des <abbr title="Autorisations d'Engagement">AE</abbr> du projet de loi au vote, annee par annee</p>
+  </div>
 
   <div class="viz-controls" id="controls">
-    <div class="control-group">
-      <label>Niveau :</label>
-      <button class="viz-btn active" data-level="mission">Missions</button>
-      <button class="viz-btn" data-level="programme">Programmes</button>
+    <div class="ctrl">
+      <label>Niveau</label>
+      <div class="viz-seg">
+        <button class="viz-btn active" data-level="mission" title="~46 missions budgetaires">Missions</button>
+        <button class="viz-btn" data-level="programme" title="~170 programmes">Programmes</button>
+      </div>
     </div>
-    <div class="control-group">
-      <label>Filtre :</label>
+    <div class="ctrl">
+      <label>Mission</label>
       <select id="mission-filter"><option value="all">Toutes les missions</option></select>
     </div>
   </div>
 
   <div class="viz-legend">
-    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent)"></span>PLF (projet)</span>
-    <span class="legend-item"><span class="legend-swatch" style="background:#f59e0b"></span>LFI (vote)</span>
-    <span class="legend-item"><span class="legend-swatch" style="background:var(--muted);opacity:.4"></span>PLF&rarr;LFI (amendements)</span>
-    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);opacity:.4"></span>LFI&rarr;PLF (inter-annuel)</span>
+    <span><span class="sw" style="background:#000091"></span><abbr title="Projet de Loi de Finances">PLF</abbr> (projet)</span>
+    <span><span class="sw" style="background:#d97706"></span><abbr title="Loi de Finances Initiale">LFI</abbr> (vote)</span>
+    <span><span class="sw" style="background:#94a3b8"></span>PLF&rarr;LFI (amendements)</span>
+    <span><span class="sw" style="background:#000091;opacity:.4"></span>LFI&rarr;PLF (inter-annuel)</span>
   </div>
 
-  <div class="stats-line" id="stats"></div>
+  <div class="viz-stats" id="stats"></div>
   <div id="chart"></div>
 </main>
 
 <div class="sankey-tip" style="display:none"></div>
 
 <script>
-const PLF_COLOR = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || "#2563eb";
-const LFI_COLOR = "#f59e0b";
+const PLF_COLOR = "#000091";
+const LFI_COLOR = "#d97706";
 const LINK_PLF_LFI = "#94a3b8";
 const LINK_YEAR = PLF_COLOR;
 

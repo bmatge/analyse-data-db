@@ -11,90 +11,8 @@
   .hero { text-align: center; padding: 2rem 0 1rem; }
   .hero h1 { font-size: 1.6rem; }
   .hero .subtitle { font-size: 1rem; max-width: 660px; margin: 0.5rem auto 0; }
-
   .section { margin: 2.5rem 0; }
-  .section h2 { border-bottom: 2px solid var(--accent); padding-bottom: 0.3rem; margin-bottom: 1rem; }
-
-  /* Architecture diagram */
-  .arch-diagram {
-    display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 0;
-    align-items: stretch; margin: 1.5rem 0;
-  }
-  @media (max-width: 800px) { .arch-diagram { grid-template-columns: 1fr; } .arch-arrow { transform: rotate(90deg); } }
-
-  .arch-block {
-    border-radius: var(--radius); padding: 1.25rem; text-align: center;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .arch-block h3 { font-size: 0.95rem; margin-bottom: 0.6rem; }
-  .arch-block p { font-size: 0.8rem; line-height: 1.5; }
-  .arch-block ul { text-align: left; font-size: 0.8rem; line-height: 1.7; padding-left: 1.2rem; margin-top: 0.4rem; }
-
-  .arch-source { background: #eff6ff; border: 2px solid #93c5fd; }
-  .arch-source h3 { color: #1d4ed8; }
-  .arch-api { background: #ecfdf5; border: 2px solid #6ee7b7; }
-  .arch-api h3 { color: #059669; }
-  .arch-site { background: #fef3c7; border: 2px solid #fcd34d; }
-  .arch-site h3 { color: #92400e; }
-
-  .arch-arrow {
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.8rem; color: var(--muted); padding: 0 0.5rem;
-  }
-
-  /* Responsibility matrix */
-  .matrix { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 1rem 0; }
-  .matrix th { background: #f8fafc; padding: 0.6rem 0.75rem; text-align: left; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--muted); border-bottom: 2px solid var(--border); }
-  .matrix td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); text-align: center; }
-  .matrix td:first-child { text-align: left; font-weight: 500; }
-  .matrix tr:hover { background: #f8fafc; }
-  .matrix .yes { color: #059669; font-weight: 700; font-size: 1.1rem; }
-  .matrix .co { color: var(--muted); font-size: 0.78rem; }
-
-  /* Data flow cards */
-  .flow-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
-  @media (max-width: 700px) { .flow-cards { grid-template-columns: 1fr; } }
-  .flow-card {
-    background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
-    overflow: hidden; border: 1px solid var(--border);
-  }
-  .flow-card-header {
-    padding: 0.8rem 1.25rem; font-weight: 700; font-size: 0.95rem;
-    display: flex; align-items: center; gap: 0.6rem;
-  }
-  .flow-card-header .icon { font-size: 1.4rem; }
-  .flow-card-body { padding: 1rem 1.25rem; font-size: 0.85rem; line-height: 1.7; }
-  .flow-card-body ul { padding-left: 1.2rem; margin: 0.4rem 0; }
-  .flow-card-body .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); font-weight: 600; margin-top: 0.8rem; }
-
-  .flow-card.data .flow-card-header { background: #ecfdf5; color: #059669; border-bottom: 2px solid #6ee7b7; }
-  .flow-card.docs .flow-card-header { background: #eff6ff; color: #1d4ed8; border-bottom: 2px solid #93c5fd; }
-
-  /* Timeline */
-  .timeline { margin: 1rem 0; }
-  .tl-row { display: flex; gap: 1rem; align-items: flex-start; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
-  .tl-row:last-child { border-bottom: none; }
-  .tl-when { min-width: 120px; font-weight: 700; font-size: 0.82rem; color: var(--accent); padding-top: 0.15rem; }
-  .tl-what { flex: 1; font-size: 0.85rem; }
-  .tl-who { min-width: 140px; font-size: 0.78rem; color: var(--muted); text-align: right; padding-top: 0.15rem; }
-
-  /* Principles */
-  .principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
-  .principle {
-    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-    box-shadow: var(--shadow); padding: 1rem; text-align: center;
-  }
-  .principle .icon { font-size: 1.6rem; margin-bottom: 0.3rem; }
-  .principle h4 { font-size: 0.85rem; margin-bottom: 0.3rem; }
-  .principle p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
-
-  /* Key rule */
-  .key-rule {
-    background: var(--card); border-left: 4px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0;
-    padding: 1rem 1.25rem; margin: 1rem 0; box-shadow: var(--shadow);
-    font-size: 0.9rem; line-height: 1.7;
-  }
-  .key-rule strong { color: var(--accent); }
+  .section h2 { border-bottom: 2px solid var(--text-title-blue-france); padding-bottom: 0.3rem; margin-bottom: 1rem; }
 </style>
 </head>
 <body>
@@ -153,8 +71,8 @@
     <h3>Producteurs de donnees</h3>
     <p>SI budgetaire (Tango, Farandole, 2PERF, 2BOO)</p>
     <ul>
-      <li>Credits AE / CP</li>
-      <li>Emplois ETPT</li>
+      <li>Credits <abbr title="Autorisations d'engagement">AE</abbr> / <abbr title="Credits de paiement">CP</abbr></li>
+      <li>Emplois <abbr title="Equivalents temps plein travaille">ETPT</abbr></li>
       <li>Performance (indicateurs)</li>
       <li>Nomenclature annuelle</li>
     </ul>
@@ -186,10 +104,10 @@
 <div class="arch-diagram">
   <div class="arch-block arch-source">
     <h3>Producteurs de documents</h3>
-    <p>SI documentaire (GED, performance-publique.fr)</p>
+    <p>SI documentaire (<abbr title="Gestion electronique des documents">GED</abbr>, performance-publique.fr)</p>
     <ul>
-      <li>PAP / RAP (bleus budgetaires)</li>
-      <li>DPT, jaunes, circulaires</li>
+      <li><abbr title="Projets annuels de performances">PAP</abbr> / <abbr title="Rapports annuels de performances">RAP</abbr> (bleus budgetaires)</li>
+      <li><abbr title="Documents de politique transversale">DPT</abbr>, jaunes, circulaires</li>
       <li>Decrets, annexes</li>
     </ul>
   </div>
@@ -199,7 +117,7 @@
   <div class="arch-block arch-site" style="visibility:hidden;"></div>
 </div>
 
-<div class="key-rule">
+<div class="callout-rule">
   <strong>Regle d'or :</strong> Chaque producteur publie dans son perimetre, dans un format convenu, a son rythme. Le site web consomme tout et ne demande rien de plus. Aucun acteur n'a besoin de connaitre le fonctionnement interne des autres.
 </div>
 </div>
@@ -210,48 +128,48 @@
 
 <div class="flow-cards">
 
-  <div class="flow-card data">
+  <div class="flow-card flow-card--data">
     <div class="flow-card-header"><span class="icon">&#x1f4ca;</span> Flux DATA &mdash; Donnees chiffrees</div>
     <div class="flow-card-body">
       <p>Tout ce qui est <strong>chiffre</strong> dans le budget : credits, emplois, indicateurs de performance.</p>
 
-      <div class="label">Ce que le producteur fournit</div>
+      <div class="fl-label">Ce que le producteur fournit</div>
       <ul>
         <li><strong>La nomenclature</strong> de l'annee (missions, programmes, actions, ministeres)</li>
-        <li><strong>Les credits</strong> AE et CP, ventiles par destination et par nature</li>
-        <li><strong>Les emplois</strong> ETPT par programme</li>
+        <li><strong>Les credits</strong> <abbr title="Autorisations d'engagement">AE</abbr> et <abbr title="Credits de paiement">CP</abbr>, ventiles par destination et par nature</li>
+        <li><strong>Les emplois</strong> <abbr title="Equivalents temps plein travaille">ETPT</abbr> par programme</li>
         <li><strong>Les indicateurs</strong> de performance (objectifs, realisations, cibles)</li>
       </ul>
 
-      <div class="label">Format attendu</div>
-      <p>Un fichier JSON ou CSV par jeu de donnees, organise par annee et exercice (PLF, LFI, PLR). Chaque ligne porte ses codes nomenclature (mission, programme, action).</p>
+      <div class="fl-label">Format attendu</div>
+      <p>Un fichier JSON ou CSV par jeu de donnees, organise par annee et exercice (<abbr title="Projet de loi de finances">PLF</abbr>, <abbr title="Loi de finances initiale">LFI</abbr>, <abbr title="Projet de loi de reglement">PLR</abbr>). Chaque ligne porte ses codes nomenclature (mission, programme, action).</p>
 
-      <div class="label">Frequence</div>
-      <p>3 fois par an : au depot du PLF (automne), au vote de la LFI (decembre), a l'execution du PLR (printemps).</p>
+      <div class="fl-label">Frequence</div>
+      <p>3 fois par an : au depot du <abbr title="Projet de loi de finances">PLF</abbr> (automne), au vote de la <abbr title="Loi de finances initiale">LFI</abbr> (decembre), a l'execution du <abbr title="Projet de loi de reglement">PLR</abbr> (printemps).</p>
 
-      <div class="label">Exigence minimale</div>
+      <div class="fl-label">Exigence minimale</div>
       <p>Deposer un fichier CSV dans un dossier partage. C'est exactement ce que font deja les bureaux via les exports Tango.</p>
     </div>
   </div>
 
-  <div class="flow-card docs">
+  <div class="flow-card flow-card--docs">
     <div class="flow-card-header"><span class="icon">&#x1f4c4;</span> Flux DOCS &mdash; Documentation budgetaire</div>
     <div class="flow-card-body">
-      <p>Tout ce qui est <strong>document</strong> : les annexes budgetaires (PAP, RAP), les documents de politique transversale, les jaunes, les circulaires.</p>
+      <p>Tout ce qui est <strong>document</strong> : les annexes budgetaires (<abbr title="Projets annuels de performances">PAP</abbr>, <abbr title="Rapports annuels de performances">RAP</abbr>), les documents de politique transversale, les jaunes, les circulaires.</p>
 
-      <div class="label">Ce que le producteur fournit</div>
+      <div class="fl-label">Ce que le producteur fournit</div>
       <ul>
         <li><strong>Les fichiers PDF</strong> eux-memes</li>
         <li><strong>Un index</strong> decrivant chaque fichier : a quelle mission, quel programme, quel exercice il se rapporte</li>
       </ul>
 
-      <div class="label">Format attendu</div>
+      <div class="fl-label">Format attendu</div>
       <p>Les PDFs dans une arborescence par type de budget et mission (comme aujourd'hui). Un fichier d'index (JSON ou CSV) avec pour chaque document : son type, sa mission, son programme, son exercice.</p>
 
-      <div class="label">Frequence</div>
-      <p>Au depot du PLF (~230 documents d'un coup), puis enrichissement progressif (DPT, jaunes) dans les semaines suivantes.</p>
+      <div class="fl-label">Frequence</div>
+      <p>Au depot du <abbr title="Projet de loi de finances">PLF</abbr> (~230 documents d'un coup), puis enrichissement progressif (<abbr title="Documents de politique transversale">DPT</abbr>, jaunes) dans les semaines suivantes.</p>
 
-      <div class="label">Exigence minimale</div>
+      <div class="fl-label">Exigence minimale</div>
       <p>Deposer un ZIP de PDFs avec un fichier d'index. C'est le processus existant (cf. imports Farandole actuels).</p>
     </div>
   </div>
@@ -263,11 +181,11 @@
 <div class="section">
 <h2>La nomenclature : le langage commun</h2>
 
-<div class="key-rule">
-  <strong>La nomenclature est le pivot.</strong> Chaque document et chaque ligne de donnees porte ses codes nomenclature (mission, programme, action). C'est grace a ces codes que le site web peut relier un document PAP a ses credits, ou afficher les indicateurs de performance a cote des depenses d'un programme.
+<div class="callout-rule">
+  <strong>La nomenclature est le pivot.</strong> Chaque document et chaque ligne de donnees porte ses codes nomenclature (mission, programme, action). C'est grace a ces codes que le site web peut relier un document <abbr title="Projets annuels de performances">PAP</abbr> a ses credits, ou afficher les indicateurs de performance a cote des depenses d'un programme.
 </div>
 
-<p>La nomenclature est publiee <strong>une fois par an</strong>, avant les donnees et les documents. Elle est immuable pour l'annee : si un programme existe dans la nomenclature 2025, il existera dans toutes les publications 2025 (PLF, LFI, PLR).</p>
+<p>La nomenclature est publiee <strong>une fois par an</strong>, avant les donnees et les documents. Elle est immuable pour l'annee : si un programme existe dans la nomenclature 2025, il existera dans toutes les publications 2025 (<abbr title="Projet de loi de finances">PLF</abbr>, <abbr title="Loi de finances initiale">LFI</abbr>, <abbr title="Projet de loi de reglement">PLR</abbr>).</p>
 
 <p>Le site web se charge ensuite de faire le lien entre les annees : suivre un programme qui change de code, detecter les fusions ou scissions, signaler les evolutions. Les producteurs n'ont pas a s'en preoccuper.</p>
 </div>
@@ -281,14 +199,14 @@
     <tr>
       <th>Tache</th>
       <th>Bureaux metier / SI budgetaire</th>
-      <th>SI documentaire / GED</th>
+      <th>SI documentaire / <abbr title="Gestion electronique des documents">GED</abbr></th>
       <th>Equipe site web</th>
     </tr>
   </thead>
   <tbody>
     <tr><td>Publier la nomenclature annuelle</td><td class="yes">&#10003;</td><td></td><td></td></tr>
-    <tr><td>Produire les credits AE/CP</td><td class="yes">&#10003;</td><td></td><td></td></tr>
-    <tr><td>Produire les emplois ETPT</td><td class="yes">&#10003;</td><td></td><td></td></tr>
+    <tr><td>Produire les credits <abbr title="Autorisations d'engagement">AE</abbr>/<abbr title="Credits de paiement">CP</abbr></td><td class="yes">&#10003;</td><td></td><td></td></tr>
+    <tr><td>Produire les emplois <abbr title="Equivalents temps plein travaille">ETPT</abbr></td><td class="yes">&#10003;</td><td></td><td></td></tr>
     <tr><td>Produire les indicateurs de performance</td><td class="yes">&#10003;</td><td></td><td></td></tr>
     <tr><td>Deposer les documents PDF</td><td></td><td class="yes">&#10003;</td><td></td></tr>
     <tr><td>Indexer les documents (type, mission, programme)</td><td></td><td class="yes">&#10003;</td><td></td></tr>
@@ -302,35 +220,37 @@
 
 <!-- ═══════════════════════════════════════════════ -->
 <div class="section">
-<h2>Calendrier type (exemple PLF)</h2>
+<h2>Calendrier type (exemple <abbr title="Projet de loi de finances">PLF</abbr>)</h2>
 
-<div class="timeline">
-  <div class="tl-row">
-    <div class="tl-when">J &minus; 7</div>
-    <div class="tl-what"><strong>Nomenclature</strong> &mdash; Publication de la nomenclature de l'annee N+1 (missions, programmes, actions, ministeres)</div>
-    <div class="tl-who">Bureau nomenclature</div>
-  </div>
-  <div class="tl-row">
-    <div class="tl-when">J (depot du PLF)</div>
-    <div class="tl-what"><strong>Donnees + Documents</strong> &mdash; Publication simultanee des credits (CSV/JSON) et des documents (ZIP de PDFs + index)</div>
-    <div class="tl-who">SI budgetaire + SI docs</div>
-  </div>
-  <div class="tl-row">
-    <div class="tl-when">J + 1</div>
-    <div class="tl-what"><strong>Chargement</strong> &mdash; Le site charge les 2 flux, croise les donnees, genere les pages. Verification automatique de coherence.</div>
-    <div class="tl-who">Pipeline automatique</div>
-  </div>
-  <div class="tl-row">
-    <div class="tl-when">J + 1 a J + 2</div>
-    <div class="tl-what"><strong>Validation</strong> &mdash; Verification humaine : spot-checks sur les chiffres et les documents. Corrections eventuelles par re-depot.</div>
-    <div class="tl-who">Equipe web + referent metier</div>
-  </div>
-  <div class="tl-row">
-    <div class="tl-when">J + 2 a J + 60</div>
-    <div class="tl-what"><strong>Enrichissement</strong> &mdash; Ajout progressif des DPT, jaunes, circulaires. Chaque ajout est un simple depot de fichier.</div>
-    <div class="tl-who">Bureaux metier</div>
-  </div>
-</div>
+<table class="timeline-table">
+  <tbody>
+    <tr>
+      <td class="tl-when">J &minus; 7</td>
+      <td><strong>Nomenclature</strong> &mdash; Publication de la nomenclature de l'annee N+1 (missions, programmes, actions, ministeres)</td>
+      <td class="tl-who">Bureau nomenclature</td>
+    </tr>
+    <tr>
+      <td class="tl-when">J (depot du <abbr title="Projet de loi de finances">PLF</abbr>)</td>
+      <td><strong>Donnees + Documents</strong> &mdash; Publication simultanee des credits (CSV/JSON) et des documents (ZIP de PDFs + index)</td>
+      <td class="tl-who">SI budgetaire + SI docs</td>
+    </tr>
+    <tr>
+      <td class="tl-when">J + 1</td>
+      <td><strong>Chargement</strong> &mdash; Le site charge les 2 flux, croise les donnees, genere les pages. Verification automatique de coherence.</td>
+      <td class="tl-who">Pipeline automatique</td>
+    </tr>
+    <tr>
+      <td class="tl-when">J + 1 a J + 2</td>
+      <td><strong>Validation</strong> &mdash; Verification humaine : spot-checks sur les chiffres et les documents. Corrections eventuelles par re-depot.</td>
+      <td class="tl-who">Equipe web + referent metier</td>
+    </tr>
+    <tr>
+      <td class="tl-when">J + 2 a J + 60</td>
+      <td><strong>Enrichissement</strong> &mdash; Ajout progressif des <abbr title="Documents de politique transversale">DPT</abbr>, jaunes, circulaires. Chaque ajout est un simple depot de fichier.</td>
+      <td class="tl-who">Bureaux metier</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 
 <!-- ═══════════════════════════════════════════════ -->
@@ -375,30 +295,26 @@
 <div class="section">
 <h2>Ce que ca change concretement</h2>
 
-<div class="flow-cards">
-  <div class="flow-card" style="border-color: #dc2626;">
-    <div class="flow-card-header" style="background:#fef2f2; color:#dc2626; border-bottom-color:#fca5a5;">Aujourd'hui</div>
-    <div class="flow-card-body">
-      <ul>
-        <li>Les donnees et documents sont publies separement, sans lien explicite</li>
-        <li>Les formats changent d'une annee a l'autre sans preavis</li>
-        <li>Chaque publication necessite du developpement cote site</li>
-        <li>Le suivi d'un programme dans le temps est manuel</li>
-        <li>Les noms de ministeres cassent les correspondances</li>
-      </ul>
-    </div>
+<div class="compare-grid">
+  <div class="compare-card compare-card--before">
+    <h3>Aujourd'hui</h3>
+    <ul>
+      <li>Les donnees et documents sont publies separement, sans lien explicite</li>
+      <li>Les formats changent d'une annee a l'autre sans preavis</li>
+      <li>Chaque publication necessite du developpement cote site</li>
+      <li>Le suivi d'un programme dans le temps est manuel</li>
+      <li>Les noms de ministeres cassent les correspondances</li>
+    </ul>
   </div>
-  <div class="flow-card" style="border-color: #059669;">
-    <div class="flow-card-header" style="background:#ecfdf5; color:#059669; border-bottom-color:#6ee7b7;">Avec le programme d'interface</div>
-    <div class="flow-card-body">
-      <ul>
-        <li>Donnees et documents partage la meme nomenclature = liables automatiquement</li>
-        <li>Format contractualise, stable, versionne</li>
-        <li>Publication en 24h par simple depot de fichiers</li>
-        <li>Suivi inter-annuel automatique (identite canonique)</li>
-        <li>Les codes nomenclature sont la cle, pas les noms</li>
-      </ul>
-    </div>
+  <div class="compare-card compare-card--after">
+    <h3>Avec le programme d'interface</h3>
+    <ul>
+      <li>Donnees et documents partagent la meme nomenclature = liables automatiquement</li>
+      <li>Format contractualise, stable, versionne</li>
+      <li>Publication en 24h par simple depot de fichiers</li>
+      <li>Suivi inter-annuel automatique (identite canonique)</li>
+      <li>Les codes nomenclature sont la cle, pas les noms</li>
+    </ul>
   </div>
 </div>
 </div>

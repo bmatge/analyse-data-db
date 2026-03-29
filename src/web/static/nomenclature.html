@@ -10,87 +10,9 @@
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
 <style>
-  /* ── Tabs ── */
-  .tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 1rem; }
-  .tab {
-    padding: 0.6rem 1.25rem; font-size: 0.9rem; font-weight: 600; cursor: pointer;
-    color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -2px;
-    transition: all 0.15s; background: none; border-top: none; border-left: none; border-right: none;
-  }
-  .tab:hover { color: var(--text); }
-  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
-
-  /* ── Explorer styles ── */
-  .filters {
-    display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;
-  }
-  .filters select, .filters input {
-    padding: 0.4rem 0.6rem; border: 1px solid var(--border); border-radius: 6px;
-    font-size: 0.85rem; background: var(--card);
-  }
-  .filters input { min-width: 220px; }
-  .filters label { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
-
-  .mission-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 0.6rem; overflow: hidden; }
-  .mission-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1rem; cursor: pointer; user-select: none; transition: background 0.12s; }
-  .mission-header:hover { background: #f8fafc; }
-  .mission-header .arrow { font-size: 0.7rem; color: var(--muted); transition: transform 0.15s; width: 1rem; text-align: center; }
-  .mission-header.open .arrow { transform: rotate(90deg); }
-  .mission-header .msn-code { font-family: monospace; font-weight: 700; color: var(--accent); min-width: 2rem; }
-  .mission-header .msn-name { flex: 1; font-weight: 500; font-size: 0.9rem; }
-  .mission-header .msn-meta { display: flex; gap: 0.8rem; font-size: 0.8rem; color: var(--muted); margin-left: auto; white-space: nowrap; }
-  .mission-header .msn-cp { color: var(--fin); font-weight: 600; }
-  .mission-body { display: none; padding: 0 1rem 0.8rem 2.5rem; }
-  .mission-body.open { display: block; }
-
-  .pgm-section { margin-bottom: 0.3rem; }
-  .pgm-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0; cursor: pointer; user-select: none; font-size: 0.88rem; }
-  .pgm-header:hover { background: #f8fafc; border-radius: 4px; }
-  .pgm-header.open .arrow { transform: rotate(90deg); }
-  .pgm-code { font-family: monospace; font-weight: 700; min-width: 2.5rem; }
-  .pgm-name { flex: 1; }
-
-  .act-list { display: none; padding-left: 1.5rem; border-left: 2px solid var(--border); margin-left: 0.5rem; }
-  .act-list.open { display: block; }
-  .act-item { padding: 0.15rem 0; }
-  .act-header { display: flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0; cursor: pointer; font-size: 0.84rem; }
-  .act-header.no-children { cursor: default; }
-  .act-header:hover { background: #f8fafc; border-radius: 4px; }
-  .act-header.open .arrow { transform: rotate(90deg); }
-  .act-code { font-family: monospace; font-weight: 600; color: var(--muted); min-width: 2rem; }
-  .act-name { color: var(--text); }
-
-  .ssa-list { display: none; padding-left: 1.5rem; border-left: 2px solid #e2e8f0; margin-left: 0.5rem; }
-  .ssa-list.open { display: block; }
-  .ssa-item { font-size: 0.82rem; padding: 0.1rem 0; color: var(--muted); }
-  .ssa-code { font-family: monospace; font-weight: 600; margin-right: 0.3rem; }
-
-  .empty-msg { text-align: center; padding: 2rem; color: var(--muted); }
-
-  /* ── Sankey styles ── */
-  #sankey-controls { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin: 4px 0 6px; }
-  .ctrl { display: flex; align-items: center; gap: 4px; }
-  .ctrl label { font-size: 11px; font-weight: 600; color: var(--muted); }
-  .ctrl button { padding: 3px 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--card); cursor: pointer; font-size: 11px; transition: all .15s; }
-  .ctrl button:hover { background: var(--bg); }
-  .ctrl button.active { background: var(--accent); color: white; border-color: var(--accent); }
-  .ctrl select { font-size: 11px; padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px; max-width: 280px; }
-  .sankey-legend { display: flex; justify-content: center; gap: 14px; margin: 4px 0 2px; flex-wrap: wrap; }
-  .sankey-legend span { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); }
-  .sankey-legend .sw { width: 12px; height: 12px; border-radius: 2px; }
-  .sankey-legend .ln { width: 18px; height: 0; border-top: 2px dashed #ef4444; }
-  .sankey-stats { text-align: center; font-size: 11px; color: var(--muted); margin: 4px 0; }
+  /* Sankey chart container */
   #sankey-chart { width: 100%; overflow-x: auto; }
   #sankey-chart svg { display: block; margin: 0 auto; }
-  .link { fill: none; stroke-opacity: 0.2; transition: stroke-opacity .2s; }
-  .link:hover { stroke-opacity: 0.5; }
-  .link.moved { stroke-dasharray: 4 2; stroke-opacity: 0.5; }
-  .sankey-tip { position: absolute; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; font-size: 11px; pointer-events: none; box-shadow: 0 3px 12px rgba(0,0,0,0.12); max-width: 400px; line-height: 1.6; z-index: 10; }
-  .sankey-tip .tt { font-weight: 700; font-size: 12px; margin-bottom: 3px; }
-  .sankey-tip .td { color: var(--muted); }
-  .sankey-tip .badge-s { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; color: white; margin-right: 4px; }
 </style>
 </head>
 <body>
@@ -132,68 +54,78 @@
 </header>
 
 <main class="budget-main full-width">
-  <h1 style="font-size:1.3rem; margin-bottom:0.3rem;">Nomenclature budgetaire</h1>
-  <p class="subtitle" style="margin-bottom:0.8rem;">Explorer l'arborescence et les flux inter-annuels des missions, programmes et actions</p>
+  <div class="fr-container">
+    <h1 class="fr-h3 fr-mb-1w">Nomenclature budgetaire</h1>
+    <p class="fr-text--sm fr-mb-2w" style="color:var(--text-mention-grey)">Explorer l'arborescence <abbr title="Mission > Programme > Action > Sous-action">par destination</abbr> et les flux inter-annuels de la nomenclature <abbr title="Loi Organique relative aux Lois de Finances">LOLF</abbr></p>
+  </div>
 
-  <div class="tabs">
-    <button class="tab active" data-tab="arbo">Arborescence</button>
-    <button class="tab" data-tab="flux">Flux inter-annuels</button>
+  <div class="budget-tabs">
+    <button class="budget-tab active" data-tab="arbo">Arborescence</button>
+    <button class="budget-tab" data-tab="flux">Flux inter-annuels</button>
   </div>
 
   <!-- ═══════════════════════════════════════ TAB ARBO ═══ -->
   <div class="tab-panel active" id="panel-arbo">
     <div class="filters">
-      <label>Annee :</label>
+      <label for="year">Annee</label>
       <select id="year"></select>
-      <label>Type :</label>
+      <div class="separator"></div>
+      <label for="filter-type">Type</label>
       <select id="filter-type">
-        <option value="">Tous</option>
-        <option value="BG">BG - Budget general</option>
-        <option value="BA">BA - Budgets annexes</option>
-        <option value="CAS">CAS - Comptes d'affectation speciale</option>
-        <option value="CCF">CCF - Comptes de concours financiers</option>
+        <option value="">Tous les budgets</option>
+        <option value="BG">BG — Budget general</option>
+        <option value="BA">BA — Budgets annexes</option>
+        <option value="CAS">CAS — Comptes d'affectation speciale</option>
+        <option value="CCF">CCF — Comptes de concours financiers</option>
       </select>
-      <label>Recherche :</label>
-      <input type="text" id="filter-search" placeholder="Filtrer par nom ou code...">
+      <div class="separator"></div>
+      <label for="filter-search">Recherche</label>
+      <input type="search" id="filter-search" placeholder="Mission, programme, code...">
     </div>
     <div id="missions-list"><div class="loading">Chargement</div></div>
   </div>
 
   <!-- ═══════════════════════════════════════ TAB FLUX ═══ -->
   <div class="tab-panel" id="panel-flux">
-    <div id="sankey-controls">
+    <div class="viz-controls">
       <div class="ctrl">
-        <label>Niveau :</label>
-        <button class="active" data-level="mission">Missions</button>
-        <button data-level="programme">Programmes</button>
-        <button data-level="action">Actions</button>
+        <label>Niveau</label>
+        <div class="viz-seg">
+          <button class="viz-btn active" data-level="mission" title="49 missions budgetaires">Missions</button>
+          <button class="viz-btn" data-level="programme" title="~170 programmes">Programmes</button>
+          <button class="viz-btn" data-level="action" title="~700 actions">Actions</button>
+        </div>
       </div>
       <div class="ctrl">
-        <label>Budget :</label>
-        <button class="active" data-filter="all">Tous</button>
-        <button data-filter="BG">BG</button>
-        <button data-filter="BA">BA</button>
-        <button data-filter="CAS">CAS</button>
-        <button data-filter="CCF">CCF</button>
+        <label>Budget</label>
+        <div class="viz-seg">
+          <button class="viz-btn active" data-filter="all">Tous</button>
+          <button class="viz-btn" data-filter="BG" title="Budget General">BG</button>
+          <button class="viz-btn" data-filter="BA" title="Budgets Annexes">BA</button>
+          <button class="viz-btn" data-filter="CAS" title="Comptes d'Affectation Speciale">CAS</button>
+          <button class="viz-btn" data-filter="CCF" title="Comptes de Concours Financiers">CCF</button>
+        </div>
       </div>
       <div class="ctrl">
-        <label>Taille :</label>
-        <button class="active" data-sizing="count">Nb entites</button>
-        <button data-sizing="ae">Montant AE</button>
+        <label>Taille</label>
+        <div class="viz-seg">
+          <button class="viz-btn active" data-sizing="count">Nombre</button>
+          <button class="viz-btn" data-sizing="ae" title="Autorisations d'Engagement">Montant <abbr title="Autorisations d'Engagement">AE</abbr></button>
+        </div>
       </div>
       <div class="ctrl">
-        <label>Mission :</label>
-        <select id="sankey-mission-filter"><option value="all">Toutes</option></select>
+        <label>Mission</label>
+        <select id="sankey-mission-filter"><option value="all">Toutes les missions</option></select>
       </div>
     </div>
-    <div class="sankey-legend">
-      <span><span class="sw" style="background:#2563eb"></span>Budget general</span>
-      <span><span class="sw" style="background:#7c3aed"></span>Budgets annexes</span>
-      <span><span class="sw" style="background:#059669"></span>Comptes speciaux</span>
-      <span><span class="sw" style="background:#d97706"></span>Concours financiers</span>
-      <span><span class="ln"></span>Deplacement</span>
+    <div class="viz-legend">
+      <span><span class="sw" style="background:#000091"></span><abbr title="Budget General">BG</abbr></span>
+      <span><span class="sw" style="background:#a558a0"></span><abbr title="Budgets Annexes">BA</abbr></span>
+      <span><span class="sw" style="background:#009081"></span><abbr title="Comptes d'Affectation Speciale">CAS</abbr></span>
+      <span><span class="sw" style="background:#d97706"></span><abbr title="Comptes de Concours Financiers">CCF</abbr></span>
+      <span><span class="ln"></span>Deplacement inter-missions</span>
     </div>
-    <div class="sankey-stats" id="sankey-stats"></div>
+    <div class="viz-stats" id="sankey-stats"></div>
     <div id="sankey-chart"></div>
   </div>
 </main>
@@ -204,9 +136,9 @@
 // ═══════════════════════════════════════════════
 // TABS
 // ═══════════════════════════════════════════════
-document.querySelectorAll('.tab').forEach(t => {
+document.querySelectorAll('.budget-tab').forEach(t => {
   t.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.budget-tab').forEach(x => x.classList.remove('active'));
     document.querySelectorAll('.tab-panel').forEach(x => x.classList.remove('active'));
     t.classList.add('active');
     document.getElementById('panel-' + t.dataset.tab).classList.add('active');
@@ -331,7 +263,7 @@ initYears();
 // ═══════════════════════════════════════════════
 // TAB 2: SANKEY (lazy loaded)
 // ═══════════════════════════════════════════════
-const TC = { BG: "#2563eb", BA: "#7c3aed", CAS: "#059669", CCF: "#d97706" };
+const TC = { BG: "#000091", BA: "#a558a0", CAS: "#009081", CCF: "#d97706" };
 const TL = { BG: "Budget general", BA: "Budgets annexes", CAS: "Comptes speciaux", CCF: "Concours financiers" };
 let SDATA, sankeyLoaded = false;
 let sLevel = "mission", sFilter = "all", sMission = "all", sSizing = "count";
