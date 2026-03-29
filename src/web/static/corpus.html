@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Corpus PLF 2025 – Budget Explorer</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/dsfr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/utility/utility.min.css">
 <link rel="stylesheet" href="/static/style.css">
 <style>
   .corpus-stats {
@@ -195,19 +197,41 @@
 </head>
 <body>
 
-<nav>
-  <a href="/" class="logo">Budget Explorer</a>
-  <div class="links">
-    <a href="/" data-nav="accueil">Accueil</a>
-    <a href="/glossaire" data-nav="glossaire">Glossaire</a>
-    <a href="/api-specs" data-nav="interfaces">Interfaces</a>
-    <a href="/nomenclature" data-nav="nomenclature">Nomenclature</a>
-    <a href="/corpus" data-nav="corpus" class="active">Corpus documentaire</a>
-    <a href="/plf-lfi" data-nav="plf-lfi">Flux PLF / LFI</a>
+<header role="banner" class="fr-header">
+  <div class="fr-header__body">
+    <div class="fr-container">
+      <div class="fr-header__body-row">
+        <div class="fr-header__brand fr-enlarge-link">
+          <div class="fr-header__brand-top">
+            <div class="fr-header__logo">
+              <p class="fr-logo">Republique<br>Francaise</p>
+            </div>
+          </div>
+          <div class="fr-header__service">
+            <a href="/" title="Accueil - Budget Explorer"><p class="fr-header__service-title">Budget Explorer</p></a>
+            <p class="fr-header__service-tagline">Direction du Budget</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</nav>
+  <div class="fr-header__menu">
+    <div class="fr-container">
+      <nav class="fr-nav" role="navigation" aria-label="Menu principal">
+        <ul class="fr-nav__list">
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/">Accueil</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/glossaire">Glossaire</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/api-specs">Interfaces</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/nomenclature">Nomenclature</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/corpus" aria-current="page">Corpus documentaire</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/plf-lfi">Flux PLF / LFI</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
 
-<main>
+<main class="budget-main"><div class="fr-container">
 <h1>Corpus documentaire PLF 2025</h1>
 <p class="subtitle">Projets annuels de performances (PAP) et programmes rattaches au Projet de Loi de Finances 2025</p>
 
@@ -221,7 +245,7 @@
 </div>
 
 <div id="corpus-tree"></div>
-</main>
+</div></main>
 
 <script>
 const FILE_BASE = '/ressources/docs/PLF_2025/';

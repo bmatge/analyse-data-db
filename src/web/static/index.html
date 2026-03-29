@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Budget Explorer</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/dsfr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/utility/utility.min.css">
 <link rel="stylesheet" href="/static/style.css">
 <style>
   .hero { text-align: center; padding: 2rem 0 1rem; }
@@ -72,27 +74,58 @@
 </head>
 <body>
 
-<nav>
-  <a href="/" class="logo">Budget Explorer</a>
-  <div class="links">
-    <a href="/" data-nav="accueil" class="active">Accueil</a>
-    <a href="/glossaire" data-nav="glossaire">Glossaire</a>
-    <a href="/api-specs" data-nav="interfaces">Interfaces</a>
-    <a href="/nomenclature" data-nav="nomenclature">Nomenclature</a>
-    <a href="/corpus" data-nav="corpus">Corpus documentaire</a>
-    <a href="/plf-lfi" data-nav="plf-lfi">Flux PLF / LFI</a>
+<header role="banner" class="fr-header">
+  <div class="fr-header__body">
+    <div class="fr-container">
+      <div class="fr-header__body-row">
+        <div class="fr-header__brand fr-enlarge-link">
+          <div class="fr-header__brand-top">
+            <div class="fr-header__logo">
+              <p class="fr-logo">Republique<br>Francaise</p>
+            </div>
+          </div>
+          <div class="fr-header__service">
+            <a href="/" title="Accueil - Budget Explorer">
+              <p class="fr-header__service-title">Budget Explorer</p>
+            </a>
+            <p class="fr-header__service-tagline">Direction du Budget</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</nav>
+  <div class="fr-header__menu" id="header-menu">
+    <div class="fr-container">
+      <nav class="fr-nav" role="navigation" aria-label="Menu principal">
+        <ul class="fr-nav__list">
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/" aria-current="page">Accueil</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/glossaire">Glossaire</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/api-specs">Interfaces</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/nomenclature">Nomenclature</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/corpus">Corpus documentaire</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/plf-lfi">Flux PLF / LFI</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
 
-<main>
+<main class="budget-main">
 
 <!-- ═══════════════════════════════════════════════ -->
-<div class="hero">
-  <h1>Classer et relier les donnees du Budget de l'Etat</h1>
-  <p class="subtitle">Comment organiser la documentation et les donnees budgetaires pour qu'elles soient retrouvables, comparables et navigables dans le temps ?</p>
+<div class="fr-container">
+  <div class="fr-grid-row fr-grid-row--center">
+    <div class="fr-col-8">
+      <div class="hero">
+        <h1>Classer et relier les donnees du Budget de l'Etat</h1>
+        <p class="subtitle">Comment organiser la documentation et les donnees budgetaires pour qu'elles soient retrouvables, comparables et navigables dans le temps ?</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════ -->
+<div class="fr-container">
 <div class="problem-section">
   <h2>Le probleme</h2>
   <p>Chaque annee, la Direction du Budget produit des <strong>centaines de documents</strong> (PAP, RAP, DPT, jaunes, circulaires) et des <strong>jeux de donnees chiffrees</strong> (credits AE/CP, emplois ETPT, performance, depenses fiscales, recettes). Ces deux mondes &mdash; documentation et data &mdash; partagent la meme structure hierarchique mais vivent dans des silos separes.</p>
@@ -113,8 +146,10 @@
 
   <p>Cette nomenclature est la <strong>cle de liaison</strong> entre les documents et les donnees. Un document comme <code>PAP2025_BG_Defense_DA.pdf</code> et une ligne de credits du programme 178 sont relies par la meme mission DA.</p>
 </div>
+</div>
 
 <!-- ═══════════════════════════════════════════════ -->
+<div class="fr-container">
 <div class="problem-section">
   <h2>Le cycle budgetaire</h2>
   <p>Les donnees arrivent en <strong>trois temps</strong> chaque annee, avec des documents associes a chaque etape :</p>
@@ -150,32 +185,44 @@
 
   <p>L'enjeu est de pouvoir suivre un programme ou une mission <strong>a travers ces etapes</strong> (PLF &rarr; LFI &rarr; PLR) et <strong>d'une annee a l'autre</strong>, meme quand la nomenclature evolue.</p>
 </div>
-
-<!-- ═══════════════════════════════════════════════ -->
-<div class="problem-section">
-  <h2>Les defis</h2>
-
-  <div class="two-col">
-    <div class="challenge-card">
-      <h3><span class="icon">&#x1f504;</span> Nomenclature variable</h3>
-      <p>Les codes mission et programme peuvent changer d'une annee a l'autre. Des programmes sont crees, supprimes, fusionnes, deplaces entre missions. <span class="highlight-warn">57 programmes supprimes</span> et <span class="highlight-ok">~30 crees</span> entre 2014 et 2025.</p>
-    </div>
-    <div class="challenge-card">
-      <h3><span class="icon">&#x1f3db;</span> Ministeres instables</h3>
-      <p>Les noms de ministeres changent a chaque remaniement. Entre PLF 2024 et PLF 2025, seuls <span class="highlight-warn">5 noms sur 17</span> sont restes identiques. Le nom de ministere ne peut jamais servir de cle.</p>
-    </div>
-    <div class="challenge-card">
-      <h3><span class="icon">&#x1f4ca;</span> Formats heterogenes</h3>
-      <p>Les fichiers open data changent de schema au fil des ans : 7 colonnes en 2014, 12 en 2020 (codes uniquement), 16 en 2024 (avec libelles). Les noms de colonnes AE/CP varient d'un fichier a l'autre.</p>
-    </div>
-    <div class="challenge-card">
-      <h3><span class="icon">&#x23f1;</span> Publication en 24h</h3>
-      <p>Les donnees doivent etre chargees dans les 24h suivant la publication officielle. Pas le temps de modifier du code : le systeme doit etre <span class="highlight">pilote par configuration</span>.</p>
-    </div>
-  </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════ -->
+<div class="fr-container">
+<div class="problem-section">
+  <h2>Les defis</h2>
+
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col-12 fr-col-md-6">
+      <div class="challenge-card">
+        <h3><span class="icon">&#x1f504;</span> Nomenclature variable</h3>
+        <p>Les codes mission et programme peuvent changer d'une annee a l'autre. Des programmes sont crees, supprimes, fusionnes, deplaces entre missions. <span class="highlight-warn">57 programmes supprimes</span> et <span class="highlight-ok">~30 crees</span> entre 2014 et 2025.</p>
+      </div>
+    </div>
+    <div class="fr-col-12 fr-col-md-6">
+      <div class="challenge-card">
+        <h3><span class="icon">&#x1f3db;</span> Ministeres instables</h3>
+        <p>Les noms de ministeres changent a chaque remaniement. Entre PLF 2024 et PLF 2025, seuls <span class="highlight-warn">5 noms sur 17</span> sont restes identiques. Le nom de ministere ne peut jamais servir de cle.</p>
+      </div>
+    </div>
+    <div class="fr-col-12 fr-col-md-6">
+      <div class="challenge-card">
+        <h3><span class="icon">&#x1f4ca;</span> Formats heterogenes</h3>
+        <p>Les fichiers open data changent de schema au fil des ans : 7 colonnes en 2014, 12 en 2020 (codes uniquement), 16 en 2024 (avec libelles). Les noms de colonnes AE/CP varient d'un fichier a l'autre.</p>
+      </div>
+    </div>
+    <div class="fr-col-12 fr-col-md-6">
+      <div class="challenge-card">
+        <h3><span class="icon">&#x23f1;</span> Publication en 24h</h3>
+        <p>Les donnees doivent etre chargees dans les 24h suivant la publication officielle. Pas le temps de modifier du code : le systeme doit etre <span class="highlight">pilote par configuration</span>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<div class="fr-container">
 <div class="problem-section">
   <h2>La solution : nomenclature versionnee + identite canonique</h2>
 
@@ -196,8 +243,10 @@ l'</span><span class="warn">evenement</span><span class="dim"> est enregistre et
 
   <p>Les <strong>documents</strong> (PDFs) sont automatiquement lies aux donnees via la nomenclature : le fichier <code>FR_2025_PLF_DA_PGM_178.pdf</code> est rattache au programme 178, mission DA, et donc a toutes les lignes de credits correspondantes.</p>
 </div>
+</div>
 
 <!-- ═══════════════════════════════════════════════ -->
+<div class="fr-container">
 <div class="problem-section">
   <h2>Explorer</h2>
 
@@ -224,8 +273,10 @@ l'</span><span class="warn">evenement</span><span class="dim"> est enregistre et
     </a>
   </div>
 </div>
+</div>
 
 <!-- ═══════════════════════════════════════════════ -->
+<div class="fr-container">
 <div class="problem-section">
   <h2>Donnees chargees</h2>
   <div class="card-grid" id="stats-grid">
@@ -236,6 +287,7 @@ l'</span><span class="warn">evenement</span><span class="dim"> est enregistre et
     <div class="stat-card"><div class="label">Entites canoniques</div><div class="value doc" id="st-canonical">--</div></div>
     <div class="stat-card"><div class="label">Lignes de donnees</div><div class="value fin" id="st-rows">--</div></div>
   </div>
+</div>
 </div>
 
 </main>

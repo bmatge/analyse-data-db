@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Programme d'interface – Budget Explorer</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/dsfr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/utility/utility.min.css">
 <link rel="stylesheet" href="/static/style.css">
 <style>
   .hero { text-align: center; padding: 2rem 0 1rem; }
@@ -97,19 +99,45 @@
 </head>
 <body>
 
-<nav>
-  <a href="/" class="logo">Budget Explorer</a>
-  <div class="links">
-    <a href="/" data-nav="accueil">Accueil</a>
-    <a href="/glossaire" data-nav="glossaire">Glossaire</a>
-    <a href="/api-specs" data-nav="interfaces" class="active">Interfaces</a>
-    <a href="/nomenclature" data-nav="nomenclature">Nomenclature</a>
-    <a href="/corpus" data-nav="corpus">Corpus documentaire</a>
-    <a href="/plf-lfi" data-nav="plf-lfi">Flux PLF / LFI</a>
+<header role="banner" class="fr-header">
+  <div class="fr-header__body">
+    <div class="fr-container">
+      <div class="fr-header__body-row">
+        <div class="fr-header__brand fr-enlarge-link">
+          <div class="fr-header__brand-top">
+            <div class="fr-header__logo">
+              <p class="fr-logo">Republique<br>Francaise</p>
+            </div>
+          </div>
+          <div class="fr-header__service">
+            <a href="/" title="Accueil - Budget Explorer">
+              <p class="fr-header__service-title">Budget Explorer</p>
+            </a>
+            <p class="fr-header__service-tagline">Direction du Budget</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</nav>
+  <div class="fr-header__menu" id="header-menu">
+    <div class="fr-container">
+      <nav class="fr-nav" role="navigation" aria-label="Menu principal">
+        <ul class="fr-nav__list">
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/">Accueil</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/glossaire">Glossaire</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/api-specs" aria-current="page">Interfaces</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/nomenclature">Nomenclature</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/corpus">Corpus documentaire</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/plf-lfi">Flux PLF / LFI</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
 
-<main>
+<main class="budget-main">
+
+<div class="fr-container">
 
 <div class="hero">
   <h1>Programme d'interface</h1>
@@ -248,7 +276,7 @@
 <div class="section">
 <h2>Qui fait quoi ?</h2>
 
-<table class="matrix">
+<table class="fr-table matrix">
   <thead>
     <tr>
       <th>Tache</th>
@@ -375,6 +403,7 @@
 </div>
 </div>
 
+</div><!-- /fr-container -->
 </main>
 </body>
 </html>

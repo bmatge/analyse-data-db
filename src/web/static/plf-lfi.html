@@ -4,21 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PLF / LFI – Budget Explorer</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/dsfr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/utility/utility.min.css">
 <link rel="stylesheet" href="/static/style.css">
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
 <style>
-  #controls { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin: 4px 16px 6px; }
+  .viz-controls { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin: 4px 16px 6px; }
   .control-group { display: flex; align-items: center; gap: 4px; }
   .control-group label { font-size: 11px; font-weight: 600; color: var(--muted); margin-right: 4px; }
-  .control-group button {
+  .viz-btn {
     padding: 3px 10px; border: 1px solid var(--border); border-radius: 4px;
     background: var(--card); cursor: pointer; font-size: 11px; transition: all .15s;
   }
-  .control-group button:hover { background: var(--bg); }
-  .control-group button.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .viz-btn:hover { background: var(--bg); }
+  .viz-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
   .control-group select { font-size: 11px; padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px; max-width: 280px; background: var(--card); }
-  .legend-bar { display: flex; justify-content: center; gap: 16px; margin: 4px 0 2px; flex-wrap: wrap; }
+  .viz-legend { display: flex; justify-content: center; gap: 16px; margin: 4px 0 2px; flex-wrap: wrap; }
   .legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); }
   .legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
   .stats-line { text-align: center; font-size: 11px; color: var(--muted); margin: 4px 0; }
@@ -30,42 +32,66 @@
   .link.plf-lfi:hover { stroke-opacity: 0.5; }
   .step-label { font-size: 13px; font-weight: 700; }
   .step-label-sub { font-size: 10px; fill: var(--muted); }
-  .sankey-tooltip {
+  .sankey-tip {
     position: absolute; background: var(--card); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 10px 14px; font-size: 11px;
     pointer-events: none; box-shadow: 0 3px 12px rgba(0,0,0,0.12);
     max-width: 420px; line-height: 1.6; z-index: 10;
   }
-  .sankey-tooltip .tt-title { font-weight: 700; font-size: 12px; margin-bottom: 3px; }
-  .sankey-tooltip .tt-detail { color: var(--muted); }
-  .sankey-tooltip .tt-delta-pos { color: #059669; font-weight: 600; }
-  .sankey-tooltip .tt-delta-neg { color: #dc2626; font-weight: 600; }
-  .sankey-tooltip .tt-badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; color: white; margin-right: 4px; }
+  .sankey-tip .tt-title { font-weight: 700; font-size: 12px; margin-bottom: 3px; }
+  .sankey-tip .tt-detail { color: var(--muted); }
+  .sankey-tip .tt-delta-pos { color: #059669; font-weight: 600; }
+  .sankey-tip .tt-delta-neg { color: #dc2626; font-weight: 600; }
+  .sankey-tip .tt-badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; color: white; margin-right: 4px; }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="/" class="logo">Budget Explorer</a>
-  <div class="links">
-    <a href="/" data-nav="accueil">Accueil</a>
-    <a href="/glossaire" data-nav="glossaire">Glossaire</a>
-    <a href="/api-specs" data-nav="interfaces">Interfaces</a>
-    <a href="/nomenclature" data-nav="nomenclature">Nomenclature</a>
-    <a href="/corpus" data-nav="corpus">Corpus documentaire</a>
-    <a href="/plf-lfi" data-nav="plf-lfi" class="active">Flux PLF / LFI</a>
+<header role="banner" class="fr-header">
+  <div class="fr-header__body">
+    <div class="fr-container">
+      <div class="fr-header__body-row">
+        <div class="fr-header__brand fr-enlarge-link">
+          <div class="fr-header__brand-top">
+            <div class="fr-header__logo">
+              <p class="fr-logo">Republique<br>Francaise</p>
+            </div>
+          </div>
+          <div class="fr-header__service">
+            <a href="/" title="Accueil - Budget Explorer">
+              <p class="fr-header__service-title">Budget Explorer</p>
+            </a>
+            <p class="fr-header__service-tagline">Direction du Budget</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</nav>
+  <div class="fr-header__menu" id="header-menu">
+    <div class="fr-container">
+      <nav class="fr-nav" role="navigation" aria-label="Menu principal">
+        <ul class="fr-nav__list">
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/">Accueil</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/glossaire">Glossaire</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/api-specs">Interfaces</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/nomenclature">Nomenclature</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/corpus">Corpus documentaire</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/plf-lfi" aria-current="page">Flux PLF / LFI</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
 
-<main style="max-width:none; padding: 0.5rem 1rem;">
+<main class="budget-main full-width">
   <h1 style="font-size:1.2rem; text-align:center; margin:10px 0 2px;">Flux budgetaires PLF &rarr; LFI (2019-2023)</h1>
   <p class="subtitle" style="text-align:center; margin-bottom:6px;">Evolution des autorisations d'engagement du projet de loi au vote</p>
 
-  <div id="controls">
+  <div class="viz-controls" id="controls">
     <div class="control-group">
       <label>Niveau :</label>
-      <button class="active" data-level="mission">Missions</button>
-      <button data-level="programme">Programmes</button>
+      <button class="viz-btn active" data-level="mission">Missions</button>
+      <button class="viz-btn" data-level="programme">Programmes</button>
     </div>
     <div class="control-group">
       <label>Filtre :</label>
@@ -73,7 +99,7 @@
     </div>
   </div>
 
-  <div class="legend-bar">
+  <div class="viz-legend">
     <span class="legend-item"><span class="legend-swatch" style="background:var(--accent)"></span>PLF (projet)</span>
     <span class="legend-item"><span class="legend-swatch" style="background:#f59e0b"></span>LFI (vote)</span>
     <span class="legend-item"><span class="legend-swatch" style="background:var(--muted);opacity:.4"></span>PLF&rarr;LFI (amendements)</span>
@@ -84,7 +110,7 @@
   <div id="chart"></div>
 </main>
 
-<div class="sankey-tooltip" style="display:none"></div>
+<div class="sankey-tip" style="display:none"></div>
 
 <script>
 const PLF_COLOR = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || "#2563eb";
@@ -264,7 +290,7 @@ function render() {
     .text(d => { const l = d.label || d.code; return l.length > ml ? l.slice(0, ml - 1) + "\u2026" : l; });
 }
 
-const tip = d3.select(".sankey-tooltip");
+const tip = d3.select(".sankey-tip");
 function showTip(ev, html) { tip.style("display", "block").html(html); moveTip(ev); }
 function moveTip(ev) { tip.style("left", (ev.pageX + 14) + "px").style("top", (ev.pageY - 12) + "px"); }
 function hideTip() { tip.style("display", "none"); }
