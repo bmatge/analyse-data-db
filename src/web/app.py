@@ -392,6 +392,82 @@ async def api_arbre(annee: int, mission_code: str):
     return tree
 
 
+# ── API: corpus (document tree for a year+exercice) ──
+
+@app.get("/api/corpus/{annee}")
+async def api_corpus(annee: int, exercice: str = None):
+    """Build the corpus tree for the corpus page: documents grouped by type_budget > mission > programme."""
+    conn = get_db()
+
+    # If no exercice specified, pick the first available for this year
+    if not exercice:
+        row = conn.execute(
+            "SELECT DISTINCT exercice FROM document WHERE annee = ? ORDER BY exercice", (annee,)
+        ).fetchone()
+        exercice = row["exercice"] if row else "PLF"
+
+    docs = conn.execute(
+        "SELECT * FROM document WHERE annee = ? AND exercice = ? ORDER BY type_budget, niveau, mission_code, programme_code",
+        (annee, exercice)
+    ).fetchall()
+
+    # Build the tree structure expected by corpus.html
+    tree = {}
+    for doc in docs:
+        d = dict(doc)
+        tb = d["type_budget"]
+        mc = d["mission_code"] or tb  # CCO/COM have no mission_code
+        if tb not in tree:
+            tree[tb] = {"missions": {}}
+
+        if mc not in tree[tb]["missions"]:
+            # Get mission name from nomenclature
+            msn = conn.execute(
+                "SELECT libelle FROM mission WHERE annee = ? AND code = ?", (annee, mc)
+            ).fetchone()
+            tree[tb]["missions"][mc] = {
+                "name": msn["libelle"] if msn else mc,
+                "programmes": [],
+                "msn_path": None
+            }
+
+        if d["niveau"] == "MSN":
+            tree[tb]["missions"][mc]["msn_path"] = d["filepath"]
+        elif d["niveau"] == "PGM" and d["programme_code"]:
+            # Get programme name from nomenclature
+            pgm = conn.execute(
+                "SELECT libelle FROM programme WHERE annee = ? AND code = ?",
+                (annee, d["programme_code"])
+            ).fetchone()
+            tree[tb]["missions"][mc]["programmes"].append({
+                "num": str(d["programme_code"]),
+                "name": pgm["libelle"] if pgm else "",
+                "path": d["filepath"]
+            })
+
+    conn.close()
+
+    # Determine the file base path
+    exercice_dir = "PLRG" if exercice == "PLR" else "PLF"
+    file_base = f"/ressources/docs/{annee}/{exercice_dir}/"
+
+    # Available exercices for this year
+    conn2 = get_db()
+    exercices = [r["exercice"] for r in conn2.execute(
+        "SELECT DISTINCT exercice FROM document WHERE annee = ? ORDER BY exercice", (annee,)
+    ).fetchall()]
+    conn2.close()
+
+    return {
+        "annee": annee,
+        "exercice": exercice,
+        "exercice_dir": exercice_dir,
+        "file_base": file_base,
+        "exercices_disponibles": exercices,
+        "tree": tree
+    }
+
+
 # ── Static file mounts (must be after all routes) ────
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 

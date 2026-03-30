@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Corpus PLF 2025 – Budget Explorer</title>
+<title>Corpus documentaire – Budget Explorer</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/dsfr.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/utility/utility.min.css">
 <link rel="stylesheet" href="/static/style.css">
@@ -155,8 +155,15 @@
 </header>
 
 <main class="budget-main corpus"><div class="fr-container">
-<h1 class="fr-h3 fr-mb-1w">Corpus documentaire <abbr title="Projet de Loi de Finances">PLF</abbr> 2025</h1>
-<p class="fr-text--sm fr-mb-2w" style="color:var(--text-mention-grey)"><abbr title="Projets Annuels de Performances">PAP</abbr> et programmes rattaches au Projet de Loi de Finances 2025 &mdash; 229 documents PDF indexes par mission et programme</p>
+<h1 class="fr-h3 fr-mb-1w" id="corpus-title">Corpus documentaire</h1>
+<p class="fr-text--sm fr-mb-2w" style="color:var(--text-mention-grey)" id="corpus-subtitle">Chargement...</p>
+
+<div style="display:flex;gap:0.5rem;margin-bottom:1rem;align-items:center;flex-wrap:wrap">
+  <label class="fr-label" style="margin:0;font-size:0.85rem">Annee :</label>
+  <select id="sel-annee" class="fr-select" style="width:auto;padding:0.3rem 0.6rem;font-size:0.85rem"></select>
+  <label class="fr-label" style="margin:0 0 0 0.5rem;font-size:0.85rem">Exercice :</label>
+  <select id="sel-exercice" class="fr-select" style="width:auto;padding:0.3rem 0.6rem;font-size:0.85rem"></select>
+</div>
 
 <div class="stat-grid" id="stats"></div>
 
@@ -171,45 +178,107 @@
 </div></main>
 
 <script>
-const FILE_BASE = '/ressources/docs/PLF_2025/';
+let FILE_BASE = '';
+let DATA = {};
 
 const BUDGET_TYPES = {
-  BG:  { label: 'Budget general',                      badge: 'badge-bg' },
-  BA:  { label: 'Budgets annexes',                     badge: 'badge-ba' },
-  CAS: { label: 'Comptes d\'affectation speciale',     badge: 'badge-cas' },
-  CCF: { label: 'Comptes de concours financiers',      badge: 'badge-ccf' },
-  CCO: { label: 'Comptes de commerce',                 badge: 'badge-doc' },
-  COM: { label: 'Comptes d\'operations monetaires',    badge: 'badge-doc' }
+  BG:  { label: 'Budget general' },
+  BA:  { label: 'Budgets annexes' },
+  CAS: { label: "Comptes d'affectation speciale" },
+  CCF: { label: 'Comptes de concours financiers' },
+  CCO: { label: 'Comptes de commerce' },
+  COM: { label: "Comptes d'operations monetaires" }
 };
 
-const DATA = {"BA":{"missions":{"XC":{"name":"Controle et exploitation aeriens","programmes":[{"num":"612","path":"BA/PGM/612/FR_2025_PLF_XC_PGM_612.pdf"},{"num":"613","path":"BA/PGM/613/FR_2025_PLF_XC_PGM_613.pdf"},{"num":"614","path":"BA/PGM/614/FR_2025_PLF_XC_PGM_614.pdf"}],"msn_path":"BA/MSN/XC/PAP2025_BA_Controle_exploitation_aeriens_XC.pdf"},"XJ":{"name":"Publications officielles et information administrative","programmes":[{"num":"623","path":"BA/PGM/623/FR_2025_PLF_XJ_PGM_623.pdf"},{"num":"624","path":"BA/PGM/624/FR_2025_PLF_XJ_PGM_624.pdf"}],"msn_path":"BA/MSN/XJ/PAP2025_BA_Publications_officielles_information_administrative_XJ.pdf"}}},"BG":{"missions":{"AA":{"name":"Action exterieure de l'Etat","programmes":[{"num":"105","path":"BG/PGM/105/FR_2025_PLF_AA_PGM_105.pdf"},{"num":"151","path":"BG/PGM/151/FR_2025_PLF_AA_PGM_151.pdf"},{"num":"185","path":"BG/PGM/185/FR_2025_PLF_AA_PGM_185.pdf"}],"msn_path":"BG/MSN/AA/PAP2025_BG_Action_exterieure_Etat_AA.pdf"},"AB":{"name":"Administration generale et territoriale de l'Etat","programmes":[{"num":"216","path":"BG/PGM/216/FR_2025_PLF_AB_PGM_216.pdf"},{"num":"232","path":"BG/PGM/232/FR_2025_PLF_AB_PGM_232.pdf"},{"num":"354","path":"BG/PGM/354/FR_2025_PLF_AB_PGM_354.pdf"}],"msn_path":"BG/MSN/AB/PAP2025_BG_Administration_generale_territoriale_Etat_AB.pdf"},"AC":{"name":"Agriculture, alimentation, foret et affaires rurales","programmes":[{"num":"149","path":"BG/PGM/149/FR_2025_PLF_AC_PGM_149.pdf"},{"num":"206","path":"BG/PGM/206/FR_2025_PLF_AC_PGM_206.pdf"},{"num":"215","path":"BG/PGM/215/FR_2025_PLF_AC_PGM_215.pdf"},{"num":"381","path":"BG/PGM/381/FR_2025_PLF_AC_PGM_381.pdf"}],"msn_path":"BG/MSN/AC/PAP2025_BG_Agriculture_alimentation_foret_affaires_rurales_AC.pdf"},"AD":{"name":"Aide publique au developpement","programmes":[{"num":"110","path":"BG/PGM/110/FR_2025_PLF_AD_PGM_110.pdf"},{"num":"209","path":"BG/PGM/209/FR_2025_PLF_AD_PGM_209.pdf"},{"num":"365","path":"BG/PGM/365/FR_2025_PLF_AD_PGM_365.pdf"},{"num":"370","path":"BG/PGM/370/FR_2025_PLF_AD_PGM_370.pdf"},{"num":"384","path":"BG/PGM/384/FR_2025_PLF_AD_PGM_384.pdf"}],"msn_path":"BG/MSN/AD/PAP2025_BG_Aide_publique_developpement_AD.pdf"},"AQ":{"name":"Audiovisuel public","programmes":[{"num":"372","path":"BG/PGM/372/FR_2025_PLF_AQ_PGM_372.pdf"},{"num":"373","path":"BG/PGM/373/FR_2025_PLF_AQ_PGM_373.pdf"},{"num":"374","path":"BG/PGM/374/FR_2025_PLF_AQ_PGM_374.pdf"},{"num":"375","path":"BG/PGM/375/FR_2025_PLF_AQ_PGM_375.pdf"},{"num":"376","path":"BG/PGM/376/FR_2025_PLF_AQ_PGM_376.pdf"},{"num":"377","path":"BG/PGM/377/FR_2025_PLF_AQ_PGM_377.pdf"},{"num":"383","path":"BG/PGM/383/FR_2025_PLF_AQ_PGM_383.pdf"}],"msn_path":"BG/MSN/AQ/PAP2025_BG_Audiovisuel_Public_AQ.pdf"},"AV":{"name":"Investir pour la France de 2030","programmes":[{"num":"421","path":"BG/PGM/421/FR_2025_PLF_AV_PGM_421.pdf"},{"num":"422","path":"BG/PGM/422/FR_2025_PLF_AV_PGM_422.pdf"},{"num":"423","path":"BG/PGM/423/FR_2025_PLF_AV_PGM_423.pdf"},{"num":"424","path":"BG/PGM/424/FR_2025_PLF_AV_PGM_424.pdf"},{"num":"425","path":"BG/PGM/425/FR_2025_PLF_AV_PGM_425.pdf"}],"msn_path":"BG/MSN/AV/PAP2025_BG_Investir_France_2030_AV.pdf"},"CA":{"name":"Conseil et controle de l'Etat","programmes":[{"num":"126","path":"BG/PGM/126/FR_2025_PLF_CA_PGM_126.pdf"},{"num":"164","path":"BG/PGM/164/FR_2025_PLF_CA_PGM_164.pdf"},{"num":"165","path":"BG/PGM/165/FR_2025_PLF_CA_PGM_165.pdf"}],"msn_path":"BG/MSN/CA/PAP2025_BG_Conseil_controle_Etat_CA.pdf"},"CB":{"name":"Culture","programmes":[{"num":"131","path":"BG/PGM/131/FR_2025_PLF_CB_PGM_131.pdf"},{"num":"175","path":"BG/PGM/175/FR_2025_PLF_CB_PGM_175.pdf"},{"num":"224","path":"BG/PGM/224/FR_2025_PLF_CB_PGM_224.pdf"},{"num":"361","path":"BG/PGM/361/FR_2025_PLF_CB_PGM_361.pdf"}],"msn_path":"BG/MSN/CB/PAP2025_BG_Culture_CB.pdf"},"DA":{"name":"Defense","programmes":[{"num":"144","path":"BG/PGM/144/FR_2025_PLF_DA_PGM_144.pdf"},{"num":"146","path":"BG/PGM/146/FR_2025_PLF_DA_PGM_146.pdf"},{"num":"178","path":"BG/PGM/178/FR_2025_PLF_DA_PGM_178.pdf"},{"num":"212","path":"BG/PGM/212/FR_2025_PLF_DA_PGM_212.pdf"}],"msn_path":"BG/MSN/DA/PAP2025_BG_Defense_DA.pdf"},"DB":{"name":"Economie","programmes":[{"num":"134","path":"BG/PGM/134/FR_2025_PLF_DB_PGM_134.pdf"},{"num":"220","path":"BG/PGM/220/FR_2025_PLF_DB_PGM_220.pdf"},{"num":"305","path":"BG/PGM/305/FR_2025_PLF_DB_PGM_305.pdf"},{"num":"343","path":"BG/PGM/343/FR_2025_PLF_DB_PGM_343.pdf"},{"num":"367","path":"BG/PGM/367/FR_2025_PLF_DB_PGM_367.pdf"}],"msn_path":"BG/MSN/DB/PAP2025_BG_Economie_DB.pdf"},"DC":{"name":"Direction de l'action du Gouvernement","programmes":[{"num":"129","path":"BG/PGM/129/FR_2025_PLF_DC_PGM_129.pdf"},{"num":"308","path":"BG/PGM/308/FR_2025_PLF_DC_PGM_308.pdf"}],"msn_path":"BG/MSN/DC/PAP2025_BG_Direction_action_du_Gouvernement_DC.pdf"},"EB":{"name":"Engagements financiers de l'Etat","programmes":[{"num":"114","path":"BG/PGM/114/FR_2025_PLF_EB_PGM_114.pdf"},{"num":"117","path":"BG/PGM/117/FR_2025_PLF_EB_PGM_117.pdf"},{"num":"145","path":"BG/PGM/145/FR_2025_PLF_EB_PGM_145.pdf"},{"num":"336","path":"BG/PGM/336/FR_2025_PLF_EB_PGM_336.pdf"},{"num":"338","path":"BG/PGM/338/FR_2025_PLF_EB_PGM_338.pdf"},{"num":"344","path":"BG/PGM/344/FR_2025_PLF_EB_PGM_344.pdf"},{"num":"355","path":"BG/PGM/355/FR_2025_PLF_EB_PGM_355.pdf"},{"num":"369","path":"BG/PGM/369/FR_2025_PLF_EB_PGM_369.pdf"}],"msn_path":"BG/MSN/EB/PAP2025_BG_Engagements_financiers_Etat_EB.pdf"},"EC":{"name":"Enseignement scolaire","programmes":[{"num":"139","path":"BG/PGM/139/FR_2025_PLF_EC_PGM_139.pdf"},{"num":"140","path":"BG/PGM/140/FR_2025_PLF_EC_PGM_140.pdf"},{"num":"141","path":"BG/PGM/141/FR_2025_PLF_EC_PGM_141.pdf"},{"num":"143","path":"BG/PGM/143/FR_2025_PLF_EC_PGM_143.pdf"},{"num":"214","path":"BG/PGM/214/FR_2025_PLF_EC_PGM_214.pdf"},{"num":"230","path":"BG/PGM/230/FR_2025_PLF_EC_PGM_230.pdf"}],"msn_path":"BG/MSN/EC/PAP2025_BG_Enseignement_scolaire_EC.pdf"},"GA":{"name":"Gestion des finances publiques","programmes":[{"num":"156","path":"BG/PGM/156/FR_2025_PLF_GA_PGM_156.pdf"},{"num":"218","path":"BG/PGM/218/FR_2025_PLF_GA_PGM_218.pdf"},{"num":"302","path":"BG/PGM/302/FR_2025_PLF_GA_PGM_302.pdf"}],"msn_path":"BG/MSN/GA/PAP2025_BG_Gestion_finances_publiques_GA.pdf"},"IA":{"name":"Immigration, asile et integration","programmes":[{"num":"104","path":"BG/PGM/104/FR_2025_PLF_IA_PGM_104.pdf"},{"num":"303","path":"BG/PGM/303/FR_2025_PLF_IA_PGM_303.pdf"}],"msn_path":"BG/MSN/IA/PAP2025_BG_Immigration_asile_integration_IA.pdf"},"JA":{"name":"Justice","programmes":[{"num":"101","path":"BG/PGM/101/FR_2025_PLF_JA_PGM_101.pdf"},{"num":"107","path":"BG/PGM/107/FR_2025_PLF_JA_PGM_107.pdf"},{"num":"166","path":"BG/PGM/166/FR_2025_PLF_JA_PGM_166.pdf"},{"num":"182","path":"BG/PGM/182/FR_2025_PLF_JA_PGM_182.pdf"},{"num":"310","path":"BG/PGM/310/FR_2025_PLF_JA_PGM_310.pdf"},{"num":"335","path":"BG/PGM/335/FR_2025_PLF_JA_PGM_335.pdf"}],"msn_path":"BG/MSN/JA/PAP2025_BG_Justice_JA.pdf"},"MA":{"name":"Medias, livre et industries culturelles","programmes":[{"num":"180","path":"BG/PGM/180/FR_2025_PLF_MA_PGM_180.pdf"},{"num":"334","path":"BG/PGM/334/FR_2025_PLF_MA_PGM_334.pdf"}],"msn_path":"BG/MSN/MA/PAP2025_BG_Medias_livre_industries_culturelles_MA.pdf"},"MB":{"name":"Anciens combattants, memoire et liens avec la nation","programmes":[{"num":"158","path":"BG/PGM/158/FR_2025_PLF_MB_PGM_158.pdf"},{"num":"169","path":"BG/PGM/169/FR_2025_PLF_MB_PGM_169.pdf"}],"msn_path":"BG/MSN/MB/PAP2025_BG_Anciens_combattants_memoire_liens_nation_MB.pdf"},"OA":{"name":"Outre-mer","programmes":[{"num":"123","path":"BG/PGM/123/FR_2025_PLF_OA_PGM_123.pdf"},{"num":"138","path":"BG/PGM/138/FR_2025_PLF_OA_PGM_138.pdf"}],"msn_path":"BG/MSN/OA/PAP2025_BG_Outre-mer_OA.pdf"},"PB":{"name":"Pouvoirs publics","programmes":[{"num":"501","path":"BG/PGM/501/FR_2025_PLF_PB_PGM_501.pdf"},{"num":"511","path":"BG/PGM/511/FR_2025_PLF_PB_PGM_511.pdf"},{"num":"521","path":"BG/PGM/521/FR_2025_PLF_PB_PGM_521.pdf"},{"num":"531","path":"BG/PGM/531/FR_2025_PLF_PB_PGM_531.pdf"},{"num":"532","path":"BG/PGM/532/FR_2025_PLF_PB_PGM_532.pdf"},{"num":"533","path":"BG/PGM/533/FR_2025_PLF_PB_PGM_533.pdf"},{"num":"541","path":"BG/PGM/541/FR_2025_PLF_PB_PGM_541.pdf"},{"num":"542","path":"BG/PGM/542/FR_2025_PLF_PB_PGM_542.pdf"}],"msn_path":"BG/MSN/PB/PAP2025_BG_Pouvoirs_publics_PB.pdf"},"PC":{"name":"Credits non repartis","programmes":[{"num":"551","path":"BG/PGM/551/FR_2025_PLF_PC_PGM_551.pdf"},{"num":"552","path":"BG/PGM/552/FR_2025_PLF_PC_PGM_552.pdf"}],"msn_path":"BG/MSN/PC/PAP2025_BG_Credits_non_repartis_PC.pdf"},"PR":{"name":"Plan de relance","programmes":[{"num":"362","path":"BG/PGM/362/FR_2025_PLF_PR_PGM_362.pdf"},{"num":"363","path":"BG/PGM/363/FR_2025_PLF_PR_PGM_363.pdf"}],"msn_path":"BG/MSN/PR/PAP2025_BG_Plan_relance_PR.pdf"},"RA":{"name":"Recherche et enseignement superieur","programmes":[{"num":"142","path":"BG/PGM/142/FR_2025_PLF_RA_PGM_142.pdf"},{"num":"150","path":"BG/PGM/150/FR_2025_PLF_RA_PGM_150.pdf"},{"num":"172","path":"BG/PGM/172/FR_2025_PLF_RA_PGM_172.pdf"},{"num":"190","path":"BG/PGM/190/FR_2025_PLF_RA_PGM_190.pdf"},{"num":"191","path":"BG/PGM/191/FR_2025_PLF_RA_PGM_191.pdf"},{"num":"192","path":"BG/PGM/192/FR_2025_PLF_RA_PGM_192.pdf"},{"num":"193","path":"BG/PGM/193/FR_2025_PLF_RA_PGM_193.pdf"},{"num":"231","path":"BG/PGM/231/FR_2025_PLF_RA_PGM_231.pdf"}],"msn_path":"BG/MSN/RA/PAP2025_BG_Recherche_enseignement_superieur_RA.pdf"},"RB":{"name":"Regimes sociaux et de retraite","programmes":[{"num":"195","path":"BG/PGM/195/FR_2025_PLF_RB_PGM_195.pdf"},{"num":"197","path":"BG/PGM/197/FR_2025_PLF_RB_PGM_197.pdf"},{"num":"198","path":"BG/PGM/198/FR_2025_PLF_RB_PGM_198.pdf"}],"msn_path":"BG/MSN/RB/PAP2025_BG_Regimes_sociaux_retraite_RB.pdf"},"RC":{"name":"Relations avec les collectivites territoriales","programmes":[{"num":"119","path":"BG/PGM/119/FR_2025_PLF_RC_PGM_119.pdf"},{"num":"122","path":"BG/PGM/122/FR_2025_PLF_RC_PGM_122.pdf"}],"msn_path":"BG/MSN/RC/PAP2025_BG_Relations_collectivites_territoriales_RC.pdf"},"RD":{"name":"Remboursements et degrevements","programmes":[{"num":"200","path":"BG/PGM/200/FR_2025_PLF_RD_PGM_200.pdf"},{"num":"201","path":"BG/PGM/201/FR_2025_PLF_RD_PGM_201.pdf"}],"msn_path":"BG/MSN/RD/PAP2025_BG_Remboursements_degrevements_RD.pdf"},"SA":{"name":"Sante","programmes":[{"num":"183","path":"BG/PGM/183/FR_2025_PLF_SA_PGM_183.pdf"},{"num":"204","path":"BG/PGM/204/FR_2025_PLF_SA_PGM_204.pdf"},{"num":"379","path":"BG/PGM/379/FR_2025_PLF_SA_PGM_379.pdf"}],"msn_path":"BG/MSN/SA/PAP2025_BG_Sante_SA.pdf"},"SB":{"name":"Securites","programmes":[{"num":"152","path":"BG/PGM/152/FR_2025_PLF_SB_PGM_152.pdf"},{"num":"161","path":"BG/PGM/161/FR_2025_PLF_SB_PGM_161.pdf"},{"num":"176","path":"BG/PGM/176/FR_2025_PLF_SB_PGM_176.pdf"},{"num":"207","path":"BG/PGM/207/FR_2025_PLF_SB_PGM_207.pdf"}],"msn_path":"BG/MSN/SB/PAP2025_BG_Securites_SB.pdf"},"SE":{"name":"Solidarite, insertion et egalite des chances","programmes":[{"num":"137","path":"BG/PGM/137/FR_2025_PLF_SE_PGM_137.pdf"},{"num":"157","path":"BG/PGM/157/FR_2025_PLF_SE_PGM_157.pdf"},{"num":"304","path":"BG/PGM/304/FR_2025_PLF_SE_PGM_304.pdf"}],"msn_path":"BG/MSN/SE/PAP2025_BG_Solidarite_insertion_egalite_chances_SE.pdf"},"SF":{"name":"Sport, jeunesse et vie associative","programmes":[{"num":"163","path":"BG/PGM/163/FR_2025_PLF_SF_PGM_163.pdf"},{"num":"219","path":"BG/PGM/219/FR_2025_PLF_SF_PGM_219.pdf"},{"num":"350","path":"BG/PGM/350/FR_2025_PLF_SF_PGM_350.pdf"}],"msn_path":"BG/MSN/SF/PAP2025_BG_Sport_jeunesse_vie_associative_SF.pdf"},"TA":{"name":"Ecologie, developpement et mobilites durables","programmes":[{"num":"113","path":"BG/PGM/113/FR_2025_PLF_TA_PGM_113.pdf"},{"num":"159","path":"BG/PGM/159/FR_2025_PLF_TA_PGM_159.pdf"},{"num":"174","path":"BG/PGM/174/FR_2025_PLF_TA_PGM_174.pdf"},{"num":"181","path":"BG/PGM/181/FR_2025_PLF_TA_PGM_181.pdf"},{"num":"203","path":"BG/PGM/203/FR_2025_PLF_TA_PGM_203.pdf"},{"num":"205","path":"BG/PGM/205/FR_2025_PLF_TA_PGM_205.pdf"},{"num":"217","path":"BG/PGM/217/FR_2025_PLF_TA_PGM_217.pdf"},{"num":"235","path":"BG/PGM/235/FR_2025_PLF_TA_PGM_235.pdf"},{"num":"345","path":"BG/PGM/345/FR_2025_PLF_TA_PGM_345.pdf"},{"num":"380","path":"BG/PGM/380/FR_2025_PLF_TA_PGM_380.pdf"}],"msn_path":"BG/MSN/TA/PAP2025_BG_Ecologie_developpement_mobilites_durables_TA.pdf"},"TB":{"name":"Travail et emploi","programmes":[{"num":"102","path":"BG/PGM/102/FR_2025_PLF_TB_PGM_102.pdf"},{"num":"103","path":"BG/PGM/103/FR_2025_PLF_TB_PGM_103.pdf"},{"num":"111","path":"BG/PGM/111/FR_2025_PLF_TB_PGM_111.pdf"},{"num":"155","path":"BG/PGM/155/FR_2025_PLF_TB_PGM_155.pdf"}],"msn_path":"BG/MSN/TB/PAP2025_BG_Travail_emploi_TB.pdf"},"TR":{"name":"Transformation et fonction publiques","programmes":[{"num":"148","path":"BG/PGM/148/FR_2025_PLF_TR_PGM_148.pdf"},{"num":"348","path":"BG/PGM/348/FR_2025_PLF_TR_PGM_348.pdf"},{"num":"349","path":"BG/PGM/349/FR_2025_PLF_TR_PGM_349.pdf"},{"num":"368","path":"BG/PGM/368/FR_2025_PLF_TR_PGM_368.pdf"}],"msn_path":"BG/MSN/TR/PAP2025_BG_Transformation_fonction_publiques_TR.pdf"},"VA":{"name":"Cohesion des territoires","programmes":[{"num":"109","path":"BG/PGM/109/FR_2025_PLF_VA_PGM_109.pdf"},{"num":"112","path":"BG/PGM/112/FR_2025_PLF_VA_PGM_112.pdf"},{"num":"135","path":"BG/PGM/135/FR_2025_PLF_VA_PGM_135.pdf"},{"num":"147","path":"BG/PGM/147/FR_2025_PLF_VA_PGM_147.pdf"},{"num":"162","path":"BG/PGM/162/FR_2025_PLF_VA_PGM_162.pdf"},{"num":"177","path":"BG/PGM/177/FR_2025_PLF_VA_PGM_177.pdf"}],"msn_path":"BG/MSN/VA/PAP2025_BG_Cohesion_territoires_VA.pdf"}}},"CAS":{"missions":{"YB":{"name":"Gestion du patrimoine immobilier de l'Etat","programmes":[{"num":"721","path":"CAS/PGM/721/FR_2025_PLF_YB_PGM_721.pdf"},{"num":"723","path":"CAS/PGM/723/FR_2025_PLF_YB_PGM_723.pdf"}],"msn_path":"CAS/MSN/YB/PAP2025_CS_CAS_Gestion_patrimoine_immobilier_Etat_YB.pdf"},"YC":{"name":"Participations financieres de l'Etat","programmes":[{"num":"731","path":"CAS/PGM/731/FR_2025_PLF_YC_PGM_731.pdf"},{"num":"732","path":"CAS/PGM/732/FR_2025_PLF_YC_PGM_732.pdf"}],"msn_path":"CAS/MSN/YC/PAP2025_CS_CAS_Participations_financieres_Etat_YC.pdf"},"YD":{"name":"Pensions","programmes":[{"num":"741","path":"CAS/PGM/741/FR_2025_PLF_YD_PGM_741.pdf"},{"num":"742","path":"CAS/PGM/742/FR_2025_PLF_YD_PGM_742.pdf"},{"num":"743","path":"CAS/PGM/743/FR_2025_PLF_YD_PGM_743.pdf"}],"msn_path":"CAS/MSN/YD/PAP2025_CS_CAS_Pensions_YD.pdf"},"YE":{"name":"Controle de la circulation et du stationnement routiers","programmes":[{"num":"751","path":"CAS/PGM/751/FR_2025_PLF_YE_PGM_751.pdf"},{"num":"753","path":"CAS/PGM/753/FR_2025_PLF_YE_PGM_753.pdf"},{"num":"754","path":"CAS/PGM/754/FR_2025_PLF_YE_PGM_754.pdf"},{"num":"755","path":"CAS/PGM/755/FR_2025_PLF_YE_PGM_755.pdf"}],"msn_path":"CAS/MSN/YE/PAP2025_CS_CAS_Controle_circulation_routiers_YE.pdf"},"YF":{"name":"Developpement agricole et rural","programmes":[{"num":"775","path":"CAS/PGM/775/FR_2025_PLF_YF_PGM_775.pdf"},{"num":"776","path":"CAS/PGM/776/FR_2025_PLF_YF_PGM_776.pdf"}],"msn_path":"CAS/MSN/YF/PAP2025_CS_CAS_Developpement_agricole_rural_YF.pdf"},"YK":{"name":"Financement des aides aux collectivites pour l'electrification rurale","programmes":[{"num":"793","path":"CAS/PGM/793/FR_2025_PLF_YK_PGM_793.pdf"},{"num":"794","path":"CAS/PGM/794/FR_2025_PLF_YK_PGM_794.pdf"}],"msn_path":"CAS/MSN/YK/PAP2025_CS_CAS_Financement_aides_collectivites_electrification_rurale_YK.pdf"}}},"CCF":{"missions":{"ZB":{"name":"Avances a divers services de l'Etat ou organismes","programmes":[{"num":"821","path":"CCF/PGM/821/FR_2025_PLF_ZB_PGM_821.pdf"},{"num":"823","path":"CCF/PGM/823/FR_2025_PLF_ZB_PGM_823.pdf"},{"num":"824","path":"CCF/PGM/824/FR_2025_PLF_ZB_PGM_824.pdf"},{"num":"825","path":"CCF/PGM/825/FR_2025_PLF_ZB_PGM_825.pdf"},{"num":"826","path":"CCF/PGM/826/FR_2025_PLF_ZB_PGM_826.pdf"},{"num":"827","path":"CCF/PGM/827/FR_2025_PLF_ZB_PGM_827.pdf"},{"num":"828","path":"CCF/PGM/828/FR_2025_PLF_ZB_PGM_828.pdf"},{"num":"830","path":"CCF/PGM/830/FR_2025_PLF_ZB_PGM_830.pdf"}],"msn_path":"CCF/MSN/ZB/PAP2025_CS_CCF_Avances_divers_services_ZB.pdf"},"ZC":{"name":"Avances aux collectivites territoriales","programmes":[{"num":"832","path":"CCF/PGM/832/FR_2025_PLF_ZC_PGM_832.pdf"},{"num":"833","path":"CCF/PGM/833/FR_2025_PLF_ZC_PGM_833.pdf"},{"num":"834","path":"CCF/PGM/834/FR_2025_PLF_ZC_PGM_834.pdf"}],"msn_path":"CCF/MSN/ZC/PAP2025_CS_CCF_Avances_collectivites_territoriales_ZC.pdf"},"ZE":{"name":"Prets a des Etats etrangers","programmes":[{"num":"851","path":"CCF/PGM/851/FR_2025_PLF_ZE_PGM_851.pdf"},{"num":"852","path":"CCF/PGM/852/FR_2025_PLF_ZE_PGM_852.pdf"},{"num":"853","path":"CCF/PGM/853/FR_2025_PLF_ZE_PGM_853.pdf"},{"num":"854","path":"CCF/PGM/854/FR_2025_PLF_ZE_PGM_854.pdf"}],"msn_path":"CCF/MSN/ZE/PAP2025_CS_CCF_Prets_Etats_etrangers_ZE.pdf"},"ZF":{"name":"Prets et avances a des particuliers ou organismes prives","programmes":[{"num":"861","path":"CCF/PGM/861/FR_2025_PLF_ZF_PGM_861.pdf"},{"num":"862","path":"CCF/PGM/862/FR_2025_PLF_ZF_PGM_862.pdf"},{"num":"869","path":"CCF/PGM/869/FR_2025_PLF_ZF_PGM_869.pdf"},{"num":"876","path":"CCF/PGM/876/FR_2025_PLF_ZF_PGM_876.pdf"},{"num":"877","path":"CCF/PGM/877/FR_2025_PLF_ZF_PGM_877.pdf"},{"num":"878","path":"CCF/PGM/878/FR_2025_PLF_ZF_PGM_878.pdf"}],"msn_path":"CCF/MSN/ZF/PAP2025_CS_CCF_Prets_avances_particuliers_organismes_prives_ZF.pdf"}}},"CCO":{"missions":{"CCO":{"name":"Comptes de commerce","programmes":[],"msn_path":"CCO/CCO/PAP2025_CS_CCO_Comptes_commerce.pdf"}}},"COM":{"missions":{"COM":{"name":"Comptes d'operations monetaires","programmes":[],"msn_path":"COM/COM/PAP2025_CS_COM_Comptes_operations_monetaires.pdf"}}}};
+const BT_ORDER = ['BG', 'BA', 'CAS', 'CCF', 'CCO', 'COM'];
+const EXERCICE_LABELS = { PLF: 'PLF (Projet)', PLR: 'PLRG (Resultats)' };
 
-// Compute stats
-let totalMissions = 0, totalProgrammes = 0, totalFiles = 0;
-const btOrder = ['BG', 'BA', 'CAS', 'CCF', 'CCO', 'COM'];
-for (const bt of btOrder) {
-  const missions = Object.keys(DATA[bt].missions);
-  totalMissions += missions.length;
-  for (const m of missions) {
-    totalFiles++; // mission file
-    totalProgrammes += DATA[bt].missions[m].programmes.length;
-    totalFiles += DATA[bt].missions[m].programmes.length;
-  }
+// ── Init: load years then corpus ──
+async function init() {
+  const years = await (await fetch('/api/annees')).json();
+  const selAnnee = document.getElementById('sel-annee');
+  years.forEach(y => {
+    const o = document.createElement('option');
+    o.value = y;
+    o.textContent = y;
+    selAnnee.appendChild(o);
+  });
+  selAnnee.value = years[years.length - 1];
+
+  selAnnee.addEventListener('change', () => loadExercices(selAnnee.value));
+  document.getElementById('sel-exercice').addEventListener('change', () => {
+    loadCorpus(selAnnee.value, document.getElementById('sel-exercice').value);
+  });
+
+  await loadExercices(selAnnee.value);
 }
 
-document.getElementById('stats').innerHTML = [
-  { label: 'Types de budget', value: btOrder.length, mod: 'accent' },
-  { label: 'Missions', value: totalMissions, mod: 'info' },
-  { label: 'Programmes', value: totalProgrammes, mod: 'info' },
-  { label: 'Documents PDF', value: totalFiles, mod: 'success' }
-].map(s => `<div class="fr-tile stat-tile stat-tile--${s.mod}"><div class="stat-label">${s.label}</div><div class="stat-value">${s.value}</div></div>`).join('');
+async function loadExercices(annee) {
+  const data = await (await fetch(`/api/corpus/${annee}`)).json();
+  const selEx = document.getElementById('sel-exercice');
+  selEx.innerHTML = '';
+  data.exercices_disponibles.forEach(ex => {
+    const o = document.createElement('option');
+    o.value = ex;
+    o.textContent = EXERCICE_LABELS[ex] || ex;
+    selEx.appendChild(o);
+  });
+  selEx.value = data.exercice;
+  applyCorpusData(data);
+}
 
-// Build tree
+async function loadCorpus(annee, exercice) {
+  const data = await (await fetch(`/api/corpus/${annee}?exercice=${exercice}`)).json();
+  applyCorpusData(data);
+}
+
+function applyCorpusData(data) {
+  FILE_BASE = data.file_base;
+  DATA = data.tree;
+
+  const exLabel = data.exercice === 'PLR' ? 'PLRG' : data.exercice;
+  document.getElementById('corpus-title').textContent = `Corpus documentaire ${exLabel} ${data.annee}`;
+  document.title = `Corpus ${exLabel} ${data.annee} – Budget Explorer`;
+
+  // Count docs
+  let totalMissions = 0, totalProgrammes = 0, totalFiles = 0;
+  const activeBTs = BT_ORDER.filter(bt => DATA[bt]);
+  for (const bt of activeBTs) {
+    const missions = Object.keys(DATA[bt].missions);
+    totalMissions += missions.length;
+    for (const m of missions) {
+      if (DATA[bt].missions[m].msn_path) totalFiles++;
+      totalProgrammes += DATA[bt].missions[m].programmes.length;
+      totalFiles += DATA[bt].missions[m].programmes.length;
+    }
+  }
+
+  document.getElementById('corpus-subtitle').textContent =
+    `Documents ${exLabel} ${data.annee} — ${totalFiles} PDF indexes par mission et programme`;
+
+  updateStats(activeBTs.length, totalMissions, totalProgrammes, totalFiles);
+  buildTree();
+  bindSearch();
+  bindExpandCollapse();
+}
+
+function updateStats(nbt, nmsn, npgm, nfiles) {
+  document.getElementById('stats').innerHTML = [
+    { label: 'Types de budget', value: nbt, mod: 'accent' },
+    { label: 'Missions', value: nmsn, mod: 'info' },
+    { label: 'Programmes', value: npgm, mod: 'info' },
+    { label: 'Documents PDF', value: nfiles, mod: 'success' }
+  ].map(s => `<div class="fr-tile stat-tile stat-tile--${s.mod}"><div class="stat-label">${s.label}</div><div class="stat-value">${s.value}</div></div>`).join('');
+}
+
+// ── Build tree from DATA ──
 function buildTree() {
   const container = document.getElementById('corpus-tree');
   container.innerHTML = '';
 
-  for (const bt of btOrder) {
+  const activeBTs = BT_ORDER.filter(bt => DATA[bt]);
+
+  for (const bt of activeBTs) {
     const info = BUDGET_TYPES[bt];
     const missions = DATA[bt].missions;
     const msnKeys = Object.keys(missions);
@@ -251,14 +320,6 @@ function buildTree() {
         <a href="${FILE_BASE}${msn.msn_path}" target="_blank" class="pdf-link" title="Telecharger le PAP de la mission ${msn.name}">&#128196; PAP Mission</a>
         ${hasPgm ? `<span class="msn-count">${msn.programmes.length} programme${msn.programmes.length > 1 ? 's' : ''}</span>` : ''}
       `;
-
-      if (hasPgm) {
-        mh.addEventListener('click', (e) => {
-          if (e.target.closest('.pdf-link')) return;
-          mh.classList.toggle('open');
-          pgmList.classList.toggle('open');
-        });
-      }
       row.appendChild(mh);
 
       // Programme list
@@ -278,11 +339,14 @@ function buildTree() {
           pgmList.appendChild(item);
         }
         row.appendChild(pgmList);
-        // re-bind pgmList reference for the click handler
+
         mh.addEventListener('click', (e) => {
           if (e.target.closest('.pdf-link')) return;
+          mh.classList.toggle('open');
+          pgmList.classList.toggle('open');
         });
       }
+
       body.appendChild(row);
     }
 
@@ -291,79 +355,80 @@ function buildTree() {
   }
 }
 
-buildTree();
+// ── Search ──
+function bindSearch() {
+  const searchInput = document.getElementById('search');
+  const resultCount = document.getElementById('result-count');
 
-// Fix: pgmList reference in event handler
-// Rebind properly by using DOM traversal
-document.querySelectorAll('.mission-header').forEach(mh => {
-  const row = mh.parentElement;
-  const pgmList = row.querySelector('.pgm-list');
-  if (!pgmList) return;
+  // Remove old listener by cloning
+  const newInput = searchInput.cloneNode(true);
+  searchInput.parentNode.replaceChild(newInput, searchInput);
+  newInput.value = '';
 
-  // Remove old listeners by replacing node
-  const newMh = mh.cloneNode(true);
-  mh.parentNode.replaceChild(newMh, mh);
+  newInput.addEventListener('input', () => {
+    const q = newInput.value.trim().toLowerCase();
+    let visible = 0;
 
-  newMh.addEventListener('click', (e) => {
-    if (e.target.closest('.pdf-link')) return;
-    newMh.classList.toggle('open');
-    pgmList.classList.toggle('open');
-  });
-});
+    document.querySelectorAll('.budget-section').forEach(section => {
+      let sectionHasMatch = false;
+      const body = section.querySelector('.budget-body');
+      const header = section.querySelector('.budget-header');
 
-// Search
-const searchInput = document.getElementById('search');
-const resultCount = document.getElementById('result-count');
+      section.querySelectorAll('.mission-row').forEach(row => {
+        const code = row.dataset.code.toLowerCase();
+        const name = row.dataset.name;
+        const pgmNums = Array.from(row.querySelectorAll('.pgm-item')).map(p => p.dataset.num);
+        const match = !q || code.includes(q) || name.includes(q) || pgmNums.some(n => n.includes(q));
 
-searchInput.addEventListener('input', () => {
-  const q = searchInput.value.trim().toLowerCase();
-  let visible = 0;
+        row.style.display = match ? '' : 'none';
+        if (match) {
+          sectionHasMatch = true;
+          visible++;
+        }
+      });
 
-  document.querySelectorAll('.budget-section').forEach(section => {
-    let sectionHasMatch = false;
-    const body = section.querySelector('.budget-body');
-    const header = section.querySelector('.budget-header');
+      section.style.display = sectionHasMatch || !q ? '' : 'none';
 
-    section.querySelectorAll('.mission-row').forEach(row => {
-      const code = row.dataset.code.toLowerCase();
-      const name = row.dataset.name;
-      const pgmNums = Array.from(row.querySelectorAll('.pgm-item')).map(p => p.dataset.num);
-      const match = !q || code.includes(q) || name.includes(q) || pgmNums.some(n => n.includes(q));
-
-      row.style.display = match ? '' : 'none';
-      if (match) {
-        sectionHasMatch = true;
-        visible++;
+      if (q && sectionHasMatch) {
+        header.classList.add('open');
+        body.classList.add('open');
       }
     });
 
-    section.style.display = sectionHasMatch || !q ? '' : 'none';
+    resultCount.textContent = q ? `${visible} mission${visible > 1 ? 's' : ''}` : '';
+  });
+}
 
-    if (q && sectionHasMatch) {
-      header.classList.add('open');
-      body.classList.add('open');
-    }
+// ── Expand / Collapse all ──
+function bindExpandCollapse() {
+  const btnExpand = document.getElementById('btn-expand-all');
+  const btnCollapse = document.getElementById('btn-collapse-all');
+
+  // Clone to remove old listeners
+  const newExpand = btnExpand.cloneNode(true);
+  btnExpand.parentNode.replaceChild(newExpand, btnExpand);
+  const newCollapse = btnCollapse.cloneNode(true);
+  btnCollapse.parentNode.replaceChild(newCollapse, btnCollapse);
+
+  newExpand.addEventListener('click', () => {
+    document.querySelectorAll('.budget-header').forEach(h => h.classList.add('open'));
+    document.querySelectorAll('.budget-body').forEach(b => b.classList.add('open'));
+    document.querySelectorAll('.mission-header').forEach(h => {
+      if (h.parentElement.querySelector('.pgm-list')) h.classList.add('open');
+    });
+    document.querySelectorAll('.pgm-list').forEach(l => l.classList.add('open'));
   });
 
-  resultCount.textContent = q ? `${visible} mission${visible > 1 ? 's' : ''}` : '';
-});
-
-// Expand / Collapse all
-document.getElementById('btn-expand-all').addEventListener('click', () => {
-  document.querySelectorAll('.budget-header').forEach(h => h.classList.add('open'));
-  document.querySelectorAll('.budget-body').forEach(b => b.classList.add('open'));
-  document.querySelectorAll('.mission-header').forEach(h => {
-    if (h.parentElement.querySelector('.pgm-list')) h.classList.add('open');
+  newCollapse.addEventListener('click', () => {
+    document.querySelectorAll('.budget-header').forEach(h => h.classList.remove('open'));
+    document.querySelectorAll('.budget-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.mission-header').forEach(h => h.classList.remove('open'));
+    document.querySelectorAll('.pgm-list').forEach(l => l.classList.remove('open'));
   });
-  document.querySelectorAll('.pgm-list').forEach(l => l.classList.add('open'));
-});
+}
 
-document.getElementById('btn-collapse-all').addEventListener('click', () => {
-  document.querySelectorAll('.budget-header').forEach(h => h.classList.remove('open'));
-  document.querySelectorAll('.budget-body').forEach(b => b.classList.remove('open'));
-  document.querySelectorAll('.mission-header').forEach(h => h.classList.remove('open'));
-  document.querySelectorAll('.pgm-list').forEach(l => l.classList.remove('open'));
-});
+// ── Start ──
+init();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/dsfr.module.min.js" type="module"></script>

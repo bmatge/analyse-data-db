@@ -291,7 +291,7 @@ function docLinksHtml(programmeCode, missionCode) {
   if (missionCode && docsIndex.msn[missionCode]) docs.push(...docsIndex.msn[missionCode]);
   if (!docs.length) return '<p class="fr-text--sm" style="color:var(--text-mention-grey)">Aucun document disponible</p>';
   return docs.map(d =>
-    `<a class="doc-link fr-link" href="/entrants/PLF_2025/${d.filepath}" target="_blank">${d.titre || d.filename}</a>`
+    `<a class="doc-link fr-link" href="/ressources/docs/${d.annee}/${d.exercice === 'PLR' ? 'PLRG' : 'PLF'}/${d.filepath}" target="_blank">${d.titre || d.filename}</a>`
   ).join('<br>');
 }
 
@@ -747,7 +747,7 @@ function renderIcicle() {
     .on('click', (ev, d) => {
       ev.stopPropagation();
       const docs = docsIndex.pgm[d.data.code];
-      if (docs && docs[0]) window.open(`/entrants/PLF_2025/${docs[0].filepath}`, '_blank');
+      if (docs && docs[0]) { const d = docs[0]; window.open(`/ressources/docs/${d.annee}/${d.exercice === 'PLR' ? 'PLRG' : 'PLF'}/${d.filepath}`, '_blank'); }
     });
 
   function icicleZoom(p) {
