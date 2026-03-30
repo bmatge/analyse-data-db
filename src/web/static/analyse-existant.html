@@ -110,8 +110,8 @@
   </thead>
   <tbody>
     <tr>
-      <td><code>entrants/2023/</code></td>
-      <td><span class="fr-badge fr-badge--sm fr-badge--plr">PLR 2023</span></td>
+      <td><code>entrants/2023/PLRG/</code></td>
+      <td><span class="fr-badge fr-badge--sm fr-badge--plr">PLRG 2023</span></td>
       <td class="num">2023</td>
       <td class="num">209</td>
       <td class="num">694</td>
@@ -120,17 +120,17 @@
       <td>_emplois.xls</td>
     </tr>
     <tr>
-      <td><code>entrants/2024/</code></td>
-      <td><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2024</span></td>
+      <td><code>entrants/2024/PLF/</code> + <code>PLRG/</code></td>
+      <td><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2024</span> + <span class="fr-badge fr-badge--sm fr-badge--plr">PLRG 2024</span></td>
       <td class="num">2024</td>
-      <td class="num">217</td>
+      <td class="num">217 + 229</td>
       <td class="num">665</td>
-      <td>MiS_PGM_ACT_SSA.xls</td>
-      <td>PLF2024-credits.xls</td>
-      <td>PLF2024-emplois.xls</td>
+      <td>MiS_PGM_ACT_SSA.xls (x2)</td>
+      <td>PLF2024-credits.xls + Credits_...RetD.xls</td>
+      <td>PLF2024-emplois.xls + _emplois.xls</td>
     </tr>
     <tr>
-      <td><code>entrants/2025/</code></td>
+      <td><code>entrants/2025/PLF/</code></td>
       <td><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2025</span></td>
       <td class="num">2025</td>
       <td class="num">229</td>
@@ -140,17 +140,7 @@
       <td>emplois.xls</td>
     </tr>
     <tr>
-      <td><code>entrants/2025/</code></td>
-      <td><span class="fr-badge fr-badge--sm fr-badge--plr">PLRG 2024</span></td>
-      <td class="num">2024</td>
-      <td class="num">229</td>
-      <td class="num">0</td>
-      <td>MiS_PGM_ACT_SSA.xls</td>
-      <td>Credits_Destination_Nature_YC_RetD.xls</td>
-      <td>_emplois.xls</td>
-    </tr>
-    <tr>
-      <td><code>entrants/2026/</code></td>
+      <td><code>entrants/2026/PLF/</code></td>
       <td><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2026</span></td>
       <td class="num">2026</td>
       <td class="num">224</td>
@@ -165,21 +155,22 @@
 <p>S'ajoutent les sources <strong>open data</strong> deja presentes dans <code>entrants/plf open data/</code> : CSV pour PLF 2014 a 2025, LFI 2019 a 2023, et PLR 2018.</p>
 
 <!-- ══════════════════════════════════════════════════ -->
-<h2>Structure des ZIP</h2>
-<p>Chaque ZIP de documents budgetaires contient la meme arborescence :</p>
+<h2>Organisation des dossiers</h2>
+<p>Les documents sont ranges par <strong>annee budgetaire</strong>, puis par <strong>exercice</strong> (PLF ou PLRG), puis par type de budget :</p>
 <div class="schema-box">
-<pre>BA/         Budgets Annexes
-  MSN/      Documents par mission (XC, XJ)
-  PGM/      Documents par programme (612, 613...)
-BG/         Budget General
-  MSN/      49 missions (AA, AB, AC...)
-  PGM/      ~160 programmes (101, 102, 103...)
-CAS/        Comptes d'Affectation Speciale
-  MSN/ + PGM/
-CCF/        Comptes de Concours Financiers
-  MSN/ + PGM/
-CCO/        Comptes de Commerce
-COM/        Comptes d'Operations Monetaires</pre>
+<pre>entrants/{annee}/
+  PLF/                  Documents du Projet de Loi de Finances
+    BA/ BG/ CAS/ CCF/ CCO/ COM/
+      MSN/{code}/       Documents par mission
+      PGM/{code}/       Documents par programme
+  PLRG/                 Documents du Projet de Loi de Resultats de Gestion
+    BA/ BG/ CAS/ CCF/ CCO/ COM/
+      MSN/{code}/       Documents par mission
+      PGM/{code}/       Documents par programme
+  donnees pour dataviz... PLF {annee}/
+    MiS_PGM_ACT_SSA.xls, Credits_*.xls, emplois.xls
+  donnees pour dataviz... PLRG {annee}/
+    MiS_PGM_ACT_SSA.xls, Credits_*.xls, _emplois.xls</pre>
 </div>
 
 <!-- ══════════════════════════════════════════════════ -->
@@ -187,7 +178,7 @@ COM/        Comptes d'Operations Monetaires</pre>
 
 <!-- ── 2023 ── -->
 <div class="year-card">
-  <h3><span class="fr-badge fr-badge--plr">PLR 2023</span> entrants/2023/</h3>
+  <h3><span class="fr-badge fr-badge--plr">PLRG 2023</span> entrants/2023/PLRG/</h3>
 
   <h4>Documents budgetaires (PLR_2023.zip — 313 Mo)</h4>
   <p>1 129 fichiers : <span class="source-badge source-badge--pdf">209 PDF</span> <span class="source-badge source-badge--html">694 HTML</span></p>
@@ -214,9 +205,9 @@ COM/        Comptes d'Operations Monetaires</pre>
 
 <!-- ── 2024 ── -->
 <div class="year-card">
-  <h3><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2024</span> entrants/2024/</h3>
+  <h3><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2024</span> + <span class="fr-badge fr-badge--plr">PLRG 2024</span> entrants/2024/PLF/ + entrants/2024/PLRG/</h3>
 
-  <h4>Documents budgetaires (PLF_2024.zip — 210 Mo)</h4>
+  <h4>Documents budgetaires PLF (PLF_2024.zip — 210 Mo)</h4>
   <p>1 114 fichiers : <span class="source-badge source-badge--pdf">217 PDF</span> <span class="source-badge source-badge--html">665 HTML</span></p>
   <table class="inventory-table">
     <thead><tr><th>Suffixe HTML</th><th>Nombre</th></tr></thead>
@@ -228,24 +219,34 @@ COM/        Comptes d'Operations Monetaires</pre>
       <tr><td><code>_OPE</code></td><td class="num">52</td></tr>
     </tbody>
   </table>
-  <p>Convention de nommage : <code>FR_2024_PLF_{type_budget}_PGM_{code}.pdf</code></p>
+  <p>Convention de nommage PLF : <code>FR_2024_PLF_{type_budget}_PGM_{code}.pdf</code></p>
 
-  <h4>Donnees dataviz (donnees pour dataviz et nomenclature PLF 2024.zip)</h4>
+  <h4>Documents budgetaires PLRG (PLRG_2024.zip — 236 Mo)</h4>
+  <p><span class="source-badge source-badge--pdf">229 PDF</span> <span class="source-badge source-badge--html" style="opacity:0.3">0 HTML</span> — RAP (resultats de gestion). Convention : <code>FR_2024_PLR_{type_budget}_PGM_{code}.pdf</code></p>
+
+  <h4>Donnees dataviz PLF</h4>
   <ul class="file-list">
-    <li><code>MiS_PGM_ACT_SSA.xls</code> — Nomenclature (2 642 lignes)</li>
-    <li><code>PLF2024-credits.xls</code> — Credits (2 374 lignes, colonnes <code>ae</code> / <code>cp</code>)</li>
-    <li><code>PLF2024-emplois.xls</code> — ETPT</li>
+    <li><code>MiS_PGM_ACT_SSA.xls</code> — Nomenclature PLF (2 642 lignes)</li>
+    <li><code>PLF2024-credits.xls</code> — Credits PLF (2 374 lignes, colonnes <code>ae</code> / <code>cp</code>)</li>
+    <li><code>PLF2024-emplois.xls</code> — ETPT PLF</li>
+  </ul>
+
+  <h4>Donnees dataviz PLRG</h4>
+  <ul class="file-list">
+    <li><code>MiS_PGM_ACT_SSA.xls</code> — Nomenclature PLRG (2 643 lignes)</li>
+    <li><code>Credits_Destination_Nature_YC_RetD.xls</code> — Credits executes (3 560 lignes, colonnes <code>AE EXEC</code> / <code>CP EXEC</code>)</li>
+    <li><code>_emplois.xls</code> — ETPT executes</li>
   </ul>
 
   <div class="ecart-box">
-    <h4>Ecart constate : nommage du fichier credits</h4>
-    <p>Le fichier credits est nomme <code>PLF2024-credits.xls</code> au lieu de <code>Credits_Destination_Nature_YC_RetD.xls</code> (nom utilise pour toutes les autres annees). Le schema des colonnes est aussi different : <code>ae</code>/<code>cp</code> au lieu de <code>AE EXEC</code>/<code>CP EXEC</code>, et <code>sous-action</code> (tiret) au lieu de <code>sous_action</code> (underscore).</p>
+    <h4>Ecart constate : nommage du fichier credits PLF</h4>
+    <p>Le fichier credits PLF est nomme <code>PLF2024-credits.xls</code> au lieu de <code>Credits_Destination_Nature_YC_RetD.xls</code> (nom utilise pour toutes les autres annees). Le schema des colonnes differe aussi entre PLF (<code>ae</code>/<code>cp</code>, <code>sous-action</code>) et PLRG (<code>AE EXEC</code>/<code>CP EXEC</code>, <code>sous_action</code>).</p>
   </div>
 </div>
 
 <!-- ── 2025 PLF ── -->
 <div class="year-card">
-  <h3><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2025</span> entrants/2025/</h3>
+  <h3><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2025</span> entrants/2025/PLF/</h3>
 
   <h4>Documents budgetaires (PLF_2025.zip — 131 Mo)</h4>
   <p>472 fichiers : <span class="source-badge source-badge--pdf">229 PDF</span> <span class="source-badge source-badge--html" style="opacity:0.3">0 HTML</span></p>
@@ -269,30 +270,9 @@ COM/        Comptes d'Operations Monetaires</pre>
   </ul>
 </div>
 
-<!-- ── 2025 PLRG ── -->
-<div class="year-card">
-  <h3><span class="fr-badge fr-badge--plr">PLRG 2024</span> entrants/2025/</h3>
-
-  <h4>Documents budgetaires (PLRG_2024.zip — 236 Mo)</h4>
-  <p>472 fichiers : <span class="source-badge source-badge--pdf">229 PDF</span> <span class="source-badge source-badge--html" style="opacity:0.3">0 HTML</span></p>
-  <p>Les PDF sont les RAP (execution). Pas de HTML. Convention : <code>FR_2024_PLR_{type_budget}_PGM_{code}.pdf</code></p>
-
-  <h4>Donnees dataviz (donnees pour dataviz et nomenclature PLRG 2024.zip)</h4>
-  <ul class="file-list">
-    <li><code>MiS_PGM_ACT_SSA.xls</code> — Nomenclature (2 643 lignes)</li>
-    <li><code>Credits_Destination_Nature_YC_RetD.xls</code> — Credits executes (3 560 lignes, colonnes <code>AE EXEC</code> / <code>CP EXEC</code>)</li>
-    <li><code>_emplois.xls</code> — ETPT</li>
-  </ul>
-
-  <div class="ok-box">
-    <h4>Note : dossier de rattachement</h4>
-    <p>Le PLRG 2024 est dans <code>entrants/2025/</code> car il est publie au printemps 2025 pour les comptes de l'exercice 2024. C'est le pendant "execution" du PLF 2024.</p>
-  </div>
-</div>
-
 <!-- ── 2026 ── -->
 <div class="year-card">
-  <h3><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2026</span> entrants/2026/</h3>
+  <h3><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2026</span> entrants/2026/PLF/</h3>
 
   <h4>Documents budgetaires (PLF_2026.zip — 132 Mo)</h4>
   <p>462 fichiers : <span class="source-badge source-badge--pdf">224 PDF</span> <span class="source-badge source-badge--html" style="opacity:0.3">0 HTML</span></p>

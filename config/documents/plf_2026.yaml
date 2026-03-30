@@ -4,7 +4,7 @@
 annee: 2026
 exercice: PLF
 type_document: PAP
-root_path: "2026"
+root_path: "2026/PLF"
 
 patterns:
   mission:

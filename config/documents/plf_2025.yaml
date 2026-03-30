@@ -4,7 +4,7 @@
 annee: 2025
 exercice: PLF
 type_document: PAP
-root_path: "PLF_2025"
+root_path: "2025/PLF"
 
 patterns:
   # Documents au niveau mission

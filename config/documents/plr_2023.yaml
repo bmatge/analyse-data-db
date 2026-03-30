@@ -4,7 +4,7 @@
 annee: 2023
 exercice: PLR
 type_document: RAP
-root_path: "2023"
+root_path: "2023/PLRG"
 
 patterns:
   mission:

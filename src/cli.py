@@ -104,12 +104,8 @@ def cmd_load_xls(args):
     )
 
     # Search for the XLS file in the year's entrants directory
+    # (PLRG data is stored in the budget year folder, e.g., PLRG 2024 in entrants/2024/)
     search_dir = str(Path(ENTRANTS_DIR) / str(annee))
-    if exercice == "PLR":
-        # PLR data may be in the next year's directory (e.g., PLRG 2024 in entrants/2025)
-        search_dir_alt = str(Path(ENTRANTS_DIR) / str(annee + 1))
-        if not Path(search_dir).exists() or not any(Path(search_dir).rglob("*credits*.xls")):
-            search_dir = search_dir_alt
 
     print(f"Loading XLS credits for {exercice} {annee} from {search_dir}...")
     result = load_data(conn, config_path, search_dir)

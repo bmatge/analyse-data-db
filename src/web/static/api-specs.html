@@ -270,10 +270,11 @@ Ministere</div>
 </table>
 
 <p>L'arborescence des dossiers est stable :</p>
-<div class="flow-schema">{type_budget}/
-  MSN/{code_mission}/    → PDF mission (1 par mission)
-  PGM/{code_programme}/  → PDF programme (1 par programme)
-                          + HTML (5 sections) pour 2023-2024 uniquement</div>
+<div class="flow-schema">entrants/{annee}/{exercice}/     ← PLF/ ou PLRG/
+  {type_budget}/
+    MSN/{code_mission}/    → PDF mission (1 par mission)
+    PGM/{code_programme}/  → PDF programme (1 par programme)
+                            + HTML (5 sections) pour 2023-2024 uniquement</div>
 
 <p>Les HTML structures (<code>_CREDITS</code>, <code>_JPE</code>, <code>_STRAT</code>, <code>_PERF</code>, <code>_OPE</code>) ne sont disponibles que pour le PLR 2023 et le PLF 2024. Ce sont les memes donnees que les PDF mais en format parsable (tableaux HTML avec CSS FARANDOLE).</p>
 </div>
@@ -360,7 +361,7 @@ Ministere</div>
   <li><strong>Les CSV open data sont plus riches mais instables</strong> — 3 generations de schemas en 10 ans, encodages variables, noms de colonnes variables. Chaque annee necessite sa propre config YAML.</li>
   <li><strong>Les HTML structures ont disparu a partir du PLF 2025</strong> — les 694 HTML du PLR 2023 et 665 du PLF 2024 sont les derniers. L'information equivalente n'est plus accessible que via les PDF.</li>
   <li><strong>Le nommage des fichiers credits varie</strong> — <code>PLF2024-credits.xls</code> (specifique) vs <code>Credits_Destination_Nature_YC_RetD.xls</code> (generique). Les patterns glob dans les configs YAML absorbent ces variations.</li>
-  <li><strong>Le PLRG est dans le dossier de l'annee suivante</strong> — le PLRG 2024 est dans <code>entrants/2025/</code> car publie au printemps 2025. C'est coherent avec le calendrier budgetaire mais demande une logique de recherche croisee.</li>
+  <li><strong>Le PLRG est range par annee budgetaire</strong> — le PLRG 2024 est dans <code>entrants/2024/PLRG/</code>, aux cotes du PLF 2024 dans <code>entrants/2024/PLF/</code>. Le sous-dossier <code>PLF/</code> ou <code>PLRG/</code> distingue l'exercice, l'annee du dossier parent identifie l'annee budgetaire.</li>
 </ol>
 </div>
 

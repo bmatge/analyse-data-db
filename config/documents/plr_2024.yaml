@@ -1,10 +1,11 @@
 # Configuration de scan des documents PDF du PLRG 2024 (RAP)
-# 229 PDF dans entrants/2025/ (le PLRG 2024 est publié en 2025)
+# Les PDF PLRG 2024 sont rangés dans entrants/2024/ (année budgétaire),
+# aux côtés des PDF PLF 2024. Le parser distingue par le nom de fichier.
 
 annee: 2024
 exercice: PLR
 type_document: RAP
-root_path: "2025"
+root_path: "2024/PLRG"
 
 patterns:
   mission:
