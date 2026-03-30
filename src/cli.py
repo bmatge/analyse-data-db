@@ -8,11 +8,36 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.parent
 DB_PATH = str(PROJECT_ROOT / "db" / "budget.db")
 CONFIG_DIR = str(PROJECT_ROOT / "config")
-# Use ressources/data if it exists (git-tracked), fallback to entrants/
+# Use ressources/data if it exists (git-tracked), fallback to entrants/plf open data
 _ressources_data = PROJECT_ROOT / "ressources" / "data"
 _entrants_data = PROJECT_ROOT / "entrants" / "plf open data"
 DATA_DIR = str(_ressources_data if _ressources_data.exists() else _entrants_data)
+RESSOURCES_DIR = str(PROJECT_ROOT / "ressources")
 ENTRANTS_DIR = str(PROJECT_ROOT / "entrants")
+
+
+def _find_dataviz_dir(annee: int, exercice: str) -> str:
+    """Find the dataviz directory for a given year and exercice.
+
+    Tries ressources/data/{year}_{exercice}/ first (git-tracked),
+    then entrants/{year}/données pour dataviz...{exercice}/ (local).
+    """
+    exercice_key = "PLRG" if exercice.upper() == "PLR" else exercice.upper()
+
+    # Try ressources/data/{year}_{exercice}/ first
+    ressources_path = Path(RESSOURCES_DIR) / "data" / f"{annee}_{exercice_key}"
+    if ressources_path.exists():
+        return str(ressources_path)
+
+    # Fallback to entrants/{year}/données pour dataviz...
+    year_dir = Path(ENTRANTS_DIR) / str(annee)
+    if year_dir.exists():
+        dataviz_dirs = [d for d in year_dir.iterdir()
+                        if d.is_dir() and exercice_key in d.name and "dataviz" in d.name]
+        if dataviz_dirs:
+            return str(dataviz_dirs[0])
+
+    return str(year_dir) if year_dir.exists() else DATA_DIR
 
 sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -103,12 +128,8 @@ def cmd_load_xls(args):
         (annee, exercice),
     )
 
-    # Search for the XLS file in the right dataviz subfolder
-    year_dir = Path(ENTRANTS_DIR) / str(annee)
-    # Find the dataviz folder matching the exercice (PLF or PLRG)
-    search_key = "PLRG" if exercice == "PLR" else "PLF"
-    dataviz_dirs = [d for d in year_dir.iterdir() if d.is_dir() and search_key in d.name and "dataviz" in d.name]
-    search_dir = str(dataviz_dirs[0]) if dataviz_dirs else str(year_dir)
+    # Search for the XLS file in the dataviz directory
+    search_dir = _find_dataviz_dir(annee, exercice)
 
     print(f"Loading XLS credits for {exercice} {annee} from {search_dir}...")
     result = load_data(conn, config_path, search_dir)
@@ -197,13 +218,10 @@ def cmd_load_nomenclature(args):
     for table in ("sous_action", "action", "programme", "mission", "ministere"):
         conn.execute(f"DELETE FROM {table} WHERE annee = ?", (annee,))
 
-    # Search in the right dataviz subfolder for the XLS nomenclature file
+    # Search in the dataviz directory for the XLS nomenclature file
     config = load_schema_config(config_path)
-    year_dir = Path(ENTRANTS_DIR) / str(annee)
     exercice_key = exercice.upper() if exercice else config["derived"].get("exercice", "PLF")
-    search_key = "PLRG" if exercice_key == "PLR" else "PLF"
-    dataviz_dirs = [d for d in year_dir.iterdir() if d.is_dir() and search_key in d.name and "dataviz" in d.name] if year_dir.exists() else []
-    search_dir = str(dataviz_dirs[0]) if dataviz_dirs else (str(year_dir) if year_dir.exists() else DATA_DIR)
+    search_dir = _find_dataviz_dir(annee, exercice_key)
 
     print(f"Loading nomenclature for {annee}...")
     result = load_nomenclature_xls_format(conn, config_path, search_dir)
