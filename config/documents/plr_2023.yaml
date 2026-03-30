@@ -1,0 +1,30 @@
+# Configuration de scan des documents PDF du PLR 2023 (RAP)
+# 209 PDF + 694 HTML — seuls les PDF sont indexés par cette config
+
+annee: 2023
+exercice: PLR
+type_document: RAP
+root_path: "2023"
+
+patterns:
+  mission:
+    path_pattern: "{type_budget}/MSN/{mission_code}/"
+    filename_patterns:
+      - "FR_{annee}_PLR_{budget_prefix}_MSN_{mission_code}.pdf"
+
+  programme:
+    path_pattern: "{type_budget}/PGM/{programme_code}/"
+    filename_patterns:
+      - "FR_{annee}_PLR_{mission_code}_PGM_{programme_code}.pdf"
+
+  special:
+    - type_budget: CCO
+      path: "CCO/CCO/"
+      filename: "FR_2023_PLR_CCO.pdf"
+      mission_code: null
+      programme_code: null
+    - type_budget: COM
+      path: "COM/COM/"
+      filename: "FR_2023_PLR_COM.pdf"
+      mission_code: null
+      programme_code: null

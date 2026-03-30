@@ -1,0 +1,29 @@
+# Crédits XLS format PLR/PLRG (PLRG 2023, PLRG 2024)
+# Colonnes: exercice, loi, typeBudget, ministere, mission, programme, action, sous_action, categorie, titre, AE EXEC, CP EXEC
+# Source: fichiers "Credits_Destination_Nature_YC_RetD.xls" dans les dossiers PLRG
+
+source:
+  type: xls
+  encoding: utf-8
+
+file_pattern: "Credits_Destination_Nature_YC_RetD.xls"
+
+columns:
+  annee_source:          { source: "exercice", type: integer }
+  exercice_source:       { source: "loi", type: string }
+  type_budget:           { source: "typeBudget", type: string }
+  ministere_code:        { source: "ministere", type: integer }
+  mission_code:          { source: "mission", type: string }
+  programme_code:        { source: "programme", type: integer }
+  action_code:           { source: "action", type: string, nullable: true }
+  sous_action_code:      { source: "sous_action", type: string, nullable: true }
+  categorie_code:        { source: "categorie", type: integer }
+  titre_code:            { source: "titre", type: integer }
+  ae:                    { source: "AE EXEC", type: float, nullable: true }
+  cp:                    { source: "CP EXEC", type: float, nullable: true }
+
+derived:
+  exercice: PLR
+
+validation:
+  type_budget_values: [BG, BA, CAS, CCF]

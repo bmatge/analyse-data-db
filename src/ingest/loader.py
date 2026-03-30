@@ -1,4 +1,4 @@
-"""Configuration-driven CSV loader for budget data."""
+"""Configuration-driven CSV/XLS loader for budget data."""
 
 import csv
 import math
@@ -7,6 +7,7 @@ from fnmatch import fnmatch
 from pathlib import Path
 from typing import Any
 
+import pandas as pd
 import yaml
 
 
@@ -175,14 +176,75 @@ def insert_nomenclature_data(conn: sqlite3.Connection, rows: list[dict], source_
     conn.commit()
 
 
+def find_source_file_recursive(config: dict, data_dir: str) -> Path:
+    """Find the source file matching the config's file_pattern, searching recursively."""
+    pattern = config["file_pattern"]
+    annee = config.get("derived", {}).get("annee")
+    if annee:
+        pattern = pattern.replace("{annee}", str(annee))
+    data_path = Path(data_dir)
+    # First try flat
+    matches = [f for f in data_path.iterdir() if f.is_file() and fnmatch(f.name, pattern)]
+    if not matches:
+        # Search recursively
+        matches = [f for f in data_path.rglob("*") if f.is_file() and fnmatch(f.name, pattern)]
+    if not matches:
+        raise FileNotFoundError(f"No file matching '{pattern}' in {data_dir}")
+    if len(matches) > 1:
+        raise FileNotFoundError(f"Multiple files matching '{pattern}': {matches}")
+    return matches[0]
+
+
+def read_xls(file_path: Path, config: dict) -> list[dict]:
+    """Read an XLS file and apply the schema mapping, returning normalized rows."""
+    columns = config["columns"]
+    derived = config.get("derived", {})
+
+    df = pd.read_excel(file_path)
+    rows = []
+    for _, raw_row in df.iterrows():
+        row = {}
+        for internal_name, col_cfg in columns.items():
+            if col_cfg is None:
+                row[internal_name] = None
+                continue
+            source_col = col_cfg["source"]
+            raw_val = raw_row.get(source_col)
+            if pd.isna(raw_val) or (isinstance(raw_val, str) and raw_val.strip() == ""):
+                row[internal_name] = None
+            else:
+                # Convert via string for reuse of convert_value
+                row[internal_name] = convert_value(str(raw_val), col_cfg)
+        # Use annee from XLS data if present, otherwise from derived
+        if "annee_source" in row and row["annee_source"] is not None:
+            row["annee"] = row["annee_source"]
+        if "exercice_source" in row and row["exercice_source"] is not None:
+            row["exercice"] = row["exercice_source"]
+        # Apply derived fields (but don't overwrite annee/exercice from data)
+        for key, val in derived.items():
+            if key not in row or row.get(key) is None:
+                row[key] = val
+        # Skip empty rows
+        if not row.get("type_budget") and not row.get("programme_code"):
+            continue
+        rows.append(row)
+    return rows
+
+
 def load_data(conn: sqlite3.Connection, config_path: str, data_dir: str) -> dict:
-    """Main entry point: load a CSV into the database using a YAML config.
+    """Main entry point: load a CSV/XLS into the database using a YAML config.
 
     Returns a summary dict with counts and any errors.
     """
     config = load_schema_config(config_path)
-    source_file = find_source_file(config, data_dir)
-    rows = read_csv(source_file, config)
+    source_type = config.get("source", {}).get("type", "csv")
+
+    if source_type == "xls":
+        source_file = find_source_file_recursive(config, data_dir)
+        rows = read_xls(source_file, config)
+    else:
+        source_file = find_source_file(config, data_dir)
+        rows = read_csv(source_file, config)
     errors = validate_rows(rows, config)
 
     if errors:

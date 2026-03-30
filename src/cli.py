@@ -1,7 +1,6 @@
 """CLI entry point for the budget classification system."""
 
 import argparse
-import json
 import sys
 from pathlib import Path
 
@@ -80,11 +79,17 @@ def cmd_load(args):
     print("Done.")
 
 
-def cmd_load_documents(args):
-    """Load document metadata from PDF scan."""
+def cmd_load_xls(args):
+    """Load budget data from an XLS credits file."""
     annee = args.year
-    config_name = f"plf_{annee}.yaml"
-    config_path = str(Path(CONFIG_DIR) / "documents" / config_name)
+    exercice = args.exercice.upper()
+
+    # Pick the right schema based on exercice
+    if exercice == "PLR":
+        config_name = "credits_xls_plr.yaml"
+    else:
+        config_name = "credits_xls_plf.yaml"
+    config_path = str(Path(CONFIG_DIR) / "schemas" / config_name)
 
     if not Path(config_path).exists():
         print(f"ERROR: Config not found: {config_path}")
@@ -92,10 +97,65 @@ def cmd_load_documents(args):
 
     conn = get_connection(DB_PATH)
 
-    # Clear existing documents for this year
-    conn.execute("DELETE FROM document WHERE annee = ?", (annee,))
+    # Clear existing data for this year+exercice
+    conn.execute(
+        "DELETE FROM donnees_budget WHERE annee = ? AND exercice = ?",
+        (annee, exercice),
+    )
 
-    print(f"Scanning documents for PLF {annee}...")
+    # Search for the XLS file in the year's entrants directory
+    search_dir = str(Path(ENTRANTS_DIR) / str(annee))
+    if exercice == "PLR":
+        # PLR data may be in the next year's directory (e.g., PLRG 2024 in entrants/2025)
+        search_dir_alt = str(Path(ENTRANTS_DIR) / str(annee + 1))
+        if not Path(search_dir).exists() or not any(Path(search_dir).rglob("*credits*.xls")):
+            search_dir = search_dir_alt
+
+    print(f"Loading XLS credits for {exercice} {annee} from {search_dir}...")
+    result = load_data(conn, config_path, search_dir)
+    print(f"  File: {result['file']}")
+    print(f"  Rows: {result['rows']}")
+    if result["errors"]:
+        print(f"  ERRORS: {len(result['errors'])}")
+        for e in result["errors"][:10]:
+            print(f"    - {e}")
+
+    conn.close()
+    print("Done.")
+
+
+def cmd_load_documents(args):
+    """Load document metadata from PDF scan."""
+    annee = args.year
+    exercice = getattr(args, "exercice", "PLF").upper()
+
+    # Try PLF first, then PLR config
+    if exercice == "PLR":
+        config_name = f"plr_{annee}.yaml"
+    else:
+        config_name = f"plf_{annee}.yaml"
+    config_path = str(Path(CONFIG_DIR) / "documents" / config_name)
+
+    if not Path(config_path).exists():
+        # Fallback: try the other exercice
+        alt = f"plf_{annee}.yaml" if exercice == "PLR" else f"plr_{annee}.yaml"
+        alt_path = str(Path(CONFIG_DIR) / "documents" / alt)
+        if Path(alt_path).exists():
+            config_path = alt_path
+        else:
+            print(f"ERROR: Config not found: {config_path}")
+            sys.exit(1)
+
+    conn = get_connection(DB_PATH)
+
+    # Clear existing documents for this year+exercice
+    config = load_schema_config(config_path)
+    conn.execute(
+        "DELETE FROM document WHERE annee = ? AND exercice = ?",
+        (annee, config.get("exercice", exercice)),
+    )
+
+    print(f"Scanning documents for {exercice} {annee}...")
     result = load_documents(conn, config_path, ENTRANTS_DIR)
     print(f"  Total PDFs found: {result.get('total_pdfs', 0)}")
     print(f"  Successfully parsed: {result.get('parsed', 0)}")
@@ -113,11 +173,23 @@ def cmd_load_documents(args):
 def cmd_load_nomenclature(args):
     """Load a nomenclature file in XLS-like format (TTR/CAT/MIN/MSN/PGM/ACT/SSA)."""
     annee = args.year
-    config_name = f"nomenclature_{annee}.yaml"
-    config_path = str(Path(CONFIG_DIR) / "schemas" / config_name)
+    exercice = getattr(args, "exercice", None)
 
-    if not Path(config_path).exists():
-        print(f"ERROR: Config not found: {config_path}")
+    # Determine config name — try exercice-specific first, then generic
+    candidates = []
+    if exercice:
+        candidates.append(f"nomenclature_{exercice.lower()}_{annee}.yaml")
+    candidates.append(f"nomenclature_{annee}.yaml")
+
+    config_path = None
+    for name in candidates:
+        path = Path(CONFIG_DIR) / "schemas" / name
+        if path.exists():
+            config_path = str(path)
+            break
+
+    if not config_path:
+        print(f"ERROR: Config not found (tried: {', '.join(candidates)})")
         sys.exit(1)
 
     conn = get_connection(DB_PATH)
@@ -126,13 +198,22 @@ def cmd_load_nomenclature(args):
     for table in ("sous_action", "action", "programme", "mission", "ministere"):
         conn.execute(f"DELETE FROM {table} WHERE annee = ?", (annee,))
 
+    # Search in year's entrants directory for XLS files
+    config = load_schema_config(config_path)
+    search_dir = str(Path(ENTRANTS_DIR) / str(annee))
+    if not Path(search_dir).exists():
+        search_dir = DATA_DIR
+
     print(f"Loading nomenclature for {annee}...")
-    result = load_nomenclature_xls_format(conn, config_path, DATA_DIR)
+    result = load_nomenclature_xls_format(conn, config_path, search_dir)
+    if result["status"] == "error":
+        # Try DATA_DIR as fallback
+        result = load_nomenclature_xls_format(conn, config_path, DATA_DIR)
     if result["status"] == "error":
         print(f"  ERROR: {result['message']}")
         sys.exit(1)
     print(f"  File: {result['file']}")
-    print(f"  Ministères: {result['ministeres']}")
+    print(f"  Ministeres: {result['ministeres']}")
     print(f"  Missions: {result['missions']}")
     print(f"  Programmes: {result['programmes']}")
     print(f"  Actions: {result['actions']}")
@@ -225,10 +306,12 @@ def cmd_load_all(args):
         print(f"ERROR: No config found for {args.year} (tried opendata_{args.year}.yaml and nomenclature_{args.year}.yaml)")
         sys.exit(1)
 
-    # Try to load documents if config exists
-    doc_config = Path(CONFIG_DIR) / "documents" / f"plf_{args.year}.yaml"
-    if doc_config.exists():
-        cmd_load_documents(args)
+    # Try to load documents — PLF first, then PLR
+    for prefix in ("plf", "plr"):
+        doc_config = Path(CONFIG_DIR) / "documents" / f"{prefix}_{args.year}.yaml"
+        if doc_config.exists():
+            cmd_load_documents(args)
+            break
 
     cmd_validate(args)
 
@@ -240,17 +323,24 @@ def main():
     # init
     sub.add_parser("init", help="Initialize database and load constants")
 
-    # load
+    # load (CSV open data)
     p_load = sub.add_parser("load", help="Load CSV data for a year")
     p_load.add_argument("year", type=int, help="Budget year (e.g. 2025)")
+
+    # load-xls (XLS credits from dataviz)
+    p_xls = sub.add_parser("load-xls", help="Load XLS credits data for a year")
+    p_xls.add_argument("year", type=int, help="Budget year (e.g. 2024)")
+    p_xls.add_argument("--exercice", default="PLF", help="Exercice: PLF or PLR (default: PLF)")
 
     # load-documents
     p_docs = sub.add_parser("load-documents", help="Scan and load PDF documents")
     p_docs.add_argument("year", type=int, help="Budget year")
+    p_docs.add_argument("--exercice", default="PLF", help="Exercice: PLF or PLR (default: PLF)")
 
     # load-nomenclature
     p_nom = sub.add_parser("load-nomenclature", help="Load nomenclature file (XLS format)")
     p_nom.add_argument("year", type=int, help="Budget year")
+    p_nom.add_argument("--exercice", help="Exercice: PLF or PLR (optional, auto-detected)")
 
     # reconcile
     sub.add_parser("reconcile", help="Build canonical entities")
@@ -271,6 +361,7 @@ def main():
     commands = {
         "init": cmd_init,
         "load": cmd_load,
+        "load-xls": cmd_load_xls,
         "load-nomenclature": cmd_load_nomenclature,
         "load-documents": cmd_load_documents,
         "reconcile": cmd_reconcile,

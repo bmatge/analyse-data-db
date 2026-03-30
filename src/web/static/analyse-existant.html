@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analyse de l'existant – Budget Explorer</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/dsfr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/utility/utility.min.css">
+<link rel="stylesheet" href="/static/style.css">
+<style>
+  .inventory-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.88rem; }
+  .inventory-table th, .inventory-table td { padding: 0.5rem 0.7rem; border: 1px solid var(--border-default-grey); text-align: left; }
+  .inventory-table th { background: var(--background-contrast-grey); font-weight: 600; }
+  .inventory-table tr:nth-child(even) { background: var(--background-alt-grey); }
+  .inventory-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .year-card { background: white; border: 1px solid var(--border-default-grey); border-radius: 8px; padding: 1.2rem; margin-bottom: 1.5rem; }
+  .year-card h3 { margin: 0 0 0.8rem 0; display: flex; align-items: center; gap: 0.5rem; }
+
+  .file-list { margin: 0.5rem 0; padding-left: 1.2rem; }
+  .file-list li { margin-bottom: 0.3rem; }
+  .file-list code { font-size: 0.82rem; background: var(--background-alt-grey); padding: 0.1rem 0.4rem; border-radius: 3px; }
+
+  .ecart-box { background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: 0.8rem 1rem; margin: 1rem 0; }
+  .ecart-box h4 { margin: 0 0 0.4rem 0; color: #856404; }
+
+  .ok-box { background: #d4edda; border: 1px solid #28a745; border-radius: 6px; padding: 0.8rem 1rem; margin: 1rem 0; }
+  .ok-box h4 { margin: 0 0 0.4rem 0; color: #155724; }
+
+  .source-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.78rem; font-weight: 600; }
+  .source-badge--pdf { background: #dc3545; color: white; }
+  .source-badge--html { background: #0d6efd; color: white; }
+  .source-badge--xls { background: #198754; color: white; }
+  .source-badge--csv { background: #6f42c1; color: white; }
+
+  .schema-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  @media (max-width: 768px) { .schema-compare { grid-template-columns: 1fr; } }
+
+  .schema-box-small { background: var(--background-alt-grey); border-radius: 6px; padding: 0.8rem; font-size: 0.85rem; }
+  .schema-box-small h5 { margin: 0 0 0.4rem 0; }
+  .schema-box-small pre { margin: 0; white-space: pre-wrap; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<header role="banner" class="fr-header">
+  <div class="fr-header__body">
+    <div class="fr-container">
+      <div class="fr-header__body-row">
+        <div class="fr-header__brand fr-enlarge-link">
+          <div class="fr-header__brand-top">
+            <div class="fr-header__logo">
+              <p class="fr-logo">Republique<br>Francaise</p>
+            </div>
+            <div class="fr-header__navbar">
+              <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="header-navigation" aria-haspopup="menu" id="burger-btn" title="Menu">Menu</button>
+            </div>
+          </div>
+          <div class="fr-header__service">
+            <a href="/" title="Accueil - Budget Explorer">
+              <p class="fr-header__service-title">Budget Explorer</p>
+            </a>
+            <p class="fr-header__service-tagline">Direction du Budget</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fr-header__menu fr-modal" id="header-navigation" aria-labelledby="burger-btn">
+    <div class="fr-container">
+      <button class="fr-btn--close fr-btn" aria-controls="header-navigation" title="Fermer">Fermer</button>
+      <div class="fr-header__menu-links"></div>
+      <nav class="fr-nav" role="navigation" aria-label="Menu principal">
+        <ul class="fr-nav__list">
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/">Accueil</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/glossaire">Glossaire</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/api-specs">Interfaces</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/nomenclature">Nomenclature</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/corpus">Corpus documentaire</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/plf-lfi">Flux PLF / LFI</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/prototypes">Prototypes</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/analyse-existant" aria-current="page">Analyse existant</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="budget-main">
+<div class="fr-container">
+
+<h1>Analyse de l'existant</h1>
+<p>Inventaire exhaustif des donnees brutes disponibles dans <code>entrants/</code>, issues des ZIP de la Direction du Budget. Cette page documente le contenu de chaque livraison, les formats trouves, et les ecarts entre annees.</p>
+
+<!-- ══════════════════════════════════════════════════ -->
+<h2>Vue d'ensemble</h2>
+
+<table class="inventory-table">
+  <thead>
+    <tr>
+      <th>Dossier</th>
+      <th>Type document</th>
+      <th>Annee budgetaire</th>
+      <th>PDF</th>
+      <th>HTML</th>
+      <th>XLS nomenclature</th>
+      <th>XLS credits</th>
+      <th>XLS emplois</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>entrants/2023/</code></td>
+      <td><span class="fr-badge fr-badge--sm fr-badge--plr">PLR 2023</span></td>
+      <td class="num">2023</td>
+      <td class="num">209</td>
+      <td class="num">694</td>
+      <td>MiS_PGM_ACT_SSA.xls</td>
+      <td>Credits_Destination_Nature_YC_RetD.xls</td>
+      <td>_emplois.xls</td>
+    </tr>
+    <tr>
+      <td><code>entrants/2024/</code></td>
+      <td><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2024</span></td>
+      <td class="num">2024</td>
+      <td class="num">217</td>
+      <td class="num">665</td>
+      <td>MiS_PGM_ACT_SSA.xls</td>
+      <td>PLF2024-credits.xls</td>
+      <td>PLF2024-emplois.xls</td>
+    </tr>
+    <tr>
+      <td><code>entrants/2025/</code></td>
+      <td><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2025</span></td>
+      <td class="num">2025</td>
+      <td class="num">229</td>
+      <td class="num">0</td>
+      <td>MiS_PGM_ACT_SSA.xls</td>
+      <td>Credits_Destination_Nature_YC_RetD.xls</td>
+      <td>emplois.xls</td>
+    </tr>
+    <tr>
+      <td><code>entrants/2025/</code></td>
+      <td><span class="fr-badge fr-badge--sm fr-badge--plr">PLRG 2024</span></td>
+      <td class="num">2024</td>
+      <td class="num">229</td>
+      <td class="num">0</td>
+      <td>MiS_PGM_ACT_SSA.xls</td>
+      <td>Credits_Destination_Nature_YC_RetD.xls</td>
+      <td>_emplois.xls</td>
+    </tr>
+    <tr>
+      <td><code>entrants/2026/</code></td>
+      <td><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2026</span></td>
+      <td class="num">2026</td>
+      <td class="num">224</td>
+      <td class="num">0</td>
+      <td>MiS_PGM_ACT_SSA.xls</td>
+      <td>Credits_Destination_Nature_YC_RetD.xls</td>
+      <td>emplois.xls</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>S'ajoutent les sources <strong>open data</strong> deja presentes dans <code>entrants/plf open data/</code> : CSV pour PLF 2014 a 2025, LFI 2019 a 2023, et PLR 2018.</p>
+
+<!-- ══════════════════════════════════════════════════ -->
+<h2>Structure des ZIP</h2>
+<p>Chaque ZIP de documents budgetaires contient la meme arborescence :</p>
+<div class="schema-box">
+<pre>BA/         Budgets Annexes
+  MSN/      Documents par mission (XC, XJ)
+  PGM/      Documents par programme (612, 613...)
+BG/         Budget General
+  MSN/      49 missions (AA, AB, AC...)
+  PGM/      ~160 programmes (101, 102, 103...)
+CAS/        Comptes d'Affectation Speciale
+  MSN/ + PGM/
+CCF/        Comptes de Concours Financiers
+  MSN/ + PGM/
+CCO/        Comptes de Commerce
+COM/        Comptes d'Operations Monetaires</pre>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<h2>Detail par annee</h2>
+
+<!-- ── 2023 ── -->
+<div class="year-card">
+  <h3><span class="fr-badge fr-badge--plr">PLR 2023</span> entrants/2023/</h3>
+
+  <h4>Documents budgetaires (PLR_2023.zip — 313 Mo)</h4>
+  <p>1 129 fichiers : <span class="source-badge source-badge--pdf">209 PDF</span> <span class="source-badge source-badge--html">694 HTML</span></p>
+  <p>Les PDF sont les <em>bleus budgetaires</em> complets (RAP). Les HTML sont les memes documents decomposes en sections parsables :</p>
+  <table class="inventory-table">
+    <thead><tr><th>Suffixe HTML</th><th>Contenu</th><th>Nombre</th></tr></thead>
+    <tbody>
+      <tr><td><code>_CREDITS</code></td><td>Tableaux de credits par action/titre (AE/CP, LFI N-1, execution)</td><td class="num">166</td></tr>
+      <tr><td><code>_JPE</code></td><td>Justification au Premier Euro — detail fin des depenses</td><td class="num">173</td></tr>
+      <tr><td><code>_STRAT</code></td><td>Presentation strategique du programme</td><td class="num">166</td></tr>
+      <tr><td><code>_PERF</code></td><td>Objectifs et indicateurs de performance</td><td class="num">136</td></tr>
+      <tr><td><code>_OPE</code></td><td>Operateurs rattaches au programme</td><td class="num">53</td></tr>
+    </tbody>
+  </table>
+  <p>Convention de nommage des fichiers : <code>FR_2023_PLR_{type_budget}_PGM_{code}.pdf</code></p>
+
+  <h4>Donnees dataviz (donnees pour dataviz et nomenclature PLRG 2023.zip)</h4>
+  <ul class="file-list">
+    <li><code>MiS_PGM_ACT_SSA.xls</code> — Nomenclature complete (2 593 lignes, 8 colonnes)</li>
+    <li><code>Credits_Destination_Nature_YC_RetD.xls</code> — Credits executes (3 424 lignes, colonnes <code>AE EXEC</code> / <code>CP EXEC</code>)</li>
+    <li><code>_emplois.xls</code> — ETPT par programme (166 programmes)</li>
+  </ul>
+</div>
+
+<!-- ── 2024 ── -->
+<div class="year-card">
+  <h3><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2024</span> entrants/2024/</h3>
+
+  <h4>Documents budgetaires (PLF_2024.zip — 210 Mo)</h4>
+  <p>1 114 fichiers : <span class="source-badge source-badge--pdf">217 PDF</span> <span class="source-badge source-badge--html">665 HTML</span></p>
+  <table class="inventory-table">
+    <thead><tr><th>Suffixe HTML</th><th>Nombre</th></tr></thead>
+    <tbody>
+      <tr><td><code>_CREDITS</code></td><td class="num">157</td></tr>
+      <tr><td><code>_JPE</code></td><td class="num">165</td></tr>
+      <tr><td><code>_STRAT</code></td><td class="num">157</td></tr>
+      <tr><td><code>_PERF</code></td><td class="num">134</td></tr>
+      <tr><td><code>_OPE</code></td><td class="num">52</td></tr>
+    </tbody>
+  </table>
+  <p>Convention de nommage : <code>FR_2024_PLF_{type_budget}_PGM_{code}.pdf</code></p>
+
+  <h4>Donnees dataviz (donnees pour dataviz et nomenclature PLF 2024.zip)</h4>
+  <ul class="file-list">
+    <li><code>MiS_PGM_ACT_SSA.xls</code> — Nomenclature (2 642 lignes)</li>
+    <li><code>PLF2024-credits.xls</code> — Credits (2 374 lignes, colonnes <code>ae</code> / <code>cp</code>)</li>
+    <li><code>PLF2024-emplois.xls</code> — ETPT</li>
+  </ul>
+
+  <div class="ecart-box">
+    <h4>Ecart constate : nommage du fichier credits</h4>
+    <p>Le fichier credits est nomme <code>PLF2024-credits.xls</code> au lieu de <code>Credits_Destination_Nature_YC_RetD.xls</code> (nom utilise pour toutes les autres annees). Le schema des colonnes est aussi different : <code>ae</code>/<code>cp</code> au lieu de <code>AE EXEC</code>/<code>CP EXEC</code>, et <code>sous-action</code> (tiret) au lieu de <code>sous_action</code> (underscore).</p>
+  </div>
+</div>
+
+<!-- ── 2025 PLF ── -->
+<div class="year-card">
+  <h3><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2025</span> entrants/2025/</h3>
+
+  <h4>Documents budgetaires (PLF_2025.zip — 131 Mo)</h4>
+  <p>472 fichiers : <span class="source-badge source-badge--pdf">229 PDF</span> <span class="source-badge source-badge--html" style="opacity:0.3">0 HTML</span></p>
+
+  <div class="ecart-box">
+    <h4>Ecart majeur : pas de HTML</h4>
+    <p>Contrairement au PLR 2023 et PLF 2024, ce ZIP ne contient <strong>aucun fichier HTML</strong>. Seuls les PDF compiles sont fournis. Le contenu (credits, JPE, performance, operateurs) est le meme mais uniquement dans les PDF.</p>
+  </div>
+
+  <p>Convention de nommage :</p>
+  <ul class="file-list">
+    <li>Missions : <code>PAP2025_{type_budget}_{nom_mission}_{code}.pdf</code></li>
+    <li>Programmes : <code>FR_2025_PLF_{mission}_PGM_{code}.pdf</code></li>
+  </ul>
+
+  <h4>Donnees dataviz (donnees pour dataviz nomenclature PLF 2025.zip)</h4>
+  <ul class="file-list">
+    <li><code>MiS_PGM_ACT_SSA.xls</code> — Nomenclature (2 664 lignes)</li>
+    <li><code>Credits_Destination_Nature_YC_RetD.xls</code> — Credits (2 404 lignes, colonnes <code>ae</code> / <code>cp</code>)</li>
+    <li><code>emplois.xls</code> — ETPT</li>
+  </ul>
+</div>
+
+<!-- ── 2025 PLRG ── -->
+<div class="year-card">
+  <h3><span class="fr-badge fr-badge--plr">PLRG 2024</span> entrants/2025/</h3>
+
+  <h4>Documents budgetaires (PLRG_2024.zip — 236 Mo)</h4>
+  <p>472 fichiers : <span class="source-badge source-badge--pdf">229 PDF</span> <span class="source-badge source-badge--html" style="opacity:0.3">0 HTML</span></p>
+  <p>Les PDF sont les RAP (execution). Pas de HTML. Convention : <code>FR_2024_PLR_{type_budget}_PGM_{code}.pdf</code></p>
+
+  <h4>Donnees dataviz (donnees pour dataviz et nomenclature PLRG 2024.zip)</h4>
+  <ul class="file-list">
+    <li><code>MiS_PGM_ACT_SSA.xls</code> — Nomenclature (2 643 lignes)</li>
+    <li><code>Credits_Destination_Nature_YC_RetD.xls</code> — Credits executes (3 560 lignes, colonnes <code>AE EXEC</code> / <code>CP EXEC</code>)</li>
+    <li><code>_emplois.xls</code> — ETPT</li>
+  </ul>
+
+  <div class="ok-box">
+    <h4>Note : dossier de rattachement</h4>
+    <p>Le PLRG 2024 est dans <code>entrants/2025/</code> car il est publie au printemps 2025 pour les comptes de l'exercice 2024. C'est le pendant "execution" du PLF 2024.</p>
+  </div>
+</div>
+
+<!-- ── 2026 ── -->
+<div class="year-card">
+  <h3><span class="fr-badge fr-badge--sm fr-badge--info">PLF 2026</span> entrants/2026/</h3>
+
+  <h4>Documents budgetaires (PLF_2026.zip — 132 Mo)</h4>
+  <p>462 fichiers : <span class="source-badge source-badge--pdf">224 PDF</span> <span class="source-badge source-badge--html" style="opacity:0.3">0 HTML</span></p>
+  <p>Convention identique au PLF 2025 : <code>PAP2026_...</code> pour les missions, <code>FR_2026_PLF_...</code> pour les programmes.</p>
+
+  <h4>Donnees dataviz (donnees pour dataviz nomenclature PLF 2026.zip)</h4>
+  <ul class="file-list">
+    <li><code>MiS_PGM_ACT_SSA.xls</code> — Nomenclature (2 642 lignes)</li>
+    <li><code>Credits_Destination_Nature_YC_RetD.xls</code> — Credits (2 333 lignes, colonnes <code>ae</code> / <code>cp</code>)</li>
+    <li><code>emplois.xls</code> — ETPT</li>
+  </ul>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<h2>Ecarts et variantes constates</h2>
+
+<h3>1. Presence des HTML structurés</h3>
+<table class="inventory-table">
+  <thead><tr><th>Source</th><th>HTML</th><th>Commentaire</th></tr></thead>
+  <tbody>
+    <tr><td>PLR 2023</td><td>694</td><td>HTML complets (CREDITS, JPE, STRAT, PERF, OPE)</td></tr>
+    <tr><td>PLF 2024</td><td>665</td><td>HTML complets (idem)</td></tr>
+    <tr><td>PLF 2025</td><td>0</td><td>PDF uniquement — rupture de format</td></tr>
+    <tr><td>PLRG 2024</td><td>0</td><td>PDF uniquement</td></tr>
+    <tr><td>PLF 2026</td><td>0</td><td>PDF uniquement</td></tr>
+  </tbody>
+</table>
+<p>Les HTML sont la version machine-readable des PDF (meme contenu, meme dossier programme). Ils permettent le parsing direct des tableaux de credits. A partir du PLF 2025, seuls les PDF compiles sont livres.</p>
+
+<h3>2. Variantes des colonnes dans les XLS credits</h3>
+<div class="schema-compare">
+  <div class="schema-box-small">
+    <h5>Format PLF (PLF 2024, 2025, 2026)</h5>
+    <pre>exercice, loi, typeBudget, ministere,
+mission, programme, action,
+<strong>sous-action</strong>,     ← tiret
+categorie, titre,
+<strong>ae, cp</strong>           ← minuscules</pre>
+  </div>
+  <div class="schema-box-small">
+    <h5>Format PLR (PLRG 2023, PLRG 2024)</h5>
+    <pre>exercice, loi, typeBudget, ministere,
+mission, programme, action,
+<strong>sous_action</strong>,     ← underscore
+categorie, titre,
+<strong>AE EXEC, CP EXEC</strong> ← majuscules</pre>
+  </div>
+</div>
+<p>Le schema de base est identique (12 colonnes, meme granularite action × categorie). Seuls les noms de colonnes pour les montants et les sous-actions different. Deux schemas YAML distincts gerent ces variantes (<code>credits_xls_plf.yaml</code> et <code>credits_xls_plr.yaml</code>).</p>
+
+<h3>3. Nommage des fichiers</h3>
+<table class="inventory-table">
+  <thead><tr><th>Element</th><th>Variante constatee</th></tr></thead>
+  <tbody>
+    <tr><td>Credits PLF 2024</td><td><code>PLF2024-credits.xls</code> au lieu de <code>Credits_Destination_Nature_YC_RetD.xls</code></td></tr>
+    <tr><td>Emplois PLR</td><td><code>_emplois.xls</code> (prefixe underscore) vs <code>emplois.xls</code> (sans)</td></tr>
+    <tr><td>Emplois PLF 2024</td><td><code>PLF2024-emplois.xls</code> (nom specifique)</td></tr>
+    <tr><td>Dossier dataviz</td><td>Variations dans le nom : "donnees pour dataviz <em>et</em> nomenclature" vs "donnees pour dataviz nomenclature" (avec ou sans "et")</td></tr>
+  </tbody>
+</table>
+
+<h3>4. Nomenclature XLS : parfaitement stable</h3>
+<div class="ok-box">
+  <h4>Aucun ecart</h4>
+  <p>Les 5 fichiers <code>MiS_PGM_ACT_SSA.xls</code> ont exactement les memes 8 colonnes (<code>Type ligne</code>, <code>Type Budget</code>, <code>code</code>, <code>Mission</code>, <code>Ministere</code>, <code>Libelle</code>, <code>Libelle abrege</code>, <code>commentFP</code>) et le meme format de codes (PGM-NN pour les actions, PGM-NN-NN pour les sous-actions). Identique au CSV <code>PLF_2022_Nomenclature.csv</code> deja integre.</p>
+</div>
+
+<h3>5. Volume de donnees par source</h3>
+<table class="inventory-table">
+  <thead><tr><th>Source</th><th>Lignes credits</th><th>Programmes</th><th>Missions</th><th>Total AE</th><th>Total CP</th></tr></thead>
+  <tbody>
+    <tr><td>PLRG 2023 (exec)</td><td class="num">3 424</td><td class="num">166</td><td class="num">45</td><td class="num">811,6 Md&euro;</td><td class="num">813,5 Md&euro;</td></tr>
+    <tr><td>PLF 2024</td><td class="num">2 374</td><td class="num">169</td><td class="num">46</td><td class="num">816,4 Md&euro;</td><td class="num">812,1 Md&euro;</td></tr>
+    <tr><td>PLF 2025</td><td class="num">2 404</td><td class="num">167</td><td class="num">46</td><td class="num">847,6 Md&euro;</td><td class="num">823,0 Md&euro;</td></tr>
+    <tr><td>PLRG 2024 (exec)</td><td class="num">3 560</td><td class="num">164</td><td class="num">45</td><td class="num">798,8 Md&euro;</td><td class="num">808,5 Md&euro;</td></tr>
+    <tr><td>PLF 2026</td><td class="num">2 333</td><td class="num">162</td><td class="num">45</td><td class="num">842,8 Md&euro;</td><td class="num">818,5 Md&euro;</td></tr>
+  </tbody>
+</table>
+<p>Les fichiers PLR ont ~50% de lignes en plus que les PLF (plus de detail dans l'execution).</p>
+
+<!-- ══════════════════════════════════════════════════ -->
+<h2>Couverture des sources de donnees</h2>
+<p>Comparaison entre ce qui est disponible dans les HTML/PDF, les XLS dataviz, et les CSV open data :</p>
+
+<table class="inventory-table">
+  <thead>
+    <tr><th>Donnee</th><th><span class="source-badge source-badge--html">HTML</span> (2023-2024)</th><th><span class="source-badge source-badge--xls">XLS dataviz</span> (toutes)</th><th><span class="source-badge source-badge--csv">CSV open data</span></th><th><span class="source-badge source-badge--pdf">PDF</span> (toutes)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Credits AE/CP par action/titre</td><td>oui</td><td>oui</td><td>oui (variable)</td><td>oui</td></tr>
+    <tr><td>Nomenclature mission/pgm/action</td><td>oui</td><td>oui</td><td>oui (variable)</td><td>oui</td></tr>
+    <tr><td>JPE (detail fin des depenses)</td><td>oui</td><td>—</td><td>—</td><td>oui</td></tr>
+    <tr><td>Performance / indicateurs</td><td>oui</td><td>—</td><td>partiellement</td><td>oui</td></tr>
+    <tr><td>Operateurs</td><td>oui</td><td>—</td><td>—</td><td>oui</td></tr>
+    <tr><td>Emplois / ETPT</td><td>—</td><td>oui</td><td>partiellement</td><td>oui</td></tr>
+  </tbody>
+</table>
+
+<p>Pour la pipeline actuelle (credits + nomenclature), les <strong>XLS dataviz couvrent toutes les annees</strong> de maniere homogene. Les CSV open data sont un complement utile avec des colonnes supplementaires (libelles, FdC/AdP). Le detail JPE et les operateurs ne sont accessibles que via les HTML (2023-2024) ou les PDF.</p>
+
+</div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/dsfr.module.min.js" type="module"></script>
+</body>
+</html>

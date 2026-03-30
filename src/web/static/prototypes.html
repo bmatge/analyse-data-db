@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prototypes dataviz – Budget Explorer</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/dsfr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/utility/utility.min.css">
+<link rel="stylesheet" href="/static/style.css">
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<style>
+/* ── Global controls ── */
+.proto-controls {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+  margin: 8px 16px; padding: 10px 0; border-bottom: 1px solid var(--border-default-grey);
+}
+.ctrl { display: flex; align-items: center; gap: 6px; }
+.ctrl label { font-size: 12px; font-weight: 600; color: var(--text-mention-grey); }
+.ctrl select { font-size: 12px; padding: 4px 8px; border: 1px solid var(--border-default-grey); border-radius: 4px; background: var(--background-default-grey); }
+.viz-seg { display: flex; gap: 0; }
+.viz-btn {
+  padding: 4px 12px; border: 1px solid var(--border-default-grey); background: var(--background-default-grey);
+  cursor: pointer; font-size: 12px; transition: all .15s; color: var(--text-default-grey);
+}
+.viz-btn:first-child { border-radius: 4px 0 0 4px; }
+.viz-btn:last-child { border-radius: 0 4px 4px 0; }
+.viz-btn + .viz-btn { border-left: none; }
+.viz-btn:hover { background: var(--background-contrast-grey); }
+.viz-btn.active { background: var(--background-active-blue-france); color: white; border-color: var(--background-active-blue-france); }
+
+/* ── Tabs ── */
+.proto-tabs {
+  display: flex; gap: 0; border-bottom: 2px solid var(--border-default-grey);
+  margin: 0 16px; overflow-x: auto;
+}
+.proto-tab {
+  padding: 10px 20px; border: none; background: none; cursor: pointer;
+  font-size: 13px; font-weight: 600; color: var(--text-mention-grey);
+  border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap;
+  transition: all .15s;
+}
+.proto-tab:hover { color: var(--text-default-grey); }
+.proto-tab.active { color: var(--text-active-blue-france); border-bottom-color: var(--text-active-blue-france); }
+.proto-panel { display: none; padding: 16px; }
+.proto-panel.active { display: block; }
+
+/* ── Tooltip ── */
+.proto-tip {
+  position: absolute; background: var(--background-raised-grey); border: 1px solid var(--border-default-grey);
+  border-radius: 8px; padding: 12px 16px; font-size: 12px; pointer-events: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12); max-width: 420px; line-height: 1.6; z-index: 100;
+  display: none;
+}
+.proto-tip .tt-title { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+.proto-tip .tt-detail { color: var(--text-mention-grey); }
+.proto-tip .tt-pos { color: #059669; font-weight: 600; }
+.proto-tip .tt-neg { color: #dc2626; font-weight: 600; }
+
+/* ── Info panel (documentation) ── */
+.doc-panel {
+  margin: 16px auto; max-width: 800px; display: none;
+}
+.doc-panel.visible { display: block; }
+.doc-panel .fr-callout { margin: 0; }
+.doc-link { display: inline-flex; align-items: center; gap: 4px; }
+.doc-link::before { content: "\1F4C4"; font-size: 14px; }
+
+/* ── Chart containers ── */
+.chart-container { width: 100%; overflow-x: auto; overflow-y: auto; min-height: 400px; }
+.chart-container svg { display: block; margin: 0 auto; }
+
+/* ── Bar chart specifics ── */
+.bar-ae { fill: #000091; opacity: 0.75; }
+.bar-cp { fill: #18753c; opacity: 0.75; }
+.bar-ae:hover, .bar-cp:hover { opacity: 1; }
+.bar-label { font-size: 11px; fill: var(--text-default-grey); }
+.bar-delta { font-size: 10px; font-weight: 600; }
+
+/* ── Treemap specifics ── */
+.treemap-cell { stroke: #fff; stroke-width: 1px; cursor: pointer; transition: opacity .15s; }
+.treemap-cell:hover { opacity: 0.85; }
+.treemap-label { font-size: 11px; fill: #fff; pointer-events: none; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+.treemap-breadcrumb { font-size: 13px; margin: 8px 16px; color: var(--text-mention-grey); }
+.treemap-breadcrumb span { cursor: pointer; text-decoration: underline; color: var(--text-active-blue-france); }
+
+/* ── Sunburst specifics ── */
+.sunburst-arc { cursor: pointer; transition: opacity .15s; }
+.sunburst-arc:hover { opacity: 0.8; }
+.sunburst-center { font-size: 14px; font-weight: 700; text-anchor: middle; fill: var(--text-title-grey); }
+.sunburst-center-sub { font-size: 12px; text-anchor: middle; fill: var(--text-mention-grey); }
+
+/* ── Icicle specifics ── */
+.icicle-cell { stroke: #fff; stroke-width: 1px; cursor: pointer; transition: opacity .15s; }
+.icicle-cell:hover { opacity: 0.85; }
+.icicle-label { font-size: 11px; fill: #fff; pointer-events: none; font-weight: 500; }
+
+/* ── Circle packing specifics ── */
+.pack-circle { stroke: #fff; stroke-width: 1px; cursor: pointer; transition: opacity .15s; }
+.pack-circle:hover { opacity: 0.8; }
+.pack-label { font-size: 10px; text-anchor: middle; fill: var(--text-default-grey); pointer-events: none; }
+
+/* ── Legend ── */
+.proto-legend { display: flex; justify-content: center; gap: 16px; margin: 8px 0; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text-mention-grey); }
+.legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header role="banner" class="fr-header">
+  <div class="fr-header__body">
+    <div class="fr-container">
+      <div class="fr-header__body-row">
+        <div class="fr-header__brand fr-enlarge-link">
+          <div class="fr-header__brand-top">
+            <div class="fr-header__logo">
+              <p class="fr-logo">Republique<br>Francaise</p>
+            </div>
+            <div class="fr-header__navbar">
+              <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="header-navigation" aria-haspopup="menu" id="burger-btn" title="Menu">Menu</button>
+            </div>
+          </div>
+          <div class="fr-header__service">
+            <a href="/" title="Accueil - Budget Explorer">
+              <p class="fr-header__service-title">Budget Explorer</p>
+            </a>
+            <p class="fr-header__service-tagline">Direction du Budget</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fr-header__menu fr-modal" id="header-navigation" aria-labelledby="burger-btn">
+    <div class="fr-container">
+      <button class="fr-btn--close fr-btn" aria-controls="header-navigation" title="Fermer">Fermer</button>
+      <div class="fr-header__menu-links"></div>
+      <nav class="fr-nav" role="navigation" aria-label="Menu principal">
+        <ul class="fr-nav__list">
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/">Accueil</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/glossaire">Glossaire</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/api-specs">Interfaces</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/nomenclature">Nomenclature</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/corpus">Corpus documentaire</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/plf-lfi">Flux PLF / LFI</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/prototypes" aria-current="page">Prototypes</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/analyse-existant">Analyse existant</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="budget-main full-width">
+  <div class="fr-container">
+    <h1 class="fr-h3 fr-mb-1w">Prototypes de visualisation budgetaire</h1>
+    <p class="fr-text--sm fr-mb-2w" style="color:var(--text-mention-grey)">Comparer differentes approches de dataviz pour explorer la structure <abbr title="Ministere > Mission > Programme">hierarchique</abbr> du budget, avec montants <abbr title="Autorisations d'Engagement">AE</abbr> et <abbr title="Credits de Paiement">CP</abbr></p>
+  </div>
+
+  <!-- ═══ Global controls ═══ -->
+  <div class="proto-controls">
+    <div class="ctrl">
+      <label for="proto-year">Annee</label>
+      <select id="proto-year"></select>
+    </div>
+    <div class="ctrl">
+      <label>Metrique</label>
+      <div class="viz-seg" id="metric-toggle">
+        <button class="viz-btn active" data-metric="cp"><abbr title="Credits de Paiement">CP</abbr></button>
+        <button class="viz-btn" data-metric="ae"><abbr title="Autorisations d'Engagement">AE</abbr></button>
+      </div>
+    </div>
+    <div class="ctrl">
+      <label>Budget</label>
+      <div class="viz-seg" id="budget-filter">
+        <button class="viz-btn active" data-budget="all">Tous</button>
+        <button class="viz-btn" data-budget="BG"><abbr title="Budget General">BG</abbr></button>
+        <button class="viz-btn" data-budget="BA"><abbr title="Budgets Annexes">BA</abbr></button>
+        <button class="viz-btn" data-budget="CAS"><abbr title="Comptes d'Affectation Speciale">CAS</abbr></button>
+        <button class="viz-btn" data-budget="CCF"><abbr title="Comptes de Concours Financiers">CCF</abbr></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Tabs ═══ -->
+  <div class="proto-tabs">
+    <button class="proto-tab active" data-tab="treemap">Treemap</button>
+    <button class="proto-tab" data-tab="sunburst">Sunburst</button>
+    <button class="proto-tab" data-tab="icicle">Icicle</button>
+    <button class="proto-tab" data-tab="packing">Circle Packing</button>
+    <button class="proto-tab" data-tab="bars">Barres AE / CP</button>
+  </div>
+
+  <!-- ═══ Panels ═══ -->
+  <div class="proto-panel active" id="panel-treemap">
+    <div class="treemap-breadcrumb" id="treemap-breadcrumb"></div>
+    <div class="chart-container" id="chart-treemap"></div>
+  </div>
+  <div class="proto-panel" id="panel-sunburst">
+    <div class="chart-container" id="chart-sunburst" style="display:flex;justify-content:center;"></div>
+  </div>
+  <div class="proto-panel" id="panel-icicle">
+    <div class="chart-container" id="chart-icicle"></div>
+  </div>
+  <div class="proto-panel" id="panel-packing">
+    <div class="chart-container" id="chart-packing" style="display:flex;justify-content:center;"></div>
+  </div>
+  <div class="proto-panel" id="panel-bars">
+    <div class="proto-controls" style="border-bottom:none;margin-top:0;">
+      <div class="ctrl">
+        <label>Niveau</label>
+        <div class="viz-seg" id="bar-level">
+          <button class="viz-btn active" data-level="ministere">Ministeres</button>
+          <button class="viz-btn" data-level="mission">Missions</button>
+          <button class="viz-btn" data-level="programme">Programmes</button>
+        </div>
+      </div>
+    </div>
+    <div class="chart-container" id="chart-bars"></div>
+  </div>
+
+  <!-- ═══ Documentation panel ═══ -->
+  <div class="doc-panel" id="doc-panel">
+    <div class="fr-callout">
+      <h3 class="fr-callout__title" id="doc-title">—</h3>
+      <div id="doc-content"></div>
+    </div>
+  </div>
+</main>
+
+<!-- ═══ Tooltip ═══ -->
+<div class="proto-tip" id="proto-tip"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/dsfr.module.min.js"></script>
+<script>
+// ══════════════════════════════════════════════════════
+// SHARED UTILITIES
+// ══════════════════════════════════════════════════════
+
+const TC = { BG: '#000091', BA: '#a558a0', CAS: '#009081', CCF: '#d97706' };
+
+function fmt(n) {
+  if (n == null) return '—';
+  if (Math.abs(n) >= 1e9) return (n / 1e9).toFixed(1) + ' Md\u20ac';
+  if (Math.abs(n) >= 1e6) return (n / 1e6).toFixed(0) + ' M\u20ac';
+  if (Math.abs(n) >= 1e3) return (n / 1e3).toFixed(0) + ' k\u20ac';
+  return n.toLocaleString('fr-FR') + ' \u20ac';
+}
+
+function pct(a, b) {
+  if (!b) return '';
+  const d = ((a - b) / Math.abs(b) * 100);
+  const s = (d >= 0 ? '+' : '') + d.toFixed(1) + '%';
+  return `<span class="${d >= 0 ? 'tt-pos' : 'tt-neg'}">${s}</span>`;
+}
+
+function badgeBudget(tb) {
+  return `<span class="fr-badge fr-badge--sm fr-badge--${tb.toLowerCase()}">${tb}</span>`;
+}
+
+// ── Tooltip ──
+const tip = document.getElementById('proto-tip');
+function showTip(ev, html) {
+  tip.innerHTML = html;
+  tip.style.display = 'block';
+  moveTip(ev);
+}
+function moveTip(ev) {
+  const x = ev.pageX + 14, y = ev.pageY + 14;
+  tip.style.left = Math.min(x, window.innerWidth - tip.offsetWidth - 20) + 'px';
+  tip.style.top = y + 'px';
+}
+function hideTip() { tip.style.display = 'none'; }
+
+// ── Doc panel ──
+const docPanel = document.getElementById('doc-panel');
+const docTitle = document.getElementById('doc-title');
+const docContent = document.getElementById('doc-content');
+let docsIndex = {}; // { programme_code: [docs], mission_code: [docs] }
+
+function showDocPanel(title, html) {
+  docTitle.textContent = title;
+  docContent.innerHTML = html;
+  docPanel.classList.add('visible');
+  docPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+function hideDocPanel() { docPanel.classList.remove('visible'); }
+
+function docLinksHtml(programmeCode, missionCode) {
+  const docs = [];
+  if (programmeCode && docsIndex.pgm[programmeCode]) docs.push(...docsIndex.pgm[programmeCode]);
+  if (missionCode && docsIndex.msn[missionCode]) docs.push(...docsIndex.msn[missionCode]);
+  if (!docs.length) return '<p class="fr-text--sm" style="color:var(--text-mention-grey)">Aucun document disponible</p>';
+  return docs.map(d =>
+    `<a class="doc-link fr-link" href="/entrants/PLF_2025/${d.filepath}" target="_blank">${d.titre || d.filename}</a>`
+  ).join('<br>');
+}
+
+// ── State ──
+let currentYear = null;
+let currentMetric = 'cp';
+let currentBudget = 'all';
+let hierData = null;    // raw flat rows from /api/budget/hierarchie
+let docsData = null;
+
+// ── Data loading ──
+async function loadData(annee) {
+  const [hier, docs] = await Promise.all([
+    fetch(`/api/budget/hierarchie/${annee}`).then(r => r.json()),
+    fetch(`/api/documents/${annee}`).then(r => r.json())
+  ]);
+  hierData = hier;
+  docsData = docs;
+  // Build docs index
+  docsIndex = { pgm: {}, msn: {} };
+  docs.forEach(d => {
+    if (d.programme_code) {
+      (docsIndex.pgm[d.programme_code] = docsIndex.pgm[d.programme_code] || []).push(d);
+    }
+    if (d.mission_code) {
+      (docsIndex.msn[d.mission_code] = docsIndex.msn[d.mission_code] || []).push(d);
+    }
+  });
+}
+
+function filteredData() {
+  if (!hierData) return [];
+  if (currentBudget === 'all') return hierData;
+  return hierData.filter(d => d.type_budget === currentBudget);
+}
+
+// Build d3.hierarchy from flat rows
+function buildHierarchy(data, metric) {
+  const grouped = d3.group(data, d => d.ministere_nom || 'Inconnu', d => d.mission_code);
+  const children = [];
+  for (const [ministere, missions] of grouped) {
+    const msnChildren = [];
+    for (const [msnCode, pgms] of missions) {
+      const pgmChildren = pgms.map(p => ({
+        name: `${p.programme_code} – ${p.programme_libelle || ''}`,
+        shortName: `P${p.programme_code}`,
+        code: p.programme_code,
+        missionCode: p.mission_code,
+        typeBudget: p.type_budget,
+        ae: p.total_ae || 0,
+        cp: p.total_cp || 0,
+        value: metric === 'ae' ? (p.total_ae || 0) : (p.total_cp || 0)
+      }));
+      const msn = pgms[0];
+      msnChildren.push({
+        name: `${msnCode} – ${msn.mission_libelle || ''}`,
+        shortName: msnCode,
+        code: msnCode,
+        typeBudget: msn.type_budget,
+        ae: d3.sum(pgmChildren, d => d.ae),
+        cp: d3.sum(pgmChildren, d => d.cp),
+        children: pgmChildren
+      });
+    }
+    children.push({
+      name: ministere,
+      shortName: ministere.length > 25 ? ministere.slice(0, 22) + '...' : ministere,
+      ae: d3.sum(msnChildren, d => d.ae),
+      cp: d3.sum(msnChildren, d => d.cp),
+      children: msnChildren
+    });
+  }
+  const root = { name: 'Budget', children };
+  return d3.hierarchy(root).sum(d => d.children ? 0 : Math.max(0, d.value)).sort((a, b) => b.value - a.value);
+}
+
+// ── Color scales ──
+const ministereColor = d3.scaleOrdinal(d3.schemeTableau10);
+
+function nodeColor(d) {
+  // Find the ministere ancestor
+  let node = d;
+  while (node.depth > 1) node = node.parent;
+  const base = d.depth === 0 ? '#666' : ministereColor(node.data.name);
+  if (d.depth <= 1) return base;
+  return d3.color(base).brighter(d.depth * 0.4).formatHex();
+}
+
+// ══════════════════════════════════════════════════════
+// TAB MANAGEMENT
+// ══════════════════════════════════════════════════════
+
+const loaded = {};
+document.querySelectorAll('.proto-tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.proto-tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.proto-panel').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('panel-' + t.dataset.tab).classList.add('active');
+    hideDocPanel();
+    renderActiveTab();
+  });
+});
+
+function activeTab() {
+  const t = document.querySelector('.proto-tab.active');
+  return t ? t.dataset.tab : 'treemap';
+}
+
+function renderActiveTab() {
+  const tab = activeTab();
+  if (tab === 'treemap') renderTreemap();
+  else if (tab === 'sunburst') renderSunburst();
+  else if (tab === 'icicle') renderIcicle();
+  else if (tab === 'packing') renderPacking();
+  else if (tab === 'bars') renderBars();
+}
+
+// ── Global controls ──
+document.querySelectorAll('#metric-toggle .viz-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('#metric-toggle .viz-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    currentMetric = b.dataset.metric;
+    renderActiveTab();
+  });
+});
+document.querySelectorAll('#budget-filter .viz-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('#budget-filter .viz-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    currentBudget = b.dataset.budget;
+    renderActiveTab();
+  });
+});
+
+// ══════════════════════════════════════════════════════
+// TAB 1: TREEMAP
+// ══════════════════════════════════════════════════════
+
+let treemapFocus = null; // null = root
+
+function renderTreemap() {
+  const container = document.getElementById('chart-treemap');
+  container.innerHTML = '';
+  const data = filteredData();
+  if (!data.length) { container.innerHTML = '<p class="fr-text--sm">Aucune donnee</p>'; return; }
+
+  const w = container.clientWidth || 1000;
+  const h = Math.max(500, window.innerHeight - 320);
+
+  const root = buildHierarchy(data, currentMetric);
+  const treemap = d3.treemap().size([w, h]).padding(2).paddingTop(22).round(true);
+  treemap(root);
+
+  // Determine visible nodes based on focus
+  const focus = treemapFocus || root;
+  const displayRoot = focus;
+
+  // Breadcrumb
+  const bc = document.getElementById('treemap-breadcrumb');
+  const path = [];
+  let n = focus;
+  while (n) { path.unshift(n); n = n.parent; }
+  bc.innerHTML = path.map((p, i) =>
+    i < path.length - 1
+      ? `<span onclick="treemapZoom(${i})" data-depth="${i}">${p.data.name}</span> &rsaquo; `
+      : `<strong>${p.data.name}</strong>`
+  ).join('');
+
+  // Re-layout for the focused subtree
+  const focusTree = d3.treemap().size([w, h]).padding(2).paddingTop(22).round(true);
+  const focusHier = d3.hierarchy(displayRoot.data).sum(d => d.children ? 0 : Math.max(0, currentMetric === 'ae' ? (d.ae || 0) : (d.cp || 0))).sort((a, b) => b.value - a.value);
+  focusTree(focusHier);
+
+  const svg = d3.select(container).append('svg').attr('width', w).attr('height', h);
+
+  const leaves = focusHier.descendants().filter(d => d.depth > 0);
+
+  // Cells
+  const cell = svg.selectAll('g').data(leaves).join('g')
+    .attr('transform', d => `translate(${d.x0},${d.y0})`);
+
+  cell.append('rect')
+    .attr('class', 'treemap-cell')
+    .attr('width', d => Math.max(0, d.x1 - d.x0))
+    .attr('height', d => Math.max(0, d.y1 - d.y0))
+    .attr('fill', d => nodeColor(d))
+    .on('mouseover', (ev, d) => {
+      const dd = d.data;
+      showTip(ev, `
+        <div class="tt-title">${dd.name}</div>
+        <div class="tt-detail">
+          CP : ${fmt(dd.cp)}<br>
+          AE : ${fmt(dd.ae)}<br>
+          Ecart AE/CP : ${pct(dd.ae, dd.cp)}
+          ${dd.typeBudget ? '<br>' + badgeBudget(dd.typeBudget) : ''}
+        </div>
+      `);
+    })
+    .on('mousemove', moveTip)
+    .on('mouseout', hideTip)
+    .on('click', (ev, d) => {
+      if (d.children && d.children.length) {
+        // Zoom in
+        treemapFocus = d;
+        // We need to find the matching node in the original hierarchy
+        // Instead, store the data reference
+        treemapFocusData = d.data;
+        renderTreemap();
+      } else {
+        // Show doc panel for programme
+        const dd = d.data;
+        showDocPanel(
+          dd.name,
+          `<p><strong>AE :</strong> ${fmt(dd.ae)} | <strong>CP :</strong> ${fmt(dd.cp)} | Ecart : ${pct(dd.ae, dd.cp)}</p>
+           ${dd.typeBudget ? '<p>' + badgeBudget(dd.typeBudget) + '</p>' : ''}
+           <hr class="fr-hr">
+           <p class="fr-text--bold">Documents :</p>
+           ${docLinksHtml(dd.code, dd.missionCode)}`
+        );
+      }
+    });
+
+  // Labels
+  cell.append('text')
+    .attr('class', 'treemap-label')
+    .attr('x', 4).attr('y', 14)
+    .text(d => {
+      const w = d.x1 - d.x0;
+      const h = d.y1 - d.y0;
+      if (w < 40 || h < 18) return '';
+      const name = d.data.shortName || d.data.name;
+      const maxChars = Math.floor(w / 7);
+      return name.length > maxChars ? name.slice(0, maxChars - 1) + '\u2026' : name;
+    });
+
+  // Amount labels
+  cell.append('text')
+    .attr('class', 'treemap-label')
+    .attr('x', 4).attr('y', 28)
+    .style('font-size', '10px').style('opacity', 0.85)
+    .text(d => {
+      const w = d.x1 - d.x0;
+      const h = d.y1 - d.y0;
+      if (w < 60 || h < 32) return '';
+      return fmt(d.value);
+    });
+}
+
+let treemapFocusData = null;
+
+window.treemapZoom = function(depthIndex) {
+  if (depthIndex === 0) {
+    treemapFocus = null;
+    treemapFocusData = null;
+  }
+  // Re-render will handle it
+  renderTreemap();
+};
+
+// ══════════════════════════════════════════════════════
+// TAB 2: SUNBURST
+// ══════════════════════════════════════════════════════
+
+function renderSunburst() {
+  const container = document.getElementById('chart-sunburst');
+  container.innerHTML = '';
+  const data = filteredData();
+  if (!data.length) { container.innerHTML = '<p class="fr-text--sm">Aucune donnee</p>'; return; }
+
+  const size = Math.min(container.clientWidth || 800, window.innerHeight - 300);
+  const radius = size / 2;
+
+  const root = buildHierarchy(data, currentMetric);
+  const partition = d3.partition().size([2 * Math.PI, radius]);
+  partition(root);
+
+  const arc = d3.arc()
+    .startAngle(d => d.x0)
+    .endAngle(d => d.x1)
+    .innerRadius(d => d.y0)
+    .outerRadius(d => d.y1)
+    .padAngle(0.002)
+    .padRadius(radius / 2);
+
+  const svg = d3.select(container).append('svg')
+    .attr('width', size).attr('height', size)
+    .append('g')
+    .attr('transform', `translate(${radius},${radius})`);
+
+  // Current focus for zoom
+  let current = root;
+
+  const path = svg.selectAll('path')
+    .data(root.descendants().filter(d => d.depth > 0))
+    .join('path')
+    .attr('class', 'sunburst-arc')
+    .attr('d', arc)
+    .attr('fill', d => nodeColor(d))
+    .on('mouseover', (ev, d) => {
+      const dd = d.data;
+      const parentVal = d.parent ? d.parent.value : d.value;
+      const share = parentVal ? (d.value / parentVal * 100).toFixed(1) : '—';
+      showTip(ev, `
+        <div class="tt-title">${dd.name}</div>
+        <div class="tt-detail">
+          CP : ${fmt(dd.cp)}<br>AE : ${fmt(dd.ae)}<br>
+          Part du parent : ${share}%<br>
+          Ecart AE/CP : ${pct(dd.ae, dd.cp)}
+          ${dd.typeBudget ? '<br>' + badgeBudget(dd.typeBudget) : ''}
+        </div>
+      `);
+    })
+    .on('mousemove', moveTip)
+    .on('mouseout', hideTip)
+    .on('click', (ev, d) => {
+      if (d.children) {
+        clicked(d);
+      } else {
+        const dd = d.data;
+        showDocPanel(dd.name, `
+          <p><strong>AE :</strong> ${fmt(dd.ae)} | <strong>CP :</strong> ${fmt(dd.cp)} | Ecart : ${pct(dd.ae, dd.cp)}</p>
+          ${dd.typeBudget ? '<p>' + badgeBudget(dd.typeBudget) + '</p>' : ''}
+          <hr class="fr-hr"><p class="fr-text--bold">Documents :</p>
+          ${docLinksHtml(dd.code, dd.missionCode)}`
+        );
+      }
+    });
+
+  // Center label
+  const centerText = svg.append('text').attr('class', 'sunburst-center').attr('dy', '-0.2em');
+  const centerSub = svg.append('text').attr('class', 'sunburst-center-sub').attr('dy', '1.2em');
+  updateCenter(root);
+
+  function updateCenter(d) {
+    centerText.text(d.data.shortName || d.data.name);
+    centerSub.text(fmt(d.value));
+  }
+
+  function clicked(p) {
+    current = p;
+    updateCenter(p);
+
+    const t = svg.transition().duration(750);
+
+    // Compute new arcs
+    const xScale = d3.scaleLinear().domain([p.x0, p.x1]).range([0, 2 * Math.PI]);
+    const yScale = d3.scaleLinear().domain([p.y0, radius]).range([0, radius]);
+
+    path.transition(t)
+      .attrTween('d', d => {
+        const ix0 = d3.interpolate(d.x0, d.x0); // we need to store targets
+        const ix1 = d3.interpolate(d.x1, d.x1);
+        return () => arc({
+          x0: xScale(d.x0),
+          x1: xScale(d.x1),
+          y0: Math.max(0, yScale(d.y0)),
+          y1: Math.max(0, yScale(d.y1))
+        });
+      })
+      .attr('fill-opacity', d => arcVisible(xScale, yScale, d) ? 1 : 0);
+
+    // Allow clicking center to go back
+    svg.on('click', () => {
+      if (current.parent) clicked(current.parent);
+    });
+  }
+
+  function arcVisible(xScale, yScale, d) {
+    return xScale(d.x1) > xScale(d.x0) + 0.001 && yScale(d.y1) > yScale(d.y0) + 0.5;
+  }
+}
+
+// ══════════════════════════════════════════════════════
+// TAB 3: ICICLE / PARTITION
+// ══════════════════════════════════════════════════════
+
+function renderIcicle() {
+  const container = document.getElementById('chart-icicle');
+  container.innerHTML = '';
+  const data = filteredData();
+  if (!data.length) { container.innerHTML = '<p class="fr-text--sm">Aucune donnee</p>'; return; }
+
+  const w = container.clientWidth || 1000;
+  const h = Math.max(600, window.innerHeight - 280);
+
+  const root = buildHierarchy(data, currentMetric);
+  const partition = d3.partition().size([h, w]).padding(1);
+  partition(root);
+
+  const svg = d3.select(container).append('svg').attr('width', w).attr('height', h);
+
+  let focus = root;
+
+  const cell = svg.selectAll('g')
+    .data(root.descendants().filter(d => d.depth > 0))
+    .join('g')
+    .attr('transform', d => `translate(${d.y0},${d.x0})`);
+
+  const rects = cell.append('rect')
+    .attr('class', 'icicle-cell')
+    .attr('width', d => Math.max(0, d.y1 - d.y0))
+    .attr('height', d => Math.max(0, d.x1 - d.x0))
+    .attr('fill', d => nodeColor(d))
+    .on('mouseover', (ev, d) => {
+      const dd = d.data;
+      showTip(ev, `
+        <div class="tt-title">${dd.name}</div>
+        <div class="tt-detail">
+          CP : ${fmt(dd.cp)}<br>AE : ${fmt(dd.ae)}<br>
+          Ecart AE/CP : ${pct(dd.ae, dd.cp)}
+          ${dd.typeBudget ? '<br>' + badgeBudget(dd.typeBudget) : ''}
+        </div>
+      `);
+    })
+    .on('mousemove', moveTip)
+    .on('mouseout', hideTip)
+    .on('click', (ev, d) => {
+      if (d.children) {
+        icicleZoom(d);
+      } else {
+        const dd = d.data;
+        showDocPanel(dd.name, `
+          <p><strong>AE :</strong> ${fmt(dd.ae)} | <strong>CP :</strong> ${fmt(dd.cp)} | Ecart : ${pct(dd.ae, dd.cp)}</p>
+          ${dd.typeBudget ? '<p>' + badgeBudget(dd.typeBudget) + '</p>' : ''}
+          <hr class="fr-hr"><p class="fr-text--bold">Documents :</p>
+          ${docLinksHtml(dd.code, dd.missionCode)}`
+        );
+      }
+    });
+
+  // Labels
+  cell.append('text')
+    .attr('class', 'icicle-label')
+    .attr('x', 4).attr('y', d => Math.min(14, (d.x1 - d.x0) / 2 + 4))
+    .text(d => {
+      const cellW = d.y1 - d.y0;
+      const cellH = d.x1 - d.x0;
+      if (cellH < 14 || cellW < 30) return '';
+      const name = d.data.shortName || d.data.name;
+      const maxChars = Math.floor(cellW / 7);
+      return name.length > maxChars ? name.slice(0, maxChars - 1) + '\u2026' : name;
+    });
+
+  // PDF icon for leaf nodes
+  cell.filter(d => !d.children && docsIndex.pgm[d.data.code])
+    .append('text')
+    .attr('x', d => (d.y1 - d.y0) - 16)
+    .attr('y', d => Math.min(14, (d.x1 - d.x0) / 2 + 4))
+    .style('font-size', '12px').style('cursor', 'pointer')
+    .text('\uD83D\uDCC4')
+    .on('click', (ev, d) => {
+      ev.stopPropagation();
+      const docs = docsIndex.pgm[d.data.code];
+      if (docs && docs[0]) window.open(`/entrants/PLF_2025/${docs[0].filepath}`, '_blank');
+    });
+
+  function icicleZoom(p) {
+    focus = p;
+    const t = svg.transition().duration(600);
+    const xScale = d3.scaleLinear().domain([p.x0, p.x1]).range([0, h]);
+    const yScale = d3.scaleLinear().domain([p.y0, root.y1]).range([0, w]);
+
+    cell.transition(t)
+      .attr('transform', d => `translate(${yScale(d.y0)},${xScale(d.x0)})`);
+
+    rects.transition(t)
+      .attr('width', d => Math.max(0, yScale(d.y1) - yScale(d.y0)))
+      .attr('height', d => Math.max(0, xScale(d.x1) - xScale(d.x0)));
+
+    // Re-render on double click to go back
+    svg.on('dblclick', () => {
+      if (focus.parent) icicleZoom(focus.parent);
+      else renderIcicle();
+    });
+  }
+}
+
+// ══════════════════════════════════════════════════════
+// TAB 4: CIRCLE PACKING
+// ══════════════════════════════════════════════════════
+
+function renderPacking() {
+  const container = document.getElementById('chart-packing');
+  container.innerHTML = '';
+  const data = filteredData();
+  if (!data.length) { container.innerHTML = '<p class="fr-text--sm">Aucune donnee</p>'; return; }
+
+  const size = Math.min(container.clientWidth || 800, window.innerHeight - 280);
+
+  const root = buildHierarchy(data, currentMetric);
+  const pack = d3.pack().size([size, size]).padding(4);
+  pack(root);
+
+  const svg = d3.select(container).append('svg')
+    .attr('width', size).attr('height', size);
+
+  let focus = root;
+  let view;
+
+  const node = svg.selectAll('g')
+    .data(root.descendants())
+    .join('g')
+    .attr('transform', d => `translate(${d.x},${d.y})`);
+
+  node.append('circle')
+    .attr('class', 'pack-circle')
+    .attr('r', d => d.r)
+    .attr('fill', d => d.depth === 0 ? '#f0f0f0' : nodeColor(d))
+    .attr('fill-opacity', d => d.children ? 0.25 : 0.75)
+    .attr('stroke', d => d.children ? nodeColor(d) : 'none')
+    .attr('stroke-width', d => d.depth === 1 ? 2 : 1)
+    .on('mouseover', (ev, d) => {
+      if (d.depth === 0) return;
+      const dd = d.data;
+      showTip(ev, `
+        <div class="tt-title">${dd.name}</div>
+        <div class="tt-detail">
+          CP : ${fmt(dd.cp)}<br>AE : ${fmt(dd.ae)}<br>
+          Ecart AE/CP : ${pct(dd.ae, dd.cp)}
+          ${dd.typeBudget ? '<br>' + badgeBudget(dd.typeBudget) : ''}
+          ${d.children ? '<br>' + d.children.length + ' elements' : ''}
+        </div>
+      `);
+    })
+    .on('mousemove', moveTip)
+    .on('mouseout', hideTip)
+    .on('click', (ev, d) => {
+      ev.stopPropagation();
+      if (d.children) {
+        zoomPack(d);
+      } else {
+        const dd = d.data;
+        showDocPanel(dd.name, `
+          <p><strong>AE :</strong> ${fmt(dd.ae)} | <strong>CP :</strong> ${fmt(dd.cp)} | Ecart : ${pct(dd.ae, dd.cp)}</p>
+          ${dd.typeBudget ? '<p>' + badgeBudget(dd.typeBudget) + '</p>' : ''}
+          <hr class="fr-hr"><p class="fr-text--bold">Documents :</p>
+          ${docLinksHtml(dd.code, dd.missionCode)}`
+        );
+      }
+    });
+
+  // Labels
+  node.append('text')
+    .attr('class', 'pack-label')
+    .attr('dy', '0.3em')
+    .text(d => {
+      if (d.r < 15) return '';
+      const name = d.data.shortName || d.data.name;
+      const maxChars = Math.floor(d.r * 2 / 7);
+      return name.length > maxChars ? name.slice(0, maxChars - 1) + '\u2026' : name;
+    })
+    .style('font-size', d => d.children ? '11px' : '10px')
+    .style('font-weight', d => d.children ? '600' : '400');
+
+  // Amount below name for larger circles
+  node.filter(d => d.r > 30 && !d.children)
+    .append('text')
+    .attr('class', 'pack-label')
+    .attr('dy', '1.5em')
+    .style('font-size', '9px')
+    .text(d => fmt(d.value));
+
+  function zoomPack(d) {
+    focus = d;
+    const k = size / (d.r * 2);
+    const t = svg.transition().duration(600);
+
+    node.transition(t)
+      .attr('transform', dd => {
+        const x = (dd.x - d.x) * k + size / 2;
+        const y = (dd.y - d.y) * k + size / 2;
+        return `translate(${x},${y})`;
+      });
+
+    node.selectAll('circle').transition(t)
+      .attr('r', dd => dd.r * k);
+
+    // Double-click to zoom out
+    svg.on('dblclick', () => {
+      if (focus.parent) zoomPack(focus.parent);
+    });
+  }
+}
+
+// ══════════════════════════════════════════════════════
+// TAB 5: BAR CHART
+// ══════════════════════════════════════════════════════
+
+let barLevel = 'ministere';
+
+document.querySelectorAll('#bar-level .viz-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('#bar-level .viz-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    barLevel = b.dataset.level;
+    renderBars();
+  });
+});
+
+function renderBars() {
+  const container = document.getElementById('chart-bars');
+  container.innerHTML = '';
+  const data = filteredData();
+  if (!data.length) { container.innerHTML = '<p class="fr-text--sm">Aucune donnee</p>'; return; }
+
+  // Aggregate based on level
+  let items;
+  if (barLevel === 'ministere') {
+    const grouped = d3.rollup(data, v => ({
+      ae: d3.sum(v, d => d.total_ae || 0),
+      cp: d3.sum(v, d => d.total_cp || 0),
+      name: v[0].ministere_nom || 'Inconnu'
+    }), d => d.ministere_nom || 'Inconnu');
+    items = Array.from(grouped.values()).sort((a, b) => b.cp - a.cp);
+  } else if (barLevel === 'mission') {
+    const grouped = d3.rollup(data, v => ({
+      ae: d3.sum(v, d => d.total_ae || 0),
+      cp: d3.sum(v, d => d.total_cp || 0),
+      name: `${v[0].mission_code} – ${v[0].mission_libelle || ''}`,
+      code: v[0].mission_code,
+      typeBudget: v[0].type_budget
+    }), d => d.mission_code);
+    items = Array.from(grouped.values()).sort((a, b) => b.cp - a.cp);
+  } else {
+    items = data.map(d => ({
+      ae: d.total_ae || 0,
+      cp: d.total_cp || 0,
+      name: `${d.programme_code} – ${d.programme_libelle || ''}`,
+      code: d.programme_code,
+      missionCode: d.mission_code,
+      typeBudget: d.type_budget
+    })).sort((a, b) => b.cp - a.cp);
+  }
+
+  // Limit to top 40 for readability
+  const maxItems = barLevel === 'programme' ? 40 : items.length;
+  const displayItems = items.slice(0, maxItems);
+
+  const margin = { top: 20, right: 120, bottom: 30, left: barLevel === 'ministere' ? 280 : 320 };
+  const barH = 28;
+  const h = margin.top + margin.bottom + displayItems.length * barH;
+  const w = Math.max(600, (container.clientWidth || 900));
+
+  const svg = d3.select(container).append('svg').attr('width', w).attr('height', h);
+
+  const maxVal = d3.max(displayItems, d => Math.max(d.ae, d.cp)) || 1;
+  const x = d3.scaleLinear().domain([0, maxVal]).range([margin.left, w - margin.right]);
+  const y = d3.scaleBand()
+    .domain(displayItems.map(d => d.name))
+    .range([margin.top, h - margin.bottom])
+    .padding(0.35);
+
+  // X axis
+  svg.append('g')
+    .attr('transform', `translate(0,${margin.top})`)
+    .call(d3.axisTop(x).ticks(6).tickFormat(d => fmt(d)))
+    .call(g => g.select('.domain').remove())
+    .call(g => g.selectAll('.tick line').attr('stroke', '#e0e0e0').attr('y2', h - margin.top - margin.bottom))
+    .call(g => g.selectAll('.tick text').style('font-size', '10px'));
+
+  // Bars
+  const row = svg.selectAll('.bar-row').data(displayItems).join('g').attr('class', 'bar-row');
+
+  // CP bar
+  row.append('rect')
+    .attr('class', 'bar-cp')
+    .attr('x', margin.left)
+    .attr('y', d => y(d.name))
+    .attr('width', d => Math.max(0, x(d.cp) - margin.left))
+    .attr('height', y.bandwidth() / 2)
+    .on('mouseover', (ev, d) => showBarTip(ev, d))
+    .on('mousemove', moveTip)
+    .on('mouseout', hideTip);
+
+  // AE bar
+  row.append('rect')
+    .attr('class', 'bar-ae')
+    .attr('x', margin.left)
+    .attr('y', d => y(d.name) + y.bandwidth() / 2)
+    .attr('width', d => Math.max(0, x(d.ae) - margin.left))
+    .attr('height', y.bandwidth() / 2)
+    .on('mouseover', (ev, d) => showBarTip(ev, d))
+    .on('mousemove', moveTip)
+    .on('mouseout', hideTip);
+
+  // Delta label
+  row.append('text')
+    .attr('class', 'bar-delta')
+    .attr('x', d => x(Math.max(d.ae, d.cp)) + 6)
+    .attr('y', d => y(d.name) + y.bandwidth() / 2 + 4)
+    .attr('fill', d => {
+      const delta = d.ae - d.cp;
+      return delta >= 0 ? '#059669' : '#dc2626';
+    })
+    .text(d => {
+      if (!d.cp) return '';
+      const delta = ((d.ae - d.cp) / Math.abs(d.cp) * 100);
+      return (delta >= 0 ? '+' : '') + delta.toFixed(1) + '%';
+    });
+
+  // Y axis labels (clickable)
+  row.append('text')
+    .attr('x', margin.left - 8)
+    .attr('y', d => y(d.name) + y.bandwidth() / 2 + 4)
+    .attr('text-anchor', 'end')
+    .style('font-size', '11px')
+    .style('cursor', 'pointer')
+    .style('fill', 'var(--text-active-blue-france)')
+    .text(d => {
+      const maxLen = Math.floor(margin.left / 7);
+      return d.name.length > maxLen ? d.name.slice(0, maxLen - 1) + '\u2026' : d.name;
+    })
+    .on('click', (ev, d) => {
+      showDocPanel(d.name, `
+        <p><strong>AE :</strong> ${fmt(d.ae)} | <strong>CP :</strong> ${fmt(d.cp)} | Ecart : ${pct(d.ae, d.cp)}</p>
+        ${d.typeBudget ? '<p>' + badgeBudget(d.typeBudget) + '</p>' : ''}
+        <hr class="fr-hr"><p class="fr-text--bold">Documents :</p>
+        ${docLinksHtml(d.code, d.missionCode)}`
+      );
+    });
+
+  // Legend
+  if (!document.getElementById('bar-legend')) {
+    const legend = document.createElement('div');
+    legend.id = 'bar-legend';
+    legend.className = 'proto-legend';
+    legend.innerHTML = `
+      <span class="legend-item"><span class="legend-swatch" style="background:#18753c;opacity:0.75"></span>CP</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:#000091;opacity:0.75"></span>AE</span>
+      <span class="legend-item" style="font-style:italic">Ecart = (AE-CP)/CP</span>
+    `;
+    container.parentNode.insertBefore(legend, container);
+  }
+
+  if (items.length > maxItems) {
+    const note = document.createElement('p');
+    note.className = 'fr-text--sm';
+    note.style.textAlign = 'center';
+    note.style.color = 'var(--text-mention-grey)';
+    note.textContent = `Affichage des ${maxItems} premiers sur ${items.length} (tries par CP decroissant)`;
+    container.appendChild(note);
+  }
+
+  function showBarTip(ev, d) {
+    showTip(ev, `
+      <div class="tt-title">${d.name}</div>
+      <div class="tt-detail">
+        CP : ${fmt(d.cp)}<br>
+        AE : ${fmt(d.ae)}<br>
+        Ecart AE/CP : ${pct(d.ae, d.cp)}
+        ${d.typeBudget ? '<br>' + badgeBudget(d.typeBudget) : ''}
+      </div>
+    `);
+  }
+}
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+
+async function init() {
+  const years = await (await fetch('/api/annees')).json();
+  const sel = document.getElementById('proto-year');
+  years.reverse().forEach(y => {
+    const opt = document.createElement('option');
+    opt.value = y; opt.textContent = y;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', async () => {
+    currentYear = +sel.value;
+    await loadData(currentYear);
+    renderActiveTab();
+  });
+  if (years.length) {
+    currentYear = years[0];
+    await loadData(currentYear);
+    renderActiveTab();
+  }
+}
+
+init();
+</script>
+</body>
+</html>

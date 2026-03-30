@@ -63,7 +63,11 @@ programme_code_ranges:
 exercices:
   - PLF   # Projet de Loi de Finances
   - LFI   # Loi de Finances Initiale
-  - PLR   # Projet de Loi de Règlement
+  - PLR   # Projet de Loi de Règlement (ancien nom, avant 2023)
+  - PLRG  # Projet de Loi relatif aux Résultats de la Gestion (nouveau nom depuis 2023)
+  - LRG   # Loi relative aux Résultats de la Gestion (PLRG voté)
+  - PLFG  # Projet de Loi de Finances de fin de Gestion (décembre)
+  - LFG   # Loi de Finances de fin de Gestion (PLFG voté)
   - LFR   # Loi de Finances Rectificative
   - PLFR  # Projet de Loi de Finances Rectificative
 

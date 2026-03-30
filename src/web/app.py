@@ -72,6 +72,16 @@ async def api_specs():
     return FileResponse(STATIC_DIR / "api-specs.html")
 
 
+@app.get("/prototypes")
+async def prototypes():
+    return FileResponse(STATIC_DIR / "prototypes.html")
+
+
+@app.get("/analyse-existant")
+async def analyse_existant():
+    return FileResponse(STATIC_DIR / "analyse-existant.html")
+
+
 # ── API: metadata ──────────────────────────────────────
 
 @app.get("/api/annees")
@@ -271,6 +281,63 @@ async def api_budget_par_titre(annee: int):
         GROUP BY d.titre_code
         ORDER BY d.titre_code
     """, (annee,)).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
+
+
+# ── API: budget by ministere ──────────────────────────
+
+@app.get("/api/budget/par-ministere/{annee}")
+async def api_budget_par_ministere(annee: int):
+    """AE/CP aggregated by ministere_nom."""
+    conn = get_db()
+    rows = conn.execute("""
+        SELECT ministere_nom,
+               COUNT(DISTINCT programme_code) as nb_programmes,
+               COUNT(DISTINCT mission_code) as nb_missions,
+               SUM(ae) as total_ae, SUM(cp) as total_cp
+        FROM donnees_budget
+        WHERE annee = ? AND ministere_nom IS NOT NULL
+        GROUP BY ministere_nom
+        ORDER BY total_cp DESC
+    """, (annee,)).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
+
+
+@app.get("/api/budget/hierarchie/{annee}")
+async def api_budget_hierarchie(annee: int):
+    """Full hierarchy: ministere -> mission -> programme with AE/CP."""
+    conn = get_db()
+    rows = conn.execute("""
+        SELECT d.ministere_nom, d.mission_code, m.libelle as mission_libelle,
+               m.type_budget, d.programme_code, p.libelle as programme_libelle,
+               SUM(d.ae) as total_ae, SUM(d.cp) as total_cp
+        FROM donnees_budget d
+        LEFT JOIN mission m ON m.annee = d.annee AND m.code = d.mission_code
+        LEFT JOIN programme p ON p.annee = d.annee AND p.code = d.programme_code
+        WHERE d.annee = ?
+        GROUP BY d.ministere_nom, d.mission_code, d.programme_code
+        ORDER BY total_cp DESC
+    """, (annee,)).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
+
+
+@app.get("/api/documents/{annee}")
+async def api_documents(annee: int, programme_code: int = None, mission_code: str = None):
+    """List documents (PAP PDFs) for a given year."""
+    conn = get_db()
+    sql = "SELECT * FROM document WHERE annee = ?"
+    params: list = [annee]
+    if programme_code is not None:
+        sql += " AND programme_code = ?"
+        params.append(programme_code)
+    if mission_code is not None:
+        sql += " AND mission_code = ?"
+        params.append(mission_code)
+    sql += " ORDER BY type_budget, niveau, programme_code"
+    rows = conn.execute(sql, params).fetchall()
     conn.close()
     return [dict(r) for r in rows]
 

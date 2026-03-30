@@ -1,0 +1,29 @@
+# Crédits XLS format PLF (PLF 2024, PLF 2025, PLF 2026)
+# Colonnes: exercice, loi, typeBudget, ministere, mission, programme, action, sous-action, categorie, titre, ae, cp
+# Source: fichiers "Credits_Destination_Nature_YC_RetD.xls" ou "PLF20XX-credits.xls"
+
+source:
+  type: xls
+  encoding: utf-8
+
+file_pattern: "*credits*.xls"
+
+columns:
+  annee_source:          { source: "exercice", type: integer }
+  exercice_source:       { source: "loi", type: string }
+  type_budget:           { source: "typeBudget", type: string }
+  ministere_code:        { source: "ministere", type: integer }
+  mission_code:          { source: "mission", type: string }
+  programme_code:        { source: "programme", type: integer }
+  action_code:           { source: "action", type: string, nullable: true }
+  sous_action_code:      { source: "sous-action", type: string, nullable: true }
+  categorie_code:        { source: "categorie", type: integer }
+  titre_code:            { source: "titre", type: integer }
+  ae:                    { source: "ae", type: float, nullable: true }
+  cp:                    { source: "cp", type: float, nullable: true }
+
+derived:
+  exercice: PLF
+
+validation:
+  type_budget_values: [BG, BA, CAS, CCF]

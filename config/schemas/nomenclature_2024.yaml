@@ -1,0 +1,23 @@
+# PLF 2024 - Nomenclature complète (format XLS identique au CSV 2022)
+# 8 colonnes, ~2642 lignes — hiérarchie TTR/CAT/MIN/MSN/PGM/ACT/SSA
+
+source:
+  type: nomenclature_xls_format
+  encoding: utf-8
+  separator: ";"
+
+file_pattern: "MiS_PGM_ACT_SSA.xls"
+
+columns:
+  type_ligne:      { source: "Type ligne ", type: string }
+  type_budget:     { source: "Type Budget", type: string }
+  code:            { source: "code", type: string }
+  mission:         { source: "Mission", type: string }
+  ministere:       { source: "Ministere", type: string }
+  libelle:         { source: "Libelle", type: string }
+  libelle_abrege:  { source: "Libelle abrege", type: string }
+  commentaire:     { source: "commentFP", type: string }
+
+derived:
+  annee: 2024
+  exercice: PLF

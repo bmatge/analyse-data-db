@@ -1,0 +1,30 @@
+# Configuration de scan des documents PDF du PLRG 2024 (RAP)
+# 229 PDF dans entrants/2025/ (le PLRG 2024 est publié en 2025)
+
+annee: 2024
+exercice: PLR
+type_document: RAP
+root_path: "2025"
+
+patterns:
+  mission:
+    path_pattern: "{type_budget}/MSN/{mission_code}/"
+    filename_patterns:
+      - "FR_{annee}_PLR_{budget_prefix}_MSN_{mission_code}.pdf"
+
+  programme:
+    path_pattern: "{type_budget}/PGM/{programme_code}/"
+    filename_patterns:
+      - "FR_{annee}_PLR_{mission_code}_PGM_{programme_code}.pdf"
+
+  special:
+    - type_budget: CCO
+      path: "CCO/CCO/"
+      filename: "FR_2024_PLR_CCO.pdf"
+      mission_code: null
+      programme_code: null
+    - type_budget: COM
+      path: "COM/COM/"
+      filename: "FR_2024_PLR_COM.pdf"
+      mission_code: null
+      programme_code: null

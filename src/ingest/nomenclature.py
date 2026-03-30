@@ -5,6 +5,7 @@ import sqlite3
 from fnmatch import fnmatch
 from pathlib import Path
 
+import pandas as pd
 import yaml
 
 
@@ -53,81 +54,93 @@ def load_nomenclature_xls_format(conn: sqlite3.Connection, config_path: str, dat
     pattern = config["file_pattern"]
     cols = config["columns"]
 
-    # Find the file
+    # Find the file — search in data_dir and also in subdirectories for XLS files
     data_path = Path(data_dir)
     matches = [f for f in data_path.iterdir() if f.is_file() and fnmatch(f.name, pattern)]
+    if not matches:
+        # Search in subdirectories (for entrants/20XX/données pour dataviz.../ structure)
+        matches = [f for f in data_path.rglob("*") if f.is_file() and fnmatch(f.name, pattern)]
     if not matches:
         return {"status": "error", "message": f"No file matching '{pattern}' in {data_dir}"}
     source_file = matches[0]
 
     stats = {"ministeres": 0, "missions": 0, "programmes": 0, "actions": 0, "sous_actions": 0}
 
-    with open(source_file, encoding=encoding, newline="") as f:
-        reader = csv.DictReader(f, delimiter=separator)
-        for raw_row in reader:
-            type_ligne = (raw_row.get(cols["type_ligne"]["source"]) or "").strip()
-            type_budget = (raw_row.get(cols["type_budget"]["source"]) or "").strip()
-            code = (raw_row.get(cols["code"]["source"]) or "").strip()
-            mission_code = (raw_row.get(cols["mission"]["source"]) or "").strip()
-            ministere_code = (raw_row.get(cols["ministere"]["source"]) or "").strip()
-            libelle = (raw_row.get(cols["libelle"]["source"]) or "").strip()
-            libelle_abrege = (raw_row.get(cols["libelle_abrege"]["source"]) or "").strip()
-            commentaire = (raw_row.get(cols["commentaire"]["source"]) or "").strip()
+    # Read data — use pandas for binary .xls files, csv for .csv files
+    if source_file.suffix.lower() in (".xls", ".xlsx"):
+        df = pd.read_excel(source_file)
+        rows_iter = (
+            {col: (str(val).strip() if pd.notna(val) else "") for col, val in row.items()}
+            for _, row in df.iterrows()
+        )
+    else:
+        f = open(source_file, encoding=encoding, newline="")
+        rows_iter = csv.DictReader(f, delimiter=separator)
 
-            if type_ligne == "MIN" and code:
+    for raw_row in rows_iter:
+        type_ligne = (raw_row.get(cols["type_ligne"]["source"]) or "").strip()
+        type_budget = (raw_row.get(cols["type_budget"]["source"]) or "").strip()
+        code = (raw_row.get(cols["code"]["source"]) or "").strip()
+        mission_code = (raw_row.get(cols["mission"]["source"]) or "").strip()
+        ministere_code = (raw_row.get(cols["ministere"]["source"]) or "").strip()
+        libelle = (raw_row.get(cols["libelle"]["source"]) or "").strip()
+        libelle_abrege = (raw_row.get(cols["libelle_abrege"]["source"]) or "").strip()
+        commentaire = (raw_row.get(cols["commentaire"]["source"]) or "").strip()
+
+        if type_ligne == "MIN" and code:
+            conn.execute(
+                "INSERT OR IGNORE INTO ministere (annee, code, libelle, libelle_abrege) "
+                "VALUES (?, ?, ?, ?)",
+                (annee, int(code), libelle, libelle_abrege),
+            )
+            stats["ministeres"] += 1
+
+        elif type_ligne == "MSN" and code:
+            conn.execute(
+                "INSERT OR IGNORE INTO mission (annee, code, type_budget, libelle, libelle_abrege) "
+                "VALUES (?, ?, ?, ?, ?)",
+                (annee, code, type_budget, libelle, libelle_abrege),
+            )
+            stats["missions"] += 1
+
+        elif type_ligne == "PGM" and code:
+            ministere_int = int(ministere_code) if ministere_code else None
+            conn.execute(
+                "INSERT OR IGNORE INTO programme "
+                "(annee, code, libelle, libelle_abrege, mission_code, ministere_code, type_budget, commentaire) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                (annee, int(code), libelle, libelle_abrege, mission_code,
+                 ministere_int, type_budget, commentaire),
+            )
+            stats["programmes"] += 1
+
+        elif type_ligne == "ACT" and code:
+            # Code format: PGM-NN (e.g., "105-01")
+            parts = code.split("-", 1)
+            if len(parts) == 2:
+                pgm_code = int(parts[0])
+                act_code = parts[1]
                 conn.execute(
-                    "INSERT OR IGNORE INTO ministere (annee, code, libelle, libelle_abrege) "
+                    "INSERT OR IGNORE INTO action (annee, programme_code, code, libelle) "
                     "VALUES (?, ?, ?, ?)",
-                    (annee, int(code), libelle, libelle_abrege),
+                    (annee, pgm_code, act_code, libelle),
                 )
-                stats["ministeres"] += 1
+                stats["actions"] += 1
 
-            elif type_ligne == "MSN" and code:
+        elif type_ligne == "SSA" and code:
+            # Code format: PGM-NN-NN (e.g., "105-01-01")
+            parts = code.split("-", 2)
+            if len(parts) == 3:
+                pgm_code = int(parts[0])
+                act_code = parts[1]
+                ssa_code = parts[2]
                 conn.execute(
-                    "INSERT OR IGNORE INTO mission (annee, code, type_budget, libelle, libelle_abrege) "
+                    "INSERT OR IGNORE INTO sous_action "
+                    "(annee, programme_code, action_code, code, libelle) "
                     "VALUES (?, ?, ?, ?, ?)",
-                    (annee, code, type_budget, libelle, libelle_abrege),
+                    (annee, pgm_code, act_code, ssa_code, libelle),
                 )
-                stats["missions"] += 1
-
-            elif type_ligne == "PGM" and code:
-                ministere_int = int(ministere_code) if ministere_code else None
-                conn.execute(
-                    "INSERT OR IGNORE INTO programme "
-                    "(annee, code, libelle, libelle_abrege, mission_code, ministere_code, type_budget, commentaire) "
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                    (annee, int(code), libelle, libelle_abrege, mission_code,
-                     ministere_int, type_budget, commentaire),
-                )
-                stats["programmes"] += 1
-
-            elif type_ligne == "ACT" and code:
-                # Code format: PGM-NN (e.g., "105-01")
-                parts = code.split("-", 1)
-                if len(parts) == 2:
-                    pgm_code = int(parts[0])
-                    act_code = parts[1]
-                    conn.execute(
-                        "INSERT OR IGNORE INTO action (annee, programme_code, code, libelle) "
-                        "VALUES (?, ?, ?, ?)",
-                        (annee, pgm_code, act_code, libelle),
-                    )
-                    stats["actions"] += 1
-
-            elif type_ligne == "SSA" and code:
-                # Code format: PGM-NN-NN (e.g., "105-01-01")
-                parts = code.split("-", 2)
-                if len(parts) == 3:
-                    pgm_code = int(parts[0])
-                    act_code = parts[1]
-                    ssa_code = parts[2]
-                    conn.execute(
-                        "INSERT OR IGNORE INTO sous_action "
-                        "(annee, programme_code, action_code, code, libelle) "
-                        "VALUES (?, ?, ?, ?, ?)",
-                        (annee, pgm_code, act_code, ssa_code, libelle),
-                    )
-                    stats["sous_actions"] += 1
+                stats["sous_actions"] += 1
 
     conn.execute(
         "INSERT INTO load_log (operation, annee, exercice, source_file, rows_loaded, status) "

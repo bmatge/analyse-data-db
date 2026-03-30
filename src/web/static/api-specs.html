@@ -3,16 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Programme d'interface – Budget Explorer</title>
+<title>Interfaces de donnees – Budget Explorer</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/dsfr.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.12/dist/utility/utility.min.css">
 <link rel="stylesheet" href="/static/style.css">
 <style>
   .hero { text-align: center; padding: 2rem 0 1rem; }
   .hero h1 { font-size: 1.6rem; }
-  .hero .subtitle { font-size: 1rem; max-width: 660px; margin: 0.5rem auto 0; }
+  .hero .subtitle { font-size: 1rem; max-width: 700px; margin: 0.5rem auto 0; }
   .section { margin: 2.5rem 0; }
   .section h2 { border-bottom: 2px solid var(--text-title-blue-france); padding-bottom: 0.3rem; margin-bottom: 1rem; }
+
+  .source-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1rem 0; }
+  .source-card { background: white; border: 1px solid var(--border-default-grey); border-radius: 8px; padding: 1rem; }
+  .source-card h4 { margin: 0 0 0.5rem; }
+  .source-card .meta { font-size: 0.85rem; color: var(--text-mention-grey); margin-bottom: 0.5rem; }
+  .source-card ul { margin: 0.3rem 0; padding-left: 1.2rem; font-size: 0.9rem; }
+  .source-card code { font-size: 0.8rem; background: var(--background-alt-grey); padding: 0.1rem 0.3rem; border-radius: 3px; }
+
+  .col-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 0.8rem 0; }
+  .col-table th, .col-table td { padding: 0.35rem 0.6rem; border: 1px solid var(--border-default-grey); }
+  .col-table th { background: var(--background-contrast-grey); font-weight: 600; text-align: left; }
+  .col-table tr:nth-child(even) { background: var(--background-alt-grey); }
+  .col-table .highlight { background: #fff3cd; }
+
+  .flow-schema { background: var(--background-alt-grey); border-radius: 8px; padding: 1rem; margin: 1rem 0; font-family: monospace; font-size: 0.85rem; white-space: pre-wrap; }
+
+  .variant-box { border-left: 4px solid #ffc107; padding: 0.5rem 1rem; margin: 0.8rem 0; background: #fffbf0; font-size: 0.9rem; }
+  .stable-box { border-left: 4px solid #28a745; padding: 0.5rem 1rem; margin: 0.8rem 0; background: #f0fff4; font-size: 0.9rem; }
 </style>
 </head>
 <body>
@@ -52,6 +70,8 @@
           <li class="fr-nav__item"><a class="fr-nav__link" href="/nomenclature">Nomenclature</a></li>
           <li class="fr-nav__item"><a class="fr-nav__link" href="/corpus">Corpus documentaire</a></li>
           <li class="fr-nav__item"><a class="fr-nav__link" href="/plf-lfi">Flux PLF / LFI</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/prototypes">Prototypes</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="/analyse-existant">Analyse existant</a></li>
         </ul>
       </nav>
     </div>
@@ -59,269 +79,289 @@
 </header>
 
 <main class="budget-main">
-
 <div class="fr-container">
 
 <div class="hero">
-  <h1>Programme d'interface</h1>
-  <p class="subtitle">Comment les bureaux metier, le SI et le site web se partagent le travail pour publier le budget de l'Etat</p>
+  <h1>Interfaces de donnees</h1>
+  <p class="subtitle">Etat des lieux des formats de donnees constates par reverse-engineering des fichiers bruts livres par la Direction du Budget (2023-2026)</p>
 </div>
 
 <!-- ═══════════════════════════════════════════════ -->
 <div class="section">
-<h2>Le principe : 3 acteurs, 2 flux, 1 site</h2>
+<h2>Les 4 sources de donnees constatees</h2>
 
-<div class="arch-diagram">
-  <div class="arch-block arch-source">
-    <h3>Producteurs de donnees</h3>
-    <p>SI budgetaire (Tango, Farandole, 2PERF, 2BOO)</p>
-    <ul>
-      <li>Credits <abbr title="Autorisations d'engagement">AE</abbr> / <abbr title="Credits de paiement">CP</abbr></li>
-      <li>Emplois <abbr title="Equivalents temps plein travaille">ETPT</abbr></li>
-      <li>Performance (indicateurs)</li>
-      <li>Nomenclature annuelle</li>
-    </ul>
-  </div>
-  <div class="arch-arrow">&rarr;</div>
-  <div class="arch-block arch-api">
-    <h3>2 interfaces standard</h3>
-    <p>Contrats de donnees simples et stables</p>
-    <ul>
-      <li><strong>Flux DATA</strong> : chiffres + nomenclature</li>
-      <li><strong>Flux DOCS</strong> : fichiers + index</li>
-      <li>Format : fichiers JSON + PDF</li>
-      <li>Peut etre un simple dossier partage</li>
-    </ul>
-  </div>
-  <div class="arch-arrow">&rarr;</div>
-  <div class="arch-block arch-site">
-    <h3>Site web Direction du Budget</h3>
-    <p>Agregation, croisement, restitution</p>
-    <ul>
-      <li>Croise donnees et documents</li>
-      <li>Construit les visualisations</li>
-      <li>Assure le suivi inter-annuel</li>
-      <li>Publie pour le grand public</li>
-    </ul>
-  </div>
-</div>
+<p>L'analyse des ZIP livres revele <strong>4 types de fichiers</strong> distincts, avec des niveaux de stabilite variables :</p>
 
-<div class="arch-diagram">
-  <div class="arch-block arch-source">
-    <h3>Producteurs de documents</h3>
-    <p>SI documentaire (<abbr title="Gestion electronique des documents">GED</abbr>, performance-publique.fr)</p>
+<div class="source-grid">
+  <div class="source-card">
+    <h4>1. Nomenclature XLS</h4>
+    <div class="meta">MiS_PGM_ACT_SSA.xls — binaire .xls</div>
+    <div class="stable-box">Format le plus stable. Identique sur toutes les annees.</div>
     <ul>
-      <li><abbr title="Projets annuels de performances">PAP</abbr> / <abbr title="Rapports annuels de performances">RAP</abbr> (bleus budgetaires)</li>
-      <li><abbr title="Documents de politique transversale">DPT</abbr>, jaunes, circulaires</li>
-      <li>Decrets, annexes</li>
+      <li>8 colonnes, ~2 600 lignes par annee</li>
+      <li>Hierarchie complete : TTR/CAT/MIN/MSN/PGM/ACT/SSA</li>
+      <li>Codes normalises : PGM-NN (actions), PGM-NN-NN (sous-actions)</li>
+      <li>Disponible pour : PLR 2023, PLF 2024, PLF 2025, PLRG 2024, PLF 2026</li>
     </ul>
   </div>
-  <div class="arch-arrow">&rarr;</div>
-  <div class="arch-block arch-api" style="visibility:hidden;"></div>
-  <div class="arch-arrow" style="visibility:hidden;"></div>
-  <div class="arch-block arch-site" style="visibility:hidden;"></div>
-</div>
 
-<div class="callout-rule">
-  <strong>Regle d'or :</strong> Chaque producteur publie dans son perimetre, dans un format convenu, a son rythme. Le site web consomme tout et ne demande rien de plus. Aucun acteur n'a besoin de connaitre le fonctionnement interne des autres.
+  <div class="source-card">
+    <h4>2. Credits XLS</h4>
+    <div class="meta">Credits_Destination_Nature_YC_RetD.xls ou PLF20XX-credits.xls</div>
+    <div class="variant-box">2 variantes de colonnes constatees (PLF vs PLR).</div>
+    <ul>
+      <li>12 colonnes, 2 300 a 3 600 lignes selon exercice</li>
+      <li>Granularite : action × categorie × titre</li>
+      <li>Montants AE et CP</li>
+      <li>Disponible pour : PLR 2023, PLF 2024, PLF 2025, PLRG 2024, PLF 2026</li>
+    </ul>
+  </div>
+
+  <div class="source-card">
+    <h4>3. CSV open data</h4>
+    <div class="meta">entrants/plf open data/*.csv</div>
+    <div class="variant-box">Schema variable d'une annee a l'autre (7 a 16 colonnes).</div>
+    <ul>
+      <li>Granularite plus fine : sous-action × categorie + FdC/AdP</li>
+      <li>Inclut les libelles (missions, programmes, actions)</li>
+      <li>Disponible pour : PLF 2014-2025, LFI 2019-2023, PLR 2018</li>
+      <li>Encodage variable : latin-1 (2019), utf-8-sig (2020+)</li>
+    </ul>
+  </div>
+
+  <div class="source-card">
+    <h4>4. Documents PDF</h4>
+    <div class="meta">BA/ BG/ CAS/ CCF/ CCO/ COM/ — arborescence par budget</div>
+    <div class="stable-box">Structure de dossiers stable, conventions de nommage stables.</div>
+    <ul>
+      <li>~230 PDF par exercice (missions + programmes)</li>
+      <li>Nommage: <code>FR_{annee}_{exercice}_{mission}_PGM_{code}.pdf</code></li>
+      <li>HTML structures en complement pour 2023-2024 uniquement</li>
+      <li>Disponible pour : PLR 2023, PLF 2024, PLF 2025, PLRG 2024, PLF 2026</li>
+    </ul>
+  </div>
 </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════ -->
 <div class="section">
-<h2>Les 2 flux de donnees</h2>
+<h2>Schema de la nomenclature XLS</h2>
 
-<div class="flow-cards">
+<p>Le fichier <code>MiS_PGM_ACT_SSA.xls</code> est la source la plus fiable pour la nomenclature. Son schema est rigoureusement identique depuis au moins 2022 :</p>
 
-  <div class="flow-card flow-card--data">
-    <div class="flow-card-header"><span class="icon">&#x1f4ca;</span> Flux DATA &mdash; Donnees chiffrees</div>
-    <div class="flow-card-body">
-      <p>Tout ce qui est <strong>chiffre</strong> dans le budget : credits, emplois, indicateurs de performance.</p>
-
-      <div class="fl-label">Ce que le producteur fournit</div>
-      <ul>
-        <li><strong>La nomenclature</strong> de l'annee (missions, programmes, actions, ministeres)</li>
-        <li><strong>Les credits</strong> <abbr title="Autorisations d'engagement">AE</abbr> et <abbr title="Credits de paiement">CP</abbr>, ventiles par destination et par nature</li>
-        <li><strong>Les emplois</strong> <abbr title="Equivalents temps plein travaille">ETPT</abbr> par programme</li>
-        <li><strong>Les indicateurs</strong> de performance (objectifs, realisations, cibles)</li>
-      </ul>
-
-      <div class="fl-label">Format attendu</div>
-      <p>Un fichier JSON ou CSV par jeu de donnees, organise par annee et exercice (<abbr title="Projet de loi de finances">PLF</abbr>, <abbr title="Loi de finances initiale">LFI</abbr>, <abbr title="Projet de loi de reglement">PLR</abbr>). Chaque ligne porte ses codes nomenclature (mission, programme, action).</p>
-
-      <div class="fl-label">Frequence</div>
-      <p>3 fois par an : au depot du <abbr title="Projet de loi de finances">PLF</abbr> (automne), au vote de la <abbr title="Loi de finances initiale">LFI</abbr> (decembre), a l'execution du <abbr title="Projet de loi de reglement">PLR</abbr> (printemps).</p>
-
-      <div class="fl-label">Exigence minimale</div>
-      <p>Deposer un fichier CSV dans un dossier partage. C'est exactement ce que font deja les bureaux via les exports Tango.</p>
-    </div>
-  </div>
-
-  <div class="flow-card flow-card--docs">
-    <div class="flow-card-header"><span class="icon">&#x1f4c4;</span> Flux DOCS &mdash; Documentation budgetaire</div>
-    <div class="flow-card-body">
-      <p>Tout ce qui est <strong>document</strong> : les annexes budgetaires (<abbr title="Projets annuels de performances">PAP</abbr>, <abbr title="Rapports annuels de performances">RAP</abbr>), les documents de politique transversale, les jaunes, les circulaires.</p>
-
-      <div class="fl-label">Ce que le producteur fournit</div>
-      <ul>
-        <li><strong>Les fichiers PDF</strong> eux-memes</li>
-        <li><strong>Un index</strong> decrivant chaque fichier : a quelle mission, quel programme, quel exercice il se rapporte</li>
-      </ul>
-
-      <div class="fl-label">Format attendu</div>
-      <p>Les PDFs dans une arborescence par type de budget et mission (comme aujourd'hui). Un fichier d'index (JSON ou CSV) avec pour chaque document : son type, sa mission, son programme, son exercice.</p>
-
-      <div class="fl-label">Frequence</div>
-      <p>Au depot du <abbr title="Projet de loi de finances">PLF</abbr> (~230 documents d'un coup), puis enrichissement progressif (<abbr title="Documents de politique transversale">DPT</abbr>, jaunes) dans les semaines suivantes.</p>
-
-      <div class="fl-label">Exigence minimale</div>
-      <p>Deposer un ZIP de PDFs avec un fichier d'index. C'est le processus existant (cf. imports Farandole actuels).</p>
-    </div>
-  </div>
-
-</div>
-</div>
-
-<!-- ═══════════════════════════════════════════════ -->
-<div class="section">
-<h2>La nomenclature : le langage commun</h2>
-
-<div class="callout-rule">
-  <strong>La nomenclature est le pivot.</strong> Chaque document et chaque ligne de donnees porte ses codes nomenclature (mission, programme, action). C'est grace a ces codes que le site web peut relier un document <abbr title="Projets annuels de performances">PAP</abbr> a ses credits, ou afficher les indicateurs de performance a cote des depenses d'un programme.
-</div>
-
-<p>La nomenclature est publiee <strong>une fois par an</strong>, avant les donnees et les documents. Elle est immuable pour l'annee : si un programme existe dans la nomenclature 2025, il existera dans toutes les publications 2025 (<abbr title="Projet de loi de finances">PLF</abbr>, <abbr title="Loi de finances initiale">LFI</abbr>, <abbr title="Projet de loi de reglement">PLR</abbr>).</p>
-
-<p>Le site web se charge ensuite de faire le lien entre les annees : suivre un programme qui change de code, detecter les fusions ou scissions, signaler les evolutions. Les producteurs n'ont pas a s'en preoccuper.</p>
-</div>
-
-<!-- ═══════════════════════════════════════════════ -->
-<div class="section">
-<h2>Qui fait quoi ?</h2>
-
-<table class="fr-table matrix">
+<table class="col-table">
   <thead>
-    <tr>
-      <th>Tache</th>
-      <th>Bureaux metier / SI budgetaire</th>
-      <th>SI documentaire / <abbr title="Gestion electronique des documents">GED</abbr></th>
-      <th>Equipe site web</th>
-    </tr>
+    <tr><th>Colonne</th><th>Type</th><th>Description</th><th>Exemple</th></tr>
   </thead>
   <tbody>
-    <tr><td>Publier la nomenclature annuelle</td><td class="yes">&#10003;</td><td></td><td></td></tr>
-    <tr><td>Produire les credits <abbr title="Autorisations d'engagement">AE</abbr>/<abbr title="Credits de paiement">CP</abbr></td><td class="yes">&#10003;</td><td></td><td></td></tr>
-    <tr><td>Produire les emplois <abbr title="Equivalents temps plein travaille">ETPT</abbr></td><td class="yes">&#10003;</td><td></td><td></td></tr>
-    <tr><td>Produire les indicateurs de performance</td><td class="yes">&#10003;</td><td></td><td></td></tr>
-    <tr><td>Deposer les documents PDF</td><td></td><td class="yes">&#10003;</td><td></td></tr>
-    <tr><td>Indexer les documents (type, mission, programme)</td><td></td><td class="yes">&#10003;</td><td></td></tr>
-    <tr><td>Croiser donnees + documents</td><td></td><td></td><td class="yes">&#10003;</td></tr>
-    <tr><td>Construire les visualisations</td><td></td><td></td><td class="yes">&#10003;</td></tr>
-    <tr><td>Assurer le suivi d'une annee a l'autre</td><td></td><td></td><td class="yes">&#10003;</td></tr>
-    <tr><td>Valider la coherence des publications</td><td class="co">co-responsable</td><td class="co">co-responsable</td><td class="yes">&#10003;</td></tr>
+    <tr><td><code>Type ligne </code></td><td>string</td><td>Type d'entite : TTR, CAT, MIN, MSN, PGM, ACT, SSA</td><td>PGM</td></tr>
+    <tr><td><code>Type Budget</code></td><td>string</td><td>Type de budget (vide pour MIN, TTR, CAT)</td><td>BG</td></tr>
+    <tr><td><code>code</code></td><td>string/int</td><td>Code : entier pour PGM/MIN, PGM-NN pour ACT, PGM-NN-NN pour SSA</td><td>178, 178-01, 178-01-03</td></tr>
+    <tr><td><code>Mission</code></td><td>string</td><td>Code mission 2 lettres (pour PGM, ACT, SSA)</td><td>DA</td></tr>
+    <tr><td><code>Ministere</code></td><td>int</td><td>Code ministere numerique (pour PGM)</td><td>6</td></tr>
+    <tr><td><code>Libelle</code></td><td>string</td><td>Libelle complet de l'entite</td><td>Preparation et emploi des forces</td></tr>
+    <tr><td><code>Libelle abrege</code></td><td>string</td><td>Libelle court pour dataviz</td><td>Prep.&amp;empl.forces</td></tr>
+    <tr><td><code>commentFP</code></td><td>string</td><td>Commentaire (souvent vide)</td><td></td></tr>
   </tbody>
 </table>
+
+<p>Les types de lignes forment une hierarchie :</p>
+<div class="flow-schema">TTR (7 titres) → CAT (20 categories)
+MIN (17-21 ministeres)
+  └→ MSN (45-48 missions, code 2 lettres)
+       └→ PGM (162-191 programmes, code 3 chiffres)
+            └→ ACT (786-820 actions, code PGM-NN)
+                 └→ SSA (1 505-1 589 sous-actions, code PGM-NN-NN)</div>
 </div>
 
 <!-- ═══════════════════════════════════════════════ -->
 <div class="section">
-<h2>Calendrier type (exemple <abbr title="Projet de loi de finances">PLF</abbr>)</h2>
+<h2>Schema des credits XLS</h2>
 
-<table class="timeline-table">
+<p>12 colonnes dans tous les cas, mais avec <strong>2 variantes de nommage</strong> selon l'exercice :</p>
+
+<table class="col-table">
+  <thead>
+    <tr><th>Role</th><th>Format PLF</th><th>Format PLR</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Annee</td><td><code>exercice</code></td><td><code>exercice</code></td><td>int</td><td>Annee budgetaire</td></tr>
+    <tr><td>Exercice</td><td><code>loi</code></td><td><code>loi</code></td><td>string</td><td>"PLF" ou "PLR"</td></tr>
+    <tr><td>Type budget</td><td><code>typeBudget</code></td><td><code>typeBudget</code></td><td>string</td><td>BG, BA, CAS, CCF</td></tr>
+    <tr><td>Ministere</td><td><code>ministere</code></td><td><code>ministere</code></td><td>int</td><td>Code numerique ministere</td></tr>
+    <tr><td>Mission</td><td><code>mission</code></td><td><code>mission</code></td><td>string</td><td>Code 2 lettres</td></tr>
+    <tr><td>Programme</td><td><code>programme</code></td><td><code>programme</code></td><td>int</td><td>Code 3 chiffres</td></tr>
+    <tr><td>Action</td><td><code>action</code></td><td><code>action</code></td><td>string</td><td>Format PGM-NN</td></tr>
+    <tr class="highlight"><td>Sous-action</td><td><code>sous-action</code></td><td><code>sous_action</code></td><td>string</td><td>Format PGM-NN-NN (souvent vide)</td></tr>
+    <tr><td>Categorie</td><td><code>categorie</code></td><td><code>categorie</code></td><td>int</td><td>Code categorie (21, 31, 51...)</td></tr>
+    <tr><td>Titre</td><td><code>titre</code></td><td><code>titre</code></td><td>int</td><td>Code titre (2-7)</td></tr>
+    <tr class="highlight"><td>AE</td><td><code>ae</code></td><td><code>AE EXEC</code></td><td>float</td><td>Autorisations d'engagement</td></tr>
+    <tr class="highlight"><td>CP</td><td><code>cp</code></td><td><code>CP EXEC</code></td><td>float</td><td>Credits de paiement</td></tr>
+  </tbody>
+</table>
+
+<p>Les 3 lignes surlignees sont les seules differences entre les 2 variantes. Les fichiers PLR contiennent ~50% de lignes en plus (detail d'execution plus fin).</p>
+
+<p><strong>Fichiers concernes :</strong></p>
+<ul>
+  <li>Format PLF : PLF 2024 (<code>PLF2024-credits.xls</code>), PLF 2025, PLF 2026 (<code>Credits_Destination_Nature_YC_RetD.xls</code>)</li>
+  <li>Format PLR : PLRG 2023, PLRG 2024 (<code>Credits_Destination_Nature_YC_RetD.xls</code>)</li>
+</ul>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section">
+<h2>Schema des CSV open data</h2>
+
+<p>Les CSV publies sur data.gouv.fr ont un schema plus riche mais <strong>variable selon les annees</strong>. Voici les 3 grandes generations constatees :</p>
+
+<table class="col-table">
+  <thead><tr><th>Generation</th><th>Annees</th><th>Colonnes</th><th>Particularites</th></tr></thead>
   <tbody>
     <tr>
-      <td class="tl-when">J &minus; 7</td>
-      <td><strong>Nomenclature</strong> &mdash; Publication de la nomenclature de l'annee N+1 (missions, programmes, actions, ministeres)</td>
-      <td class="tl-who">Bureau nomenclature</td>
+      <td>Generation 1</td>
+      <td>2014, 2019</td>
+      <td>7-12</td>
+      <td>Colonnes variables, encodage latin-1 (2019), pas de sous-action ni categorie</td>
     </tr>
     <tr>
-      <td class="tl-when">J (depot du <abbr title="Projet de loi de finances">PLF</abbr>)</td>
-      <td><strong>Donnees + Documents</strong> &mdash; Publication simultanee des credits (CSV/JSON) et des documents (ZIP de PDFs + index)</td>
-      <td class="tl-who">SI budgetaire + SI docs</td>
+      <td>Generation 2</td>
+      <td>2020-2023</td>
+      <td>12</td>
+      <td>Format stabilise, nombres avec espaces (<code>460 459</code>), pas de FdC/AdP</td>
     </tr>
     <tr>
-      <td class="tl-when">J + 1</td>
-      <td><strong>Chargement</strong> &mdash; Le site charge les 2 flux, croise les donnees, genere les pages. Verification automatique de coherence.</td>
-      <td class="tl-who">Pipeline automatique</td>
-    </tr>
-    <tr>
-      <td class="tl-when">J + 1 a J + 2</td>
-      <td><strong>Validation</strong> &mdash; Verification humaine : spot-checks sur les chiffres et les documents. Corrections eventuelles par re-depot.</td>
-      <td class="tl-who">Equipe web + referent metier</td>
-    </tr>
-    <tr>
-      <td class="tl-when">J + 2 a J + 60</td>
-      <td><strong>Enrichissement</strong> &mdash; Ajout progressif des <abbr title="Documents de politique transversale">DPT</abbr>, jaunes, circulaires. Chaque ajout est un simple depot de fichier.</td>
-      <td class="tl-who">Bureaux metier</td>
+      <td>Generation 3</td>
+      <td>2024-2025</td>
+      <td>16</td>
+      <td>Ajout sous-actions, FdC/AdP, ministere, libelles complets</td>
     </tr>
   </tbody>
 </table>
+
+<p>Colonnes du format generation 3 (le plus complet, 2024-2025) :</p>
+<div class="flow-schema">Type Mission ; Mission ; Code Mission ; Programme ; Libelle Programme ;
+Action ; Libelle Action ; Sous Action ; Libelle SousAction ;
+Categorie ; Code Titre ;
+AE  PLF ; CP PLF ; AE Prev FDC/ADP ; CP Prev FDC/ADP ;
+Ministere</div>
 </div>
 
 <!-- ═══════════════════════════════════════════════ -->
 <div class="section">
-<h2>Principes de conception (perennite 10 ans)</h2>
+<h2>Convention de nommage des documents PDF</h2>
 
-<div class="principles">
-  <div class="principle">
-    <div class="icon">&#x1f4e6;</div>
-    <h4>Formats ouverts</h4>
-    <p>JSON, CSV, PDF. Pas de format proprietaire. Lisible par n'importe quel outil.</p>
-  </div>
-  <div class="principle">
-    <div class="icon">&#x1f512;</div>
-    <h4>Contrat stable</h4>
-    <p>On ajoute des champs, on n'en supprime jamais. Compatibilite ascendante garantie.</p>
-  </div>
-  <div class="principle">
-    <div class="icon">&#x2699;</div>
-    <h4>Agnostique</h4>
-    <p>Aucune dependance technologique. Un dossier de fichiers statiques suffit cote producteur.</p>
-  </div>
-  <div class="principle">
-    <div class="icon">&#x1f4c5;</div>
-    <h4>Versionne par annee</h4>
-    <p>Chaque annee est un monde autonome. Pas de reference croisee entre annees cote producteur.</p>
-  </div>
-  <div class="principle">
-    <div class="icon">&#x26a1;</div>
-    <h4>Publication en 24h</h4>
-    <p>Zero modification de code a la publication. Seuls les fichiers de donnees changent.</p>
-  </div>
-  <div class="principle">
-    <div class="icon">&#x1f91d;</div>
-    <h4>Charge minimale</h4>
-    <p>Chaque acteur ne fait que ce qui releve de son perimetre. Pas de travail en doublon.</p>
-  </div>
-</div>
+<p>Deux conventions coexistent selon le type d'exercice et le niveau hierarchique :</p>
+
+<table class="col-table">
+  <thead><tr><th>Niveau</th><th>Convention PLF (PAP)</th><th>Convention PLR (RAP)</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Mission</td>
+      <td><code>PAP{annee}_{type}_{nom}_{code}.pdf</code><br>Ex: <code>PAP2025_BG_Defense_DA.pdf</code></td>
+      <td><code>FR_{annee}_PLR_{type}_MSN_{code}.pdf</code><br>Ex: <code>FR_2023_PLR_BG_MSN_DA.pdf</code></td>
+    </tr>
+    <tr>
+      <td>Programme</td>
+      <td><code>FR_{annee}_PLF_{mission}_PGM_{code}.pdf</code><br>Ex: <code>FR_2025_PLF_DA_PGM_178.pdf</code></td>
+      <td><code>FR_{annee}_PLR_{mission}_PGM_{code}.pdf</code><br>Ex: <code>FR_2023_PLR_DA_PGM_178.pdf</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>L'arborescence des dossiers est stable :</p>
+<div class="flow-schema">{type_budget}/
+  MSN/{code_mission}/    → PDF mission (1 par mission)
+  PGM/{code_programme}/  → PDF programme (1 par programme)
+                          + HTML (5 sections) pour 2023-2024 uniquement</div>
+
+<p>Les HTML structures (<code>_CREDITS</code>, <code>_JPE</code>, <code>_STRAT</code>, <code>_PERF</code>, <code>_OPE</code>) ne sont disponibles que pour le PLR 2023 et le PLF 2024. Ce sont les memes donnees que les PDF mais en format parsable (tableaux HTML avec CSS FARANDOLE).</p>
 </div>
 
 <!-- ═══════════════════════════════════════════════ -->
 <div class="section">
-<h2>Ce que ca change concretement</h2>
+<h2>Articulation des sources</h2>
 
-<div class="compare-grid">
-  <div class="compare-card compare-card--before">
-    <h3>Aujourd'hui</h3>
-    <ul>
-      <li>Les donnees et documents sont publies separement, sans lien explicite</li>
-      <li>Les formats changent d'une annee a l'autre sans preavis</li>
-      <li>Chaque publication necessite du developpement cote site</li>
-      <li>Le suivi d'un programme dans le temps est manuel</li>
-      <li>Les noms de ministeres cassent les correspondances</li>
-    </ul>
-  </div>
-  <div class="compare-card compare-card--after">
-    <h3>Avec le programme d'interface</h3>
-    <ul>
-      <li>Donnees et documents partagent la meme nomenclature = liables automatiquement</li>
-      <li>Format contractualise, stable, versionne</li>
-      <li>Publication en 24h par simple depot de fichiers</li>
-      <li>Suivi inter-annuel automatique (identite canonique)</li>
-      <li>Les codes nomenclature sont la cle, pas les noms</li>
-    </ul>
-  </div>
+<p>Le diagramme ci-dessous montre comment les differentes sources se combinent dans la pipeline :</p>
+
+<div class="flow-schema">                    ┌─────────────────────────┐
+                    │  MiS_PGM_ACT_SSA.xls    │  Nomenclature complete
+                    │  (toutes annees)         │  avec libelles et
+                    │  8 cols, ~2600 lignes    │  libelles abreges
+                    └───────────┬─────────────┘
+                                │
+                                ▼
+┌─────────────────────────┐    NOMENCLATURE    ┌─────────────────────────┐
+│  Credits XLS (dataviz)  │──── versionnee ────│  CSV open data          │
+│  12 cols, codes seuls   │     par annee      │  16 cols, avec libelles │
+│  2300-3600 lignes       │                    │  + FdC/AdP              │
+└───────────┬─────────────┘                    └───────────┬─────────────┘
+            │                                              │
+            ▼                                              ▼
+         CREDITS                                        CREDITS
+      (AE/CP par action                          (AE/CP par sous-action
+       × categorie)                                × categorie + FdC/AdP)
+            │                                              │
+            └──────────────┬───────────────────────────────┘
+                           │
+                           ▼
+                    ┌──────────────┐
+                    │  donnees_    │   Table unifiee
+                    │  budget      │   dans SQLite
+                    └──────┬───────┘
+                           │
+                           ▼
+                    ┌──────────────┐
+                    │  Documents   │   Lies via les codes
+                    │  PDF/HTML    │   mission + programme
+                    └──────────────┘</div>
+
+<p><strong>Regle de priorite :</strong> quand les CSV open data existent pour une annee, ils sont preferes aux XLS dataviz car ils ont une granularite plus fine (sous-actions) et des colonnes supplementaires (FdC/AdP, libelles). Les XLS dataviz sont la source de repli pour les annees sans CSV open data, et la source primaire pour la nomenclature complete (avec libelles abreges et commentaires, absents des CSV).</p>
 </div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section">
+<h2>Matrice de couverture par annee</h2>
+
+<table class="col-table">
+  <thead>
+    <tr><th>Annee</th><th>Exercice</th><th>Nomenclature XLS</th><th>Credits XLS</th><th>CSV open data</th><th>Documents PDF</th><th>HTML structures</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>2014</td><td>PLF</td><td>—</td><td>—</td><td>oui (7 cols)</td><td>—</td><td>—</td></tr>
+    <tr><td>2019</td><td>PLF</td><td>—</td><td>—</td><td>oui (latin-1)</td><td>—</td><td>—</td></tr>
+    <tr><td>2019</td><td>LFI</td><td>—</td><td>—</td><td>oui</td><td>—</td><td>—</td></tr>
+    <tr><td>2020</td><td>PLF</td><td>—</td><td>—</td><td>oui (espaces)</td><td>—</td><td>—</td></tr>
+    <tr><td>2020</td><td>LFI</td><td>—</td><td>—</td><td>oui</td><td>—</td><td>—</td></tr>
+    <tr><td>2021</td><td>PLF</td><td>—</td><td>—</td><td>oui (espaces)</td><td>—</td><td>—</td></tr>
+    <tr><td>2021</td><td>LFI</td><td>—</td><td>—</td><td>oui</td><td>—</td><td>—</td></tr>
+    <tr><td>2022</td><td>PLF</td><td>CSV equivalent</td><td>—</td><td>oui (espaces)</td><td>—</td><td>—</td></tr>
+    <tr><td>2022</td><td>LFI</td><td>—</td><td>—</td><td>oui</td><td>—</td><td>—</td></tr>
+    <tr><td>2023</td><td>PLF</td><td>—</td><td>—</td><td>oui (16 cols)</td><td>—</td><td>—</td></tr>
+    <tr><td>2023</td><td>LFI</td><td>—</td><td>—</td><td>oui</td><td>—</td><td>—</td></tr>
+    <tr style="background:#d4edda"><td>2023</td><td>PLR</td><td>oui</td><td>oui (PLR)</td><td>—</td><td>209 PDF</td><td>694 HTML</td></tr>
+    <tr style="background:#d4edda"><td>2024</td><td>PLF</td><td>oui</td><td>oui (PLF)</td><td>oui (16 cols)</td><td>217 PDF</td><td>665 HTML</td></tr>
+    <tr style="background:#d4edda"><td>2024</td><td>PLR</td><td>oui</td><td>oui (PLR)</td><td>—</td><td>229 PDF</td><td>—</td></tr>
+    <tr style="background:#d4edda"><td>2025</td><td>PLF</td><td>oui</td><td>oui (PLF)</td><td>oui (16 cols)</td><td>229 PDF</td><td>—</td></tr>
+    <tr style="background:#d4edda"><td>2026</td><td>PLF</td><td>oui</td><td>oui (PLF)</td><td>—</td><td>224 PDF</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<p>Les lignes vertes correspondent aux donnees nouvellement ajoutees. Les annees 2014-2022 ne disposent que de CSV open data (sans documents PDF ni XLS dataviz dans le perimetre actuel).</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section">
+<h2>Observations cles du reverse-engineering</h2>
+
+<ol>
+  <li><strong>La nomenclature XLS est la source la plus stable</strong> — memes 8 colonnes, memes conventions de codes, meme format binaire .xls sur toutes les annees constatees. C'est le pivot naturel du systeme.</li>
+  <li><strong>Les credits XLS ont 2 variantes previsibles</strong> — PLF (minuscules, tiret) et PLR (majuscules EXEC, underscore). La difference est purement cosmetique (noms de colonnes), pas structurelle.</li>
+  <li><strong>Les CSV open data sont plus riches mais instables</strong> — 3 generations de schemas en 10 ans, encodages variables, noms de colonnes variables. Chaque annee necessite sa propre config YAML.</li>
+  <li><strong>Les HTML structures ont disparu a partir du PLF 2025</strong> — les 694 HTML du PLR 2023 et 665 du PLF 2024 sont les derniers. L'information equivalente n'est plus accessible que via les PDF.</li>
+  <li><strong>Le nommage des fichiers credits varie</strong> — <code>PLF2024-credits.xls</code> (specifique) vs <code>Credits_Destination_Nature_YC_RetD.xls</code> (generique). Les patterns glob dans les configs YAML absorbent ces variations.</li>
+  <li><strong>Le PLRG est dans le dossier de l'annee suivante</strong> — le PLRG 2024 est dans <code>entrants/2025/</code> car publie au printemps 2025. C'est coherent avec le calendrier budgetaire mais demande une logique de recherche croisee.</li>
+</ol>
 </div>
 
 </div><!-- /fr-container -->

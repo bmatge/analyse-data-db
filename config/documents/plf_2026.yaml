@@ -1,0 +1,37 @@
+# Configuration de scan des documents PDF du PLF 2026
+# 224 PDF — uniquement des PDF (pas de HTML)
+
+annee: 2026
+exercice: PLF
+type_document: PAP
+root_path: "2026"
+
+patterns:
+  mission:
+    path_pattern: "{type_budget}/MSN/{mission_code}/"
+    filename_patterns:
+      - "PAP{annee}_{budget_prefix}_{mission_name}_{mission_code}.pdf"
+    budget_prefix_mapping:
+      BG: "BG"
+      BA: "BA"
+      CAS: "CS_CAS"
+      CCF: "CS_CCF"
+      CCO: "CS_CCO"
+      COM: "CS_COM"
+
+  programme:
+    path_pattern: "{type_budget}/PGM/{programme_code}/"
+    filename_patterns:
+      - "FR_{annee}_PLF_{mission_code}_PGM_{programme_code}.pdf"
+
+  special:
+    - type_budget: CCO
+      path: "CCO/CCO/"
+      filename: "PAP2026_CS_CCO_Comptes_commerce.pdf"
+      mission_code: null
+      programme_code: null
+    - type_budget: COM
+      path: "COM/COM/"
+      filename: "PAP2026_CS_COM_Comptes_operations_monetaires.pdf"
+      mission_code: null
+      programme_code: null

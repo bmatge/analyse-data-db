@@ -21,7 +21,9 @@ def scan_pdfs(root_path: Path) -> list[Path]:
 def parse_mission_pdf(filepath: Path, root: Path, config: dict) -> dict | None:
     """Parse a mission-level PDF filename and path.
 
-    Expected path: {root}/{type_budget}/MSN/{mission_code}/PAP2025_BG_Name_XX.pdf
+    Expected paths:
+      PLF: {root}/{type_budget}/MSN/{mission_code}/PAP2025_BG_Name_XX.pdf
+      PLR: {root}/{type_budget}/MSN/{mission_code}/FR_2023_PLR_BG_MSN_XX.pdf
     """
     rel = filepath.relative_to(root)
     parts = rel.parts
@@ -33,27 +35,39 @@ def parse_mission_pdf(filepath: Path, root: Path, config: dict) -> dict | None:
     mission_code = parts[2]
     filename = parts[3]
 
-    # Verify this is a mission-level file
-    if not filename.startswith("PAP"):
-        return None
-
-    # Extract mission code from filename (last 2 chars before .pdf)
+    # PLF format: PAP2025_BG_Name_XX.pdf
     match = re.match(r"PAP\d{4}_(.+?)_(.+?)_([A-Z]{2})\.pdf", filename)
-    if not match:
-        return None
+    if match:
+        return {
+            "annee": config["annee"],
+            "exercice": config["exercice"],
+            "type_document": config["type_document"],
+            "type_budget": type_budget,
+            "niveau": "MSN",
+            "mission_code": match.group(3),
+            "programme_code": None,
+            "filename": filename,
+            "filepath": str(rel),
+            "titre": match.group(2).replace("_", " "),
+        }
 
-    return {
-        "annee": config["annee"],
-        "exercice": config["exercice"],
-        "type_document": config["type_document"],
-        "type_budget": type_budget,
-        "niveau": "MSN",
-        "mission_code": match.group(3),
-        "programme_code": None,
-        "filename": filename,
-        "filepath": str(rel),
-        "titre": match.group(2).replace("_", " "),
-    }
+    # PLR format: FR_2023_PLR_BG_MSN_XX.pdf
+    match = re.match(r"FR_(\d{4})_PLR_([A-Z]+)_MSN_([A-Z]{2})\.pdf", filename)
+    if match:
+        return {
+            "annee": config["annee"],
+            "exercice": config["exercice"],
+            "type_document": config["type_document"],
+            "type_budget": type_budget,
+            "niveau": "MSN",
+            "mission_code": match.group(3),
+            "programme_code": None,
+            "filename": filename,
+            "filepath": str(rel),
+            "titre": None,
+        }
+
+    return None
 
 
 def parse_programme_pdf(filepath: Path, root: Path, config: dict) -> dict | None:
@@ -71,22 +85,39 @@ def parse_programme_pdf(filepath: Path, root: Path, config: dict) -> dict | None
     programme_code_dir = parts[2]
     filename = parts[3]
 
+    # PLF format: FR_2025_PLF_XX_PGM_NNN.pdf
     match = re.match(r"FR_(\d{4})_PLF_([A-Z]{2})_PGM_(\d{3})\.pdf", filename)
-    if not match:
-        return None
+    if match:
+        return {
+            "annee": config["annee"],
+            "exercice": config["exercice"],
+            "type_document": config["type_document"],
+            "type_budget": type_budget,
+            "niveau": "PGM",
+            "mission_code": match.group(2),
+            "programme_code": int(match.group(3)),
+            "filename": filename,
+            "filepath": str(rel),
+            "titre": None,
+        }
 
-    return {
-        "annee": config["annee"],
-        "exercice": config["exercice"],
-        "type_document": config["type_document"],
-        "type_budget": type_budget,
-        "niveau": "PGM",
-        "mission_code": match.group(2),
-        "programme_code": int(match.group(3)),
-        "filename": filename,
-        "filepath": str(rel),
-        "titre": None,
-    }
+    # PLR format: FR_2023_PLR_XX_PGM_NNN.pdf
+    match = re.match(r"FR_(\d{4})_PLR_([A-Z]{2})_PGM_(\d{3})\.pdf", filename)
+    if match:
+        return {
+            "annee": config["annee"],
+            "exercice": config["exercice"],
+            "type_document": config["type_document"],
+            "type_budget": type_budget,
+            "niveau": "PGM",
+            "mission_code": match.group(2),
+            "programme_code": int(match.group(3)),
+            "filename": filename,
+            "filepath": str(rel),
+            "titre": None,
+        }
+
+    return None
 
 
 def parse_special_pdf(filepath: Path, root: Path, config: dict) -> dict | None:
