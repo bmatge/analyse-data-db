@@ -103,9 +103,12 @@ def cmd_load_xls(args):
         (annee, exercice),
     )
 
-    # Search for the XLS file in the year's entrants directory
-    # (PLRG data is stored in the budget year folder, e.g., PLRG 2024 in entrants/2024/)
-    search_dir = str(Path(ENTRANTS_DIR) / str(annee))
+    # Search for the XLS file in the right dataviz subfolder
+    year_dir = Path(ENTRANTS_DIR) / str(annee)
+    # Find the dataviz folder matching the exercice (PLF or PLRG)
+    search_key = "PLRG" if exercice == "PLR" else "PLF"
+    dataviz_dirs = [d for d in year_dir.iterdir() if d.is_dir() and search_key in d.name and "dataviz" in d.name]
+    search_dir = str(dataviz_dirs[0]) if dataviz_dirs else str(year_dir)
 
     print(f"Loading XLS credits for {exercice} {annee} from {search_dir}...")
     result = load_data(conn, config_path, search_dir)
@@ -194,11 +197,13 @@ def cmd_load_nomenclature(args):
     for table in ("sous_action", "action", "programme", "mission", "ministere"):
         conn.execute(f"DELETE FROM {table} WHERE annee = ?", (annee,))
 
-    # Search in year's entrants directory for XLS files
+    # Search in the right dataviz subfolder for the XLS nomenclature file
     config = load_schema_config(config_path)
-    search_dir = str(Path(ENTRANTS_DIR) / str(annee))
-    if not Path(search_dir).exists():
-        search_dir = DATA_DIR
+    year_dir = Path(ENTRANTS_DIR) / str(annee)
+    exercice_key = exercice.upper() if exercice else config["derived"].get("exercice", "PLF")
+    search_key = "PLRG" if exercice_key == "PLR" else "PLF"
+    dataviz_dirs = [d for d in year_dir.iterdir() if d.is_dir() and search_key in d.name and "dataviz" in d.name] if year_dir.exists() else []
+    search_dir = str(dataviz_dirs[0]) if dataviz_dirs else (str(year_dir) if year_dir.exists() else DATA_DIR)
 
     print(f"Loading nomenclature for {annee}...")
     result = load_nomenclature_xls_format(conn, config_path, search_dir)

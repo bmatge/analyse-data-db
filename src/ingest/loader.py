@@ -256,11 +256,13 @@ def load_data(conn: sqlite3.Connection, config_path: str, data_dir: str) -> dict
     else:
         insert_nomenclature_data(conn, rows, str(source_file.name))
 
-    # Log the load
+    # Log the load — annee/exercice may come from derived or from the data itself
+    log_annee = config.get("derived", {}).get("annee") or (rows[0].get("annee") if rows else None)
+    log_exercice = config.get("derived", {}).get("exercice") or (rows[0].get("exercice") if rows else None)
     conn.execute(
         "INSERT INTO load_log (operation, annee, exercice, source_file, rows_loaded, status) "
         "VALUES (?, ?, ?, ?, ?, ?)",
-        ("load_data", config["derived"]["annee"], config["derived"]["exercice"],
+        ("load_data", log_annee, log_exercice,
          str(source_file.name), len(rows), "success"),
     )
     conn.commit()

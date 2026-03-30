@@ -6,7 +6,7 @@ source:
   type: xls
   encoding: utf-8
 
-file_pattern: "*credits*.xls"
+file_pattern: "*[Cc]redits*.xls"
 
 columns:
   annee_source:          { source: "exercice", type: integer }

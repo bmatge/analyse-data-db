@@ -104,7 +104,7 @@ def load_nomenclature_xls_format(conn: sqlite3.Connection, config_path: str, dat
             stats["missions"] += 1
 
         elif type_ligne == "PGM" and code:
-            ministere_int = int(ministere_code) if ministere_code else None
+            ministere_int = int(float(ministere_code)) if ministere_code else None
             conn.execute(
                 "INSERT OR IGNORE INTO programme "
                 "(annee, code, libelle, libelle_abrege, mission_code, ministere_code, type_budget, commentaire) "

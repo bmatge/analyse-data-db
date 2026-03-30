@@ -51,8 +51,8 @@ def parse_mission_pdf(filepath: Path, root: Path, config: dict) -> dict | None:
             "titre": match.group(2).replace("_", " "),
         }
 
-    # PLR format: FR_2023_PLR_BG_MSN_XX.pdf
-    match = re.match(r"FR_(\d{4})_PLR_([A-Z]+)_MSN_([A-Z]{2})\.pdf", filename)
+    # FR_ format (PLF or PLR): FR_2024_PLF_BG_MSN_AA.pdf or FR_2023_PLR_BG_MSN_AA.pdf
+    match = re.match(r"FR_(\d{4})_(?:PLF|PLR)_([A-Z]+)_MSN_([A-Z]{2})\.pdf", filename)
     if match:
         return {
             "annee": config["annee"],
@@ -85,8 +85,8 @@ def parse_programme_pdf(filepath: Path, root: Path, config: dict) -> dict | None
     programme_code_dir = parts[2]
     filename = parts[3]
 
-    # PLF format: FR_2025_PLF_XX_PGM_NNN.pdf
-    match = re.match(r"FR_(\d{4})_PLF_([A-Z]{2})_PGM_(\d{3})\.pdf", filename)
+    # PLF format: FR_2025_PLF_XX_PGM_NNN.pdf (XX = 2-3 letter mission/type code)
+    match = re.match(r"FR_(\d{4})_PLF_([A-Z]{2,3})_PGM_(\d{3})\.pdf", filename)
     if match:
         return {
             "annee": config["annee"],
@@ -101,8 +101,8 @@ def parse_programme_pdf(filepath: Path, root: Path, config: dict) -> dict | None
             "titre": None,
         }
 
-    # PLR format: FR_2023_PLR_XX_PGM_NNN.pdf
-    match = re.match(r"FR_(\d{4})_PLR_([A-Z]{2})_PGM_(\d{3})\.pdf", filename)
+    # PLR format: FR_2023_PLR_XX_PGM_NNN.pdf (XX = 2-3 letter mission/type code)
+    match = re.match(r"FR_(\d{4})_PLR_([A-Z]{2,3})_PGM_(\d{3})\.pdf", filename)
     if match:
         return {
             "annee": config["annee"],
