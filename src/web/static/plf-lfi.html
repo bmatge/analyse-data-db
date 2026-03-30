@@ -92,8 +92,8 @@
 
 <main class="budget-main full-width">
   <div class="fr-container" style="text-align:center;">
-    <h1 class="fr-h3 fr-mb-1w">Flux budgetaires <abbr title="Projet de Loi de Finances">PLF</abbr> &rarr; <abbr title="Loi de Finances Initiale">LFI</abbr> (2019-2023)</h1>
-    <p class="fr-text--sm fr-mb-2w" style="color:var(--text-mention-grey)">Evolution des <abbr title="Autorisations d'Engagement">AE</abbr> du projet de loi au vote, annee par annee</p>
+    <h1 class="fr-h3 fr-mb-1w">Flux budgetaires <abbr title="Projet de Loi de Finances">PLF</abbr> &harr; <abbr title="Projet de Loi relatif aux Resultats de la Gestion">PLRG</abbr> (2023-2026)</h1>
+    <p class="fr-text--sm fr-mb-2w" style="color:var(--text-mention-grey)">Evolution des <abbr title="Autorisations d'Engagement">AE</abbr> du projet de loi a l'execution, annee par annee</p>
   </div>
 
   <div class="viz-controls" id="controls">
@@ -112,9 +112,9 @@
 
   <div class="viz-legend">
     <span><span class="sw" style="background:#000091"></span><abbr title="Projet de Loi de Finances">PLF</abbr> (projet)</span>
-    <span><span class="sw" style="background:#d97706"></span><abbr title="Loi de Finances Initiale">LFI</abbr> (vote)</span>
-    <span><span class="sw" style="background:#94a3b8"></span>PLF&rarr;LFI (amendements)</span>
-    <span><span class="sw" style="background:#000091;opacity:.4"></span>LFI&rarr;PLF (inter-annuel)</span>
+    <span><span class="sw" style="background:#d97706"></span><abbr title="Projet de Loi relatif aux Resultats de la Gestion">PLRG</abbr> (execution)</span>
+    <span><span class="sw" style="background:#94a3b8"></span>PLF&harr;PLRG (ecart projet/execution)</span>
+    <span><span class="sw" style="background:#000091;opacity:.4"></span>Inter-annuel</span>
   </div>
 
   <div class="viz-stats" id="stats"></div>
@@ -126,8 +126,11 @@
 <script>
 const PLF_COLOR = "#000091";
 const LFI_COLOR = "#d97706";
+const PLR_COLOR = "#d97706";  // PLRG uses same color as LFI (execution)
 const LINK_PLF_LFI = "#94a3b8";
 const LINK_YEAR = PLF_COLOR;
+function stepColor(exercice) { return exercice === 'PLR' ? PLR_COLOR : exercice === 'LFI' ? LFI_COLOR : PLF_COLOR; }
+function stepLabel(exercice, year) { return (exercice === 'PLR' ? 'PLRG' : exercice) + ' ' + year; }
 
 let DATA, currentLevel = "mission", currentMission = "all";
 
@@ -197,7 +200,7 @@ function render() {
   for (let i = 0; i < steps.length - 1; i++) {
     const s1 = steps[i], s2 = steps[i + 1];
     const k1 = `${s1.exercice} ${s1.year}`, k2 = `${s2.exercice} ${s2.year}`;
-    const isPlfToLfi = s1.exercice === "PLF" && s2.exercice === "LFI" && s1.year === s2.year;
+    const isPlfToLfi = (s1.exercice === "PLF" && (s2.exercice === "LFI" || s2.exercice === "PLR") && s1.year === s2.year) || (s1.exercice === "PLR" && s2.exercice === "PLF");
     const d1 = (currentLevel === "mission" ? DATA.missions_by_step : DATA.programmes_by_step)[k1] || {};
     const d2 = (currentLevel === "mission" ? DATA.missions_by_step : DATA.programmes_by_step)[k2] || {};
 
@@ -234,7 +237,7 @@ function render() {
   });
   document.getElementById("stats").textContent = steps.map(s => {
     const v = stepTotals[`${s.exercice} ${s.year}`];
-    return v ? `${s.exercice} ${s.year}: ${(v/1e9).toFixed(1)} Md\u20ac` : null;
+    return v ? `${stepLabel(s.exercice, s.year)}: ${(v/1e9).toFixed(1)} Md\u20ac` : null;
   }).filter(Boolean).join("  \u2192  ");
 
   // SVG
@@ -263,9 +266,9 @@ function render() {
 
   // Step headers
   steps.forEach((s, i) => {
-    const x = stepX[i] + 6, color = s.exercice === "PLF" ? PLF_COLOR : LFI_COLOR;
+    const x = stepX[i] + 6, color = stepColor(s.exercice);
     svg.append("text").attr("class", "step-label").attr("x", x).attr("y", margin.top - 20)
-      .attr("text-anchor", "middle").attr("fill", color).text(s.exercice);
+      .attr("text-anchor", "middle").attr("fill", color).text(s.exercice === 'PLR' ? 'PLRG' : s.exercice);
     svg.append("text").attr("class", "step-label-sub").attr("x", x).attr("y", margin.top - 7)
       .attr("text-anchor", "middle").text(s.year);
   });
@@ -284,7 +287,7 @@ function render() {
   ng.append("rect")
     .attr("x", d => d.x0).attr("y", d => d.y0)
     .attr("width", d => d.x1 - d.x0).attr("height", d => Math.max(1, d.y1 - d.y0))
-    .attr("fill", d => d.exercice === "PLF" ? PLF_COLOR : LFI_COLOR).attr("rx", 2)
+    .attr("fill", d => stepColor(d.exercice)).attr("rx", 2)
     .on("mouseover", (ev, d) => showTip(ev, nodeTip(d)))
     .on("mousemove", moveTip).on("mouseout", hideTip);
 
@@ -307,8 +310,8 @@ function moveTip(ev) { tip.style("left", (ev.pageX + 14) + "px").style("top", (e
 function hideTip() { tip.style("display", "none"); }
 
 function nodeTip(d) {
-  const bg = d.exercice === "PLF" ? PLF_COLOR : LFI_COLOR;
-  const badge = `<span class="tt-badge" style="background:${bg}">${d.exercice} ${d.year}</span>`;
+  const bg = stepColor(d.exercice);
+  const badge = `<span class="tt-badge" style="background:${bg}">${stepLabel(d.exercice, d.year)}</span>`;
   const label = currentLevel === "mission" ? `${d.code} \u2014 ${d.label}` : `Programme ${d.code}`;
   return `<div class="tt-title">${badge}${label}</div><div class="tt-detail">${d.ae ? "AE : " + fmtMd(d.ae) : "Pas de montant"}</div>`;
 }
@@ -322,7 +325,7 @@ function linkTip(d) {
   const cls = delta >= 0 ? "tt-delta-pos" : "tt-delta-neg";
   const sign = delta >= 0 ? "+" : "";
   const label = d.isPlfToLfi ? "Passage PLF \u2192 LFI (vote)" : "Evolution inter-annuelle";
-  return `<div class="tt-title">${label}</div><div class="tt-detail">${src.exercice} ${src.year} : ${fmtMd(d.ae1)}<br>${tgt.exercice} ${tgt.year} : ${fmtMd(d.ae2)}<br><span class="${cls}">\u0394 ${sign}${fmtMd(delta)} (${sign}${pct}%)</span></div>`;
+  return `<div class="tt-title">${label}</div><div class="tt-detail">${stepLabel(src.exercice, src.year)} : ${fmtMd(d.ae1)}<br>${stepLabel(tgt.exercice, tgt.year)} : ${fmtMd(d.ae2)}<br><span class="${cls}">\u0394 ${sign}${fmtMd(delta)} (${sign}${pct}%)</span></div>`;
 }
 </script>
 
