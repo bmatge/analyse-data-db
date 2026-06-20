@@ -1,8 +1,8 @@
 services:
   app:
     build: .
-    container_name: budget-explorer
     restart: unless-stopped
+    networks: [proxy]
     volumes:
       - db-data:/app/db
       - ./entrants:/app/entrants:ro
@@ -10,6 +10,19 @@ services:
       resources:
         limits:
           memory: 256M
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.${APP_NAME}.rule=Host(`${DOMAIN}`)
+      - traefik.http.routers.${APP_NAME}.entrypoints=websecure
+      - traefik.http.routers.${APP_NAME}.tls.certresolver=letsencrypt
+      - traefik.http.services.${APP_NAME}.loadbalancer.server.port=8000
 
+# Base SQLite persistée dans le volume nommé db-data (migré depuis oldvps : budget.db).
 volumes:
   db-data:
+
+# Réseau Traefik partagé du lab VibeLab (spawn). APP_NAME / DOMAIN injectés par spawn.
+networks:
+  proxy:
+    external: true
